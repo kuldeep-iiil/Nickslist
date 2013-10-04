@@ -1,0 +1,226 @@
+@charset "utf-8";
+/* CSS Document */
+
+@font-face {
+    font-family: 'OpenSans';
+    src: url('/assets/fonts/OpenSans-CondLight-webfont.eot');
+    src: url('/assets/fonts/OpenSans-CondLight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/OpenSans-CondLight-webfont.woff') format('woff'),
+         url('/assets/fonts/OpenSans-CondLight-webfont.ttf') format('truetype'),
+         url('/assets/fonts/OpenSans-CondLight-webfont.svg#OpenSans') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Folkslight';
+    src: url('/assets/fonts/Folks-Light-webfont.eot');
+    src: url('/assets/fonts/Folks-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/Folks-Light-webfont.woff') format('woff'),
+         url('/assets/fonts/Folks-Light-webfont.ttf') format('truetype'),
+         url('/assets/fonts/Folks-Light-webfont.svg#Folkslight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('fonts/BebasNeue-webfont.eot');
+    src: url('fonts/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/BebasNeue-webfont.woff') format('woff'),
+         url('fonts/BebasNeue-webfont.ttf') format('truetype'),
+         url('fonts/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{ margin:0; padding:0; font-family:Arial, Helvetica, sans-serif; background:#f5f5f5}
+a{ text-decoration:none}
+img{ border:0}
+
+h1, h2, h3, h4, p{margin:0; padding:0}
+
+#wrapper{ width:100%; float:left;}
+.browser-center{ width:990px; margin:0 auto} 
+#header-wrapper{ width:100%; float:left; background:#ffffff; padding-bottom: 13px;}
+#header-area{ width:100%; float:left;  border-top:5px solid #0d233e; padding:10px 0; position:relative}
+#logo{ width:auto; float:left; margin-top:10px}
+#facebook-like{ width:250px; float:left; border-right:1px solid #CCCCCC; border-left:1px solid #CCCCCC; margin-left: 54px;    padding: 25px 80px 25px 80px;}
+#customer-support{ width:230px; float:right; margin:10px; background:url(/assets/phone-icon.jpg) no-repeat left center; text-align:right;  }
+#customer-support h1{ font-weight:bold; font-size:30px; color:#ff8a00;}
+#customer-support p{ font-size:14px; color:#838484}
+#customer-support p a{ color:#ff8a00}
+#navigation{ width:990px; position:absolute; bottom:-35px; left:0; background:url(/assets/nav-bg.jpg) repeat-x; height:42px; z-index:9999; border-radius:5px }
+.login-register{ width:150px; float:right; background:url(/assets/org-bt-bg.jpg) repeat-x; border-radius:0 5px 5px 0; height:42px; line-height:42px; font-size:13px; color:#fff; text-transform:uppercase;}
+.login-register a{ padding:12px 20px; color:#ffffff}
+
+#nav{ width:800px; float:left}
+#nav ul{ list-style:none; margin:0; padding:0; width:100%; float:left}
+#nav li{ width:auto; float:left; font-size:13px; text-transform:uppercase; height: 42px;    line-height: 42px;}
+#nav li a{ color:#ffffff; padding: 13px 15px;}
+#nav li a:hover{ background:url(/assets/hover.jpg) repeat-x}
+
+#nav li.first a:hover{ background:url(/assets/hover.jpg) repeat-x; border-radius: 5px 0 0 5px}
+#nav li a.active{ background:url(/assets/hover.jpg) repeat-x}
+#nav li.first a.active{ background:url(/assets/hover.jpg) repeat-x; border-radius: 5px 0 0 5px}
+
+#main-content-wrapper{ width:100%; float:left; margin-top:50px}
+
+#banner{/* max-width:1200px; margin:0 auto; */ background:#17215b; float:left; width:100%; position:relative}
+#banner-area{ width:100%; float:left; background:url(/assets/banner.jpg) no-repeat; min-height:388px; position:relative}
+.banner-content{ float:left; margin-top: 100px;    width: 435px;}
+.banner-content h1{font-family: 'OpenSans', Arial, sans-serif; font-weight:normal; color:#ffffff; font-size:38px}
+.banner-content p{ color:#ffffff; font-family:14px; margin:10px 0; line-height:20px}
+.banner-content p a{ background:url(/assets/org-bt-bg.jpg) repeat-x; padding:11px; color:#ffffff; border-radius:5px; float:left}
+#innwe-banner-area{ width:100%; float:left; background:url(/assets/banner.jpg) no-repeat; min-height:160px; position:relative}
+#search{ width:970px; background:#174986; position:absolute; bottom:-45px; left:0; height:70px; border-radius:5px; z-index:999; padding:10px}
+
+#search-form{ width:970px; float:left}
+.form-textbox{ float:left; margin-right:4px;}
+.textbox{ width:105px; height:34px; line-height:34px; font-size:13px; color:#666666; border-radius:5px; border:0; background:#ffffff;  padding:0 5px}
+.textbox-small{ width:105px; height:34px; line-height:34px; font-size:13px; color:#666666; border-radius:5px; border:0; background:#ffffff; padding:0 5px}
+.search-heading{font-family: 'OpenSans', Arial, sans-serif; font-weight:normal; color:#ffffff; font-size: 24px; line-height: 25px;
+    margin-bottom: 8px;}
+.org-bt{ background:url(/assets/org-bt-bg.jpg) repeat-x; padding:11px 20px; color:#ffffff; border-radius:5px; float:left}
+.form-dropdown{ width:120px; float:left; background:#ffffff; border-radius:5px; min-height:24px; margin-right:5px; padding:5px}
+.dropdown{ width:120px; height:24px; border:0; font-size:13px; color:#666666; }
+.search-bt{ background:url(/assets/search.png) no-repeat; height:37px; width:100px; border:0; text-indent:-999px; cursor: pointer; cursor: hand; }
+
+#three-block{ width:100%; float:left; margin-top:20px}
+.blue-block{ width:286px; float:left; background:#3d8cdb url(/assets/block-bg.png) no-repeat; min-height:266px; text-align:center; padding:20px}
+.blue-block h1{font-family: 'OpenSans', Arial, sans-serif; font-weight:bold; color:#ffffff; font-size: 35px; }
+.blue-block p{ font-size:14px; color:#ffffff; margin-top:15px; line-height:18px}
+.blue-block img{ text-align:center; margin:15px 0}
+
+.org-block{ width:286px; float:left; background:#ff981f ; min-height:266px; text-align:center; padding:20px; margin: 0 6px;}
+.org-block h1{font-family: 'OpenSans', Arial, sans-serif; font-weight:bold; color:#ffffff; font-size: 35px; }
+.org-block p{ font-size:14px; color:#ffffff; margin-top:15px;  line-height:18px}
+.org-block img{ text-align:center; }
+
+
+#latest-news{ width:990px; float:left; background:url(/assets/new-bg.jpg) no-repeat; min-height:124px; padding:35px 0}
+.news-heading{ width:100%; float:left; text-align:center; font-family: 'OpenSans', Arial, sans-serif; font-weight:bold; color:#333; font-size: 25px; margin-top:10px}
+.news-point{ width:80%; float:left; margin:5px 10%}
+.news-point ul{ margin:0; padding:0; list-style:none; width:100%; float:left}
+.news-point li{ font-size:14px; float:left; text-align:center; width:100%; color:#666666; line-height:18px}
+.news-point li a{ color:#3d8cdb}
+
+
+#footer-wrapper{ width:100%; float:left; background:#333333; min-height:40px; padding:15px 0; margin-top:10px}
+.footer-links{ width:700px; margin:0 auto}
+.footer-links ul{ list-style:none; margin:0; padding:0; width:100%; float:left}
+.footer-links li{ font-size:12px; text-transform:uppercase; width:auto; float:left; margin:0 10px}
+.footer-links li a{ color:#b98241;}
+.footer-links li a:hover{ color:#ffffff}
+
+.copyright{ width:100%; float:left; text-align:center; color:#7f7e7e; font-size:12px; margin-top:10px} 
+.copyright a{color:#b98241; margin:0 10px	}
+
+
+
+.login-wrapper{ width:150px; float:right; position:relative}
+
+
+
+
+#signin_menu {
+	display:none;
+	background-color:#ffa133;
+	position:absolute;
+	width:215px;
+	z-index:100;
+	
+	text-align:left;
+	padding:10px;
+	/*margin-left:-8px;
+	*margin-left:-15px;
+	margin-top:5px;*/
+	color:#333333;
+	font-size:12px;
+	right:0;
+	top:42px;
+	border-radius:0 5px 5px 5px;
+}
+
+#signin_menu input[type=text], #signin_menu input[type=password] {
+	display:block;
+	border-radius:4px;
+	
+	border:1px solid #e8912b;
+	font-size:13px;
+	margin:0 0 5px;
+	padding:5px;
+	width:203px;
+}
+#signin_menu p {
+	margin:0;
+}
+#signin_menu a {
+	color:#333;
+}
+#signin_menu label {
+	font-weight:normal;
+}
+#signin_menu p.remember {
+	padding:10px 0;
+}
+#signin_menu p.forgot, #signin_menu p.complete {
+	clear:both;
+	margin:5px 0;
+}
+
+#signin_submit {
+	border-radius:4px;
+	
+	background:#2967ac;
+	border:1px solid #195aa2;
+	color:#fff;
+	text-shadow:0 -1px 0 #39d;
+	padding:4px 10px 5px;
+	font-size:11px;
+	margin:0 5px 0 0;
+	font-weight:bold;
+}
+
+.signup{ width:215px; float:left; color:#333; text-align:center;  font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif; font-size:25px; border-top:1px solid #d07b18; padding-top:10px; margin-top:5px}
+.signup a{ color:#fff !important}
+
+#record-search{ width:100%; float:left}
+.search-record-right{ width:530px; height:300px; float:right}
+.search-record-left{ width:400px; float:left}
+.address-area{ width:400px; float:left}
+.customer-name{ width:100%; color:#ff8a00; float:left; font-size:30px; font-family: 'OpenSans', Arial, sans-serif; text-transform:uppercase; border-bottom:1px solid #d2d2d2}
+.address-detail{ width:375px; float:left; background:url(/assets/loc-icon.png) 0 5px no-repeat; padding-left:25px; margin:15px 0}
+.address-phone{ width:375px; float:left;  background:url(/assets/ph-icon.png) 0 5px no-repeat; padding-left:25px; line-height:25px}
+
+.read-review{ width:295px; float:left; background:#fff; border:1px solid #e7e7e7; padding:15px 25px; border-radius:5px; margin:60px 0 0 30px}
+.read-review h1{ font-family:Arial, Helvetica, sans-serif; font-size:17px; font-weight:normal; margin:5px 0}
+.read-review button{ text-transform:uppercase; font-size:16px; font-weight:bold}
+
+.review-block-wrapper{ width:100%; float:left}
+.review-block{ width:283px; float:left; padding:10px; background:#eeeeee url(/assets/review-block-bg.png) repeat-x; border:1px solid #c4c4c4; border-radius:5px; margin:12px}
+.customer-block{ width:283px; float:left}
+.customer-photo{ width:84px; float:left}
+.customer-photo img{border:1px solid #c4c4c4}
+.customer-detail{ width:190px; float:right}
+.customer-detail .customer-name-desc{ width:100%; float:left}
+.customer-detail .customer-name-desc h1{ font-size:20px; color:#333333; font-weight:bold;}
+.customer-detail .customer-name-desc h2{ font-size:17px; color:#666666; font-weight:normal;}
+.customer-detail .phone{ font-size:14px; color:#444444; background:url(/assets/phone-small-icon.png) no-repeat left center; padding-left:15px; float:left; margin-top:10px}
+.customer-detail .email{font-size:14px; color:#444444; background:url(/assets/email-icon.png) no-repeat left center; padding-left:15px; float:left; margin-top:5px}
+
+.review-area{ width:283px; float:left; border-top:1px solid #d4d4d4; margin-top:10px; padding-top:10px}
+.review-area .read-review-bt{ width:107px; float:right; font-size:14px}
+
+.review-area .review-star{ width:auto; float:left; font-size:12px;}
+.review-area .review-star p{ font-size:13px;}
+
+.blue-bt{ background:url(/assets/nav-bg.jpg) bottom left repeat-x; padding:11px 20px; color:#ffffff; border-radius:5px; float:left}
+.reivew-blue-bt{ background:url(/assets/nav-bg.jpg) bottom left repeat-x; padding:7px 10px; color:#ffffff; border-radius:5px; float:left}
+
+#review-header{ width:970px; float:left; background:#ffa133 url(/assets/org-bt-bg.jpg) bottom left repeat-x; margin:15px 0; padding:10px; border-radius:5px}
+#review-header-left{ width:350px; float:left}
+#review-header-left h1{ color:#fff; font-size:35px; font-family: 'OpenSans', Arial, sans-serif; text-transform:uppercase; text-align:center}
+#review-header-left p{ color:#fff; font-size:17px;  text-align:center}
+#review-header-right{ width:500px; float:left}
+#review-header-right .address-desc{ width:auto; float:left; background:url(/assets/loc-icon.png) 0 5px no-repeat; padding-left:25px; margin:5px 0}

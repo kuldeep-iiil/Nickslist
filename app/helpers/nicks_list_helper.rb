@@ -1,0 +1,2 @@
+module NicksListHelper
+end
