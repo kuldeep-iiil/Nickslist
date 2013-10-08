@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>NicksList</title>
+	<title>NicksList-About Us</title>
 	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 	<%= csrf_meta_tags %>
@@ -40,8 +40,8 @@
                 	<div id="nav">
                     	<ul>
                         	<li class="first"><a href="/" class="active">Home</a></li>
-                            <li><a href="nicks_list/About">About BillysList</a></li>
-                            <li><a href="nicks_list/HowItWorks">How it works </a></li>
+                            <li><a href="About">About BillysList</a></li>
+                            <li><a href="HowItWorks">How it works </a></li>
                             <li><a href="#">FAQ’s</a></li>
                             <li><a href="#">Testimonials</a></li>
                             <li><a href="#">Press Release</a></li>
@@ -131,49 +131,61 @@
             </div>
         </div>
     <div id="main-content-wrapper">
-    	<div class="browser-center">
-        	<div id="three-block">
-            	<div class="blue-block">
-                	<%= image_tag("about-icon.png", :alt => "") %>
-                	<h1>About BillysList</h1>
-                    <p>BillysList.com was founded by a small business owner who realized that just as good people need to beaware of bad contractors; good contractors need to be aware of bad people.  </p>
+    <div class="browser-center">
+      <div id="left-content-area">
+        <h1>About Billyslist</h1>
+        <p>BillysList.com was founded by a small business owner who realized that just as good people need to be aware of bad contractors; good contractors need to be aware of bad people.  To Billy, it never seemed right to chalk up the actions of dishonest people to the cost of doing business.  The losses cost small businesses and consumers alike.  A bad customer should never have the last word.</p>
+        <p>As contractors we all know that competition is a good thing.  We also know the benefit of working together through trade organizations and other programs.  This is where the inspiration came from for BillysList.com, because contractors need a voice too. </p>
+        <p>In this internet driven world customers are able to know almost everything about a potential contractor.  The Federal, State and Local Governments regulate and keep tabs on us.  Organizations like the BBB and other consumer based rating services provide valuable information to guide someone in selecting a contractor that best fits them.  All of this takes place because of a few bad apples.  The majority of contractors are good and decent people, but the actions of a few, spread distrust upon all of us. </p>
+        <p>BillysList.com seeks to level the playing field and put contractors at ease with the people they work for.  Just as consumers want to know who they are contracting with and what their track record is, business owners also understand that “it is better to know”.</p>
+      </div>
+      <div id="right-content-area">
+        <div id="client-testimonials">
+          <h1>Client Testimonials</h1>
+          <ul class="bxslider">
+            <li>
+              <div class="testimonial-rotating">
+                <div class="testimonial-desc"> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </div>
+                <div class="testimonial-name">
+                  <h2>David William</h2>
+                  <h3>Plumber</h3>
                 </div>
-                
-                <div class="org-block">
-                	<%= image_tag("how-work.png", :alt => "") %>
-                	<h1>How it Works</h1>
-                    <p>When you login to BillysList.com you have the option to either rate/review a customer or searchfor info on a potential customer.  </p>
-                </div>
-                
-                <div class="blue-block">
-                	<%= image_tag("testimonial.png", :alt => "") %>
-                	<h1>Client Testimonials</h1>
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.  </p>
-                </div>
-            </div>
+              </div>
+            </li>
             
-            <div id="latest-news">
-            	<div class="news-heading">Latest News and Updates</div>
-                <div class="news-point">
-                	<ul class="bxslider">
-                    	<li>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</li>
-                        <li>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</li>
-                        <li>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</li>
-                    </ul>
-                    
+             <li>
+              <div class="testimonial-rotating">
+                <div class="testimonial-desc"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </div>
+                <div class="testimonial-name">
+                  <h2>David William</h2>
+                  <h3>Plumber</h3>
                 </div>
-            </div>
+              </div>
+            </li>
             
+             <li>
+              <div class="testimonial-rotating">
+                <div class="testimonial-desc"> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. </div>
+                <div class="testimonial-name">
+                  <h2>David William</h2>
+                  <h3>Plumber</h3>
+                </div>
+              </div>
+            </li>
+            
+          </ul>
         </div>
+      </div>
     </div>
+  </div>
     
     <div id="footer-wrapper">
     	<div class="browser-center">
         	<div class="footer-links">
             	<ul>
                 	<li><a href="/">Home</a></li>
-                    <li><a href="nicks_list/About">About BillysList</a></li>
-                    <li><a href="nicks_list/HowItWorks">How it works</a></li>
+                    <li><a href="About">About BillysList</a></li>
+                    <li><a href="HowItWorks">How it works</a></li>
                     <li><a href="#">FAQ’s</a></li>
                     <li><a href="#">Testimonials</a></li>
                     <li><a href="#">Press Release</a></li>

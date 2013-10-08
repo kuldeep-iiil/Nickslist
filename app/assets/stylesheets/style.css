@@ -3,22 +3,22 @@
 
 @font-face {
     font-family: 'OpenSans';
-    src: url('/assets/fonts/OpenSans-CondLight-webfont.eot');
-    src: url('/assets/fonts/OpenSans-CondLight-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/fonts/OpenSans-CondLight-webfont.woff') format('woff'),
-         url('/assets/fonts/OpenSans-CondLight-webfont.ttf') format('truetype'),
-         url('/assets/fonts/OpenSans-CondLight-webfont.svg#OpenSans') format('svg');
+    src: url('/assets/OpenSans-CondLight-webfont.eot');
+    src: url('/assets/OpenSans-CondLight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/OpenSans-CondLight-webfont.woff') format('woff'),
+         url('/assets/OpenSans-CondLight-webfont.ttf') format('truetype'),
+         url('/assets/OpenSans-CondLight-webfont.svg#OpenSans') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Folkslight';
-    src: url('/assets/fonts/Folks-Light-webfont.eot');
-    src: url('/assets/fonts/Folks-Light-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/fonts/Folks-Light-webfont.woff') format('woff'),
-         url('/assets/fonts/Folks-Light-webfont.ttf') format('truetype'),
-         url('/assets/fonts/Folks-Light-webfont.svg#Folkslight') format('svg');
+    src: url('/assets/Folks-Light-webfont.eot');
+    src: url('/assets/Folks-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/Folks-Light-webfont.woff') format('woff'),
+         url('/assets/Folks-Light-webfont.ttf') format('truetype'),
+         url('/assets/Folks-Light-webfont.svg#Folkslight') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -52,7 +52,7 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 #customer-support p a{ color:#ff8a00}
 #navigation{ width:990px; position:absolute; bottom:-35px; left:0; background:url(/assets/nav-bg.jpg) repeat-x; height:42px; z-index:9999; border-radius:5px }
 .login-register{ width:150px; float:right; background:url(/assets/org-bt-bg.jpg) repeat-x; border-radius:0 5px 5px 0; height:42px; line-height:42px; font-size:13px; color:#fff; text-transform:uppercase;}
-.login-register a{ padding:12px 20px; color:#ffffff}
+.login-register a{ padding:12px 20px; color:#ffffff;}
 
 #nav{ width:800px; float:left}
 #nav ul{ list-style:none; margin:0; padding:0; width:100%; float:left}
@@ -96,6 +96,11 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 .org-block h1{font-family: 'OpenSans', Arial, sans-serif; font-weight:bold; color:#ffffff; font-size: 35px; }
 .org-block p{ font-size:14px; color:#ffffff; margin-top:15px;  line-height:18px}
 .org-block img{ text-align:center; }
+
+#register-form{ width:900px; float:left; margin-top:20px; padding:10px 10px;}
+.register-block{ float:left; width:100%}
+.register-textbox{ width:155px; height:34px; float:left; line-height:34px; font-size:13px; color:#666666; border-radius:5px; border:1; border-style:groove; margin:5px; padding:0 5px;}
+.register-dropdown{ width:169px; height:38px; float:left; border:1; border-style:groove;  border-radius:5px; font-size:13px; color:#666666; margin:5px;}
 
 
 #latest-news{ width:990px; float:left; background:url(/assets/new-bg.jpg) no-repeat; min-height:124px; padding:35px 0}
@@ -224,3 +229,42 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 #review-header-left p{ color:#fff; font-size:17px;  text-align:center}
 #review-header-right{ width:500px; float:left}
 #review-header-right .address-desc{ width:auto; float:left; background:url(/assets/loc-icon.png) 0 5px no-repeat; padding-left:25px; margin:5px 0}
+
+#signup-wrapper{ width:100%; float:left}
+#signup-header{ width:100%; float:left}
+#signup-header h1{font-size:35px; font-family: 'OpenSans', Arial, sans-serif; text-transform:uppercase; text-align:center; color:#174986}
+#signup-header h2{font-size:16px; font-family: Arial, sans-serif;  text-align:center; color:#333333; font-weight:normal}
+
+#singup-form-area{ width:435px; float:left; background:#ffffff; border:1px solid #d7d7d7; padding:25px 150px; margin:25px 0 0 127px; border-radius:5px}
+
+.singup-form{ width:429px; float:left}
+.singup-form-heading{ width:97%; float:left; margin-bottom:20px}
+.singup-form-heading h1{ font-size:22px; color:#2464a3; font-weight:bold; border-bottom:1px solid #d7d7d7}
+.singup-form-heading p{ font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#666666; padding:5px 0}
+
+.singup-textarea{ width:auto; float:left; margin:0 5px 5px 0 }
+.singup-textbox{ width:410px; height:34px; border:1px solid #d7d7d7; line-height:34px; font-size:13px; color:#666666; border-radius:5px; background:#ffffff;  padding:0 5px}
+.singup-textbox-small{ width:197px; height:34px; border:1px solid #d7d7d7; line-height:34px; font-size:13px; color:#666666; border-radius:5px; background:#ffffff;  padding:0 5px}
+
+.steps{ width:100%; float:left; text-align:center}
+
+#left-content-area{ width:635px; float:left}
+#left-content-area h1{font-size:35px; font-family: 'OpenSans', Arial, sans-serif; color:#174986}
+#left-content-area p{ font-size:14px; color:#333333; line-height:19px}
+#left-content-area ul{ width:100%; float:left;}
+#left-content-area li{ font-size:13px; color:#333; font-weight:bold;}
+#left-content-area p a{ color:#0072ff}
+
+#right-content-area{ width:314px; float:right}
+
+#client-testimonials{ width:314px; float:left;}
+#client-testimonials h1{font-size:35px; font-family: 'OpenSans', Arial, sans-serif; color:#174986}
+.testimonial-rotating{ width:100%; float:left}
+.testimonial-desc{ width:274px; float:left; background:#ffa133; border-radius:5px 5px 0 0; padding:10px 20px; font-size:17px; color:#5f3504; line-height:21px; font-family:Georgia, "Times New Roman", Times, serif; font-style:italic}
+
+.testimonial-name{background:url(../images/testimonial-bg.jpg) top left no-repeat; padding-left:90px; padding-top:5px; float:left; width:224px}
+.testimonial-name h2{font-size:17px; color:#5f3504; line-height:21px; font-family:Georgia, "Times New Roman", Times, serif; font-style:italic; font-weight:normal; margin-top:5px}
+.testimonial-name h3{font-size:14px; color:#5f3504; font-weight:normal}
+
+#client-testimonials .bx-pager{ display:none}
+#client-testimonials ul{ margin:0; padding:0}

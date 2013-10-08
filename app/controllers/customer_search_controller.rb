@@ -2,24 +2,22 @@ require 'rexml/document'
 class CustomerSearchController < ApplicationController
   include REXML
   skip_before_action :verify_authenticity_token
-  def GetDetails
-    
-    #Get Custome Map location details from Zillow API
+  
+  def GetDetails    
+    if(params[:txtStreetAddress] != nil && params[:selectCity] != nil && params[:selectState] != nil && params[:txtZipCode] != nil)
+      streetAddress=params[:txtStreetAddress].gsub(' ','+' )
+      streetAddress=streetAddress.gsub(',','%2C' )   
+      citystatezip=params[:selectCity] + '%2C+' + params[:selectState] + '%2C+' + params[:txtZipCode]
+      
+      #Calling method to show location map
+      ShowLocationMap(streetAddress, citystatezip)
+    end    
+  end
+  
+  #Get Custome Map location details from Zillow API to show location map on web page
+  def ShowLocationMap(streetAddress, citystatezip)
     apiUserName="root"
     apiPassword="root"
-    
-    if(params[:txtStreetAddress] != nil)
-      streetAddress=params[:txtStreetAddress].gsub(' ','+' )
-      streetAddress=streetAddress.gsub(',','%2C' )
-    else
-      streetAddress=""
-    end
-    
-    if(params[:selectCity] != nil && params[:selectState] !=nil)
-      citystatezip=params[:selectCity] + '%2C+' + params[:selectState]
-    else
-      citystatezip=""
-    end
     #uri = "http://www.zillow.com/webservice/GetSearchResults.htm?#{'zws-id=X1-ZWz1dmvv3i5qtn_3fm17&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA'}"
     uri = "http://www.zillow.com/webservice/GetSearchResults.htm?#{'zws-id=X1-ZWz1dmvv3i5qtn_3fm17&address=' + streetAddress + '&citystatezip=' + citystatezip}"
     rest_resource = RestClient::Resource.new(uri, apiUserName, apiPassword) 
@@ -41,6 +39,5 @@ class CustomerSearchController < ApplicationController
     #Pass values for Longitude and Latitude to the View to show customer location in MAP.
     @longitude = longitude
     @latitude = latitude
-    
   end
 end

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<title>NicksList - Search Customer</title>
+  	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 	<%= csrf_meta_tags %>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -30,7 +31,7 @@
 	<div id="header-wrapper">
 		<div class="browser-center">
         	<div id="header-area">
-            	<div id="logo"><a href="index.html"><%= image_tag("logo.jpg", :alt => "") %></a></div>
+            	<div id="logo"><a href="/"><%= image_tag("logo.jpg", :alt => "") %></a></div>
                 <div id="facebook-like"><%= image_tag("facebook-like.jpg", :alt => "") %></div>
                 <div id="customer-support">
                 	<p>Customer Support</p>
@@ -40,7 +41,7 @@
                 <div id="navigation">
                 	<div id="nav">
                     	<ul>
-                        	<li class="first"><a href="<%= root_path %>" class="active">Home</a></li>
+                        	<li class="first"><a href="/" class="active">Home</a></li>
                             <li><a href="#">About BillysList</a></li>
                             <li><a href="#">How it works </a></li>
                             <li><a href="#">FAQ’s</a></li>
@@ -50,25 +51,8 @@
                         </ul>
                     </div>
                 	<div class="login-wrapper">
-                		<div  class="login-register"><a href="#">Login/Register</a></div>
-                    	<div id="signin_menu">    
-                    		<p>                
-                      		<label for="username">Username or email</label>
-                      		<input id="username" name="username" value="" title="username" tabindex="4" type="text">
-                      		</p>
-                      		<p>
-                        	<label for="password">Password</label>
-                        	<input id="password" name="password" value="" title="password" tabindex="5" type="password">
-                      		</p>
-                      		<p class="remember">
-                        	<input id="signin_submit" value="Sign in" tabindex="6" type="submit">
-                        	<input id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
-                        	<label for="remember">Remember me</label>
-                      		</p>
-                      		<p class="forgot"> <a href="#" id="resend_password_link">Forgot your password?</a> </p>
-                      		<div class="signup">New User? <a href="#">Signup Here</a></div>                                          
-                    	</div>
-                   		</div>
+                		<div  class="login-register"><a href="#">Logout</a></div>
+                    </div>
                 	</div>
                 </div>
             </div>
@@ -95,33 +79,27 @@
                             <div class="form-textbox">
                         	  <input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
                         	</div>
-                          	<div class="form-dropdown">
-                       	    	<select name="selectCity" id="selectCity" class="dropdown">
+                          	<div class="form-textbox">
+                       	    	<input name="selectCity" type="text" required="true" class="textbox" id="selectCity" placeholder="City" value="<%= params[:selectCity] %>" />
+                        	
+                       	    	<!--<select name="selectCity" id="selectCity" class="dropdown">
                         	    	<option>City</option>
                         	    	<% @city=City.find(:all)%>
                         	    	<% @city.each do |incity| %>
-                        	    		<% if incity.Name == params[:selectCity] %>
-            							<option selected="true"><%= incity.Name %></option>		
-									<% else %>
 										<option><%= incity.Name %></option>
 									<% end %>
-										
-									<% end %>
-                      	      	</select>
+                      	      </select>-->
                         	</div>
-                        	<div class="form-dropdown">
-                       	    <select name="selectState" id="selectState" class="dropdown">
+                        	<div class="form-textbox">
+                        	<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" value="<%= params[:selectState] %>" />
+                        	
+                       	    <!--<select name="selectState" id="selectState" class="dropdown">
                         	    <option>State</option>
                         	    <% @state=State.find(:all)%>
                         	    <% @state.each do |instate| %>
-                        	    	<% if instate.Name == params[:selectState] %>
-            							<option selected="true"><%= instate.Name %></option>		
-									<% else %>
-										<option><%= instate.Name %></option>
-									<% end %>
-									
+									<option><%= instate.Name %></option>
 								<% end %>
-                      	      </select>
+                      	     </select>-->
                         	</div>
                             <div class="form-textbox">
                         	  <input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
@@ -150,10 +128,8 @@
                         <div class="address-phone"><%= params[:txtPhoneNumber]  %></div>
                     </div>
                     <div class="read-review">
-                    	<% @city=City.find_by Name:params[:selectCity] %>
-							<% @state=State.find_by Name:params[:selectState] %>
 							
-                			<% @customer = Customer.find_by StreetAddress:params[:txtStreetAddress], CityID:@city.ID, StateID:@state.ID, ZIPCode:params[:txtZipCode] %>
+                			<% @customer = Customer.find_by StreetAddress:params[:txtStreetAddress], CityID:params[:selectCity], StateID:params[:selectState], ZIPCode:params[:txtZipCode] %>
             				
             				<% if @customer.blank? %>
             					<h1>This customer is not reviewed yet!</h1>

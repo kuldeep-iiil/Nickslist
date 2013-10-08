@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NicksList - User Registration</title>
+	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= csrf_meta_tags %>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<link href="css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>-->
+	<script type="text/javascript">
+		$(document).ready(function(){
+ 			$('.bxslider').bxSlider({
+  				mode: 'horizontal',
+  				speed:'500',
+  				auto:'true',
+  				pause:'5000'
+  			});
+  			$('.login-register a').click(function(){
+				$('#signin_menu').toggle();
+			});
+		});
+		
+		function hideshow(ID){
+			r
+			if (ID=='Registration')
+				register-form.style.visibility=="hidden"
+				subscript-form.style.visibility=="show"
+			else
+				register-form.style.visibility=="show"
+				subscript-form.style.visibility=="hidden"
+		}
+	</script>
+</head>
+<body>
+	<div id="wrapper">
+	<div id="header-wrapper">
+		<div class="browser-center">
+        	<div id="header-area">
+            	<div id="logo"><a href="/"><%= image_tag("logo.jpg", :alt => "") %></a></div>
+                <div id="facebook-like"><%= image_tag("facebook-like.jpg", :alt => "") %></div>
+                <div id="customer-support">
+                	<p>Customer Support</p>
+                    <h1>703 555 5555</h1>
+                    <p>Any Questions <a href="mailto:">Email Us</a></p>
+                </div>
+                <div id="navigation">
+                	<div id="nav">
+                    	<ul>
+                        	<li class="first"><a href="/" class="active">Home</a></li>
+                            <li><a href="#">About BillysList</a></li>
+                            <li><a href="#">How it works </a></li>
+                            <li><a href="#">FAQ’s</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                            <li><a href="#">Press Release</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                	<div class="login-wrapper">
+                		<div  class="login-register"><a href="#">Logout</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="banner">
+        	<div class="browser-center">
+            	<div id="banner-area">
+                	<div class="banner-content">
+                    	<h1>Lorem Ipsum, consectetur, adipisci</h1>
+                        <p>If you want to know about your customer that he will pay for the quality services that you provide. BillysList is the right tool to confirm.</p>
+                        <p><a href="#">More Information</a></p>
+                    </div>
+                    <div id="search">
+                    	<form action="customer_search/GetDetails" method="post">
+                    	<div class="search-heading">Search Customer Rate/Reviews or Search for info on a potential customer.</div>
+                    	<div id="search-form">
+                        	<div class="form-textbox">
+                        	  <input name="txtFirstName" type="text" required="true" class="textbox" id="txtFirstName" placeholder="First Name" />
+                        	</div>
+                        	<div class="form-textbox">
+                        	  <input name="txtLastName" type="text" required="true" class="textbox" id="txtLastName" placeholder="Last Name" />
+                        	</div>
+                            <div class="form-textbox">
+                        	  <input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" />
+                        	</div>
+                          	<div class="form-dropdown">
+                       	    	<select name="selectCity" id="selectCity" class="dropdown">
+                        	    	<option>City</option>
+                        	    	<% @city=City.find(:all)%>
+                        	    	<% @city.each do |incity| %>
+										<option><%= incity.Name %></option>
+									<% end %>
+                      	      	</select>
+                        	</div>
+                        	<div class="form-dropdown">
+                       	    <select name="selectState" id="selectState" class="dropdown">
+                        	    <option>State</option>
+                        	    <% @state=State.find(:all)%>
+                        	    <% @state.each do |instate| %>
+									<option><%= instate.Name %></option>
+								<% end %>
+                      	      </select>
+                        	</div>
+                            <div class="form-textbox">
+                        	  <input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" />
+                        	</div>
+                            <div class="form-textbox">
+                        	  <input name="txtPhoneNumber" type="text" required="true" class="textbox-small" id="txtPhoneNumber" placeholder="Phone Number" />
+                        	</div>
+                            <div class="form-textbox">
+                       	  	  <input type="submit" name="Submit" id="Submit" value="Submit" class="search-bt" />
+                        	</div>
+                        	</form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div id="main-content-wrapper">
+    	<div class="browser-center">
+    		<div style="float:left"><u><h2>Registration/Subscription Form</h2></u></div>
+    		<form action="GetRegister" method="post">
+        	<div id="register-form">
+        		<div class="register-block">
+                	<input name="txtFirstName" type="text" required="true" class="register-textbox" id="txtFirstName" placeholder="First Name" />
+                	
+                	<input name="txtMiddleName" type="text" required="true" class="register-textbox" id="txtMiddleName" placeholder="Middle Name" />
+
+                	<input name="txtLastName" type="text" required="true" class="register-textbox" id="txtLastName" placeholder="Last Name" />
+
+                	<input name="txtEmailID" type="text" required="true" class="register-textbox" id="txtEmailID" placeholder="Email ID" />
+                 
+                	<input name="txtContactNumber" type="text" required="true" class="register-textbox" id="txtContactNumber" placeholder="Contact number" />
+				
+                </div>
+                	 	
+                <br /><br /><br/>
+                <h3>Address Details</h3>
+				<div class="register-block">
+					<!---<select name="selectAddressType" id="selectAddressType" class="register-dropdown">
+                    	<option>Address Type</option>
+                        <% @addresstype=AddressType.find(:all)%>
+                        <% @addresstype.each do |inaddresstype| %>
+						<option><%= inaddresstype.Name %></option>
+						<% end %>
+                 </select>-->
+                   	
+                	<input name="txtStreetAddress" type="text" required="true" class="register-textbox" id="txtStreetAddress" placeholder="Street Address" />
+               
+                	<select name="selectCity1" id="selectCity1" class="register-dropdown">
+                    	<option>City</option>
+                        <% @city1=City.find(:all)%>
+                        <% @city1.each do |incity| %>
+						<option><%= incity.Name %></option>
+						<% end %>
+                   	</select>
+                   	
+                    <select name="selectState1" id="selectState1" class="register-dropdown">
+                    	<option>State</option>
+                        <% @state1=State.find(:all)%>
+                        <% @state1.each do |instate| %>
+							<option><%= instate.Name %></option>
+						<% end %>
+                    </select>
+                    
+                    <input name="txtZipCode" type="text" required="true" class="register-textbox" id="txtZipCode" placeholder="Zipcode" />
+				</div>
+
+                	<br /><br /><br/>
+                <h3>Mailling Address Details (If Any Other)</h3>
+                <div class="register-block">
+                	<!--<select name="selectAddressType1" id="selectAddressType1" class="register-dropdown">
+                    	<option>Address Type</option>
+                        <% @addresstype1=AddressType.find(:all)%>
+                        <% @addresstype1.each do |inaddresstype| %>
+						<option><%= inaddresstype.Name %></option>
+						<% end %>
+                 </select>-->
+                   	
+                	<input name="txtStreetAddress" type="text" required="true" class="register-textbox" id="txtStreetAddress" placeholder="Street Address" />
+               
+                	<select name="selectCity1" id="selectCity1" class="register-dropdown">
+                    	<option>City</option>
+                        <% @city1=City.find(:all)%>
+                        <% @city1.each do |incity| %>
+						<option><%= incity.Name %></option>
+						<% end %>
+                   	</select>
+                   	
+                    <select name="selectState1" id="selectState1" class="register-dropdown">
+                    	<option>State</option>
+                        <% @state1=State.find(:all)%>
+                        <% @state1.each do |instate| %>
+							<option><%= instate.Name %></option>
+						<% end %>
+                    </select>
+                    
+                    <input name="txtZipCode" type="text" required="true" class="register-textbox" id="txtZipCode" placeholder="Zipcode" />
+				</div>                	
+                
+                <br /><br /><br/>
+                <h3>Company Details</h3>
+                <div class="register-block">
+                	<input name="txtCompany" type="text" required="true" class="register-textbox" id="txtCompany" placeholder="Company" />
+               
+                	<select name="selectIncorporation" id="selectIncorporation" class="register-dropdown">
+                    	<option>Incorporation Type</option>
+                        <% @city1=City.find(:all)%>
+                        <% @city1.each do |incity| %>
+						<option><%= incity.Name %></option>
+						<% end %>
+                   	</select>
+
+                    <input name="txtLicense" type="text" required="true" class="register-textbox" id="txtLicense" placeholder="License Number" />
+                  </div>
+                  
+                <br /><br /><br/>
+                <h3>Login Details</h3>
+                <div class="register-block">
+                	<input name="txtUserName" type="text" required="true" class="register-textbox" id="txtUserName" placeholder="User Name" />
+                	
+                	<input name="txtPassword" type="text" required="true" class="register-textbox" id="txtPassword" placeholder="Password" />
+
+                	<input name="txtConfirmPassword" type="text" required="true" class="register-textbox" id="txtConfirmPassword" placeholder="Confirm Password" />
+
+                </div>
+                <div style="float: center;"><input type="submit" name="Submit" id="Submit" value="Register" class="org-bt" /></div>	
+            </form>    
+           	</div>
+            
+            <div id="latest-news">
+            	<div class="news-heading">Latest News and Updates</div>
+                <div class="news-point">
+                	<ul class="bxslider">
+                    	<li>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</li>
+                        <li>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</li>
+                        <li>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</li>
+                    </ul>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div id="footer-wrapper">
+    	<div class="browser-center">
+        	<div class="footer-links">
+            	<ul>
+                	<li><a href="<%= root_path %>">Home</a></li>
+                    <li><a href="#">About BillysList</a></li>
+                    <li><a href="#">How it works</a></li>
+                    <li><a href="#">FAQ’s</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Press Release</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="copyright">Copyright © 2013. All Right Reserved. <a href="#">Privacy Policy</a>   |   <a href="#">Terms & Conditions</a></div>
+        </div>
+    </div>
+    
+</div>
+</body>
+</html>
