@@ -1,8 +1,14 @@
 NicksListProj::Application.routes.draw do
+  post "user_registeration/GetRegister"
+  get "user_registeration/GetRegister"
   post "customer_search/GetDetails"
-  #get "customer_search/GetDetails"
+  get "customer_search/GetDetails"
   post "nicks_list/Index"
-  #get "nicks_list/Index"
+  get "nicks_list/Index"
+  post "nicks_list/About"
+  get "nicks_list/About"
+  post "nicks_list/HowItWorks"
+  get "nicks_list/HowItWorks"
   root to: "nicks_list#Index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
