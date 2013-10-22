@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NicksList - User Registration</title>
+	<!--<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= csrf_meta_tags %>-->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<link href="css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
+	<script type="text/javascript">
+		
+	</script>
+</head>
+<body>
+	<div id="wrapper">
+	<div id="header-wrapper">
+		<div class="browser-center">
+        	<div id="header-area">
+            	<div id="logo"><a href="/"><%= image_tag("logo.jpg", :alt => "") %></a></div>
+                <div id="facebook-like"><%= image_tag("facebook-like.jpg", :alt => "") %></div>
+                <div id="customer-support">
+                	<p>Customer Support</p>
+                    <h1>703 555 5555</h1>
+                    <p>Any Questions <a href="mailto:">Email Us</a></p>
+                </div>
+                <div id="navigation">
+                	<div id="nav">
+                    	<ul>
+                        	<li class="first"><a href="/" class="active">Home</a></li>
+                            <li><a href="#">About BillysList</a></li>
+                            <li><a href="#">How it works </a></li>
+                            <li><a href="#">FAQ’s</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                            <li><a href="#">Press Release</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                	<div class="login-wrapper">
+                		<div  class="login-register"><a href="#">Login/Register</a></div>
+                    	<div id="signin_menu">    
+                    		<p>                
+                      		<label for="username">Username or email</label>
+                      		<input id="username" name="username" value="" title="username" tabindex="4" type="text">
+                      		</p>
+                      		<p>
+                        	<label for="password">Password</label>
+                        	<input id="password" name="password" value="" title="password" tabindex="5" type="password">
+                      		</p>
+                      		<p class="remember">
+                        	<input id="signin_submit" value="Sign in" tabindex="6" type="submit">
+                        	<input id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
+                        	<label for="remember">Remember me</label>
+                      		</p>
+                      		<p class="forgot"> <a href="#" id="resend_password_link">Forgot your password?</a> </p>
+                      		<div class="signup">New User? <a href="/user_registeration/GetRegister">Signup Here</a></div>                                          
+                    	</div>
+                   	</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="banner">
+        	<div class="browser-center">
+            	<div id="banner-area">
+                	<div class="banner-content">
+                    	<h1>Lorem Ipsum, consectetur, adipisci</h1>
+                        <p>If you want to know about your customer that he will pay for the quality services that you provide. BillysList is the right tool to confirm.</p>
+                        <p><a href="#">More Information</a></p>
+                    </div>
+                    <div id="search">
+                    	<form action="customer_search/GetDetails" method="post">
+                    	<div class="search-heading">Search Customer Rate/Reviews or Search for info on a potential customer.</div>
+                    	<div id="search-form">
+                        	<div class="form-textbox">
+                        	  <input name="txtFirstName" type="text" required="true" class="textbox" id="txtFirstName" placeholder="First Name" />
+                        	</div>
+                        	<div class="form-textbox">
+                        	  <input name="txtLastName" type="text" required="true" class="textbox" id="txtLastName" placeholder="Last Name" />
+                        	</div>
+                            <div class="form-textbox">
+                        	  <input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" />
+                        	</div>
+                          	<div class="form-textbox">
+                       	    	<input name="selectCity" type="text" required="true" class="textbox" id="selectCity" placeholder="City" />
+                        	
+                       	    	<!--<select name="selectCity" id="selectCity" class="dropdown">
+                        	    	<option>City</option>
+                        	    	<% @city=City.find(:all)%>
+                        	    	<% @city.each do |incity| %>
+										<option><%= incity.Name %></option>
+									<% end %>
+                      	      </select>-->
+                        	</div>
+                        	<div class="form-textbox">
+                        	<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" />
+                        	
+                       	    <!--<select name="selectState" id="selectState" class="dropdown">
+                        	    <option>State</option>
+                        	    <% @state=State.find(:all)%>
+                        	    <% @state.each do |instate| %>
+									<option><%= instate.Name %></option>
+								<% end %>
+                      	     </select>-->
+                        	</div>
+                            <div class="form-textbox">
+                        	  <input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" />
+                        	</div>
+                            <div class="form-textbox">
+                        	  <input name="txtPhoneNumber" type="text" required="true" class="textbox-small" id="txtPhoneNumber" placeholder="Phone Number" />
+                        	</div>
+                            <div class="form-textbox">
+                       	  	  <input type="submit" name="Submit" id="Submit" value="Submit" class="search-bt" />
+                        	</div>
+                        	</form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div id="main-content-wrapper">
+    	<div class="browser-center">
+        	<div id="signup-wrapper">
+               <div id="signup-header">
+                  <h1>Register with us</h1>
+                  <h2>Sign-up in just a few easy steps</h2>
+               </div>
+               <!--<div class="steps"><%= image_tag("step1.jpg", :alt => "") %></div>-->
+               
+               <div id="singup-form-area">
+               		<div class="singup-form-heading">
+                    	<h1>Confirm Subscription</h1>
+                        <p>Please review the following details and confirm subscription.</p>
+                        <div id="Error"><%= @messageString %></div>        
+                    </div>
+                    
+               		<div class="singup-form">              			
+               			<div id="SignupForm">
+               			<form action="/user_registeration/show" method="post">
+                    	<div>
+                    	  <label><b>Company Name</b> : <%= params[:textCompany]%></label>
+                    	</div>
+                        <div>
+                    	  <label><b>First Name</b> : <%= params[:textFirstName]%></label>
+                        </div>
+                        <div>
+                          <label><b>Last Name</b> : <%= params[:textLastName]%></label>
+                    	</div>
+                        <div>
+                    	  <label><b>Incorporation Type</b> : <%= params[:textIncorporationType]%></label>
+                    	</div>
+                    	<div>
+                    	  <label><b>Phone Number</b> : <%= params[:textPhoneNumber]%></label>
+                    	</div>
+                        <div>
+                    	  <label><b>Email ID</b> : <%= params[:textEmail] %></label>
+                          </div>
+                        <div>
+                    	  <label><b>License Number</b> : <%= params[:textLicense] %></label>
+                    	</div>
+                    	<div>
+                    		<br />
+                    		<H3>Business Address</H3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    	</div>
+                    	<div>
+                    	  <label><b>Street Address</b> : <%= params[:textBussStreetAddress]%></label>
+                    	</div>
+                    	<div>
+                    	  <label><b>City</b> : <%= params[:textBussCity]%></label>
+                    	</div>
+                    	<div>
+                    	  <label><b>State</b> : <%= params[:textBussState]%></label>
+                    	</div>
+                        <div>
+                    	  <label><b>Zip Code</b> : <%= params[:textBussZipCode]%></label>
+                    	</div>
+                    	<div>
+                    		<br />
+                    		<H3>Mailing Address</H3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    	
+                    	</div>
+                        <div>
+                    	  <label><b>Street Address</b> : <%= params[:textMailStreetAddress]%></label>
+                    	</div>
+                    	<div>
+                    	  <label><b>City</b> : <%= params[:textMailCity]%></label>
+                    	</div>
+                    	<div>
+                    	  <label><b>State</b> : <%= params[:textMailState]%></label>
+                    	</div>
+                        <div>
+                    	  <label><b>Zip Code</b> : <%= params[:textMailZipCode]%></label>
+                    	</div>
+                    	<div>
+                    		<br />
+                    		<H3>Subscription Price</H3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    	
+                    	</div>
+                    	<div>
+                    	  <label><b>Price</b> : <%= params[:hiddenPrice] %>$</label>
+                    	</div>
+                        <div class="singup-textarea">
+                        	<input type="submit" name="Submit" id="Submit" value="Confirm & Continue" class="org-bt" value="<%= params[:textFirstName]%>" />
+                        </div>
+                        </form>
+                        </div>
+                    </div>
+               </div>
+               
+             </div>
+        </div>
+    </div>
+    
+    <div id="footer-wrapper">
+    	<div class="browser-center">
+        	<div class="footer-links">
+            	<ul>
+                	<li><a href="<%= root_path %>">Home</a></li>
+                    <li><a href="#">About BillysList</a></li>
+                    <li><a href="#">How it works</a></li>
+                    <li><a href="#">FAQ’s</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Press Release</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="copyright">Copyright © 2013. All Right Reserved. <a href="#">Privacy Policy</a>   |   <a href="#">Terms & Conditions</a></div>
+        </div>
+    </div>
+    
+</div>
+</body>
+</html>
