@@ -2,39 +2,19 @@
 <html>
 <head>
 	<title>NicksList - User Registration</title>
-	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<!--<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-	<%= csrf_meta_tags %>
+	<%= csrf_meta_tags %>-->
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<!--<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
 	<link href="css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
-	<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>-->
+	<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
- 			$('.bxslider').bxSlider({
-  				mode: 'horizontal',
-  				speed:'500',
-  				auto:'true',
-  				pause:'5000'
-  			});
-  			$('.login-register a').click(function(){
-				$('#signin_menu').toggle();
-			});
-		});
 		
-		function hideshow(ID){
-			r
-			if (ID=='Registration')
-				register-form.style.visibility=="hidden"
-				subscript-form.style.visibility=="show"
-			else
-				register-form.style.visibility=="show"
-				subscript-form.style.visibility=="hidden"
-		}
 	</script>
 </head>
-<body>
+<body onload="SignupForm_AuthUser('<%= @authCode %>', '<%= @companyName %>', '<%= @incorporationType %>', '<%= @bussStreetAddress %>', '<%= @bussCity %>', '<%= @bussState %>', '<%= @bussZipCode %>', '<%= @mailStreetAddress %>', '<%= @mailCity %>', '<%= @mailState %>', '<%= @mailZipCode %>', '<%= @phoneNumber %>', '<%= @email %>', '<%= @license %>');">
 	<div id="wrapper">
 	<div id="header-wrapper">
 		<div class="browser-center">
@@ -59,8 +39,25 @@
                         </ul>
                     </div>
                 	<div class="login-wrapper">
-                		<div  class="login-register"><a href="#">Logout</a></div>
-                    </div>
+                		<div  class="login-register"><a href="#">Login/Register</a></div>
+                    	<div id="signin_menu">    
+                    		<p>                
+                      		<label for="username">Username or email</label>
+                      		<input id="username" name="username" value="" title="username" tabindex="4" type="text">
+                      		</p>
+                      		<p>
+                        	<label for="password">Password</label>
+                        	<input id="password" name="password" value="" title="password" tabindex="5" type="password">
+                      		</p>
+                      		<p class="remember">
+                        	<input id="signin_submit" value="Sign in" tabindex="6" type="submit">
+                        	<input id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
+                        	<label for="remember">Remember me</label>
+                      		</p>
+                      		<p class="forgot"> <a href="#" id="resend_password_link">Forgot your password?</a> </p>
+                      		<div class="signup">New User? <a href="/user_registeration/GetRegister">Signup Here</a></div>                                          
+                    	</div>
+                   	</div>
                 </div>
             </div>
         </div>
@@ -86,23 +83,27 @@
                             <div class="form-textbox">
                         	  <input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" />
                         	</div>
-                          	<div class="form-dropdown">
-                       	    	<select name="selectCity" id="selectCity" class="dropdown">
+                          	<div class="form-textbox">
+                       	    	<input name="selectCity" type="text" required="true" class="textbox" id="selectCity" placeholder="City" />
+                        	
+                       	    	<!--<select name="selectCity" id="selectCity" class="dropdown">
                         	    	<option>City</option>
                         	    	<% @city=City.find(:all)%>
                         	    	<% @city.each do |incity| %>
 										<option><%= incity.Name %></option>
 									<% end %>
-                      	      	</select>
+                      	      </select>-->
                         	</div>
-                        	<div class="form-dropdown">
-                       	    <select name="selectState" id="selectState" class="dropdown">
+                        	<div class="form-textbox">
+                        	<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" />
+                        	
+                       	    <!--<select name="selectState" id="selectState" class="dropdown">
                         	    <option>State</option>
                         	    <% @state=State.find(:all)%>
                         	    <% @state.each do |instate| %>
 									<option><%= instate.Name %></option>
 								<% end %>
-                      	      </select>
+                      	     </select>-->
                         	</div>
                             <div class="form-textbox">
                         	  <input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" />
@@ -121,128 +122,116 @@
         </div>
     <div id="main-content-wrapper">
     	<div class="browser-center">
-    		<div style="float:left"><u><h2>Registration/Subscription Form</h2></u></div>
-    		<form action="GetRegister" method="post">
-        	<div id="register-form">
-        		<div class="register-block">
-                	<input name="txtFirstName" type="text" required="true" class="register-textbox" id="txtFirstName" placeholder="First Name" />
-                	
-                	<input name="txtMiddleName" type="text" required="true" class="register-textbox" id="txtMiddleName" placeholder="Middle Name" />
-
-                	<input name="txtLastName" type="text" required="true" class="register-textbox" id="txtLastName" placeholder="Last Name" />
-
-                	<input name="txtEmailID" type="text" required="true" class="register-textbox" id="txtEmailID" placeholder="Email ID" />
-                 
-                	<input name="txtContactNumber" type="text" required="true" class="register-textbox" id="txtContactNumber" placeholder="Contact number" />
-				
-                </div>
-                	 	
-                <br /><br /><br/>
-                <h3>Address Details</h3>
-				<div class="register-block">
-					<!---<select name="selectAddressType" id="selectAddressType" class="register-dropdown">
-                    	<option>Address Type</option>
-                        <% @addresstype=AddressType.find(:all)%>
-                        <% @addresstype.each do |inaddresstype| %>
-						<option><%= inaddresstype.Name %></option>
-						<% end %>
-                 </select>-->
-                   	
-                	<input name="txtStreetAddress" type="text" required="true" class="register-textbox" id="txtStreetAddress" placeholder="Street Address" />
+        	<div id="signup-wrapper">
+               <div id="signup-header">
+                  <h1>Register with us</h1>
+                  <h2>Sign-up in just a few easy steps</h2>
+               </div>
+               <!--<div class="steps"><%= image_tag("step1.jpg", :alt => "") %></div>-->
                
-                	<select name="selectCity1" id="selectCity1" class="register-dropdown">
-                    	<option>City</option>
-                        <% @city1=City.find(:all)%>
-                        <% @city1.each do |incity| %>
-						<option><%= incity.Name %></option>
-						<% end %>
-                   	</select>
-                   	
-                    <select name="selectState1" id="selectState1" class="register-dropdown">
-                    	<option>State</option>
-                        <% @state1=State.find(:all)%>
-                        <% @state1.each do |instate| %>
-							<option><%= instate.Name %></option>
-						<% end %>
-                    </select>
+               <div id="singup-form-area">
+               		<div class="singup-form-heading">
+                    	<h1>Create Your Account</h1>
+                        <p>Fill the basic information below to create your account</p>
+                        <%= @show %>
+                        <div id="Error"><%= @messageString %></div>        
+                    </div>
                     
-                    <input name="txtZipCode" type="text" required="true" class="register-textbox" id="txtZipCode" placeholder="Zipcode" />
-				</div>
-
-                	<br /><br /><br/>
-                <h3>Mailling Address Details (If Any Other)</h3>
-                <div class="register-block">
-                	<!--<select name="selectAddressType1" id="selectAddressType1" class="register-dropdown">
-                    	<option>Address Type</option>
-                        <% @addresstype1=AddressType.find(:all)%>
-                        <% @addresstype1.each do |inaddresstype| %>
-						<option><%= inaddresstype.Name %></option>
-						<% end %>
-                 </select>-->
-                   	
-                	<input name="txtStreetAddress" type="text" required="true" class="register-textbox" id="txtStreetAddress" placeholder="Street Address" />
+               		<div class="singup-form">
+               			<div id="chkCodeBox">
+                        	<input type="checkbox" id="chkCode" name="chkCode" onclick="SignupForm_visibility(this);" value="1" /> I have company authorization code.                        	                       	               			
+                        </div>
+               			<div id="SignupCode">
+               				<form action="/user_registeration/GetRegister" method="post">
+               				<div class="singup-textarea">
+                    	  		<input type="text" name="textCode" id="textCode" required="true" class="singup-textbox-small" placeholder="Authorization Code" />
+                    		</div>
+                    		<div class="singup-textarea">
+                        		<input type="submit" name="Submit" id="Submit" value="Submit" class="org-bt" />
+                        	</div>
+                        	</form>                        
+                        </div>
+                        <div id="SignupReadOnlyCode">
+               				<div class="singup-textarea">
+                    	  		<input type="text" name="textFilledCode" required="true" id="textFilledCode" class="singup-textbox-small"  placeholder="Authorization Code" />
+                    		</div>
+                    		<div class="singup-textarea">
+                        		<a href="#" onclick="Change_CheckCode();">Change Authorization Code</a>
+                        	</div>
+                        </div>
+               			<div id="SignupForm">
+               			<form action="/user_registeration/GetRegister" method="post">
+               			<input type="hidden" id="hiddenFilledCode" name="hiddenFilledCode" />
+                    	<div class="singup-textarea">
+                    	  <input type="text" name="textCompany" id="textCompany" required="true" class="singup-textbox"  placeholder="Name of Company" />
+                    	</div>
+                        <div class="singup-textarea">
+                    	  <input type="text" name="textFirstName" id="textFirstName" required="true" class="singup-textbox-small"  placeholder="Owner First Name" />
+                        </div>
+                        <div class="singup-textarea">
+                          <input type="text" name="textLastName" id="textLastName" required="true" class="singup-textbox-small"  placeholder="Owner Last Name" />
+                    	</div>
+                        <div class="singup-textarea">
+                    	  <input type="text" name="textIncorporationType" id="textIncorporationType" required="true" class="singup-textbox"  placeholder="Type of Incorporation" />
+                    	</div>
+                    	<div class="singup-textarea">
+                    	  <input type="text" name="textBussStreetAddress" required="true" id="textBussStreetAddress" class="singup-textbox-small"  placeholder="Business Street Address" />
+                    	</div>
+                    	<div class="singup-textarea">
+                    	  <input type="text" name="textBussCity" id="textBussCity" required="true" class="singup-textbox-small"  placeholder="City" />
+                    	</div>
+                    	<div class="singup-textarea">
+                    	  <input type="text" name="textBussState" id="textBussState" required="true" class="singup-textbox-small"  placeholder="State" />
+                    	</div>
+                        <div class="singup-textarea">
+                    	  <input type="text" name="textBussZipCode" id="textBussZipCode" required="true" class="singup-textbox-small"  placeholder="ZipCode" />
+                    	</div>
+                    	<div class="singup-textarea">
+                    		<input type="checkbox" id="chkAddress" name="chkAddress" value="1" onclick="check_chkAddress(this);" /> Use Business Address as Mailing Address.
+                    	</div>
+                        <div class="singup-textarea">
+                    	  <input type="text" name="textMailStreetAddress" id="textMailStreetAddress" required="true" class="singup-textbox-small"  placeholder="Mailing Street Address" />
+                    	</div>
+                    	<div class="singup-textarea">
+                    	  <input type="text" name="textMailCity" id="textMailCity" required="true" class="singup-textbox-small"  placeholder="City" />
+                    	</div>
+                    	<div class="singup-textarea">
+                    	  <input type="text" name="textMailState" id="textMailState" required="true" class="singup-textbox-small"  placeholder="State" />
+                    	</div>
+                        <div class="singup-textarea">
+                    	  <input type="text" name="textMailZipCode" id="textMailZipCode" required="true" class="singup-textbox-small"  placeholder="ZipCode" />
+                    	</div>
+                        <div class="singup-textarea">
+                    	  <input type="text" name="textPhoneNumber" id="textPhoneNumber" required="true" class="singup-textbox"  placeholder="Phone Number" />
+                    	</div>
+                        <div class="singup-textarea">
+                    	  <input type="email" name="textEmail" id="textEmail" required="true" onchange="form.textConfirmEmail.pattern = this.value;" class="singup-textbox-small"  placeholder="Email Address" />
+                          </div>
+                          <div class="singup-textarea">
+                          <input type="email"  name="textConfirmEmail" id="textConfirmEmail" required="true" class="singup-textbox-small"  placeholder="Confirm Email Address" />
+                    	</div>
+                        <div class="singup-textarea">
+                    	  <input type="text" name="textLicense" id="textLicense" required="true" class="singup-textbox"  placeholder="Contractor License Number" />
+                    	</div>
+                    	<div class="singup-textarea">
+                    	  <input type="text" name="textUserName" id="textUserName" required="true" class="singup-textbox"  placeholder="User Name" />
+                    	</div>
+                        <div class="singup-textarea">
+                    	  <input type="password" name="textPassword" id="textPassword" required="true" onchange="form.textConfirmPassword.pattern = this.value;" class="singup-textbox-small"  placeholder="Password" />
+                          </div>
+                          <div class="singup-textarea">
+                          <input type="password"  name="textConfirmPassword" id="textConfirmPassword" required="true" class="singup-textbox-small"  placeholder="Confirm Password" />
+                    	</div>
+                    	<input type="hidden" id="hiddenPrice" name="hiddenPrice" />
+                        <div class="singup-textarea">
+                        	<input type="submit" name="Submit" id="Submit" value="Save & Continue" class="org-bt" />
+                        </div>
+                        </form>
+                        </div>
+                    </div>
+               </div>
                
-                	<select name="selectCity1" id="selectCity1" class="register-dropdown">
-                    	<option>City</option>
-                        <% @city1=City.find(:all)%>
-                        <% @city1.each do |incity| %>
-						<option><%= incity.Name %></option>
-						<% end %>
-                   	</select>
-                   	
-                    <select name="selectState1" id="selectState1" class="register-dropdown">
-                    	<option>State</option>
-                        <% @state1=State.find(:all)%>
-                        <% @state1.each do |instate| %>
-							<option><%= instate.Name %></option>
-						<% end %>
-                    </select>
-                    
-                    <input name="txtZipCode" type="text" required="true" class="register-textbox" id="txtZipCode" placeholder="Zipcode" />
-				</div>                	
-                
-                <br /><br /><br/>
-                <h3>Company Details</h3>
-                <div class="register-block">
-                	<input name="txtCompany" type="text" required="true" class="register-textbox" id="txtCompany" placeholder="Company" />
-               
-                	<select name="selectIncorporation" id="selectIncorporation" class="register-dropdown">
-                    	<option>Incorporation Type</option>
-                        <% @city1=City.find(:all)%>
-                        <% @city1.each do |incity| %>
-						<option><%= incity.Name %></option>
-						<% end %>
-                   	</select>
-
-                    <input name="txtLicense" type="text" required="true" class="register-textbox" id="txtLicense" placeholder="License Number" />
-                  </div>
-                  
-                <br /><br /><br/>
-                <h3>Login Details</h3>
-                <div class="register-block">
-                	<input name="txtUserName" type="text" required="true" class="register-textbox" id="txtUserName" placeholder="User Name" />
-                	
-                	<input name="txtPassword" type="text" required="true" class="register-textbox" id="txtPassword" placeholder="Password" />
-
-                	<input name="txtConfirmPassword" type="text" required="true" class="register-textbox" id="txtConfirmPassword" placeholder="Confirm Password" />
-
-                </div>
-                <div style="float: center;"><input type="submit" name="Submit" id="Submit" value="Register" class="org-bt" /></div>	
-            </form>    
-           	</div>
-            
-            <div id="latest-news">
-            	<div class="news-heading">Latest News and Updates</div>
-                <div class="news-point">
-                	<ul class="bxslider">
-                    	<li>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</li>
-                        <li>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</li>
-                        <li>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</li>
-                    </ul>
-                    
-                </div>
-            </div>
-            
+             </div>
         </div>
     </div>
     

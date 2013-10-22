@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20131017054654) do
 
   create_table "AddressTypes", primary_key: "ID", force: true do |t|
     t.string   "Name",        limit: 20, null: false
@@ -119,6 +119,15 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "DateCreated",            null: false
     t.datetime "DateUpdated",            null: false
   end
+
+  create_table "Keys", primary_key: "ID", force: true do |t|
+    t.integer  "UserID",                 null: false
+    t.string   "Key",         limit: 45, null: false
+    t.datetime "DateCreated",            null: false
+  end
+
+  add_index "Keys", ["ID"], name: "ID_UNIQUE", unique: true, using: :btree
+  add_index "Keys", ["Key"], name: "Key_UNIQUE", unique: true, using: :btree
 
   create_table "Liens", primary_key: "ID", force: true do |t|
     t.integer  "GrantorID",   null: false
@@ -265,24 +274,26 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "SubscribedUsers", primary_key: "ID", force: true do |t|
-    t.string   "UserName",            limit: 20, null: false
-    t.string   "Password",            limit: 10, null: false
-    t.string   "FirstName",           limit: 20, null: false
-    t.string   "MiddleName",          limit: 20
-    t.string   "LastName",            limit: 20, null: false
-    t.string   "EmailID",             limit: 20, null: false
-    t.string   "CompanyName",         limit: 20, null: false
-    t.integer  "IncorporationTypeID",            null: false
-    t.string   "ContactNumber",       limit: 20, null: false
-    t.string   "LicenseNumber",       limit: 20, null: false
-    t.binary   "IsEnabled",           limit: 1,  null: false
-    t.binary   "IsActivated",         limit: 1,  null: false
-    t.binary   "IsApproved",          limit: 1,  null: false
-    t.datetime "DateCreated",                    null: false
-    t.datetime "DateUpdated",                    null: false
+    t.string   "UserName",          limit: 20, null: false
+    t.string   "Password",          limit: 10, null: false
+    t.string   "FirstName",         limit: 20, null: false
+    t.string   "MiddleName",        limit: 20
+    t.string   "LastName",          limit: 20, null: false
+    t.string   "EmailID",           limit: 20, null: false
+    t.string   "CompanyName",       limit: 20, null: false
+    t.string   "IncorporationType", limit: 20, null: false
+    t.string   "ContactNumber",     limit: 20, null: false
+    t.string   "LicenseNumber",     limit: 20, null: false
+    t.string   "AuthCodeUsed",      limit: 45
+    t.binary   "IsEnabled",         limit: 1,  null: false
+    t.binary   "IsActivated",       limit: 1,  null: false
+    t.binary   "IsApproved",        limit: 1,  null: false
+    t.datetime "DateCreated",                  null: false
+    t.datetime "DateUpdated",                  null: false
   end
 
-  add_index "SubscribedUsers", ["IncorporationTypeID"], name: "fk_IncorporationTypeID", using: :btree
+  add_index "SubscribedUsers", ["ID"], name: "ID_UNIQUE", unique: true, using: :btree
+  add_index "SubscribedUsers", ["IncorporationType"], name: "fk_IncorporationTypeID", using: :btree
   add_index "SubscribedUsers", ["UserName"], name: "SubscribedUsercol_UNIQUE", unique: true, using: :btree
 
   create_table "SubscriptionPlans", primary_key: "ID", force: true do |t|
@@ -298,19 +309,20 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "SubscriptionPlans", ["PeriodTypeID"], name: "fk_PeriodTypeID", using: :btree
 
   create_table "UserAddressDetails", primary_key: "ID", force: true do |t|
-    t.integer  "UserID",                   null: false
-    t.integer  "AddressTypeID",            null: false
-    t.string   "Address",       limit: 20, null: false
-    t.integer  "CityID",                   null: false
-    t.integer  "StateID",                  null: false
-    t.string   "ZIPCode",       limit: 20, null: false
-    t.datetime "DateCreated",              null: false
-    t.datetime "DateUpdated",              null: false
+    t.integer  "UserID",                  null: false
+    t.string   "AddressType", limit: 20,  null: false
+    t.string   "Address",     limit: 100, null: false
+    t.string   "City",        limit: 20,  null: false
+    t.string   "State",       limit: 20,  null: false
+    t.string   "ZIPCode",     limit: 20,  null: false
+    t.datetime "DateCreated",             null: false
+    t.datetime "DateUpdated",             null: false
   end
 
-  add_index "UserAddressDetails", ["AddressTypeID"], name: "fk_UserAddressTypeID", using: :btree
-  add_index "UserAddressDetails", ["CityID"], name: "fk_AddressCityID", using: :btree
-  add_index "UserAddressDetails", ["StateID"], name: "fk_AddressStateID", using: :btree
+  add_index "UserAddressDetails", ["AddressType"], name: "fk_UserAddressTypeID", using: :btree
+  add_index "UserAddressDetails", ["City"], name: "fk_AddressCityID", using: :btree
+  add_index "UserAddressDetails", ["ID"], name: "ID_UNIQUE", unique: true, using: :btree
+  add_index "UserAddressDetails", ["State"], name: "fk_AddressStateID", using: :btree
   add_index "UserAddressDetails", ["UserID"], name: "fk_AddressUseriD", using: :btree
 
   create_table "UserAuthorization", primary_key: "ID", force: true do |t|
@@ -353,5 +365,10 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "UserSubscriptionPlanHistory", ["PlanID"], name: "fk_UserSubscriptionHistoryPlanID", using: :btree
   add_index "UserSubscriptionPlanHistory", ["UserID"], name: "fk_UserSubscriptionHistoryUserID", using: :btree
+
+  create_table "paypal_interfaces", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

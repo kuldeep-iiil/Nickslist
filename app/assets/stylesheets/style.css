@@ -77,7 +77,7 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 
 #search-form{ width:970px; float:left}
 .form-textbox{ float:left; margin-right:4px;}
-.textbox{ width:105px; height:34px; line-height:34px; font-size:13px; color:#666666; border-radius:5px; border:0; background:#ffffff;  padding:0 5px}
+.textbox{ width:175px; height:34px; line-height:34px; font-size:13px; color:#666666; border-radius:5px; border:0; background:#ffffff;  padding:0 5px}
 .textbox-small{ width:105px; height:34px; line-height:34px; font-size:13px; color:#666666; border-radius:5px; border:0; background:#ffffff; padding:0 5px}
 .search-heading{font-family: 'OpenSans', Arial, sans-serif; font-weight:normal; color:#ffffff; font-size: 24px; line-height: 25px;
     margin-bottom: 8px;}
@@ -191,12 +191,16 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 .signup a{ color:#fff !important}
 
 #record-search{ width:100%; float:left}
-.search-record-right{ width:530px; height:300px; float:right}
-.search-record-left{ width:400px; float:left}
+.search-record-right{ width:530px; height:370px; float:right; margin-top: 50px}
+.search-record-left{ width:400px; float:left;}
 .address-area{ width:400px; float:left}
 .customer-name{ width:100%; color:#ff8a00; float:left; font-size:30px; font-family: 'OpenSans', Arial, sans-serif; text-transform:uppercase; border-bottom:1px solid #d2d2d2}
 .address-detail{ width:375px; float:left; background:url(/assets/loc-icon.png) 0 5px no-repeat; padding-left:25px; margin:15px 0}
 .address-phone{ width:375px; float:left;  background:url(/assets/ph-icon.png) 0 5px no-repeat; padding-left:25px; line-height:25px}
+
+.Home-Details-Title{ width:auto; color:#ff8a00; float:left; font-size:20px; font-family: 'OpenSans', Arial, sans-serif; text-transform:uppercase; border-bottom:1px solid #d2d2d2;}
+.Home-Details-Item{ width:153px; float:left; padding-left:0px; line-height:25px}
+.Home-Details-Value{ width:215px; float:left; padding-left:0px; line-height:25px}
 
 .read-review{ width:295px; float:left; background:#fff; border:1px solid #e7e7e7; padding:15px 25px; border-radius:5px; margin:60px 0 0 30px}
 .read-review h1{ font-family:Arial, Helvetica, sans-serif; font-size:17px; font-weight:normal; margin:5px 0}
@@ -245,7 +249,8 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 .singup-textarea{ width:auto; float:left; margin:0 5px 5px 0 }
 .singup-textbox{ width:410px; height:34px; border:1px solid #d7d7d7; line-height:34px; font-size:13px; color:#666666; border-radius:5px; background:#ffffff;  padding:0 5px}
 .singup-textbox-small{ width:197px; height:34px; border:1px solid #d7d7d7; line-height:34px; font-size:13px; color:#666666; border-radius:5px; background:#ffffff;  padding:0 5px}
-
+.singup-label{ width:410px; height:34px; border:1px solid #d7d7d7; line-height:34px; font-size:13px; color:#666666; border-radius:5px; background:#C4C4C4;  padding:0 5px}
+.singup-label-small{ width:197px; height:34px; border:1px solid #d7d7d7; line-height:34px; font-size:13px; color:#666666; border-radius:5px; background:#C4C4C4;  padding:0 5px}
 .steps{ width:100%; float:left; text-align:center}
 
 #left-content-area{ width:635px; float:left}
@@ -268,3 +273,11 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 
 #client-testimonials .bx-pager{ display:none}
 #client-testimonials ul{ margin:0; padding:0}
+
+#chkCodeBox{height: 40px; font-size:14px;}
+#SignupCode{display: none}
+#SignupReadOnlyCode {display: none}
+#SignupReadOnlyCode a{font-style: italic; color: #174986; font-size:14px; text-decoration: underline; vertical-align: middle}
+#SignupForm {font-size: 14px; display: block}
+
+#Error {color: red}

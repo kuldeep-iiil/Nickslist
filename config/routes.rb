@@ -1,6 +1,14 @@
 NicksListProj::Application.routes.draw do
+  post "user_registeration/show"
+  get "user_registeration/show"
+  post "user_registeration/PaypalPayment"
+  get "user_registeration/PaypalPayment"
+  post "user_registeration/GetSubscription"
+  get "user_registeration/GetSubscription"
   post "user_registeration/GetRegister"
   get "user_registeration/GetRegister"
+  post "user_registeration/GetUserInfo"
+  get "user_registeration/GetUserInfo"
   post "customer_search/GetDetails"
   get "customer_search/GetDetails"
   post "nicks_list/Index"
@@ -10,6 +18,28 @@ NicksListProj::Application.routes.draw do
   post "nicks_list/HowItWorks"
   get "nicks_list/HowItWorks"
   root to: "nicks_list#Index"
+  
+  resources :registration do
+    collection do
+      get :PaypalPayment
+      post :PaypalPayment
+      get :GetSubscription
+      post :GetSubscription
+      get :GetRegister
+      post :GetRegister
+      get :show
+      post :show
+    end
+  end
+  
+  resources :orders do
+    collection do
+      get :paid
+      get :revoked
+      post :ipn
+    end
+  end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -5,26 +5,16 @@
   	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 	<%= csrf_meta_tags %>
+	<!--<%= stylesheet_link_tag 'gmaps4rails' %>-->
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<!--<link href="css/style.css" rel="stylesheet" type="text/css" />
-	<link href="css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
-	<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>-->
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-		<script type="text/javascript">
-		$(document).ready(function(){
- 			$('.bxslider').bxSlider({
-  				mode: 'horizontal',
-  				speed:'500',
-  				auto:'true',
-  				pause:'5000'
-  			});
-  			$('.login-register a').click(function(){
-				$('#signin_menu').toggle();
-			});
-		});
+	<script>
+		$(function() {    
+    		$( "#selectCity" ).autocomplete({
+      			source: availableCities
+    		});
+  		});
 	</script>
-	
 </head>
 <body>
 <div id="wrapper">
@@ -71,16 +61,16 @@
                     	<div class="search-heading">Search Customer Rate/Reviews or Search for info on a potential customer.</div>
                     	<div id="search-form">
                         	<div class="form-textbox">
-                        	  <input name="txtFirstName" type="text" required="true" class="textbox" id="txtFirstName" placeholder="First Name" value="<%= params[:txtFirstName] %>" />
+                        	  <input name="txtFirstName" type="text" required="true" class="textbox-small" id="txtFirstName" placeholder="First Name" value="<%= params[:txtFirstName] %>" />
                         	</div>
                         	<div class="form-textbox">
-                        	  <input name="txtLastName" type="text" required="true" class="textbox" id="txtLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
+                        	  <input name="txtLastName" type="text" required="true" class="textbox-small" id="txtLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
                         	</div>
                             <div class="form-textbox">
                         	  <input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
                         	</div>
                           	<div class="form-textbox">
-                       	    	<input name="selectCity" type="text" required="true" class="textbox" id="selectCity" placeholder="City" value="<%= params[:selectCity] %>" />
+                       	    	<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
                         	
                        	    	<!--<select name="selectCity" id="selectCity" class="dropdown">
                         	    	<option>City</option>
@@ -91,9 +81,9 @@
                       	      </select>-->
                         	</div>
                         	<div class="form-textbox">
-                        	<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" value="<%= params[:selectState] %>" />
+                        	<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" value="<%= params[:selectState] %>" />
                         	
-                       	    <!--<select name="selectState" id="selectState" class="dropdown">
+                       	    <select name="selectState" id="selectState" class="dropdown">
                         	    <option>State</option>
                         	    <% @state=State.find(:all)%>
                         	    <% @state.each do |instate| %>
@@ -124,12 +114,42 @@
                 	<div class="address-area">
                     	<div class="customer-name"><%= params[:txtFirstName] %> <%= params[:txtLastName] %></div>
                         <div class="address-detail"><%= params[:txtStreetAddress]  %><br />
-							<%= params[:selectCity]  %> <%= params[:selectState]  %> <%= params[:txtZipCode]  %></div>
+							<%= params[:selectCity]  %> <%= params[:txtZipCode]  %></div>
                         <div class="address-phone"><%= params[:txtPhoneNumber]  %></div>
                     </div>
+                    <div>&nbsp;</div>
+                    <% if(@taxAssessmentYear.present? or @taxAssessment.present? or @yearBuilt.present? or @lotSizeSqFt.present? or @finishedSqFt.present? or @bathrooms.present? or @bedrooms.present? or @lastSoldPrice.present?) %>
+                    <div class="Home-Details-Title">Home Details</div>
+                    <% end %>
+                    <div class="Home-Details-Item">&nbsp;</div><div class="Home-Details-Value">&nbsp;</div>
+                    <% if(@taxAssessmentYear.present?) %>
+                    <div class="Home-Details-Item">Tax Assesment Year </div><div class="Home-Details-Value">: <%= @taxAssessmentYear %></div>
+                    <% end %>
+                    <% if(@taxAssessment.present?) %>
+                    <div class="Home-Details-Item">Tax Assesment </div><div class="Home-Details-Value">: $<%= @taxAssessment %></div>
+                    <% end %>
+                    <% if(@yearBuilt.present?) %>
+                    <div class="Home-Details-Item">Year Built </div><div class="Home-Details-Value">: <%= @yearBuilt %></div>
+                    <% end %>
+                    <% if(@lotSizeSqFt.present?) %>
+                    <div class="Home-Details-Item">Lot </div><div class="Home-Details-Value">: <%= @lotSizeSqFt %>sqft</div>
+                    <% end %>
+                    <% if(@finishedSqFt.present?) %>
+                    <div class="Home-Details-Item">Finished </div><div class="Home-Details-Value">: <%= @finishedSqFt %>sqft</div>
+                    <% end %>
+                    <% if(@bathrooms.present?) %>
+                    <div class="Home-Details-Item">Bathrooms </div><div class="Home-Details-Value">: <%= @bathrooms %> Baths</div>
+                    <% end %>
+                    <% if(@bedrooms.present?) %>
+                    <div class="Home-Details-Item">Bedrooms </div><div class="Home-Details-Value">: <%= @bedrooms %> Beds</div>
+                    <% end %>
+                    <% if(@lastSoldPrice.present?) %>
+                    <div class="Home-Details-Item">Last Sold </div><div class="Home-Details-Value">: <%= @lastSoldDate %> for $<%= @lastSoldPrice %></div>
+                   <% end %>
+                   
                     <div class="read-review">
 							
-                			<% @customer = Customer.find_by StreetAddress:params[:txtStreetAddress], CityID:params[:selectCity], StateID:params[:selectState], ZIPCode:params[:txtZipCode] %>
+                			<% @customer = Customer.find_by StreetAddress:params[:txtStreetAddress], CityID:params[:selectCity], ZIPCode:params[:txtZipCode] %>
             				
             				<% if @customer.blank? %>
             					<h1>This customer is not reviewed yet!</h1>
@@ -143,6 +163,7 @@
                     </div>
                 </div>
                 <div class="search-record-right" id="map"></div>
+                <!--<%= gmaps4rails(@classifieds) %>-->
             </div>
 
 			<div id="latest-news">
@@ -197,7 +218,7 @@
     var marker = new google.maps.Marker({
         position: latLng,
         map: map,
-       	title: "<%= params[:txtStreetAddress] %> , <%= params[:selectCity] %>,  <%= params[:selectState] %>"
+       	title: "<%= params[:txtStreetAddress] %> , <%= params[:selectCity] %>"
     });
 
     
@@ -214,5 +235,6 @@
         }
 });
 </script>
+<!--<%= yield :scripts %>-->
 </body>
 </html>
