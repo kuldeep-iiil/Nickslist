@@ -25,11 +25,12 @@ ActiveRecord::Schema.define(version: 20131017054654) do
     t.datetime "DateUpdated",            null: false
   end
 
-  create_table "Citys", primary_key: "ID", force: true do |t|
-    t.string   "Name",        limit: 20, null: false
-    t.datetime "DateCreated",            null: false
-    t.datetime "DateUpdated",            null: false
+  create_table "Cities", primary_key: "ID", force: true do |t|
+    t.string "Name",  limit: 20, null: false
+    t.string "State", limit: 20, null: false
   end
+
+  add_index "Cities", ["ID"], name: "ID_UNIQUE", unique: true, using: :btree
 
   create_table "CourtProceedings", primary_key: "ID", force: true do |t|
     t.integer  "PlaintiffID",      null: false
@@ -45,35 +46,35 @@ ActiveRecord::Schema.define(version: 20131017054654) do
   add_index "CourtProceedings", ["PlaintiffID"], name: "fk_PlaintiffID", using: :btree
 
   create_table "Customers", primary_key: "ID", force: true do |t|
-    t.string   "FirstName",     limit: 20, null: false
-    t.string   "MiddleName",    limit: 20, null: false
-    t.string   "LastName",      limit: 20, null: false
-    t.string   "ContactNumber", limit: 20, null: false
-    t.string   "StreetAddress", limit: 20, null: false
-    t.integer  "CityID",                   null: false
-    t.integer  "StateID",                  null: false
-    t.string   "ZIPCode",       limit: 20, null: false
-    t.datetime "DateCreated",              null: false
-    t.datetime "DateUpdated",              null: false
+    t.string   "FirstName",     limit: 20,  null: false
+    t.string   "MiddleName",    limit: 20,  null: false
+    t.string   "LastName",      limit: 20,  null: false
+    t.string   "ContactNumber", limit: 20,  null: false
+    t.string   "StreetAddress", limit: 20,  null: false
+    t.string   "CityID",        limit: 100, null: false
+    t.string   "State",         limit: 20,  null: false
+    t.string   "ZIPCode",       limit: 20,  null: false
+    t.datetime "DateCreated",               null: false
+    t.datetime "DateUpdated",               null: false
   end
 
   add_index "Customers", ["CityID"], name: "fk_CustomersCityID", using: :btree
-  add_index "Customers", ["StateID"], name: "fk_CustomersStateID", using: :btree
+  add_index "Customers", ["State"], name: "fk_CustomersStateID", using: :btree
 
   create_table "Defendants", primary_key: "ID", force: true do |t|
-    t.string   "FirstName",     limit: 20, null: false
-    t.string   "MiddleName",    limit: 20, null: false
-    t.string   "LastName",      limit: 20, null: false
-    t.string   "StreetAddress", limit: 20, null: false
-    t.integer  "CityID",                   null: false
-    t.integer  "StateID",                  null: false
-    t.string   "ZipCode",       limit: 20, null: false
-    t.datetime "DateCreated",              null: false
-    t.datetime "DateUpdated",              null: false
+    t.string   "FirstName",     limit: 20,  null: false
+    t.string   "MiddleName",    limit: 20,  null: false
+    t.string   "LastName",      limit: 20,  null: false
+    t.string   "StreetAddress", limit: 20,  null: false
+    t.string   "City",          limit: 100, null: false
+    t.string   "State",         limit: 20,  null: false
+    t.string   "ZipCode",       limit: 20,  null: false
+    t.datetime "DateCreated",               null: false
+    t.datetime "DateUpdated",               null: false
   end
 
-  add_index "Defendants", ["CityID"], name: "fk_DefendantsCityID", using: :btree
-  add_index "Defendants", ["StateID"], name: "fk_DefendantsStateID", using: :btree
+  add_index "Defendants", ["City"], name: "fk_DefendantsCityID", using: :btree
+  add_index "Defendants", ["State"], name: "fk_DefendantsStateID", using: :btree
 
   create_table "DetailedInfoReviews", primary_key: "ID", force: true do |t|
     t.integer "ReviewID",               null: false
@@ -100,19 +101,19 @@ ActiveRecord::Schema.define(version: 20131017054654) do
   add_index "GeneralInfoReviews", ["ReviewID"], name: "fk_GeneralReviewID", using: :btree
 
   create_table "Grantors", primary_key: "ID", force: true do |t|
-    t.string   "FirstName",     limit: 20, null: false
-    t.string   "MiddleName",    limit: 20, null: false
-    t.string   "LastName",      limit: 20, null: false
-    t.string   "StreetAddress", limit: 20, null: false
-    t.integer  "CityID",                   null: false
-    t.integer  "StateID",                  null: false
-    t.string   "ZipCode",       limit: 20, null: false
-    t.datetime "DateCreated",              null: false
-    t.datetime "DateUpdated",              null: false
+    t.string   "FirstName",     limit: 20,  null: false
+    t.string   "MiddleName",    limit: 20,  null: false
+    t.string   "LastName",      limit: 20,  null: false
+    t.string   "StreetAddress", limit: 20,  null: false
+    t.string   "City",          limit: 100, null: false
+    t.string   "State",         limit: 20,  null: false
+    t.string   "ZipCode",       limit: 20,  null: false
+    t.datetime "DateCreated",               null: false
+    t.datetime "DateUpdated",               null: false
   end
 
-  add_index "Grantors", ["CityID"], name: "fk_GrantorsCityID", using: :btree
-  add_index "Grantors", ["StateID"], name: "fk_GrantorsStateID", using: :btree
+  add_index "Grantors", ["City"], name: "fk_GrantorsCityID", using: :btree
+  add_index "Grantors", ["State"], name: "fk_GrantorsStateID", using: :btree
 
   create_table "IncorporationTypes", primary_key: "ID", force: true do |t|
     t.string   "Name",        limit: 20, null: false
@@ -180,19 +181,19 @@ ActiveRecord::Schema.define(version: 20131017054654) do
   end
 
   create_table "Plaintiffs", primary_key: "ID", force: true do |t|
-    t.string   "FirstName",     limit: 20, null: false
-    t.string   "MiddleName",    limit: 20, null: false
-    t.string   "LastName",      limit: 20, null: false
-    t.string   "StreetAddress", limit: 20, null: false
-    t.integer  "CityID",                   null: false
-    t.integer  "StateID",                  null: false
-    t.string   "ZipCode",       limit: 20, null: false
-    t.datetime "DateCreated",              null: false
-    t.datetime "DateUpdated",              null: false
+    t.string   "FirstName",     limit: 20,  null: false
+    t.string   "MiddleName",    limit: 20,  null: false
+    t.string   "LastName",      limit: 20,  null: false
+    t.string   "StreetAddress", limit: 20,  null: false
+    t.string   "City",          limit: 100, null: false
+    t.string   "State",         limit: 20,  null: false
+    t.string   "ZipCode",       limit: 20,  null: false
+    t.datetime "DateCreated",               null: false
+    t.datetime "DateUpdated",               null: false
   end
 
-  add_index "Plaintiffs", ["CityID"], name: "fk_PlaintiffsCityID", using: :btree
-  add_index "Plaintiffs", ["StateID"], name: "fk_PlaintiffsStateID", using: :btree
+  add_index "Plaintiffs", ["City"], name: "fk_PlaintiffsCityID", using: :btree
+  add_index "Plaintiffs", ["State"], name: "fk_PlaintiffsStateID", using: :btree
 
   create_table "ReviewQuestions", primary_key: "ID", force: true do |t|
     t.integer  "ParentID"
@@ -231,15 +232,15 @@ ActiveRecord::Schema.define(version: 20131017054654) do
   end
 
   create_table "SearchDetails", primary_key: "ID", force: true do |t|
-    t.string   "FirstName",     limit: 20, null: false
-    t.string   "MiddleName",    limit: 20, null: false
-    t.string   "LastName",      limit: 20, null: false
-    t.string   "StreetAddress", limit: 20, null: false
-    t.integer  "CityID",                   null: false
-    t.integer  "StateID",                  null: false
-    t.string   "ZipCode",       limit: 20, null: false
-    t.datetime "DateCreated",              null: false
-    t.datetime "DateUpdated",              null: false
+    t.string   "FirstName",     limit: 20,  null: false
+    t.string   "MiddleName",    limit: 20,  null: false
+    t.string   "LastName",      limit: 20,  null: false
+    t.string   "StreetAddress", limit: 20,  null: false
+    t.string   "City",          limit: 100, null: false
+    t.string   "State",         limit: 20,  null: false
+    t.string   "ZipCode",       limit: 20,  null: false
+    t.datetime "DateCreated",               null: false
+    t.datetime "DateUpdated",               null: false
   end
 
   create_table "SearchReports", primary_key: "ID", force: true do |t|
@@ -274,22 +275,22 @@ ActiveRecord::Schema.define(version: 20131017054654) do
   end
 
   create_table "SubscribedUsers", primary_key: "ID", force: true do |t|
-    t.string   "UserName",          limit: 20, null: false
-    t.string   "Password",          limit: 10, null: false
-    t.string   "FirstName",         limit: 20, null: false
+    t.string   "UserName",          limit: 20,  null: false
+    t.string   "Password",          limit: 100, null: false
+    t.string   "FirstName",         limit: 20,  null: false
     t.string   "MiddleName",        limit: 20
-    t.string   "LastName",          limit: 20, null: false
-    t.string   "EmailID",           limit: 20, null: false
-    t.string   "CompanyName",       limit: 20, null: false
-    t.string   "IncorporationType", limit: 20, null: false
-    t.string   "ContactNumber",     limit: 20, null: false
-    t.string   "LicenseNumber",     limit: 20, null: false
+    t.string   "LastName",          limit: 20,  null: false
+    t.string   "EmailID",           limit: 20,  null: false
+    t.string   "CompanyName",       limit: 20,  null: false
+    t.string   "IncorporationType", limit: 20,  null: false
+    t.string   "ContactNumber",     limit: 20,  null: false
+    t.string   "LicenseNumber",     limit: 20,  null: false
     t.string   "AuthCodeUsed",      limit: 45
-    t.binary   "IsEnabled",         limit: 1,  null: false
-    t.binary   "IsActivated",       limit: 1,  null: false
-    t.binary   "IsApproved",        limit: 1,  null: false
-    t.datetime "DateCreated",                  null: false
-    t.datetime "DateUpdated",                  null: false
+    t.binary   "IsEnabled",         limit: 1,   null: false
+    t.binary   "IsActivated",       limit: 1,   null: false
+    t.binary   "IsApproved",        limit: 1,   null: false
+    t.datetime "DateCreated",                   null: false
+    t.datetime "DateUpdated",                   null: false
   end
 
   add_index "SubscribedUsers", ["ID"], name: "ID_UNIQUE", unique: true, using: :btree
@@ -312,7 +313,7 @@ ActiveRecord::Schema.define(version: 20131017054654) do
     t.integer  "UserID",                  null: false
     t.string   "AddressType", limit: 20,  null: false
     t.string   "Address",     limit: 100, null: false
-    t.string   "City",        limit: 20,  null: false
+    t.string   "City",        limit: 100, null: false
     t.string   "State",       limit: 20,  null: false
     t.string   "ZIPCode",     limit: 20,  null: false
     t.datetime "DateCreated",             null: false
