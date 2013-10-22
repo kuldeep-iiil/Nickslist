@@ -1,15 +1,3 @@
-$(document).ready(function(){
- 	$('.bxslider').bxSlider({
-  		mode: 'horizontal',
-  		speed:'500',
-  		auto:'true',
-  		pause:'5000'
-  	});
-  	$('.login-register a').click(function(){
-		$('#signin_menu').toggle();
-	});
-});
-		
 function SignupForm_visibility(chk) {
 	var idSignupCode = document.getElementById('SignupCode');
     var idSignupReadOnlyCode = document.getElementById('SignupReadOnlyCode');
@@ -25,6 +13,47 @@ function SignupForm_visibility(chk) {
 		idSignupCode.style.display = 'none';
 		idSignupReadOnlyCode.style.display = 'none';
 		idSignupForm.style.display = 'block';
+		
+		document.getElementById('chkAddress').checked = false;
+		document.getElementById('chkAddress').disabled = false;
+        document.getElementById('textCompany').value= '';
+        document.getElementById('textCompany').readOnly = false;
+        document.getElementById('textFirstName').value= '';
+        document.getElementById('textFirstName').readOnly = false;
+        document.getElementById('textLastName').value= '';
+        document.getElementById('textLastName').readOnly = false;
+    	document.getElementById('textIncorporationType').value= '';
+		document.getElementById('textIncorporationType').readOnly = false;
+		document.getElementById('textBussStreetAddress').value= '';
+    	document.getElementById('textBussStreetAddress').readOnly = false;
+    	document.getElementById('textBussCity').value= '';
+    	document.getElementById('textBussCity').readOnly = false;
+    	document.getElementById('textBussState').value= '';
+    	document.getElementById('textBussState').readOnly = false;
+    	document.getElementById('textBussZipCode').value= '';
+    	document.getElementById('textBussZipCode').readOnly = false;
+    	document.getElementById('textMailStreetAddress').value= '';
+    	document.getElementById('textMailStreetAddress').readOnly = false;
+    	document.getElementById('textMailCity').value= '';
+    	document.getElementById('textMailCity').readOnly = false;
+    	document.getElementById('textMailState').value= '';
+    	document.getElementById('textMailState').readOnly = false;
+    	document.getElementById('textMailZipCode').value= '';
+    	document.getElementById('textMailZipCode').readOnly = false;
+    	document.getElementById('textEmail').value= '';
+        document.getElementById('textEmail').readOnly = false;
+        document.getElementById('textConfirmEmail').value= '';
+        document.getElementById('textConfirmEmail').readOnly = false;
+    	document.getElementById('textPhoneNumber').value= '';
+    	document.getElementById('textPhoneNumber').readOnly = false;
+    	document.getElementById('textLicense').value= '';
+    	document.getElementById('textLicense').readOnly = false;
+    	document.getElementById('textUserName').value= '';
+        document.getElementById('textUserName').readOnly = false;
+        document.getElementById('textPassword').value= '';
+        document.getElementById('textPassword').readOnly = false;
+    	document.getElementById('textConfirmPassword').value= '';
+    	document.getElementById('textConfirmPassword').readOnly = false;
 	}
 }
 
@@ -32,6 +61,7 @@ function Change_CheckCode(){
 	document.getElementById('SignupCode').style.display = 'block';
     document.getElementById('SignupReadOnlyCode').style.display = 'none';
     document.getElementById('SignupForm').style.display = 'none';
+    document.getElementById('chkCode').disabled = false;
     
     document.getElementById('textCode').value = '';
     document.getElementById('textCompany').value= '';
@@ -55,16 +85,24 @@ function check_chkAddress(chk){
     if(chk.checked)
     {
     	document.getElementById('textMailStreetAddress').value= document.getElementById('textBussStreetAddress').value;
+		document.getElementById('textMailStreetAddress').readOnly= true;
     	document.getElementById('textMailCity').value= document.getElementById('textBussCity').value;
+		document.getElementById('textMailCity').readOnly= true;
     	document.getElementById('textMailState').value= document.getElementById('textBussState').value;
+		document.getElementById('textMailState').readOnly= true;
     	document.getElementById('textMailZipCode').value= document.getElementById('textBussZipCode').value;
+		document.getElementById('textMailZipCode').readOnly= true;
 	}
 	else
 	{
 		document.getElementById('textMailStreetAddress').value= '';
+		document.getElementById('textMailStreetAddress').readOnly= false;
     	document.getElementById('textMailCity').value= '';
+    	document.getElementById('textMailCity').readOnly= false;
     	document.getElementById('textMailState').value= '';
+    	document.getElementById('textMailState').readOnly= false;
     	document.getElementById('textMailZipCode').value= '';
+    	document.getElementById('textMailZipCode').readOnly= false;
 	}
 }
 

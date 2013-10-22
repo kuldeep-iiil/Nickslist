@@ -39,7 +39,7 @@ class CustomerSearchController < ApplicationController
     zwsID = 'X1-ZWz1dn6tpoopvv_18y6r'
     #uri = "http://www.zillow.com/webservice/GetSearchResults.htm?#{'zws-id=X1-ZWz1dmvv3i5qtn_3fm17&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA'}"
     uri = "http://www.zillow.com/webservice/GetDeepSearchResults.htm?#{'zws-id=' + zwsID + '&address=' + streetAddress + '&citystatezip=' + citystatezip}"
-    @uri = uri
+    #@uri = uri
     rest_resource = RestClient::Resource.new(uri, '', '') 
     users = rest_resource.get
     users= users.gsub('SearchResults:searchresults','SearchResults')  

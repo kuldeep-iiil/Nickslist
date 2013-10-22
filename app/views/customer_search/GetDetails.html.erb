@@ -4,17 +4,30 @@
 	<title>NicksList - Search Customer</title>
   	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-	<%= csrf_meta_tags %>
-	<!--<%= stylesheet_link_tag 'gmaps4rails' %>-->
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-	<script>
-		$(function() {    
+	<%= csrf_meta_tags %>	
+	<!--<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<link href="css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>-->
+	<script type="text/javascript">
+		$(document).ready(function(){
+ 			$('.bxslider').bxSlider({
+  				mode: 'horizontal',
+  				speed:'500',
+  				auto:'true',
+  				pause:'5000'
+  			});	
+  			$('.login-register a').click(function(){
+				$('#signin_menu').toggle();
+			});
+		});
+			
+  		$(function() {    
     		$( "#selectCity" ).autocomplete({
       			source: availableCities
     		});
   		});
-	</script>
+  </script>
 </head>
 <body>
 <div id="wrapper">
@@ -41,7 +54,7 @@
                         </ul>
                     </div>
                 	<div class="login-wrapper">
-                		<div  class="login-register"><a href="#">Logout</a></div>
+                		<div class="login-register"><a href="#">Login/Register</a></div>
                     </div>
                 	</div>
                 </div>

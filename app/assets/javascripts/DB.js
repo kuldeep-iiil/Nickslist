@@ -21,4 +21,5 @@
       "Selma, CA",
       "Fresmo, CA",
       "Sanger, CA",
+      "Vancouver, WA"
     ];

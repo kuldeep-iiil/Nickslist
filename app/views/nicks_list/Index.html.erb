@@ -3,13 +3,13 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Nick's List</title>
-	<!--<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-	<%= csrf_meta_tags %>	-->
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<%= csrf_meta_tags %>	
+	<!--<link href="css/style.css" rel="stylesheet" type="text/css" />
 	<link href="css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
-	<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
+	<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>-->
 	<script type="text/javascript">
 		$(document).ready(function(){
  			$('.bxslider').bxSlider({
@@ -17,19 +17,18 @@
   				speed:'500',
   				auto:'true',
   				pause:'5000'
-  			});
+  			});	
   			$('.login-register a').click(function(){
 				$('#signin_menu').toggle();
 			});
 		});
-		
+			
   		$(function() {    
     		$( "#selectCity" ).autocomplete({
       			source: availableCities
     		});
   		});
   </script>
-	</script>
 </head>
 <body>
 	<div id="wrapper">

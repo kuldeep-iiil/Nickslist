@@ -34,7 +34,7 @@ class UserRegisterationController < ApplicationController
       mailStreetAddress != nil and mailCity != nil and mailState != nil and mailZipCode != nil and
       phoneNumber != nil and email != nil and license != nil and userName != nil and password != nil)
           
-        if(keyCode == nil)
+        if(keyCode.blank?)
           isUsed='0'
           params[:hiddenPrice] = '1000.00'
         else
@@ -49,25 +49,27 @@ class UserRegisterationController < ApplicationController
 
         if(!userExistence.blank?)
           status = false
-          @messageString="Error Message : Username with the same name is already exist."  
+          @messageString="Error Message : Username already exists."  
         end
                   
         if(!emailExistence.blank?)
           status = false
-          @messageString="Error Message : Email ID is already exist."  
+          @messageString="Error Message : Email ID already exists."  
         end
                          
         if(!licenseExistence.blank? && keyCode == nil)
           status = false
-          @messageString="Error Message : License Number is already exist."  
+          @messageString="Error Message : License Number already exists."  
         end    
                          
         if(!companyExistence.blank? && keyCode == nil)
           status = false
-          @messageString="Error Message : Company with the same name is already exist."
+          @messageString="Error Message : Company name already exists."
         end      
         
-        if(status == true)                
+        if(status == true)
+          @messageString = ''
+                          
           #Save User Information
           @subscribedUser = SubscribedUser.new(UserName: userName, Password: password, FirstName: firstName,
           LastName: lastName, EmailID: email, CompanyName: companyName, IncorporationType: incorporationType,
@@ -86,18 +88,37 @@ class UserRegisterationController < ApplicationController
           @userMailAddressDetail.save
         
           #Create key for the user company to be used by subsicuent user.
-          if(keyCode == nil)
-            keyCode = '4562-2522-4562-4654'
+          if(keyCode.blank?)
+            keyCode = Time.now.to_i
+            @keyCode = keyCode
             @key = Key.new(UserID: user.ID, Key: keyCode , DateCreated: time)
             @key.save          
           end
                       
           #render Confirm Subscription form with filled user data   
-          render :action => 'GetSubscription'  
+          render :action => 'GetSubscription'
+      else
+          params[:textCompany] = companyName
+          params[:textFirstName] = firstName
+          params[:textLastName] = lastName
+          params[:textIncorporationType] = incorporationType
+          params[:textBussStreetAddress] = bussStreetAddress
+          params[:textBussCity] = bussCity
+          params[:textBussState] = bussState
+          params[:textBussZipCode] = bussZipCode
+          params[:textMailStreetAddress] = mailStreetAddress
+          params[:textMailCity] = mailCity
+          params[:textMailState] = mailState
+          params[:textMailZipCode] = mailZipCode
+          params[:textPhoneNumber] = phoneNumber
+          params[:textEmail] = email
+          params[:textConfirmEmail] = email
+          params[:textLicense] = license
+          params[:textUserName] = userName
       end
     end 
      
-      if(authCode != nil)
+      if(!authCode.blank?)
         key = Key.find_by(Key: authCode)
         if(not key.blank?)  
           userDetails = SubscribedUser.find_by(ID: key.UserID)

@@ -2,14 +2,13 @@
 <html>
 <head>
 	<title>NicksList-About Us</title>
-	<!--<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-	<%= csrf_meta_tags %>-->
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<%= csrf_meta_tags %>	
+	<!--<link href="css/style.css" rel="stylesheet" type="text/css" />
 	<link href="css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
-	<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
+	<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>-->
 	<script type="text/javascript">
 		$(document).ready(function(){
  			$('.bxslider').bxSlider({
@@ -17,12 +16,18 @@
   				speed:'500',
   				auto:'true',
   				pause:'5000'
-  			});
+  			});	
   			$('.login-register a').click(function(){
 				$('#signin_menu').toggle();
 			});
 		});
-	</script>
+			
+  		$(function() {    
+    		$( "#selectCity" ).autocomplete({
+      			source: availableCities
+    		});
+  		});
+  </script>
 </head>
 <body>
 	<div id="wrapper">
@@ -85,16 +90,16 @@
                     	<div class="search-heading">Search Customer Rate/Reviews or Search for info on a potential customer.</div>
                     	<div id="search-form">
                         	<div class="form-textbox">
-                        	  <input name="txtFirstName" type="text" required="true" class="textbox" id="txtFirstName" placeholder="First Name" />
+                        	  <input name="txtFirstName" type="text" required="true" class="textbox-small" id="txtFirstName" placeholder="First Name" />
                         	</div>
                         	<div class="form-textbox">
-                        	  <input name="txtLastName" type="text" required="true" class="textbox" id="txtLastName" placeholder="Last Name" />
+                        	  <input name="txtLastName" type="text" required="true" class="textbox-small" id="txtLastName" placeholder="Last Name" />
                         	</div>
                             <div class="form-textbox">
                         	  <input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" />
                         	</div>
                           	<div class="form-textbox">
-                       	    	<input name="selectCity" type="text" required="true" class="textbox" id="selectCity" placeholder="City" />
+                       	    	<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" />
                         	
                        	    	<!--<select name="selectCity" id="selectCity" class="dropdown">
                         	    	<option>City</option>
@@ -105,9 +110,9 @@
                       	      </select>-->
                         	</div>
                         	<div class="form-textbox">
-                        	<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" />
+                        	<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" />
                         	
-                       	    <!--<select name="selectState" id="selectState" class="dropdown">
+                       	    <select name="selectState" id="selectState" class="dropdown">
                         	    <option>State</option>
                         	    <% @state=State.find(:all)%>
                         	    <% @state.each do |instate| %>
