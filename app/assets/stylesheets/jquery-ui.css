@@ -457,6 +457,7 @@ button.ui-button::-moz-focus-inner {
 	margin: 0;
 	display: block;
 	outline: none;
+	z-index: 9999;
 }
 .ui-menu .ui-menu {
 	margin-top: -3px;
@@ -787,7 +788,7 @@ body .ui-tooltip {
 ----------------------------------*/
 .ui-widget {
 	font-family: Verdana,Arial,sans-serif;
-	font-size: 1.1em;
+	font-size: 13px;
 }
 .ui-widget .ui-widget {
 	font-size: 1em;
