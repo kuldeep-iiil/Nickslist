@@ -9,6 +9,7 @@
 	<link href="css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>-->
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
  			$('.bxslider').bxSlider({
@@ -175,8 +176,17 @@
                     	
                     </div>
                 </div>
-                <div class="search-record-right" id="map"></div>
-                <!--<%= gmaps4rails(@classifieds) %>-->
+                <% if(@latitude.blank? && @longitude.blank?) %>
+                	<div class="search-record-right"> 
+                	We were not able to locate the address:
+                	<br />
+                	<b><%= params[:txtStreetAddress]  %> <%= params[:selectCity]  %> <%= params[:txtZipCode]  %></b>
+                	</div>
+                <% else %>
+                	<div class="search-record-right" id="map"></div>
+                <% end %>
+                <!--<div class="search-record-right" id="map"></div>
+                <%= gmaps4rails(@classifieds) %>-->
             </div>
 
 			<div id="latest-news">
@@ -231,7 +241,7 @@
     var marker = new google.maps.Marker({
         position: latLng,
         map: map,
-       	title: "<%= params[:txtStreetAddress] %> , <%= params[:selectCity] %>"
+       	title: "<%= @address %>"
     });
 
     

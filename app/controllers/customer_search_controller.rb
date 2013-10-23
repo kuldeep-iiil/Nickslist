@@ -26,7 +26,8 @@ class CustomerSearchController < ApplicationController
       #Pass values for Longitude and Latitude to the View to show customer location in MAP.
       if cordinates.present?        
         @longitude = cordinates[0].longitude.to_s
-        @latitude = cordinates[0].latitude.to_s 
+        @latitude = cordinates[0].latitude.to_s
+        @address = cordinates[0].address.to_s
         #@classifieds = cordinates[0].latitude.to_s + ', ' + cordinates[0].longitude.to_s + ', 10, 40'
         #@classifieds = @classifieds.to_gmaps4rails
       end
