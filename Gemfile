@@ -43,6 +43,9 @@ gem 'geocoder'
 #For Encryption/Decryption
 gem 'bcrypt-ruby', :require => 'bcrypt'
 
+#To run rails server in background
+gem 'thin'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
