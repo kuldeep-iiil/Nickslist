@@ -156,70 +156,76 @@
                			<div id="SignupForm">
                			<form action="/user_registeration/show" method="post">
                     	<div>
-                    	  <label><b>Company Name</b> : <%= params[:textCompany]%></label>
+                    	  <div class="subscription-Item">Company Name : </div><div class="subscription-Value"><%= params[:textCompany]%></div>
                     	</div>
                         <div>
-                    	  <label><b>First Name</b> : <%= params[:textFirstName]%></label>
+                    	  <div class="subscription-Item">First Name : </div><div class="subscription-Value"><%= params[:textFirstName]%></div>
                         </div>
                         <div>
-                          <label><b>Last Name</b> : <%= params[:textLastName]%></label>
+                          <div class="subscription-Item">Last Name : </div><div class="subscription-Value"><%= params[:textLastName]%></div>
+                        
                     	</div>
                         <div>
-                    	  <label><b>Incorporation Type</b> : <%= params[:textIncorporationType]%></label>
+						  <div class="subscription-Item">Incorporation Type : </div><div class="subscription-Value"><%= params[:textIncorporationType]%></div>
+                        
                     	</div>
                     	<div>
-                    	  <label><b>Phone Number</b> : <%= params[:textPhoneNumber]%></label>
+                    	  <div class="subscription-Item">Phone Number : </div><div class="subscription-Value"><%= params[:textPhoneNumber]%></div>
+                        
                     	</div>
                         <div>
-                    	  <label><b>Email ID</b> : <%= params[:textEmail] %></label>
+                    	  <div class="subscription-Item">Email ID : </div><div class="subscription-Value"><%= params[:textEmail]%></div>
+                        
                           </div>
                         <div>
-                    	  <label><b>License Number</b> : <%= params[:textLicense] %></label>
+                    	  <div class="subscription-Item">License Number : </div><div class="subscription-Value"><%= params[:textLicense]%></div>
+                        
+                    	</div>
+                    	<div class="subscription-Title">Business Address</div>
+                    	
+                        
+                    	<div>
+                    	  <div class="subscription-Item">Street Address : </div><div class="subscription-Value"><%= params[:textBussStreetAddress]%></div>
+                        
                     	</div>
                     	<div>
-                    		<br />
-                    		<H3>Business Address</H3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    	  <div class="subscription-Item">City : </div><div class="subscription-Value"><%= params[:textBussCity]%></div>
+                        
                     	</div>
                     	<div>
-                    	  <label><b>Street Address</b> : <%= params[:textBussStreetAddress]%></label>
-                    	</div>
-                    	<div>
-                    	  <label><b>City</b> : <%= params[:textBussCity]%></label>
-                    	</div>
-                    	<div>
-                    	  <label><b>State</b> : <%= params[:textBussState]%></label>
+                    	  
+                    	  <div class="subscription-Item">State : </div><div class="subscription-Value"><%= params[:textBussState]%></div>
+                        
                     	</div>
                         <div>
-                    	  <label><b>Zip Code</b> : <%= params[:textBussZipCode]%></label>
+                    	  <div class="subscription-Item">Zip Code: </div><div class="subscription-Value"><%= params[:textBussZipCode]%></div>
+                        
+                    	</div>
+                    	<div class="subscription-Title">Mailing Address</div>
+                    	
+                        
+                        <div>
+                    	  <div class="subscription-Item">Street Address : </div><div class="subscription-Value"><%= params[:textMailStreetAddress]%></div>
+                        
                     	</div>
                     	<div>
-                    		<br />
-                    		<H3>Mailing Address</H3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    	
+                    	  <div class="subscription-Item">City : </div><div class="subscription-Value"><%= params[:textMailCity]%></div>
+                        
+                    	</div>
+                    	<div>
+                    	  <div class="subscription-Item">State : </div><div class="subscription-Value"><%= params[:textMailState]%></div>
+                        
                     	</div>
                         <div>
-                    	  <label><b>Street Address</b> : <%= params[:textMailStreetAddress]%></label>
+                    	  <div class="subscription-Item">Zip Code : </div><div class="subscription-Value"><%= params[:textMailZipCode]%></div>
+                        
                     	</div>
+                    	<div class="subscription-Title">Subscription Price</div>
+                    	
+                        
                     	<div>
-                    	  <label><b>City</b> : <%= params[:textMailCity]%></label>
-                    	</div>
-                    	<div>
-                    	  <label><b>State</b> : <%= params[:textMailState]%></label>
-                    	</div>
-                        <div>
-                    	  <label><b>Zip Code</b> : <%= params[:textMailZipCode]%></label>
-                    	</div>
-                    	<div>
-                    		<br />
-                    		<H3>Subscription Price</H3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    	
-                    	</div>
-                    	<div>
-                    	  <label><b>Price</b> : <%= params[:hiddenPrice] %>$</label>
+                    	  <div class="subscription-Item">Price : </div><div class="subscription-Value"><%= params[:hiddenPrice]%></div>
+                          <br />
                     	</div>
                         <div class="singup-textarea">
                         	<input type="submit" name="Submit" id="Submit" value="Confirm & Continue" class="org-bt" value="<%= params[:textFirstName]%>" />
