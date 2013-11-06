@@ -53,15 +53,17 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 #navigation{ width:990px; position:absolute; bottom:-35px; left:0; background:url(/assets/nav-bg.jpg) repeat-x; height:42px; z-index:9999; border-radius:5px }
 .login-register{ width:150px; float:right; background:url(/assets/org-bt-bg.jpg) repeat-x; border-radius:0 5px 5px 0; height:42px; line-height:42px; font-size:13px; color:#fff; text-transform:uppercase;}
 .login-register a{ padding:10px 10px; color:#ffffff;}
+.login-register a:hover{cursor:pointer}
 
 .logout-register{padding-right:5px; width:150px; float:right; background:url(/assets/org-bt-bg.jpg) repeat-x; border-radius:0 5px 5px 0; font-size:16px; color:#fff;  text-align:left; line-height: 42px}
 .logout-register a{vertical-align: top; color:#ffffff; font-family: Arial, sans-serif; font-weight:normal;}
+.logout-register a:hover{cursor:pointer}
 
 #nav{ width:800px; float:left}
 #nav ul{ list-style:none; margin:0; padding:0; width:100%; float:left}
 #nav li{ width:auto; float:left; font-size:13px; text-transform:uppercase; height: 42px;    line-height: 42px;}
 #nav li a{ color:#ffffff; padding: 13px 15px;}
-#nav li a:hover{ background:url(/assets/hover.jpg) repeat-x}
+#nav li a:hover{ background:url(/assets/hover.jpg) repeat-x;}
 
 #nav li.first a:hover{ background:url(/assets/hover.jpg) repeat-x; border-radius: 5px 0 0 5px}
 #nav li a.active{ background:url(/assets/hover.jpg) repeat-x}
