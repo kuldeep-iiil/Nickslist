@@ -52,7 +52,10 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 #customer-support p a{ color:#ff8a00}
 #navigation{ width:990px; position:absolute; bottom:-35px; left:0; background:url(/assets/nav-bg.jpg) repeat-x; height:42px; z-index:9999; border-radius:5px }
 .login-register{ width:150px; float:right; background:url(/assets/org-bt-bg.jpg) repeat-x; border-radius:0 5px 5px 0; height:42px; line-height:42px; font-size:13px; color:#fff; text-transform:uppercase;}
-.login-register a{ padding:12px 20px; color:#ffffff;}
+.login-register a{ padding:10px 10px; color:#ffffff;}
+
+.logout-register{padding-right:5px; width:150px; float:right; background:url(/assets/org-bt-bg.jpg) repeat-x; border-radius:0 5px 5px 0; font-size:16px; color:#fff;  text-align:left; line-height: 42px}
+.logout-register a{vertical-align: top; color:#ffffff; font-family: Arial, sans-serif; font-weight:normal;}
 
 #nav{ width:800px; float:left}
 #nav ul{ list-style:none; margin:0; padding:0; width:100%; float:left}
@@ -125,9 +128,6 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 
 .login-wrapper{ width:150px; float:right; position:relative}
 
-
-
-
 #signin_menu {
 	display:none;
 	background-color:#ffa133;
@@ -190,6 +190,41 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 .signup{ width:215px; float:left; color:#333; text-align:center;  font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif; font-size:20px; border-top:1px solid #d07b18; padding-top:10px; margin-top:5px}
 .signup a{ color:#fff !important}
 
+#signout_menu {
+	display:none;
+	background-color:#ffa133;
+	position:absolute;
+	width:135px;
+	z-index:100;
+	
+	text-align:center;
+	padding:10px;
+	/*margin-left:-8px;
+	*margin-left:-15px;
+	margin-top:5px;*/
+	color:#333333;
+	font-size:12px;
+	right:0;
+	top:42px;
+	border-radius:0 5px 5px 5px;
+}
+#signout_menu p {
+	margin:0;
+}
+
+#signout_submit {
+	border-radius:4px;
+	
+	background:#2967ac;
+	border:1px solid #195aa2;
+	color:#fff;
+	text-shadow:0 -1px 0 #39d;
+	padding:4px 10px 5px;
+	font-size:11px;
+	margin:0 5px 0 0;
+	font-weight:bold;
+}
+
 #record-search{ width:100%; float:left}
 .search-record-right{ width:530px; height:370px; float:right; margin-top: 50px}
 .search-record-left{ width:400px; float:left;}
@@ -202,7 +237,7 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 .Home-Details-Item{ width:153px; float:left; padding-left:0px; line-height:25px}
 .Home-Details-Value{ width:215px; float:left; padding-left:0px; line-height:25px}
 
-.read-review{ width:295px; float:left; background:#fff; border:1px solid #e7e7e7; padding:15px 25px; border-radius:5px; margin:60px 0 0 30px}
+.read-review{ width:320px; float:left; background:#fff; border:1px solid #e7e7e7; padding:15px 25px; border-radius:5px; margin:60px 0 0 30px}
 .read-review h1{ font-family:Arial, Helvetica, sans-serif; font-size:17px; font-weight:normal; margin:5px 0}
 .read-review button{ text-transform:uppercase; font-size:16px; font-weight:bold}
 

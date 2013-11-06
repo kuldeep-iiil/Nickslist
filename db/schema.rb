@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131017054654) do
+ActiveRecord::Schema.define(version: 20131031072138) do
 
   create_table "AddressTypes", primary_key: "ID", force: true do |t|
     t.string   "Name",        limit: 20, null: false
@@ -51,14 +51,14 @@ ActiveRecord::Schema.define(version: 20131017054654) do
     t.string   "LastName",      limit: 20,  null: false
     t.string   "ContactNumber", limit: 20,  null: false
     t.string   "StreetAddress", limit: 20,  null: false
-    t.string   "CityID",        limit: 100, null: false
+    t.string   "City",          limit: 100, null: false
     t.string   "State",         limit: 20,  null: false
     t.string   "ZIPCode",       limit: 20,  null: false
     t.datetime "DateCreated",               null: false
     t.datetime "DateUpdated",               null: false
   end
 
-  add_index "Customers", ["CityID"], name: "fk_CustomersCityID", using: :btree
+  add_index "Customers", ["City"], name: "fk_CustomersCityID", using: :btree
   add_index "Customers", ["State"], name: "fk_CustomersStateID", using: :btree
 
   create_table "Defendants", primary_key: "ID", force: true do |t|
@@ -277,10 +277,11 @@ ActiveRecord::Schema.define(version: 20131017054654) do
   create_table "SubscribedUsers", primary_key: "ID", force: true do |t|
     t.string   "UserName",          limit: 20,  null: false
     t.string   "Password",          limit: 100, null: false
+    t.string   "Salt",              limit: 45,  null: false
     t.string   "FirstName",         limit: 20,  null: false
     t.string   "MiddleName",        limit: 20
     t.string   "LastName",          limit: 20,  null: false
-    t.string   "EmailID",           limit: 20,  null: false
+    t.string   "EmailID",           limit: 50,  null: false
     t.string   "CompanyName",       limit: 20,  null: false
     t.string   "IncorporationType", limit: 20,  null: false
     t.string   "ContactNumber",     limit: 20,  null: false
@@ -289,6 +290,7 @@ ActiveRecord::Schema.define(version: 20131017054654) do
     t.binary   "IsEnabled",         limit: 1,   null: false
     t.binary   "IsActivated",       limit: 1,   null: false
     t.binary   "IsApproved",        limit: 1,   null: false
+    t.binary   "IsSubscribed",      limit: 1,   null: false
     t.datetime "DateCreated",                   null: false
     t.datetime "DateUpdated",                   null: false
   end
@@ -336,6 +338,18 @@ ActiveRecord::Schema.define(version: 20131017054654) do
   add_index "UserAuthorization", ["RoleID"], name: "fk_AuthRoleID", using: :btree
   add_index "UserAuthorization", ["UserID"], name: "fk_AuthUserID", using: :btree
 
+  create_table "UserPaymentDetails", primary_key: "ID", force: true do |t|
+    t.string   "UserID",        limit: 100, null: false
+    t.string   "PayerID",       limit: 100, null: false
+    t.string   "Token",         limit: 100, null: false
+    t.string   "TransactionID", limit: 45,  null: false
+    t.string   "Message",       limit: 45,  null: false
+    t.datetime "DateCreated",               null: false
+    t.string   "DateUpdated",   limit: 500, null: false
+  end
+
+  add_index "UserPaymentDetails", ["ID"], name: "ID_UNIQUE", unique: true, using: :btree
+
   create_table "UserRoles", primary_key: "ID", force: true do |t|
     t.string   "Role",        limit: 20,  null: false
     t.string   "Description", limit: 100, null: false
@@ -368,6 +382,16 @@ ActiveRecord::Schema.define(version: 20131017054654) do
   add_index "UserSubscriptionPlanHistory", ["UserID"], name: "fk_UserSubscriptionHistoryUserID", using: :btree
 
   create_table "paypal_interfaces", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "paypal_workerrs", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "paypal_workers", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end

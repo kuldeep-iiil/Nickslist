@@ -21,6 +21,9 @@
   			$('.login-register a').click(function(){
 				$('#signin_menu').toggle();
 			});
+			$('.logout-register a').click(function(){
+				$('#signout_menu').toggle();
+			});
 		});
 			
   		$(function() {    
@@ -45,9 +48,9 @@
                 <div id="navigation">
                 	<div id="nav">
                     	<ul>
-                        	<li class="first"><a href="/" class="active">Home</a></li>
-                            <li><a href="/nicks_list/About">About BillysList</a></li>
-                            <li><a href="/nicks_list/HowItWorks">How it works </a></li>
+                        	<li class="first"><a href="<%= root_url %>" class="active">Home</a></li>
+                            <li><a href="<%= nicks_list_About_url %>">About BillysList</a></li>
+                            <li><a href="<%= nicks_list_HowItWorks_url %>">How it works </a></li>
                             <li><a href="#">FAQ’s</a></li>
                             <li><a href="#">Testimonials</a></li>
                             <li><a href="#">Press Release</a></li>
@@ -55,7 +58,39 @@
                         </ul>
                     </div>
                 	<div class="login-wrapper">
-                		<div class="login-register"><a href="#">Login/Register</a></div>
+                		<% if(session[:user_id] == nil) %>
+                		<div  class="login-register"><a>Login / Register</a></div>
+                    	<div id="signin_menu"> 
+                    		<form action="<%= authentication_login_url %>" method="post">   
+                    			<p>                
+                      				<label for="username">Username</label>
+                      				<input id="textUserName" name="textUserName" required="required" value="" title="User Name" tabindex="4" type="text">
+                      			</p>
+                      			<p>
+                        			<label for="password">Password</label>
+                        			<input id="textPassword" name="textPassword" required="required" value="" title="password" tabindex="5" type="password">
+                      			</p>
+                      			<p class="remember">
+                        			<input id="signin_submit" value="Sign in" tabindex="6" type="submit">
+                        			<!--<input id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
+                        			<label for="remember">Remember me</label>-->
+                      			</p>
+                      			<p class="forgot"> 
+                      				<a href="<%= authentication_requestpassword_url %>" id="resend_password_link">Forgot your password?</a> 
+                      			</p>
+                      			<div class="signup">New User? <a href="<%= user_registeration_GetRegister_url %>">Signup Here</a></div>                                          
+							</form>
+                    	</div>
+                    	<% else %>
+                    		<div  class="logout-register"><%= image_tag("user.png", :alt => "", :width => "40px", :height=> "40px") %><a><%= session[:user_name] %></div>
+                    		<div id="signout_menu"> 
+                    		<form action="/authentication/logout" method="post">   
+                      			<p class="remember">
+                        			<input id="signout_submit" value="Sign Out" tabindex="6" type="submit">
+                      			</p>
+							</form>
+                    	</div>
+                    	<% end %>
                     </div>
                 	</div>
                 </div>
@@ -85,25 +120,9 @@
                         	</div>
                           	<div class="form-textbox">
                        	    	<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
-                        	
-                       	    	<!--<select name="selectCity" id="selectCity" class="dropdown">
-                        	    	<option>City</option>
-                        	    	<% @city=City.find(:all)%>
-                        	    	<% @city.each do |incity| %>
-										<option><%= incity.Name %></option>
-									<% end %>
-                      	      </select>-->
                         	</div>
                         	<div class="form-textbox">
-                        	<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" value="<%= params[:selectState] %>" />
-                        	
-                       	    <select name="selectState" id="selectState" class="dropdown">
-                        	    <option>State</option>
-                        	    <% @state=State.find(:all)%>
-                        	    <% @state.each do |instate| %>
-									<option><%= instate.Name %></option>
-								<% end %>
-                      	     </select>-->
+                        	<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" value="<%= params[:selectState] %>" />-->
                         	</div>
                             <div class="form-textbox">
                         	  <input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
@@ -163,7 +182,7 @@
                    
                     <div class="read-review">
 							
-                			<% @customer = Customer.find_by StreetAddress:params[:txtStreetAddress], CityID:params[:selectCity], ZIPCode:params[:txtZipCode] %>
+                			<% @customer = Customer.find_by StreetAddress:params[:txtStreetAddress], City:@city, State:@state, ZIPCode:params[:txtZipCode] %>
             				
             				<% if @customer.blank? %>
             					<h1>This customer is not reviewed yet!</h1>
@@ -209,9 +228,9 @@
     	<div class="browser-center">
         	<div class="footer-links">
             	<ul>
-                	<li><a href="/">Home</a></li>
-                    <li><a href="/nicks_list/About">About BillysList</a></li>
-                    <li><a href="/nicks_list/HowItWorks">How it works</a></li>
+                	<li><a href="<%= root_url %>">Home</a></li>
+                    <li><a href="<%= nicks_list_About_url %>">About BillysList</a></li>
+                    <li><a href="<%= nicks_list_HowItWorks_url %>">How it works </a></li>
                     <li><a href="#">FAQ’s</a></li>
                     <li><a href="#">Testimonials</a></li>
                     <li><a href="#">Press Release</a></li>

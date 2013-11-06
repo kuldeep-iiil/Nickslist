@@ -2,9 +2,9 @@ require 'paypal-sdk-merchant'
 class PaypalInterface < ActiveRecord::Base
   attr_reader :api, :express_checkout_response
 
-  PAYPAL_RETURN_URL = Rails.application.routes.url_helpers.paid_orders_url(host: 'localhost:3000')
-  PAYPAL_CANCEL_URL = Rails.application.routes.url_helpers.revoked_orders_url(host: 'localhost:3000')
-  PAYPAL_NOTIFY_URL = Rails.application.routes.url_helpers.ipn_orders_url(host: 'localhost:3000')
+  PAYPAL_RETURN_URL = Rails.application.routes.url_helpers.user_registeration_paid_url(host: '192.168.0.157:3000')
+  PAYPAL_CANCEL_URL = Rails.application.routes.url_helpers.user_registeration_revoked_url(host: '192.168.0.157:3000')
+  PAYPAL_NOTIFY_URL = Rails.application.routes.url_helpers.user_registeration_ipn_url(host: '192.168.0.157:3000')
 
   def initialize(order)
     @api = PayPal::SDK::Merchant::API.new
@@ -20,11 +20,11 @@ class PaypalInterface < ActiveRecord::Base
           NotifyURL: PAYPAL_NOTIFY_URL,
           OrderTotal: {
             currencyID: "USD",
-            value: 1
+            value: @order.ItemPrice
           },
           ItemTotal: {
             currencyID: "USD",
-            value: 1
+            value: @order.ItemPrice
           },
           ShippingTotal: {
             currencyID: "USD",
@@ -35,11 +35,11 @@ class PaypalInterface < ActiveRecord::Base
             value: "0"
           },
           PaymentDetailsItem: [{
-            Name: 1,
-            Quantity: 1,
+            Name: "Subscription",
+            Quantity: @order.NumberOfItems,
             Amount: {
               currencyID: "USD",
-              value: 1
+              value: @order.ItemPrice
             },
             ItemCategory: "Physical"
           }],
@@ -78,12 +78,12 @@ class PaypalInterface < ActiveRecord::Base
     @do_express_checkout_payment = @api.build_do_express_checkout_payment({
       DoExpressCheckoutPaymentRequestDetails: {
         PaymentAction: "Sale",
-        Token: @order.payment_token,
-        PayerID: @order.payerID,
+        Token: @order.Token,
+        PayerID: @order.PayerID,
         PaymentDetails: [{
           OrderTotal: {
             currencyID: "USD",
-            value: 1
+            value: @order.ItemPrice
           },
           NotifyURL: PAYPAL_NOTIFY_URL
         }]
@@ -92,14 +92,16 @@ class PaypalInterface < ActiveRecord::Base
 
     # Make API call & get response
     @do_express_checkout_payment_response = @api.do_express_checkout_payment(@do_express_checkout_payment)
+    return @do_express_checkout_payment_response
 
     # Access Response
-    if @do_express_checkout_payment_response.success?
-      details = @do_express_checkout_payment_response.DoExpressCheckoutPaymentResponseDetails
+    #if @do_express_checkout_payment_response.success?
+     # details = @do_express_checkout_payment_response.DoExpressCheckoutPaymentResponseDetails
       #@order.set_payment_details(prepare_express_checkout_response(details))
-    else
-      errors = @do_express_checkout_payment_response.Errors # => Array
+      #@response.set_payment_details(prepare_express_checkout_response(details))
+    #else
+     # errors = @do_express_checkout_payment_response.Errors # => Array
       #@order.save_payment_errors errors
-    end
+    #end
   end
 end

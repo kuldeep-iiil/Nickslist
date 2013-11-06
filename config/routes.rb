@@ -1,6 +1,20 @@
 NicksListProj::Application.routes.draw do
+  post "/authentication/requestpassword"
+  get "/authentication/requestpassword"
+  post "authentication/login"
+  get "authentication/login"
+  post "authentication/logout"
+  get "authentication/logout"
   post "user_registeration/show"
   get "user_registeration/show"
+  post "user_registeration/paid"
+  get "user_registeration/paid"
+  post "user_registeration/Finish"
+  get "user_registeration/Finish"
+  post "user_registeration/ipn"
+  get "user_registeration/ipn"
+  post "user_registeration/revoked"
+  get "user_registeration/revoked"
   post "user_registeration/PaypalPayment"
   get "user_registeration/PaypalPayment"
   post "user_registeration/GetSubscription"
@@ -18,19 +32,6 @@ NicksListProj::Application.routes.draw do
   post "nicks_list/HowItWorks"
   get "nicks_list/HowItWorks"
   root to: "nicks_list#Index"
-  
-  resources :registration do
-    collection do
-      get :PaypalPayment
-      post :PaypalPayment
-      get :GetSubscription
-      post :GetSubscription
-      get :GetRegister
-      post :GetRegister
-      get :show
-      post :show
-    end
-  end
   
   resources :orders do
     collection do

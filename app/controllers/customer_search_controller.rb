@@ -3,16 +3,26 @@ class CustomerSearchController < ApplicationController
   include REXML
   skip_before_action :verify_authenticity_token
   
+  
+  
   def GetDetails    
+    if(session[:user_id] == nil)
+      redirect_to root_url, :notice => "Please login first to get result for search!"
+    end
+    
     if(params[:txtStreetAddress] != nil && params[:selectCity] != nil && params[:txtZipCode] != nil)
-      
+      citystateVal = params[:selectCity].to_str.split(',')
+      @citystateVal = citystateVal
+      @city = citystateVal.at(0).strip()
+      @state = citystateVal.at(1).strip()
       #streetAddress=params[:txtStreetAddress].gsub('#','' )
       streetAddress=params[:txtStreetAddress].gsub(' ', '+')
       #streetAddress=streetAddress.gsub(' ', '+') 
       streetAddress=streetAddress.gsub(',','%2C' )  
       
       #citystatezip=params[:selectCity] + '%2C+' + params[:selectState] + '%2C+' + params[:txtZipCode]
-      citystatezip=params[:selectCity] + '%2C+' + params[:txtZipCode]
+      city=params[:selectCity].gsub(' ', '+')
+      citystatezip=city + '%2C+' + params[:txtZipCode]
       citystatezip=citystatezip.gsub(', ','%2C')
       
       #location = params[:txtStreetAddress] + ', ' + params[:selectCity] + ', ' + params[:selectState] + ', ' + params[:txtZipCode]

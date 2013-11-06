@@ -1,8 +1,8 @@
-function SignupForm_visibility(chk) {
+function SignupForm_visibility() {
 	var idSignupCode = document.getElementById('SignupCode');
     var idSignupReadOnlyCode = document.getElementById('SignupReadOnlyCode');
     var idSignupForm = document.getElementById('SignupForm');
-    if(chk.checked)
+    if(document.getElementById('chkCode').checked)
     {
 		idSignupCode.style.display = 'block';
         idSignupReadOnlyCode.style.display = 'none';
@@ -28,16 +28,16 @@ function SignupForm_visibility(chk) {
     	document.getElementById('textBussStreetAddress').readOnly = false;
     	document.getElementById('textBussCity').value= '';
     	document.getElementById('textBussCity').readOnly = false;
-    	document.getElementById('textBussState').value= '';
-    	document.getElementById('textBussState').readOnly = false;
+    	//document.getElementById('textBussState').value= '';
+    	//document.getElementById('textBussState').readOnly = false;
     	document.getElementById('textBussZipCode').value= '';
     	document.getElementById('textBussZipCode').readOnly = false;
     	document.getElementById('textMailStreetAddress').value= '';
     	document.getElementById('textMailStreetAddress').readOnly = false;
     	document.getElementById('textMailCity').value= '';
     	document.getElementById('textMailCity').readOnly = false;
-    	document.getElementById('textMailState').value= '';
-    	document.getElementById('textMailState').readOnly = false;
+    	//document.getElementById('textMailState').value= '';
+    	//document.getElementById('textMailState').readOnly = false;
     	document.getElementById('textMailZipCode').value= '';
     	document.getElementById('textMailZipCode').readOnly = false;
     	document.getElementById('textEmail').value= '';
@@ -68,11 +68,11 @@ function Change_CheckCode(){
     document.getElementById('textIncorporationType').value= '';
     document.getElementById('textBussStreetAddress').value= '';
     document.getElementById('textBussCity').value= '';
-    document.getElementById('textBussState').value= '';
+    //document.getElementById('textBussState').value= '';
     document.getElementById('textBussZipCode').value= '';
     document.getElementById('textMailStreetAddress').value= '';
     document.getElementById('textMailCity').value= '';
-    document.getElementById('textMailState').value= '';
+    //document.getElementById('textMailState').value= '';
     document.getElementById('textMailZipCode').value= '';
     document.getElementById('textPhoneNumber').value= '';
     document.getElementById('textLicense').value= '';
@@ -88,8 +88,8 @@ function check_chkAddress(chk){
 		document.getElementById('textMailStreetAddress').readOnly= true;
     	document.getElementById('textMailCity').value= document.getElementById('textBussCity').value;
 		document.getElementById('textMailCity').readOnly= true;
-    	document.getElementById('textMailState').value= document.getElementById('textBussState').value;
-		document.getElementById('textMailState').readOnly= true;
+    	//document.getElementById('textMailState').value= document.getElementById('textBussState').value;
+		//document.getElementById('textMailState').readOnly= true;
     	document.getElementById('textMailZipCode').value= document.getElementById('textBussZipCode').value;
 		document.getElementById('textMailZipCode').readOnly= true;
 	}
@@ -99,8 +99,8 @@ function check_chkAddress(chk){
 		document.getElementById('textMailStreetAddress').readOnly= false;
     	document.getElementById('textMailCity').value= '';
     	document.getElementById('textMailCity').readOnly= false;
-    	document.getElementById('textMailState').value= '';
-    	document.getElementById('textMailState').readOnly= false;
+    	//document.getElementById('textMailState').value= '';
+    	//document.getElementById('textMailState').readOnly= false;
     	document.getElementById('textMailZipCode').value= '';
     	document.getElementById('textMailZipCode').readOnly= false;
 	}
@@ -130,16 +130,16 @@ function SignupForm_AuthUser(authCode, companyName, incorporationType, bussStree
     	document.getElementById('textBussStreetAddress').readOnly = true;
     	document.getElementById('textBussCity').value= bussCity;
     	document.getElementById('textBussCity').readOnly = true;
-    	document.getElementById('textBussState').value= bussState;
-    	document.getElementById('textBussState').readOnly = true;
+    	//document.getElementById('textBussState').value= bussState;
+    	//document.getElementById('textBussState').readOnly = true;
     	document.getElementById('textBussZipCode').value= bussZipCode;
     	document.getElementById('textBussZipCode').readOnly = true;
     	document.getElementById('textMailStreetAddress').value= mailStreetAddress;
     	document.getElementById('textMailStreetAddress').readOnly = true;
     	document.getElementById('textMailCity').value= mailCity;
     	document.getElementById('textMailCity').readOnly = true;
-    	document.getElementById('textMailState').value= mailState;
-    	document.getElementById('textMailState').readOnly = true;
+    	//document.getElementById('textMailState').value= mailState;
+    	//document.getElementById('textMailState').readOnly = true;
     	document.getElementById('textMailZipCode').value= mailZipCode;
     	document.getElementById('textMailZipCode').readOnly = true;
     	document.getElementById('textPhoneNumber').value= phoneNumber;
@@ -147,7 +147,7 @@ function SignupForm_AuthUser(authCode, companyName, incorporationType, bussStree
     	document.getElementById('textLicense').value= license;
     	document.getElementById('textLicense').readOnly = true;
     			
-    	if(bussStreetAddress==mailStreetAddress && bussCity==mailCity && bussState==mailState && bussZipCode==mailZipCode){
+    	if(bussStreetAddress==mailStreetAddress && bussCity==mailCity && bussZipCode==mailZipCode){
     		document.getElementById('chkAddress').checked = true;				    				
     	}
     	else
