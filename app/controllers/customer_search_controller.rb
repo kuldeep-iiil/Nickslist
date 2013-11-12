@@ -6,9 +6,9 @@ class CustomerSearchController < ApplicationController
   
   
   def GetDetails    
-    if(session[:user_id] == nil)
-      redirect_to root_url, :notice => "Please login first to get result for search!"
-    end
+    #if(session[:user_id] == nil)
+     # redirect_to root_url, :notice => "Please login first to get result for search!"
+    #end
     
     if(params[:txtStreetAddress] != nil && params[:selectCity] != nil && params[:txtZipCode] != nil)
       @firstName = params[:txtFirstName]
