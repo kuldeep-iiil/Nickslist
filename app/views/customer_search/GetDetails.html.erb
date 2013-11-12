@@ -181,18 +181,65 @@
                    <% end %>
                    
                     <div class="read-review">
-							
-                			<% @customer = Customer.find_by StreetAddress:params[:txtStreetAddress], City:@city, State:@state, ZIPCode:params[:txtZipCode] %>
-            				
-            				<% if @customer.blank? %>
-            					<h1>This customer is not reviewed yet!</h1>
-            					<button id="btnAddReview" class="org-bt">CLICK HERE TO ADD REVIEW</button>	
-							<% else %>							
-								<h1><%= params[:txtFirstName] %> <%= params[:txtLastName] %> has 5 Reviews available</h1>
-                        		
-                        		<button id="btnViewReview" class="org-bt">CLICK HERE TO VIEW REVIEWS</button>							
-						<% end %>
-                    	
+							<% if @reviewer.blank? %>
+            				<form action="<%= review_customers_AddReviews_url %>" method="post">
+            					<h1>This customer is not reviewed yet!</h1>            	
+                        	  	<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= params[:txtFirstName] %>" />
+								<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
+								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
+								<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
+								<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
+								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= params[:txtPhoneNumber] %>" />
+								
+								<input type="submit" class="org-bt" name="btnAddReview" id="btnAddReview" value="CLICK HERE TO ADD REVIEW" />
+							</form> 	
+							<% else %>				
+							<form action="<%= review_customers_ListReviews_url %>" method="post">			
+								<h1>
+									<%= params[:txtFirstName] %> <%= params[:txtLastName] %>
+									<% if(@reviewer.length == 1) %>
+										has <%= @reviewer.length %> review available
+									<% else %>
+										has <%= @reviewer.length %> reviews available
+									<% end %>
+								</h1>
+								<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= params[:txtFirstName] %>" />
+								<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
+								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
+								<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
+								<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
+								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= params[:txtPhoneNumber] %>" />
+								<input type="submit" class="org-bt" name="btnViewReview" id="btnViewReview" value="CLICK HERE TO VIEW REVIEWS" />                        		
+                        	</form>
+                        	<% if(!@currentUser) %>
+                        	<form action="<%= review_customers_AddReviews_url %>" method="post">
+            					            	
+                        	  	<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= params[:txtFirstName] %>" />
+								<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
+								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
+								<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
+								<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
+								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= params[:txtPhoneNumber] %>" />
+								<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewer.length %>" />
+								<input type="submit" class="org-bt" name="btnAddReview" id="btnAddReview" value="ADD REVIEW" />
+							</form>
+							<% else %>
+								<form action="<%= review_customers_UpdateReviews_url %>" method="post">
+                        		<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
+								<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
+								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
+								<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+								<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
+								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
+								<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= @reviewerID %>" />
+								<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= @reviewID %>" />
+								<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewer.length %>" />
+                        		<input type="submit" class="org-bt" name="btnAddReview" id="btnAddReview" value="UPDATE REVIEW" />	
+                        		</form>
+							<% end %> 
+                        	 							
+							<% end %>
+							                   	
                     </div>
                 </div>
                 <% if(@latitude.blank? && @longitude.blank?) %>

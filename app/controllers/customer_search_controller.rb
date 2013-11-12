@@ -11,19 +11,46 @@ class CustomerSearchController < ApplicationController
     end
     
     if(params[:txtStreetAddress] != nil && params[:selectCity] != nil && params[:txtZipCode] != nil)
+      @firstName = params[:txtFirstName]
+      @lastName = params[:txtLastName]
+      @phoneNumber = params[:txtPhoneNumber]
+      @streetAddress = params[:txtStreetAddress]
+      @zipCode = params[:txtZipCode]
+      @citystateVal = params[:selectCity]
       citystateVal = params[:selectCity].to_str.split(',')
-      @citystateVal = citystateVal
       @city = citystateVal.at(0).strip()
       @state = citystateVal.at(1).strip()
       #streetAddress=params[:txtStreetAddress].gsub('#','' )
       streetAddress=params[:txtStreetAddress].gsub(' ', '+')
       #streetAddress=streetAddress.gsub(' ', '+') 
-      streetAddress=streetAddress.gsub(',','%2C' )  
+      params[:txtStreetAddress] 
       
       #citystatezip=params[:selectCity] + '%2C+' + params[:selectState] + '%2C+' + params[:txtZipCode]
       city=params[:selectCity].gsub(' ', '+')
       citystatezip=city + '%2C+' + params[:txtZipCode]
       citystatezip=citystatezip.gsub(', ','%2C')
+      
+      #Get Reviews count for searched person
+      #@customer = Customer.find_by(LastName: @lastName, ContactNumber: @phoneNumber, StreetAddress: @streetAddress, City: @city, State: @state, ZIPCode: @zipCode)
+           
+      @customer = Customer.where("LastName = ? AND ContactNumber = ? OR StreetAddress = ? AND City = ? AND State = ? AND ZIPCode = ?", @lastName, @phoneNumber, @streetAddress, @city, @state, @zipCode)
+      if(!@customer.blank?)
+      @reviewer = SubscribedUser.find_by_sql("select user.*, cust.ID as 'CustomerID', rev.ID as 'ReviewID' 
+                  from SubscribedUsers user join Reviews rev on user.ID = rev.UserID join Customers cust on cust.ID = rev.CustomerID
+                  where cust.ID IN (" + @customer.all.collect {|cust| cust.ID}.join(',') + ")")          
+      end
+      
+      if(!@reviewer.blank?)
+          @reviewer.each do |revUser|
+            if(revUser.ID == session[:user_id])
+              @currentUser = true
+              @reviewerID = revUser.ID
+              @reviewID = revUser.ReviewID 
+            else
+              @currentUser = false
+            end
+          end
+        end
       
       #location = params[:txtStreetAddress] + ', ' + params[:selectCity] + ', ' + params[:selectState] + ', ' + params[:txtZipCode]
       location = params[:txtStreetAddress] + ', ' + params[:selectCity] + ', ' + params[:txtZipCode]

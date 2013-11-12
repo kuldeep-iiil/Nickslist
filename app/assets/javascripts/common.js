@@ -1,3 +1,20 @@
+function ShowHideDiv(divName){
+	if(divName == 'General')
+	{
+		document.getElementById('btnContinue').style.display = 'none';
+		document.getElementById('divGeneral').style.display = 'none';
+		document.getElementById('divDetailed').style.display = 'block';
+		document.getElementById('btnBack').style.display = 'block';
+	}
+	else
+	{
+		document.getElementById('divGeneral').style.display = 'block';
+		document.getElementById('divDetailed').style.display = 'none';
+		document.getElementById('btnBack').style.display = 'none';
+		document.getElementById('btnContinue').style.display = 'block';
+	}	
+}
+
 function SignupForm_visibility() {
 	var idSignupCode = document.getElementById('SignupCode');
     var idSignupReadOnlyCode = document.getElementById('SignupReadOnlyCode');
