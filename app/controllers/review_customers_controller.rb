@@ -1,9 +1,9 @@
 class ReviewCustomersController < ApplicationController
   skip_before_action :verify_authenticity_token
   def AddReviews
-    if(session[:user_id] == nil)
-      redirect_to root_url, :notice => "Login Session Expired!"
-    end
+    #if(session[:user_id] == nil)
+     # redirect_to root_url, :notice => "Login Session Expired!"
+    #end
     @reviewQuestion = ReviewQuestion.all
 
     @firstName = params[:hidFirstName]
@@ -22,9 +22,9 @@ class ReviewCustomersController < ApplicationController
   end
 
   def AddReviewData
-    if(session[:user_id] == nil)
-      redirect_to root_url, :notice => "Login Session Expired!"
-    end
+    #if(session[:user_id] == nil)
+     # redirect_to root_url, :notice => "Login Session Expired!"
+    #end
     #@reviewQuestion = ReviewQuestion.all
 
     currentTime = Time.new
@@ -148,9 +148,9 @@ class ReviewCustomersController < ApplicationController
   end
 
   def ReadReviews
-    if(session[:user_id] == nil)
-      redirect_to root_url, :notice => "Login Session Expired!"
-    end
+    #if(session[:user_id] == nil)
+     # redirect_to root_url, :notice => "Login Session Expired!"
+    #end
     
     @firstName = params[:hidFirstName]
     @lastName = params[:hidLastName]
@@ -179,9 +179,9 @@ class ReviewCustomersController < ApplicationController
   end
 
   def ListReviews
-    if(session[:user_id] == nil)
-      redirect_to root_url, :notice => "Login Session Expired!"
-    end
+    #if(session[:user_id] == nil)
+     # redirect_to root_url, :notice => "Login Session Expired!"
+    #end
     
     if(!session[:hidFirstName].blank?)      
       params[:hidFirstName] = session[:hidFirstName]
@@ -222,9 +222,9 @@ class ReviewCustomersController < ApplicationController
   end
 
   def UpdateReviews
-    if(session[:user_id] == nil)
-      redirect_to root_url, :notice => "Login Session Expired!"
-    end
+    #if(session[:user_id] == nil)
+     # redirect_to root_url, :notice => "Login Session Expired!"
+    #end
     
     @firstName = params[:hidFirstName]
     @lastName = params[:hidLastName]
