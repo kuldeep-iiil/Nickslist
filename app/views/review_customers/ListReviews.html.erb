@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>NicksList - Add Reviews</title>
+		<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+		<%= csrf_meta_tags %>
+		<!--<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>-->
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('.bxslider').bxSlider({
+					mode : 'horizontal',
+					speed : '500',
+					auto : 'true',
+					pause : '5000'
+				});
+				$('.login-register a').click(function() {
+					$('#signin_menu').toggle();
+				});
+				$('.logout-register a').click(function() {
+					$('#signout_menu').toggle();
+				});
+			});
+
+			$(function() {
+				$("#selectCity").autocomplete({
+					source : availableCities
+				});
+				$("#textBussCity").autocomplete({
+					source : availableCities
+				});
+				$("#textMailCity").autocomplete({
+					source : availableCities
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="header-wrapper">
+				<div class="browser-center">
+					<div id="header-area">
+						<div id="logo">
+							<a href="/"><%= image_tag("logo.jpg", :alt => "") %></a>
+						</div>
+						<div id="facebook-like">
+							<%= image_tag("facebook-like.jpg", :alt => "") %>
+						</div>
+						<div id="customer-support">
+							<p>
+								Customer Support
+							</p>
+							<h1>703 555 5555</h1>
+							<p>
+								Any Questions <a href="mailto:">Email Us</a>
+							</p>
+						</div>
+						<div id="navigation">
+							<div id="nav">
+								<ul>
+									<li class="first">
+										<a href="<%= root_url %>" class="active">Home</a>
+									</li>
+									<li>
+										<a href="<%= nicks_list_About_url %>">About BillysList</a>
+									</li>
+									<li>
+										<a href="<%= nicks_list_HowItWorks_url %>">How it works </a>
+									</li>
+									<li>
+										<a href="#">FAQ’s</a>
+									</li>
+									<li>
+										<a href="#">Testimonials</a>
+									</li>
+									<li>
+										<a href="#">Press Release</a>
+									</li>
+									<li>
+										<a href="#">Contact Us</a>
+									</li>
+								</ul>
+							</div>
+							<div class="login-wrapper">
+								<% if(session[:user_id] == nil) %>
+								<div  class="login-register">
+									<a>Login / Register</a>
+								</div>
+								<div id="signin_menu">
+									<form action="<%= authentication_login_url %>" method="post">
+										<p>
+											<label for="username">Username</label>
+											<input id="textUserName" name="textUserName" required="required" value="" title="User Name" tabindex="4" type="text">
+										</p>
+										<p>
+											<label for="password">Password</label>
+											<input id="textPassword" name="textPassword" required="required" value="" title="password" tabindex="5" type="password">
+										</p>
+										<p class="remember">
+											<input id="signin_submit" value="Sign in" tabindex="6" type="submit">
+											<!--<input id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
+											<label for="remember">Remember me</label>-->
+										</p>
+										<p class="forgot">
+											<a href="<%= authentication_requestpassword_url %>" id="resend_password_link">Forgot your password?</a>
+										</p>
+										<div class="signup">
+											New User? <a href="<%= user_registeration_GetRegister_url %>">Signup Here</a>
+										</div>
+									</form>
+								</div>
+								<% else %>
+								<div  class="logout-register">
+									<%= image_tag("user.png", :alt => "", :width => "40px", :height=> "40px") %><a><%= session[:user_name] %>
+								</div>
+								<div id="signout_menu">
+									<form action="/authentication/logout" method="post">
+										<p class="remember">
+											<input id="signout_submit" value="Sign Out" tabindex="6" type="submit">
+										</p>
+									</form>
+								</div>
+								<% end %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="banner">
+				<div class="browser-center">
+					<div id="banner-area">
+						<div class="banner-content">
+							<h1>Lorem Ipsum, consectetur, adipisci</h1>
+							<p>
+								If you want to know about your customer that he will pay for the quality services that you provide. BillysList is the right tool to confirm.
+							</p>
+							<p>
+								<a href="<%= nicks_list_About_url %>">More Information</a>
+							</p>
+						</div>
+						<div id="search">
+							<form action="/customer_search/GetDetails" method="post">
+								<div class="search-heading">
+									Search Customer Rate/Reviews or Search for info on a potential customer.
+								</div>
+								<div id="search-form">
+									<div class="form-textbox">
+										<input name="txtFirstName" type="text" required="true" class="textbox-small" id="txtFirstName" placeholder="First Name" value="<%= params[:hidFirstName] %>" />
+									</div>
+									<div class="form-textbox">
+										<input name="txtLastName" type="text" required="true" class="textbox-small" id="txtLastName" placeholder="Last Name" value="<%= params[:hidLastName] %>" />
+									</div>
+									<div class="form-textbox">
+										<input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" value="<%= params[:hidStreetAddress] %>" />
+									</div>
+									<div class="form-textbox">
+										<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" value="<%= params[:hidselectCity] %>" />
+									</div>
+									<div class="form-textbox">
+										<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" value="<%= params[:selectState] %>" />-->
+									</div>
+									<div class="form-textbox">
+										<input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" value="<%= params[:hidZipCode] %>" />
+									</div>
+									<div class="form-textbox">
+										<input name="txtPhoneNumber" type="text" required="true" class="textbox-small" id="txtPhoneNumber" placeholder="Phone Number" value="<%= params[:hidPhoneNumber] %>" />
+									</div>
+									<div class="form-textbox">
+										<input type="submit" name="Submit" id="Submit" value="Submit" class="search-bt" />
+									</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="main-content-wrapper">
+			<div class="browser-center">
+
+				<div id="review-header">
+					<div id="review-header-left">
+						<h1><%= @firstName %>  <%= @lastName %></h1>
+						<p>
+							<% if(@reviewer.length == 1) %>
+										has <%= @reviewer.length %> review available
+									<% else %>
+										has <%= @reviewer.length %> reviews available
+									<% end %>
+						</p>
+					</div>
+					<div id="review-header-right">
+						<div class="address-desc">
+							<%= @streetAddress %>,	<%= @citystateVal %> <%= @zipCode %>
+						</div>
+						<div class="address-phone">
+							<%= @phoneNumber %>
+						</div>
+					</div>
+				</div>
+
+				
+				
+				
+				<div class="review-block-wrapper">
+				<% @reviewer.each do |r| %>
+            	<div class="review-block">
+                	<div class="customer-block">
+                    	<div class="customer-photo"><%= image_tag("photo-placeholder.png", :alt => "") %></div>
+                        <div class="customer-detail">
+                        	<div class="customer-name-desc">
+                            	<h1><%= r.FirstName %> <%= r.LastName %></h1>
+                                <h2><%= r.IncorporationType %></h2>
+                            </div>
+                            <div class="phone"><%= r.ContactNumber %></div>
+                            <div class="email"><%= r.EmailID %></div>
+                            
+                        </div>
+                    </div>
+                    <div class="review-area">
+                    	<div class="review-star">
+                        	<p>Review Given</p>
+                            <%= image_tag("grey-star.png", :alt => "") %><%= image_tag("grey-star.png", :alt => "") %><%= image_tag("grey-star.png", :alt => "") %><%= image_tag("grey-star.png", :alt => "") %><%= image_tag("grey-star.png", :alt => "") %>
+                        </div>
+                        <div class="read-review-bt">
+                        	<% if(r.ID == session[:user_id]) %>
+                        	<form action="<%= review_customers_UpdateReviews_url %>" method="post">
+                        		<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
+								<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
+								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
+								<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+								<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
+								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
+								<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= r.ID %>" />
+								<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= r.ReviewID %>" />
+								<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewer.length %>" />
+                        		<input type="submit" name="Submit" id="Submit" value="Update Review" class="reivew-blue-bt" />	
+                        	</form>
+                        	<% end %>
+                        </div>
+                        <div class="read-review-bt">
+                        	<form action="<%= review_customers_ReadReviews_url %>" method="post">
+                        	<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
+							<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
+							<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
+							<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+							<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
+							<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
+							<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= r.ID %>" />
+							<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= r.ReviewID %>" />
+							<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewer.length %>" />
+                        		<input type="submit" name="Submit" id="Submit" value="Read Review" class="reivew-blue-bt" />	
+                        	</form>
+                        </div>
+                    </div>
+                </div>
+                <% end %>
+                
+            </div>
+				
+				
+				
+			</div>
+		</div>
+
+		<div id="footer-wrapper">
+			<div class="browser-center">
+				<div class="footer-links">
+					<ul>
+						<li>
+							<a href="<%= root_url %>">Home</a>
+						</li>
+						<li>
+							<a href="<%= nicks_list_About_url %>">About BillysList</a>
+						</li>
+						<li>
+							<a href="<%= nicks_list_HowItWorks_url %>">How it works </a>
+						</li>
+						<li>
+							<a href="#">FAQ’s</a>
+						</li>
+						<li>
+							<a href="#">Testimonials</a>
+						</li>
+						<li>
+							<a href="#">Press Release</a>
+						</li>
+						<li>
+							<a href="#">Contact Us</a>
+						</li>
+					</ul>
+				</div>
+				<div class="copyright">
+					Copyright © 2013. All Right Reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a>
+				</div>
+			</div>
+		</div>
+
+		</div>
+	</body>
+</html>
