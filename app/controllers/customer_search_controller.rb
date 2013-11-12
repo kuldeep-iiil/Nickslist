@@ -1,6 +1,7 @@
 require 'rexml/document'
 class CustomerSearchController < ApplicationController
   include REXML
+  include ActionView::Helpers::NumberHelper
   skip_before_action :verify_authenticity_token
   
   
@@ -90,7 +91,7 @@ class CustomerSearchController < ApplicationController
       @taxAssessmentYear = long.text   
     end  
     xmldoc.elements.each('SearchResults/response/results/result/taxAssessment') do |long| 
-      @taxAssessment = long.text   
+      @taxAssessment = number_to_currency(long.text, :unit => "$")     
     end
     xmldoc.elements.each('SearchResults/response/results/result/yearBuilt') do |long| 
       @yearBuilt = long.text   
@@ -111,7 +112,7 @@ class CustomerSearchController < ApplicationController
       @lastSoldDate = long.text   
     end
     xmldoc.elements.each('SearchResults/response/results/result/lastSoldPrice') do |long| 
-      @lastSoldPrice = long.text   
+      @lastSoldPrice = number_to_currency(long.text, :unit => "$")   
     end         
   end
 end

@@ -159,7 +159,7 @@
                     <div class="Home-Details-Item">Tax Assesment Year </div><div class="Home-Details-Value">: <%= @taxAssessmentYear %></div>
                     <% end %>
                     <% if(@taxAssessment.present?) %>
-                    <div class="Home-Details-Item">Tax Assesment </div><div class="Home-Details-Value">: $<%= @taxAssessment %></div>
+                    <div class="Home-Details-Item">Tax Assesment </div><div class="Home-Details-Value">: <%= @taxAssessment %></div>
                     <% end %>
                     <% if(@yearBuilt.present?) %>
                     <div class="Home-Details-Item">Year Built </div><div class="Home-Details-Value">: <%= @yearBuilt %></div>
@@ -177,7 +177,7 @@
                     <div class="Home-Details-Item">Bedrooms </div><div class="Home-Details-Value">: <%= @bedrooms %> Beds</div>
                     <% end %>
                     <% if(@lastSoldPrice.present?) %>
-                    <div class="Home-Details-Item">Last Sold </div><div class="Home-Details-Value">: <%= @lastSoldDate %> for $<%= @lastSoldPrice %></div>
+                    <div class="Home-Details-Item">Last Sold </div><div class="Home-Details-Value">: <%= @lastSoldDate %> for <%= @lastSoldPrice %></div>
                    <% end %>
                    
                     <div class="read-review">
