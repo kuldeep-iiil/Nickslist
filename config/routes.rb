@@ -1,4 +1,6 @@
 NicksListProj::Application.routes.draw do
+  post "/review_customers/UpdateReviewData"
+  get "/review_customers/UpdateReviewData"
   post "/review_customers/UpdateReviews"
   get "/review_customers/UpdateReviews"
   post "/review_customers/AddReviewData"

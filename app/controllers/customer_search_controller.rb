@@ -8,7 +8,7 @@ class CustomerSearchController < ApplicationController
   
   def GetDetails    
     #if(session[:user_id] == nil)
-     # redirect_to root_url, :notice => "Please login first to get result for search!"
+    #  redirect_to root_url, :notice => ""
     #end
     
     if(params[:txtStreetAddress] != nil && params[:selectCity] != nil && params[:txtZipCode] != nil)
@@ -42,13 +42,12 @@ class CustomerSearchController < ApplicationController
       end
       
       if(!@reviewer.blank?)
+         @currentUser = false
           @reviewer.each do |revUser|
             if(revUser.ID == session[:user_id])
               @currentUser = true
               @reviewerID = revUser.ID
-              @reviewID = revUser.ReviewID 
-            else
-              @currentUser = false
+              @reviewID = revUser.ReviewID
             end
           end
         end

@@ -10,7 +10,11 @@ class AuthenticationController < ApplicationController
       session[:user_id] = user.ID
       #session[:user_name] = user.FirstName + " " + user.LastName
       session[:user_name] = "Hi, " + user.FirstName
-      redirect_to root_url
+      if(session[:redirectPageUrl].blank?)
+        redirect_to root_url
+      else
+        redirect_to session[:redirectPageUrl]
+      end
     else
       redirect_to root_url, :notice => "Invalid User Name or Password"
     end
@@ -19,6 +23,16 @@ class AuthenticationController < ApplicationController
   def logout
     session[:user_id] = nil
     session[:user_name] = nil
+    session[:hidFirstName] = nil
+    session[:hidLastName] = nil
+    session[:hidPhoneNumber] =  nil 
+    session[:hidStreetAddress] = nil
+    session[:hidselectCity] = nil
+    session[:hidZipCode] = nil
+    session[:hidReviewerID] = nil
+    session[:hidReviewID] = nil
+    session[:hidReviewCount] = nil
+    session[:redirectPageUrl] = nil
     redirect_to root_url
   end
   
