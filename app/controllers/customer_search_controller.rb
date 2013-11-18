@@ -3,14 +3,30 @@ class CustomerSearchController < ApplicationController
   include REXML
   include ActionView::Helpers::NumberHelper
   skip_before_action :verify_authenticity_token
-  
-  
-  
-  def GetDetails    
-    #if(session[:user_id] == nil)
-    #  redirect_to root_url, :notice => ""
-    #end
     
+  def GetDetails
+    if(!session[:user_id])
+      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_GetDetails_url}
+    end
+       
+    if(!flash[:hidFirstName].blank?)
+      params[:txtFirstName] = flash[:hidFirstName]
+      params[:txtLastName] = flash[:hidLastName]
+      params[:txtPhoneNumber] = flash[:hidPhoneNumber]
+      params[:txtStreetAddress] = flash[:hidStreetAddress]
+      params[:selectCity] = flash[:hidselectCity]
+      params[:txtZipCode] = flash[:hidZipCode]
+    end
+    
+    if(!params[:hidFirstName].blank?)
+      params[:txtFirstName] = params[:hidFirstName]
+      params[:txtLastName] = params[:hidLastName]
+      params[:txtPhoneNumber] = params[:hidPhoneNumber]
+      params[:txtStreetAddress] = params[:hidStreetAddress]
+      params[:selectCity] = params[:hidselectCity]
+      params[:txtZipCode] = params[:hidZipCode]
+    end
+            
     if(params[:txtStreetAddress] != nil && params[:selectCity] != nil && params[:txtZipCode] != nil)
       @firstName = params[:txtFirstName]
       @lastName = params[:txtLastName]
@@ -31,26 +47,69 @@ class CustomerSearchController < ApplicationController
       citystatezip=city + '%2C+' + params[:txtZipCode]
       citystatezip=citystatezip.gsub(', ','%2C')
       
+      currentUserID = session[:user_id]
       #Get Reviews count for searched person
       #@customer = Customer.find_by(LastName: @lastName, ContactNumber: @phoneNumber, StreetAddress: @streetAddress, City: @city, State: @state, ZIPCode: @zipCode)
+      
+      currentTime = Time.new
+      time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
            
-      @customer = Customer.where("LastName = ? AND ContactNumber = ? OR StreetAddress = ? AND City = ? AND State = ? AND ZIPCode = ?", @lastName, @phoneNumber, @streetAddress, @city, @state, @zipCode)
+      @customer = CustomerSearch.find_by_sql("select cs.ID from CustomerSearch cs 
+                                  join CustomerAddress ca on cs.AddressID = ca.ID
+                                  join CustomerPhone cp on cs.ID = cp.CustomerSearchID 
+                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
       if(!@customer.blank?)
+        
+      @customerSearchLog = CustomerSearchLog.new(CustomerSearchID: @customer[0].ID, SearchedDateTime: time)
+      @customerSearchLog.save
+      
+      @customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer[0].ID, UserID: currentUserID, IsReviewGiven: 0, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
+      if(@customer.length > 1)
+        @custoemrIDs = @customer.all.collect {|cust| cust.ID}.join(',')
+      else
+        @custoemrIDs = @customer[0].ID
+      end
       @reviewer = SubscribedUser.find_by_sql("select user.*, cust.ID as 'CustomerID', rev.ID as 'ReviewID' 
-                  from SubscribedUsers user join Reviews rev on user.ID = rev.UserID join Customers cust on cust.ID = rev.CustomerID
-                  where cust.ID IN (" + @customer.all.collect {|cust| cust.ID}.join(',') + ")")          
+                  from SubscribedUsers user join Reviews rev on user.ID  = rev.UserID
+                  join CustomerSearch cust on cust.ID= rev.CustomerSearchID
+                   
+                  where cust.ID IN ('" + @custoemrIDs.to_s + "')")          
+      else
+        @customerAddress = CustomerAddress.find_by(StreetAddress: @streetAddress, City: @city, State: @state, ZIPCode: @zipCode)
+        if(@customerAddress.blank?)
+          @customerAddress = CustomerAddress.new(StreetAddress: @streetAddress, City: @city, State: @state, ZIPCode: @zipCode, DateCreated: time, DateUpdated: time)
+          @customerAddress.save
+        end
+        
+        @customer = CustomerSearch.new(FirstName: @firstName, LastName: @lastName, AddressID: @customerAddress.ID, SearchDate: time)
+        @customer.save
+        
+        @customerPhone = CustomerPhone.find_by(ContactNumber: @phoneNumber)
+        if(@customerPhone.blank?)
+          @customerPhone = CustomerPhone.new(CustomerSearchID: @customer.ID, ContactNumber: @phoneNumber, DateCreated: time)
+          @customerPhone.save
+        end
+        
+        @customerSearchLog = CustomerSearchLog.new(CustomerSearchID: @customer.ID, SearchedDateTime: time)
+        @customerSearchLog.save
+        
+        @customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer.ID, UserID: currentUserID, IsReviewGiven: 0, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
+        @customerReviewJoin.save
       end
       
       if(!@reviewer.blank?)
          @currentUser = false
           @reviewer.each do |revUser|
-            if(revUser.ID == session[:user_id])
+            if(revUser.ID == currentUserID)
               @currentUser = true
               @reviewerID = revUser.ID
               @reviewID = revUser.ReviewID
             end
           end
         end
+      
+      #Get settings for Terms & Condition page
+      @ChkTermsConditions = 1  
       
       #location = params[:txtStreetAddress] + ', ' + params[:selectCity] + ', ' + params[:selectState] + ', ' + params[:txtZipCode]
       location = params[:txtStreetAddress] + ', ' + params[:selectCity] + ', ' + params[:txtZipCode]

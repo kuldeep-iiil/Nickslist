@@ -3,36 +3,39 @@ class AuthenticationController < ApplicationController
   def login
     userName = params[:textUserName]
     password = params[:textPassword]
+ 
+      @firstName = params[:hidFirstName]
+      @lastName = params[:hidLastName]
+      @phoneNumber = params[:hidPhoneNumber]
+      @streetAddress = params[:hidStreetAddress]
+      @citystateVal = params[:hidselectCity]
+      @zipCode = params[:hidZipCode]
+      @redirectUrl = params[:hidredirectUrl]
+      @reviewerID = params[:hidReviewerID]
+      @reviewID = params[:hidReviewID]
+      @reviewCount = params[:hidReviewCount]
+    
     @username = userName
     user = authenticate(userName, password)
     @user = user
     if user
+      session[:last_seen] = Time.now
       session[:user_id] = user.ID
       #session[:user_name] = user.FirstName + " " + user.LastName
       session[:user_name] = "Hi, " + user.FirstName
-      if(session[:redirectPageUrl].blank?)
+      if(@redirectUrl.blank?)
         redirect_to root_url
       else
-        redirect_to session[:redirectPageUrl]
+        redirect_to @redirectUrl, flash:{:hidFirstName => @firstName, :hidLastName => @lastName, :hidPhoneNumber => @phoneNumber, :hidStreetAddress => @streetAddress, :hidselectCity => @citystateVal, :hidZipCode => @zipCode, :hidReviewerID => @reviewerID, :hidReviewID => @reviewID, :hidReviewCount => @reviewCount}  
       end
     else
-      redirect_to root_url, :notice => "Invalid User Name or Password"
+      redirect_to root_url, flash:{:userName => @username, :error => "Invalid User Name or Password!"}
     end
   end
   
   def logout
     session[:user_id] = nil
     session[:user_name] = nil
-    session[:hidFirstName] = nil
-    session[:hidLastName] = nil
-    session[:hidPhoneNumber] =  nil 
-    session[:hidStreetAddress] = nil
-    session[:hidselectCity] = nil
-    session[:hidZipCode] = nil
-    session[:hidReviewerID] = nil
-    session[:hidReviewID] = nil
-    session[:hidReviewCount] = nil
-    session[:redirectPageUrl] = nil
     redirect_to root_url
   end
   

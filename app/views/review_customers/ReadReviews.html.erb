@@ -131,16 +131,7 @@
 			</div>
 			<div id="banner">
 				<div class="browser-center">
-					<div id="banner-area">
-						<div class="banner-content">
-							<h1>Lorem Ipsum, consectetur, adipisci</h1>
-							<p>
-								If you want to know about your customer that he will pay for the quality services that you provide. BillysList is the right tool to confirm.
-							</p>
-							<p>
-								<a href="<%= nicks_list_About_url %>">More Information</a>
-							</p>
-						</div>
+					<div id="innwe-banner-area">
 						<div id="search">
 							<form action="/customer_search/GetDetails" method="post">
 								<div class="search-heading">
@@ -184,10 +175,10 @@
 					<div id="review-header-left">
 						<h1><%= @firstName %>  <%= @lastName %></h1>
 						<p>
-							<% if(@reviewCount == 1) %>
+							<% if(@reviewCount == '1') %>
 								has <%= @reviewCount %> review available
 							<% else %>
-								has <%= @reviewCount %> review(s) available
+								has <%= @reviewCount %> reviews available
 							<% end %>
 						</p>
 					</div>
@@ -210,20 +201,7 @@
 
 					<div id="singup-form-area">
 						<table width="100%">
-							<tr>
-								<td>
-								<table width="100%">
-									<tr>
-										<td width="40%" align="left">Name : </td><td width="60%" align="left"><%= @reviewer.FirstName %> <%= @reviewer.LastName %></td>
-									</tr>
-									<tr>
-										<td align="left">Address : </td><td align="left"><%= @reviewerAdd.Address %>, <%= @reviewerAdd.City %>, <%= @reviewerAdd.State %> <%= @reviewerAdd.ZIPCode %></td>
-									</tr>
-									<tr>
-										<td align="left">Contact Number : </td><td align="left"><%= @reviewer.ContactNumber %></td>
-									</tr>
-								</table></td>
-							</tr>
+							
 							<tr>
 								<td>&nbsp;</td>
 							</tr>
@@ -241,8 +219,6 @@
 											<%= quset.Description %>? 
 											<% if(!@reviewAnswers[quset.ID - 1].IsYes.blank?) %>	
 												(<%= @reviewAnswers[quset.ID - 1].IsYes %>)
-											<% else %>
-												(No)	
 											<% end%>	
 										</td>
 									</tr>
@@ -262,8 +238,6 @@
 											<%= quset.Description %>? 
 											<% if(!@reviewAnswers[quset.ID - 1].IsYes.blank?) %>	
 												(<%= @reviewAnswers[quset.ID - 1].IsYes %>)
-											<% else %>
-												(No)	
 											<% end%>	
 											 
 										</td>
@@ -291,9 +265,7 @@
 										<%= quset.Description %>? 
 										<% if(quset.ID != 17) %>
 										<% if(!@reviewAnswers[quset.ID - 1].IsYes.blank?) %>	
-											(<%= @reviewAnswers[quset.ID - 1].IsYes %>)	
-										<% else %>
-											(No)
+											(<%= @reviewAnswers[quset.ID - 1].IsYes %>)
 										<% end%>
 										<% end %>						
 										</td>
@@ -311,21 +283,7 @@
 									<% end %>
 								</table></td>
 							</tr>
-							<tr>
-								<td align="left">M/L & Judgments</td>
-							</tr>
-							<tr>
-								<td align="left"><p><%= @review.MLAndJudgments %></p></td>
-							</tr>
-							<tr>
-								<td align="left">&nbsp;</td>
-							</tr>
-							<tr>
-								<td align="left">Tax record Info / 3rd Party Info : </td>
-							</tr>
-							<tr>
-								<td align="left"><p><%= @review.OtherPublicThirdPartyInfo %></p></td>
-							</tr><br />
+							
 						</table>
 					</div>
 

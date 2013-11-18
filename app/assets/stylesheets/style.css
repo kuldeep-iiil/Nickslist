@@ -322,3 +322,13 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 #SignupForm {font-size: 14px; display: block}
 
 #Error {color: red; font-size: 14px;}
+
+#Term-Condition-area{ width:935px; height:500px; float:left; background:#ffffff; border:1px solid #d7d7d7; padding:25px 25px; border-radius:5px; overflow-y:auto; scrollbar-base-color: #CCCCCC;
+scrollbar-arrow-color:      ${3:#000000;
+scrollbar-track-color:      #999999;
+scrollbar-3dlight-color:    #EEEEEE;
+scrollbar-highlight-color:  #FFFFFF;
+scrollbar-face-color:       #CCCCCC;
+scrollbar-shadow-color:     #999999;
+scrollbar-darkshadow-color: #666666;}}
+

@@ -131,16 +131,7 @@
 			</div>
 			<div id="banner">
 				<div class="browser-center">
-					<div id="banner-area">
-						<div class="banner-content">
-							<h1>Lorem Ipsum, consectetur, adipisci</h1>
-							<p>
-								If you want to know about your customer that he will pay for the quality services that you provide. BillysList is the right tool to confirm.
-							</p>
-							<p>
-								<a href="<%= nicks_list_About_url %>">More Information</a>
-							</p>
-						</div>
+					<div id="innwe-banner-area">
 						<div id="search">
 							<form action="/customer_search/GetDetails" method="post">
 								<div class="search-heading">
@@ -184,10 +175,10 @@
 					<div id="review-header-left">
 						<h1><%= @firstName %>  <%= @lastName %></h1>
 						<p>
-							<% if(@reviewCount == 1) %>
+							<% if(@reviewCount == '1') %>
 										has <%= @reviewCount %> review available
 									<% else %>
-										has <%= @reviewCount %> review(s) available
+										has <%= @reviewCount %> reviews available
 									<% end %>
 						</p>
 					</div>
@@ -281,11 +272,6 @@
 								<br /><br />
 								<% end %>
 								<% end %>
-								M/L & Judgments:
-								<textarea id="textmlandjudgments" rows="4" cols="50" name="textmlandjudgments"></textarea>
-								<br /><br />
-								Tax record Info / 3rd Party Info :
-								<textarea id="textotherPublicThirdPartyInfo" rows="4" cols="50" name="textotherPublicThirdPartyInfo"></textarea>
 								<br />
 								<br />
 								<div class="singup-textarea">

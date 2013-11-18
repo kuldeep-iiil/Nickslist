@@ -131,16 +131,7 @@
 			</div>
 			<div id="banner">
 				<div class="browser-center">
-					<div id="banner-area">
-						<div class="banner-content">
-							<h1>Lorem Ipsum, consectetur, adipisci</h1>
-							<p>
-								If you want to know about your customer that he will pay for the quality services that you provide. BillysList is the right tool to confirm.
-							</p>
-							<p>
-								<a href="<%= nicks_list_About_url %>">More Information</a>
-							</p>
-						</div>
+					<div id="innwe-banner-area">
 						<div id="search">
 							<form action="/customer_search/GetDetails" method="post">
 								<div class="search-heading">
@@ -184,10 +175,10 @@
 					<div id="review-header-left">
 						<h1><%= @firstName %>  <%= @lastName %></h1>
 						<p>
-							<% if(@reviewCount == 1) %>
+							<% if(@reviewCount == '1') %>
 							has <%= @reviewCount%> review available
 							<% else %>
-							has <%= @reviewCount %> review(s) available
+							has <%= @reviewCount %> reviews available
 							<% end %>
 						</p>
 					</div>
@@ -232,10 +223,17 @@
 										<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
 										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
 										<label for="radYesNo_N<%= quset.ID %>">No</label>
-										<% else %>
+										
+										<% elsif(@reviewAnswers[quset.ID - 1].IsYes == "No") %>
 										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
 										<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
 										<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
+										<label for="radYesNo_N<%= quset.ID %>">No</label>
+										
+										<% else %>
+										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
+										<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
+										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
 										<label for="radYesNo_N<%= quset.ID %>">No</label>
 										<% end %>
 										<% if(quset.ID == 1) %>
@@ -252,25 +250,32 @@
 										<%= quset.Description %>?
 										<br />
 										<% if(quset.ID != 7) %>
+										
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<% if(@reviewAnswers[quset.ID - 1].IsYes == "Yes") %>
 										<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
 										<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
 										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
 										<label for="radYesNo_N<%= quset.ID %>">No</label>
-										<% else %>
+										<% elsif(@reviewAnswers[quset.ID - 1].IsYes == "No") %>
 										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
 										<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
 										<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
 										<label for="radYesNo_N<%= quset.ID %>">No</label>
+										<% else %>
+										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
+										<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
+										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
+										<label for="radYesNo_N<%= quset.ID %>">No</label>
 										<% end %>
+										
 										<% else %>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<% if(@reviewAnswers[quset.ID - 1].IsYes == "Bid process") %>
 										<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo_Bid<%= quset.ID %>" value="Bid process" />
 										<% else %>
 										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Bid<%= quset.ID %>" value="Bid process" />
-										
+
 										<% end %>
 										<label for="radYesNo_Bid<%= quset.ID %>">Bid process?</label>
 										<br />
@@ -279,7 +284,7 @@
 										<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo_Work<%= quset.ID %>" value="Doing the work" />
 										<% else %>
 										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Work<%= quset.ID %>" value="Doing the work" />
-										
+
 										<% end %>
 										<label for="radYesNo_Work<%= quset.ID %>">Doing the work?</label>
 										<br />
@@ -288,7 +293,7 @@
 										<input type="radio" checked="checked" name="radYesNo_Completion<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Completion" />
 										<% else %>
 										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Completion<%= quset.ID %>" value="Completion" />
-										
+
 										<% end %>
 										<label for="radYesNo_Completion<%= quset.ID %>">Completion?</label>
 										<br />
@@ -297,7 +302,7 @@
 										<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo_AfterComp<%= quset.ID %>" value="After completion" />
 										<% else %>
 										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_AfterComp<%= quset.ID %>" value="After completion" />
-										
+
 										<% end %>
 										<label for="radYesNo_AfterComp<%= quset.ID %>">After completion?</label>
 										<br />
@@ -321,16 +326,23 @@
 									<% if(quset.ID != 17) %>
 									<br />
 									<% if(@reviewAnswers[quset.ID - 1].IsYes == "Yes") %>
-										<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
-										<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
-										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
-										<label for="radYesNo_N<%= quset.ID %>">No</label>
-										<% else %>
-										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
-										<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
-										<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
-										<label for="radYesNo_N<%= quset.ID %>">No</label>
-										<% end %>
+									<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
+									<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
+									<label for="radYesNo_N<%= quset.ID %>">No</label>
+
+									<% elsif(@reviewAnswers[quset.ID - 1].IsYes == "No") %>
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
+									<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
+									<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
+									<label for="radYesNo_N<%= quset.ID %>">No</label>
+
+									<% else %>
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
+									<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
+									<label for="radYesNo_N<%= quset.ID %>">No</label>
+									<% end %>
 									<% end %>
 									<br />
 									<textarea id="quesComment<%= quset.ID %>" rows="4" cols="50" name="quesComment<%= quset.ID %>"><%= @reviewAnswers[quset.ID - 1].Comments %></textarea>
@@ -338,12 +350,6 @@
 									<br />
 									<% end %>
 									<% end %>
-									M/L & Judgments:
-									<textarea id="textmlandjudgments" rows="4" cols="50" name="textmlandjudgments"><%= @review.MLAndJudgments %></textarea>
-									<br />
-									<br />
-									Tax record Info / 3rd Party Info :
-									<textarea id="textotherPublicThirdPartyInfo" rows="4" cols="50" name="textotherPublicThirdPartyInfo"><%= @review.OtherPublicThirdPartyInfo %></textarea>
 									<br />
 									<br />
 									<div class="singup-textarea">
