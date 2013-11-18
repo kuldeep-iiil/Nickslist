@@ -41,7 +41,7 @@ class ReviewCustomersController < ApplicationController
       else
         @custoemrIDs = @customer[0].ID
       end
-      @reviewer = SubscribedUser.find_by_sql("select user.*, cust.ID as 'CustomerID', rev.ID as 'ReviewID' 
+      @reviewer = SubscribedUser.find_by_sql("select user.ID, cust.ID as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
                   from SubscribedUsers user join Reviews rev on user.ID  = rev.UserID
                   join CustomerSearch cust on cust.ID= rev.CustomerSearchID
                    
@@ -290,11 +290,11 @@ class ReviewCustomersController < ApplicationController
       else
         @custoemrIDs = @customer[0].ID
       end
-      @reviewer = SubscribedUser.find_by_sql("select user.*, cust.ID as 'CustomerID', rev.ID as 'ReviewID' 
+      @reviewer = SubscribedUser.find_by_sql("select user.ID, cust.ID as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
                   from SubscribedUsers user join Reviews rev on user.ID  = rev.UserID
                   join CustomerSearch cust on cust.ID= rev.CustomerSearchID
                    
-                  where cust.ID IN ('" + @custoemrIDs.to_s + "')") 
+                  where cust.ID IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc") 
     end
 
   end

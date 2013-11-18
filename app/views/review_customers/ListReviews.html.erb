@@ -193,32 +193,21 @@
 				</div>
 
 				<div class="review-block-wrapper">
+					<% i = 1 %>
 					<% @reviewer.each do |r| %>
 					<div class="review-block">
 						<div class="customer-block">
-							<div class="customer-photo">
-								<%= image_tag("photo-placeholder.png", :alt => "") %>
-							</div>
-							<div class="customer-detail">
-								<div class="customer-name-desc">
-									<h1><%= r.FirstName %> <%= r.LastName %></h1>
-									<h2><%= r.IncorporationType %></h2>
-								</div>
-								<div class="phone">
-									<%= r.ContactNumber %>
-								</div>
-								<div class="email">
-									<%= r.EmailID %>
-								</div>
-
-							</div>
-						</div>
+                    		<div class="customer-photo">
+                        		<div class="serial-number"><%= sprintf('%02d', i) %></div>
+                        	</div>
+                        <div class="customer-detail">
+                        	<div class="customer-name-desc">
+                            	<h1><%= r.DateCreated.strftime('%e %B, %Y') %></h1>
+                            </div>
+                        </div>
+                    	</div>
+						
 						<div class="review-area">
-							<div class="review-star">
-								<!--<p>Review Given</p>
-								<%= image_tag("grey-star.png", :alt => "") %><%= image_tag("grey-star.png", :alt => "") %><%= image_tag("grey-star.png", :alt => "") %><%= image_tag("grey-star.png", :alt => "") %><%= image_tag("grey-star.png", :alt => "") %>-->
-							</div>
-							
 							<% if(@ChkTermsConditions == 1) %>
 							
 							<div class="read-review-bt">
@@ -289,6 +278,7 @@
 							<% end %>
 						</div>
 					</div>
+					<% i = i + 1 %>
 					<% end %>
 
 				</div>

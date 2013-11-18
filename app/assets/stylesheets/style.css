@@ -239,28 +239,29 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 .Home-Details-Item{ width:153px; float:left; padding-left:0px; line-height:25px}
 .Home-Details-Value{ width:215px; float:left; padding-left:0px; line-height:25px}
 
-.read-review{ width:405px; float:left; background:#fff; border:1px solid #e7e7e7; padding:15px 15px; border-radius:5px; margin:30px 0 0 0px}
+.read-review{ width:405px; float:right; background:#fff; border:1px solid #e7e7e7; padding:15px 15px; border-radius:5px; margin:30px 0 0 0px}
 .read-review h1{ font-family:Arial, Helvetica, sans-serif; font-size:17px; font-weight:normal; margin:5px 0}
 .read-review button{ text-transform:uppercase; font-size:16px; font-weight:bold}
 
-.review-block-wrapper{ width:100%; float:left}
-.review-block{ width:300px; float:left; padding:10px; background:#eeeeee url(/assets/review-block-bg.png) repeat-x; border:1px solid #c4c4c4; border-radius:5px; margin:6px}
-.customer-block{ width:300px; float:left}
-.customer-photo{ width:84px; float:left}
+..review-block-wrapper{ width:100%; float:left}
+.review-block{ width:283px; float:left; padding:10px; background:#eeeeee url(/assets/review-block-bg.png) bottom left repeat-x; border:1px solid #c4c4c4; border-radius:5px; margin:12px}
+.customer-block{ width:283px; float:left}
+.customer-photo{ width:60px; float:left; border-right:1px solid #a6a6a6}
+.serial-number{ width:auto; float:left; background:#e4e4e4; font-size:16px; font-weight:bold; color:#5b5b5b; padding:5px 10px; border-radius:5px;}
 .customer-photo img{border:1px solid #c4c4c4}
-.customer-detail{ width:190px; float:right}
+.customer-detail{ width:200px; float:right}
 .customer-detail .customer-name-desc{ width:100%; float:left}
-.customer-detail .customer-name-desc h1{ font-size:20px; color:#333333; font-weight:bold;}
+.customer-detail .customer-name-desc h1{ font-size:20px; color:#3d8cdb; font-weight:bold;}
+.customer-detail .customer-name-desc h1 a{color:#3d8cdb;}
 .customer-detail .customer-name-desc h2{ font-size:17px; color:#666666; font-weight:normal;}
 .customer-detail .phone{ font-size:14px; color:#444444; background:url(/assets/phone-small-icon.png) no-repeat left center; padding-left:15px; float:left; margin-top:10px}
-.customer-detail .email{width:190px; font-size:14px; color:#444444; background:url(/assets/email-icon.png) no-repeat left center; padding-left:15px; float:left; margin-top:5px}
+.customer-detail .email{font-size:14px; color:#444444; background:url(/assets/email-icon.png) no-repeat left center; padding-left:15px; float:left; margin-top:5px}
 
-.review-area{ width:300px; float:left; border-top:1px solid #d4d4d4; margin-top:10px; padding-top:10px}
+.review-area{ width:283px; float:left; border-top:1px solid #d4d4d4; margin-top:10px; padding-top:10px}
 .review-area .read-review-bt{ width:107px; float:right; font-size:14px}
 
 .review-area .review-star{ width:auto; float:left; font-size:12px;}
 .review-area .review-star p{ font-size:13px;}
-
 .blue-bt{ background:url(/assets/nav-bg.jpg) bottom left repeat-x; padding:11px 20px; color:#ffffff; border-radius:5px; float:left}
 .reivew-blue-bt{ background:url(/assets/nav-bg.jpg) bottom left repeat-x; padding:7px 10px; color:#ffffff; border-radius:5px; float:left}
 

@@ -173,8 +173,8 @@
                     <% end %>
                     <% if(@lastSoldPrice.present?) %>
                     <div class="Home-Details-Item">Last Sold </div><div class="Home-Details-Value">: <%= @lastSoldDate %> for <%= @lastSoldPrice %></div>
-                   <% end %>
-                  
+                   	<% end %>
+                  	
                     <div class="read-review">
 							<% if @reviewer.blank? %>
 							<% if(@ChkTermsConditions == 1) %>
@@ -253,19 +253,7 @@
 						</div>
 					</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-                
+           
                 <% if(@latitude.blank? && @longitude.blank?) %>
                 	<div class="search-record-right"> 
                 	We were not able to locate the address:
