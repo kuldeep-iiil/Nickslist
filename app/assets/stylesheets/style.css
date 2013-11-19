@@ -286,6 +286,7 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 .singup-form-heading p{ font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#666666; padding:5px 0}
 
 .singup-textarea{ width:auto; float:left; margin:0 5px 5px 0 }
+.singup-textarea-right{ width:auto; float:right; margin:0 5px 5px 0 }
 .singup-textbox{ width:410px; height:34px; border:1px solid #d7d7d7; line-height:34px; font-size:13px; color:#666666; border-radius:5px; background:#ffffff;  padding:0 5px}
 .singup-textbox-small{ width:197px; height:34px; border:1px solid #d7d7d7; line-height:34px; font-size:13px; color:#666666; border-radius:5px; background:#ffffff;  padding:0 5px}
 .singup-label{ width:410px; height:34px; border:1px solid #d7d7d7; line-height:34px; font-size:13px; color:#666666; border-radius:5px; background:#C4C4C4;  padding:0 5px}
@@ -326,7 +327,7 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 #Error {color: red; font-size: 14px;}
 #Success {color: green; font-size: 14px;}
 
-#Term-Condition-area{ width:935px; height:500px; float:left; background:#ffffff; border:1px solid #d7d7d7; padding:25px 25px; border-radius:5px; overflow-y:auto; scrollbar-base-color: #CCCCCC;
+#Term-Condition-area{ width:935px; height:500px; float:left; background:#ffffff; border:1px solid #d7d7d7; padding:25px 25px; margin-bottom:20px; border-radius:5px; overflow-y:auto; scrollbar-base-color: #CCCCCC;
 scrollbar-arrow-color:      ${3:#000000;
 scrollbar-track-color:      #999999;
 scrollbar-3dlight-color:    #EEEEEE;

@@ -6,9 +6,46 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  
+  <script type="text/javascript">
+			$(document).ready(function() {
+				$('.bxslider').bxSlider({
+					mode : 'horizontal',
+					speed : '500',
+					auto : 'true',
+					pause : '5000'
+				});
+				$('.login-register a').click(function() {
+					$('#signin_menu').toggle();
+				});
+				$('.logout-register a').click(function() {
+					$('#signout_menu').toggle();
+				});
+				$('body').click(function(evt) {
+					if ($(evt.target).parents('#login-reg').length == 0 && $(evt.target).parents('#signin_menu').length == 0 && evt.target.id != 'signin_menu') {
+						$('#signin_menu').hide();
+					}
+					if ($(evt.target).parents('#logout-reg').length == 0 && $(evt.target).parents('#signout_menu').length == 0 && evt.target.id != 'signout_menu') {
+						$('#signout_menu').hide();
+					}
+				});
+			});
+
+			$(function() {    
+    		$( "#selectCity" ).autocomplete({
+      			source: availableCities
+    		});
+    		$( "#textBussCity" ).autocomplete({
+      			source: availableCities
+    		});
+    		$( "#textMailCity" ).autocomplete({
+      			source: availableCities
+    		});
+  		});
+		</script>
+  
 </head>
 <body>
-
 <%= yield %>
 
 </body>

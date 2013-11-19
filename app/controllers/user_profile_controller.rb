@@ -11,21 +11,21 @@ class UserProfileController < ApplicationController
       userBussAddressDetails = UserAddressDetail.find_by(UserID: @userID, AddressType: 'Business')
       userMailAddressDetails = UserAddressDetail.find_by(UserID: @userID, AddressType: 'Mailing')
     
-      @firstName = userDetails.FirstName
-      @lastName = userDetails.LastName    
-      @companyName = userDetails.CompanyName
-      @incorporationType = userDetails.IncorporationType
-      @bussStreetAddress = userBussAddressDetails.Address
-      @bussCity = userBussAddressDetails.City + ', ' + userBussAddressDetails.State
+      @userfirstName = userDetails.FirstName
+      @userlastName = userDetails.LastName    
+      @usercompanyName = userDetails.CompanyName
+      @userincorporationType = userDetails.IncorporationType
+      @userbussStreetAddress = userBussAddressDetails.Address
+      @userbussCity = userBussAddressDetails.City + ', ' + userBussAddressDetails.State
       #@bussState = userBussAddressDetails.State
-      @bussZipCode = userBussAddressDetails.ZIPCode
-      @mailStreetAddress = userMailAddressDetails.Address
-      @mailCity = userMailAddressDetails.City + ', ' + userMailAddressDetails.State
+      @userbussZipCode = userBussAddressDetails.ZIPCode
+      @usermailStreetAddress = userMailAddressDetails.Address
+      @usermailCity = userMailAddressDetails.City + ', ' + userMailAddressDetails.State
       #@mailState = userMailAddressDetails.State
-      @mailZipCode = userMailAddressDetails.ZIPCode
-      @phoneNumber = userDetails.ContactNumber
-      @email = userDetails.EmailID
-      @license = userDetails.LicenseNumber
+      @usermailZipCode = userMailAddressDetails.ZIPCode
+      @userphoneNumber = userDetails.ContactNumber
+      @useremail = userDetails.EmailID
+      @userlicense = userDetails.LicenseNumber
       @error = ""
     end
   end
@@ -42,19 +42,19 @@ class UserProfileController < ApplicationController
       userBussAddressDetails = UserAddressDetail.find_by(UserID: @userID, AddressType: 'Business')
       userMailAddressDetails = UserAddressDetail.find_by(UserID: @userID, AddressType: 'Mailing')
     
-      @firstName = userDetails.FirstName
-      @lastName = userDetails.LastName    
-      @companyName = userDetails.CompanyName
-      @incorporationType = userDetails.IncorporationType
-      @bussStreetAddress = userBussAddressDetails.Address
-      @bussCity = userBussAddressDetails.City + ', ' + userBussAddressDetails.State
-      @bussZipCode = userBussAddressDetails.ZIPCode
-      @mailStreetAddress = userMailAddressDetails.Address
-      @mailCity = userMailAddressDetails.City + ', ' + userMailAddressDetails.State
-      @mailZipCode = userMailAddressDetails.ZIPCode
-      @phoneNumber = userDetails.ContactNumber
-      @email = userDetails.EmailID
-      @license = userDetails.LicenseNumber
+      @userfirstName = userDetails.FirstName
+      @userlastName = userDetails.LastName    
+      @usercompanyName = userDetails.CompanyName
+      @userincorporationType = userDetails.IncorporationType
+      @userbussStreetAddress = userBussAddressDetails.Address
+      @userbussCity = userBussAddressDetails.City + ', ' + userBussAddressDetails.State
+      @userbussZipCode = userBussAddressDetails.ZIPCode
+      @usermailStreetAddress = userMailAddressDetails.Address
+      @usermailCity = userMailAddressDetails.City + ', ' + userMailAddressDetails.State
+      @usermailZipCode = userMailAddressDetails.ZIPCode
+      @userphoneNumber = userDetails.ContactNumber
+      @useremail = userDetails.EmailID
+      @userlicense = userDetails.LicenseNumber
       @error = ""
     end
   end
@@ -66,13 +66,13 @@ class UserProfileController < ApplicationController
     if(!@userID.blank?)
       @userDetails = SubscribedUser.find_by(ID: @userID)
       
-      @firstName = params[:textFirstName]
-      @lastName = params[:textLastName]
-      @email = params[:textEmail]
+      @userfirstName = params[:textFirstName]
+      @userlastName = params[:textLastName]
+      @useremail = params[:textEmail]
             
-      @userDetails.FirstName = @firstName
-      @userDetails.LastName = @lastName
-      @userDetails.EmailID = @email
+      @userDetails.FirstName = @userfirstName
+      @userDetails.LastName = @userlastName
+      @userDetails.EmailID = @useremail
       @userDetails.DateUpdated = time
       @userDetails.save
           

@@ -2,152 +2,12 @@
 <html>
 <head>
 	<title>NicksList - Search Customer</title>
-  	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-	<%= csrf_meta_tags %>	
-	<!--<link href="css/style.css" rel="stylesheet" type="text/css" />
-	<link href="css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
-	<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>-->
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
- 			$('.bxslider').bxSlider({
-  				mode: 'horizontal',
-  				speed:'500',
-  				auto:'true',
-  				pause:'5000'
-  			});	
-  			$('.login-register a').click(function(){
-				$('#signin_menu').toggle();
-			});
-			$('.logout-register a').click(function(){
-				$('#signout_menu').toggle();
-			});
-		});
-			
-  		$(function() {    
-    		$( "#selectCity" ).autocomplete({
-      			source: availableCities
-    		});
-  		});
-  </script>
+	
 </head>
 <body>
 <div id="wrapper">
-	<div id="header-wrapper">
-		<div class="browser-center">
-        	<div id="header-area">
-            	<div id="logo"><a href="/"><%= image_tag("logo.jpg", :alt => "") %></a></div>
-                <div id="facebook-like"><%= image_tag("facebook-like.jpg", :alt => "") %></div>
-                <div id="customer-support">
-                	<p>Customer Support</p>
-                    <h1>703 555 5555</h1>
-                    <p>Any Questions <a href="mailto:">Email Us</a></p>
-                </div>
-                <div id="navigation">
-                	<div id="nav">
-                    	<ul>
-                        	<li class="first"><a href="<%= root_url %>" class="active">Home</a></li>
-                            <li><a href="<%= nicks_list_About_url %>">About BillysList</a></li>
-                            <li><a href="<%= nicks_list_HowItWorks_url %>">How it works </a></li>
-                            <li><a href="#">FAQ’s</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                            <li><a href="#">Press Release</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                        </ul>
-                    </div>
-                	<div class="login-wrapper">
-								<% if(session[:user_id] == nil) %>
-								<div id="login-reg" class="login-register">
-									<a>Login / Register</a>
-								</div>
-								<div id="signin_menu">
-									<form action="<%= authentication_login_url %>" method="post">
-										<p>
-											<label for="username">Username</label>
-											<input id="textUserName" name="textUserName" required="required" value="" title="User Name" tabindex="4" type="text">
-										</p>
-										<p>
-											<label for="password">Password</label>
-											<input id="textPassword" name="textPassword" required="required" value="" title="password" tabindex="5" type="password">
-										</p>
-										<% if(!@errorMessage.blank?) %>
-										<p><b><%= @errorMessage %></b></p>
-										<% end %>
-										<p class="remember">
-											<input id="signin_submit" value="Sign in" tabindex="6" type="submit">
-											<!--<input id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
-											<label for="remember">Remember me</label>-->
-										</p>
-										<p class="forgot">
-											<a href="<%= authentication_requestpassword_url %>" id="resend_password_link">Forgot your password?</a>
-										</p>
-										<div class="signup">
-											New User? <a href="<%= user_registeration_GetRegister_url %>">Signup Here</a>
-										</div>
-									</form>
-								</div>
-								<% else %>
-								<div  class="logout-register">
-									<%= image_tag("user.png", :alt => "", :width => "40px", :height=> "40px") %><a><%= session[:user_name] %>
-								</div>
-								<div id="signout_menu">
-									<form action="<%= user_profile_ViewProfile_url %>" method="post">
-										
-											<input id="signout_submit" value="My Profile" tabindex="6" type="submit">
-										
-									</form>
-									<form action="/authentication/logout" method="post">
-										
-											<input id="signout_submit" value="Sign Out" tabindex="6" type="submit">
-										
-									</form>
-								</div>
-								<% end %>
-							</div>
-                	</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="banner">
-        	<div class="browser-center">
-            	<div id="innwe-banner-area">
-                    <div id="search">
-                    	<form action="GetDetails" method="post">
-                    	<div class="search-heading">Search Customer Rate/Reviews or Search for info on a potential customer.</div>
-                    	<div id="search-form">
-                        	<div class="form-textbox">
-                        	  <input name="txtFirstName" type="text" required="true" class="textbox-small" id="txtFirstName" placeholder="First Name" value="<%= params[:txtFirstName] %>" />
-                        	</div>
-                        	<div class="form-textbox">
-                        	  <input name="txtLastName" type="text" required="true" class="textbox-small" id="txtLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
-                        	</div>
-                            <div class="form-textbox">
-                        	  <input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
-                        	</div>
-                          	<div class="form-textbox">
-                       	    	<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
-                        	</div>
-                        	<div class="form-textbox">
-                        	<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" value="<%= params[:selectState] %>" />-->
-                        	</div>
-                            <div class="form-textbox">
-                        	  <input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
-                        	</div>
-                            <div class="form-textbox">
-                        	  <input name="txtPhoneNumber" type="text" required="true" class="textbox-small" id="txtPhoneNumber" placeholder="Phone Number" value="<%= params[:txtPhoneNumber] %>" />
-                        	</div>
-                            <div class="form-textbox">
-                       	  	  <input type="submit" name="Submit" id="Submit" value="Submit" class="search-bt" />
-                        	</div>
-                        	</form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+	<%= render partial: "/layouts/header" %>
     <div id="main-content-wrapper">
     	
     	<div class="browser-center">
@@ -295,25 +155,8 @@
 
         </div> 
         </div>
-    </div>
     
-    <div id="footer-wrapper">
-    	<div class="browser-center">
-        	<div class="footer-links">
-            	<ul>
-                	<li><a href="<%= root_url %>">Home</a></li>
-                    <li><a href="<%= nicks_list_About_url %>">About BillysList</a></li>
-                    <li><a href="<%= nicks_list_HowItWorks_url %>">How it works </a></li>
-                    <li><a href="#">FAQ’s</a></li>
-                    <li><a href="#">Testimonials</a></li>
-                    <li><a href="#">Press Release</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="copyright">Copyright © 2013. All Right Reserved. <a href="#">Privacy Policy</a>   |   <a href="#">Terms & Conditions</a></div>
-        </div>
-    </div>
-    
+    <%= render partial: "/layouts/footer" %>
 </div>
 
 <script type="text/javascript">
