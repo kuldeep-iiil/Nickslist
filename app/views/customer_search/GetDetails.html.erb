@@ -68,7 +68,11 @@
 								<input type="submit" class="org-bt" name="btnAddReview" id="btnAddReview" value="CLICK HERE TO ADD REVIEW" />
 							</form>	
 							<% else %>
+							<% if(@ChkTermsConditions == 1) %>
+							<form action="<%= review_customers_TermsConditions_url %>" method="post">
+							<% else %>
 							<form action="<%= review_customers_ListReviews_url %>" method="post">
+							<% end %>
 								<h1> <%= params[:txtFirstName] %> <%= params[:txtLastName] %>
 								<% if(@reviewer.length == 1) %>
 								has <%= @reviewer.length %> review available
@@ -81,6 +85,8 @@
 								<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
 								<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
 								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= params[:txtPhoneNumber] %>" />
+								<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= review_customers_ListReviews_url %>" />
+								<input type="hidden" name="hidDetailPage" id="hidDetailPage" value="1" />
 								<input type="submit" class="org-bt" name="btnViewReview" id="btnViewReview" value="CLICK HERE TO VIEW REVIEWS" />
 							</form>
 							<% if(!@currentUser) %>
