@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>NicksList - Add Reviews</title>
-		<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+		<title>NicksList - User Registration</title>
+		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 		<%= csrf_meta_tags %>
 		<!--<link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -27,12 +27,6 @@
 
 			$(function() {
 				$("#selectCity").autocomplete({
-					source : availableCities
-				});
-				$("#textBussCity").autocomplete({
-					source : availableCities
-				});
-				$("#textMailCity").autocomplete({
 					source : availableCities
 				});
 			});
@@ -147,25 +141,25 @@
 								</div>
 								<div id="search-form">
 									<div class="form-textbox">
-										<input name="txtFirstName" type="text" required="true" class="textbox-small" id="txtFirstName" placeholder="First Name" value="<%= params[:hidFirstName] %>" />
+										<input name="txtFirstName" type="text" required="true" class="textbox-small" id="txtFirstName" placeholder="First Name" />
 									</div>
 									<div class="form-textbox">
-										<input name="txtLastName" type="text" required="true" class="textbox-small" id="txtLastName" placeholder="Last Name" value="<%= params[:hidLastName] %>" />
+										<input name="txtLastName" type="text" required="true" class="textbox-small" id="txtLastName" placeholder="Last Name" />
 									</div>
 									<div class="form-textbox">
-										<input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" value="<%= params[:hidStreetAddress] %>" />
+										<input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" />
 									</div>
 									<div class="form-textbox">
-										<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" value="<%= params[:hidselectCity] %>" />
+										<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" />
 									</div>
 									<div class="form-textbox">
-										<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" value="<%= params[:selectState] %>" />-->
+										<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" />-->
 									</div>
 									<div class="form-textbox">
-										<input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" value="<%= params[:hidZipCode] %>" />
+										<input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" />
 									</div>
 									<div class="form-textbox">
-										<input name="txtPhoneNumber" type="text" required="true" class="textbox-small" id="txtPhoneNumber" placeholder="Phone Number" value="<%= params[:hidPhoneNumber] %>" />
+										<input name="txtPhoneNumber" type="text" required="true" class="textbox-small" id="txtPhoneNumber" placeholder="Phone Number" />
 									</div>
 									<div class="form-textbox">
 										<input type="submit" name="Submit" id="Submit" value="Submit" class="search-bt" />
@@ -178,127 +172,161 @@
 		</div>
 		<div id="main-content-wrapper">
 			<div class="browser-center">
-
-				<div id="review-header">
-					<div id="review-header-left">
-						<h1><%= @firstName %>  <%= @lastName %></h1>
-						<p>
-							<% if(@reviewCount == '1') %>
-								has <%= @reviewCount %> review available
-							<% else %>
-								has <%= @reviewCount %> reviews available
-							<% end %>
-						</p>
-					</div>
-					<div id="review-header-right">
-						<div class="address-desc">
-							<%= @streetAddress %>,	<%= @citystateVal %> <%= @zipCode %>
-						</div>
-						<div class="address-phone">
-							<%= @phoneNumber %>
-						</div>
-					</div>
-				</div>
-
 				<div id="signup-wrapper">
 					<div id="signup-header">
-						<h1>Review Details</h1>
-						<!--<h2>Please fill the below given form to provide your reviews</h2>
+						<h1>My Profile</h1>
 					</div>
 					<!--<div class="steps"><%= image_tag("step1.jpg", :alt => "") %></div>-->
-
 					<div id="singup-form-area">
-						<table width="100%">
-							
-							<tr>
-								<td>&nbsp;</td>
-							</tr>
-							<tr>
-								<td align="left"><h3>General Info</h3></td>
-							</tr>
-							<tr>
-								<td align="left">
-								<table width="100%">
-									<% @reviewQuestion.each do |quset| %>
-									<% if(quset.Type == "General") %>
-									<% if(quset.ParentID == nil) %>
-									<tr>
-										<td align="left"> 
-											<%= quset.Description %>? 
-											<% if(!@reviewAnswers[quset.ID - 1].IsYes.blank?) %>	
-												(<%= @reviewAnswers[quset.ID - 1].IsYes %>)
-											<% end%>	
-										</td>
-									</tr>
-									<% if(quset.ID == 1) %>
-									<tr>										
-										<% if(!@reviewAnswers[quset.ID - 1].Comments.blank?) %>
-										<td align="left"> <p>Comments : <%= @reviewAnswers[quset.ID - 1].Comments %></p> </td>
-										<% else %>
-										<td align="left"> <p>No Comments</p> </td>
-										<% end %>
-									</tr>
-									<% end %>
-									<tr><td>&nbsp;</td></tr>
-									<% else %>
-									<tr>
-										<td align="left" style="padding-left: 15px"> 
-											<%= quset.Description %>? 
-											<% if(!@reviewAnswers[quset.ID - 1].IsYes.blank?) %>	
-												(<%= @reviewAnswers[quset.ID - 1].IsYes %>)
-											<% end%>	
-											 
-										</td>
-									</tr>
+						<div class="singup-form-heading">
+							<div style="float:right; font-weight: bold">
+								<a href="<%= authentication_ChangePassword_url %>">Change Password</a>
+							</div>
+							<h1>View Profile</h1>
+							<div id="Success"><%= flash[:notice] %></div>
+						</div>
+
+						<div class="singup-form">
+							<div id="SignupForm">
+								<form action="<%= user_profile_EditProfile_url %>" method="post">
+									<div>
+										<div class="subscription-Item">
+											Company Name :
+										</div>
+										<div class="subscription-Value">
+											<%= @companyName %>
+										</div>
+									</div>
+									<div>
+										<div class="subscription-Item">
+											First Name :
+										</div>
+										<div class="subscription-Value">
+											<%= @firstName %>
+										</div>
+									</div>
+									<div>
+										<div class="subscription-Item">
+											Last Name :
+										</div>
+										<div class="subscription-Value">
+											<%= @lastName %>
+										</div>
+
+									</div>
+									<div>
+										<div class="subscription-Item">
+											Incorporation Type :
+										</div>
+										<div class="subscription-Value">
+											<%= @incorporationType %>
+										</div>
+
+									</div>
+									<div>
+										<div class="subscription-Item">
+											Phone Number :
+										</div>
+										<div class="subscription-Value">
+											<%= @phoneNumber %>
+										</div>
+
+									</div>
+									<div>
+										<div class="subscription-Item">
+											Email ID :
+										</div>
+										<div class="subscription-Value">
+											<%= @email %>
+										</div>
+										<% session[:email_id] =  @email %>
+									</div>
+									<div>
+										<div class="subscription-Item">
+											License Number :
+										</div>
+										<div class="subscription-Value">
+											<%= @license %>
+										</div>
+
+									</div>
+									<div class="subscription-Title">
+										Business Address
+									</div>
+
+									<div>
+										<div class="subscription-Item">
+											Street Address :
+										</div>
+										<div class="subscription-Value">
+											<%= @bussStreetAddress %>
+										</div>
+
+									</div>
+									<div>
+										<div class="subscription-Item">
+											City, State :
+										</div>
+										<div class="subscription-Value">
+											<%= @bussCity %>
+										</div>
+
+									</div>
 									
-									<% end %>
-									<% end %>
-									<% end %>
-								</table></td>
-							</tr>
-							<tr>
-								<td>&nbsp;</td>
-							</tr>
-							<tr>
-								<td align="left"><h3>Detailed Info</h3></td>
-							</tr>
-							<tr>
-								<td align="left">
-								<table width="100%">
-									<% @reviewQuestion.each do |quset| %>
-									<% if(quset.Type == "Detailed") %>
-									 
-									<tr>
-										<td align="left">
-										<%= quset.Description %>? 
-										<% if(quset.ID != 17) %>
-										<% if(!@reviewAnswers[quset.ID - 1].IsYes.blank?) %>	
-											(<%= @reviewAnswers[quset.ID - 1].IsYes %>)
-										<% end%>
-										<% end %>						
-										</td>
-									</tr>
+									<div>
+										<div class="subscription-Item">
+											Zip Code:
+										</div>
+										<div class="subscription-Value">
+											<%= @bussZipCode %>
+										</div>
+
+									</div>
+									<div class="subscription-Title">
+										Mailing Address
+									</div>
+
+									<div>
+										<div class="subscription-Item">
+											Street Address :
+										</div>
+										<div class="subscription-Value">
+											<%= @mailStreetAddress %>
+										</div>
+
+									</div>
+									<div>
+										<div class="subscription-Item">
+											City, State :
+										</div>
+										<div class="subscription-Value">
+											<%= @mailCity %>
+										</div>
+
+									</div>
 									
-									<tr>
-										<% if(!@reviewAnswers[quset.ID - 1].Comments.blank?) %>
-										<td align="left"> <p>Comments : <%= @reviewAnswers[quset.ID - 1].Comments %></p> </td>
-										<% else %>
-										<td align="left"> <p>No Comments</p> </td>
-										<% end %>
-									</tr>
-									<tr><td>&nbsp;</td></tr>
-									<% end %>
-									<% end %>
-								</table></td>
-							</tr>
-							
-						</table>
+									<div>
+										<div class="subscription-Item">
+											Zip Code :
+										</div>
+										<div class="subscription-Value">
+											<%= @mailZipCode %>
+										</div>
+										
+									</div>
+										
+									<div class="singup-textarea">
+									
+										<br /><br />
+										<input type="submit" name="Submit" id="Submit" value="Edit Profile" class="org-bt" />
+									</div>
+								</form>
+							</div>
+						</div>
 					</div>
 
 				</div>
-
 			</div>
-		</div>
 		</div>
 
 		<div id="footer-wrapper">

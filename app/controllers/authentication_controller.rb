@@ -56,6 +56,40 @@ class AuthenticationController < ApplicationController
     end 
   end
   
+  def ChangePassword
+    if(!session[:user_id])
+      redirect_to nicks_list_Index_url, flash:{:redirectUrl => authentication_SavePassword_url}
+    end
+  end
+  
+  def SavePassword
+    @userID = session[:user_id]
+    currentTime = Time.new
+    time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
+    if(!@userID.blank?)
+      @userDetails = SubscribedUser.find_by(ID: @userID)
+      
+      @oldPass = params[:textOldPassword]
+      @newPass = params[:textPassword]
+
+      if(password_decryption(@userDetails.Password, @userDetails.Salt) == @oldPass)
+        if(password_decryption(@userDetails.Password, @userDetails.Salt) != @newPass)
+          @userDetails.Password = password_encryption(@newPass, @userDetails.Salt)
+          @userDetails.save
+        else
+          @error = "Old password can not be use to create a new password!"
+        end
+      else
+        @error = "Old password is invalid!"
+      end    
+    end
+    if(!@error.blank?)
+      redirect_to authentication_ChangePassword_url, :notice => @error
+    else    
+      redirect_to user_profile_ViewProfile_url, :notice => "Password changed successfuly!"
+    end 
+  end
+  
   def authenticate(userName, password)
    
     user = SubscribedUser.find_by(UserName: userName)

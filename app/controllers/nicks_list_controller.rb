@@ -7,7 +7,7 @@ class NicksListController < ApplicationController
       @errorMessage = flash[:error]
     end
     
-    if(!flash[:hidFirstName].blank?)
+    if(!flash[:redirectUrl].blank?)
       @openLogin = 1
       @firstName = flash[:hidFirstName]
       @lastName = flash[:hidLastName]

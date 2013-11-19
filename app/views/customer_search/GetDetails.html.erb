@@ -58,40 +58,54 @@
                         </ul>
                     </div>
                 	<div class="login-wrapper">
-                		<% if(session[:user_id] == nil) %>
-                		<div  class="login-register"><a>Login / Register</a></div>
-                    	<div id="signin_menu"> 
-                    		<form action="<%= authentication_login_url %>" method="post">   
-                    			<p>                
-                      				<label for="username">Username</label>
-                      				<input id="textUserName" name="textUserName" required="required" value="" title="User Name" tabindex="4" type="text">
-                      			</p>
-                      			<p>
-                        			<label for="password">Password</label>
-                        			<input id="textPassword" name="textPassword" required="required" value="" title="password" tabindex="5" type="password">
-                      			</p>
-                      			<p class="remember">
-                        			<input id="signin_submit" value="Sign in" tabindex="6" type="submit">
-                        			<!--<input id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
-                        			<label for="remember">Remember me</label>-->
-                      			</p>
-                      			<p class="forgot"> 
-                      				<a href="<%= authentication_requestpassword_url %>" id="resend_password_link">Forgot your password?</a> 
-                      			</p>
-                      			<div class="signup">New User? <a href="<%= user_registeration_GetRegister_url %>">Signup Here</a></div>                                          
-							</form>
-                    	</div>
-                    	<% else %>
-                    		<div  class="logout-register"><%= image_tag("user.png", :alt => "", :width => "40px", :height=> "40px") %><a><%= session[:user_name] %></div>
-                    		<div id="signout_menu"> 
-                    		<form action="/authentication/logout" method="post">   
-                      			<p class="remember">
-                        			<input id="signout_submit" value="Sign Out" tabindex="6" type="submit">
-                      			</p>
-							</form>
-                    	</div>
-                    	<% end %>
-                    </div>
+								<% if(session[:user_id] == nil) %>
+								<div id="login-reg" class="login-register">
+									<a>Login / Register</a>
+								</div>
+								<div id="signin_menu">
+									<form action="<%= authentication_login_url %>" method="post">
+										<p>
+											<label for="username">Username</label>
+											<input id="textUserName" name="textUserName" required="required" value="" title="User Name" tabindex="4" type="text">
+										</p>
+										<p>
+											<label for="password">Password</label>
+											<input id="textPassword" name="textPassword" required="required" value="" title="password" tabindex="5" type="password">
+										</p>
+										<% if(!@errorMessage.blank?) %>
+										<p><b><%= @errorMessage %></b></p>
+										<% end %>
+										<p class="remember">
+											<input id="signin_submit" value="Sign in" tabindex="6" type="submit">
+											<!--<input id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
+											<label for="remember">Remember me</label>-->
+										</p>
+										<p class="forgot">
+											<a href="<%= authentication_requestpassword_url %>" id="resend_password_link">Forgot your password?</a>
+										</p>
+										<div class="signup">
+											New User? <a href="<%= user_registeration_GetRegister_url %>">Signup Here</a>
+										</div>
+									</form>
+								</div>
+								<% else %>
+								<div  class="logout-register">
+									<%= image_tag("user.png", :alt => "", :width => "40px", :height=> "40px") %><a><%= session[:user_name] %>
+								</div>
+								<div id="signout_menu">
+									<form action="<%= user_profile_ViewProfile_url %>" method="post">
+										
+											<input id="signout_submit" value="My Profile" tabindex="6" type="submit">
+										
+									</form>
+									<form action="/authentication/logout" method="post">
+										
+											<input id="signout_submit" value="Sign Out" tabindex="6" type="submit">
+										
+									</form>
+								</div>
+								<% end %>
+							</div>
                 	</div>
                 </div>
             </div>

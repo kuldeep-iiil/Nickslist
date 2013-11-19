@@ -86,7 +86,7 @@
 							</div>
 							<div class="login-wrapper">
 								<% if(session[:user_id] == nil) %>
-								<div  class="login-register">
+								<div id="login-reg" class="login-register">
 									<a>Login / Register</a>
 								</div>
 								<div id="signin_menu">
@@ -99,6 +99,9 @@
 											<label for="password">Password</label>
 											<input id="textPassword" name="textPassword" required="required" value="" title="password" tabindex="5" type="password">
 										</p>
+										<% if(!@errorMessage.blank?) %>
+										<p><b><%= @errorMessage %></b></p>
+										<% end %>
 										<p class="remember">
 											<input id="signin_submit" value="Sign in" tabindex="6" type="submit">
 											<!--<input id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
@@ -117,10 +120,15 @@
 									<%= image_tag("user.png", :alt => "", :width => "40px", :height=> "40px") %><a><%= session[:user_name] %>
 								</div>
 								<div id="signout_menu">
+									<form action="<%= user_profile_ViewProfile_url %>" method="post">
+										
+											<input id="signout_submit" value="My Profile" tabindex="6" type="submit">
+										
+									</form>
 									<form action="/authentication/logout" method="post">
-										<p class="remember">
+										
 											<input id="signout_submit" value="Sign Out" tabindex="6" type="submit">
-										</p>
+										
 									</form>
 								</div>
 								<% end %>

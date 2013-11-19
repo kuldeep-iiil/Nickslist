@@ -55,7 +55,7 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 .login-register a{ padding:10px 10px; color:#ffffff;}
 .login-register a:hover{cursor:pointer}
 
-.logout-register{padding-right:5px; width:150px; float:right; background:url(/assets/org-bt-bg.jpg) repeat-x; border-radius:0 5px 5px 0; font-size:16px; color:#fff;  text-align:left; line-height: 42px}
+.logout-register{padding-right:5px; width:158px; float:right; background:url(/assets/org-bt-bg.jpg) repeat-x; border-radius:0 5px 5px 0; font-size:16px; color:#fff;  text-align:left; line-height: 42px}
 .logout-register a{vertical-align: top; color:#ffffff; font-family: Arial, sans-serif; font-weight:normal;}
 .logout-register a:hover{cursor:pointer}
 
@@ -196,11 +196,11 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 	display:none;
 	background-color:#ffa133;
 	position:absolute;
-	width:135px;
+	width:153px;
 	z-index:100;
 	
 	text-align:center;
-	padding:10px;
+	padding:5px;
 	/*margin-left:-8px;
 	*margin-left:-15px;
 	margin-top:5px;*/
@@ -208,7 +208,7 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 	font-size:12px;
 	right:0;
 	top:42px;
-	border-radius:0 5px 5px 5px;
+	border-radius:0 0 5px 5px;
 }
 #signout_menu p {
 	margin:0;
@@ -216,15 +216,16 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 
 #signout_submit {
 	border-radius:4px;
-	
+	float : left;
 	background:#2967ac;
 	border:1px solid #195aa2;
 	color:#fff;
 	text-shadow:0 -1px 0 #39d;
 	padding:4px 10px 5px;
-	font-size:11px;
+	font-size:12px;
 	margin:0 5px 0 0;
-	font-weight:bold;
+	font-weight:normal;
+	cursor: pointer;
 }
 
 #record-search{ width:100%; float:left}
@@ -323,6 +324,7 @@ h1, h2, h3, h4, p{margin:0; padding:0}
 #SignupForm {font-size: 14px; display: block}
 
 #Error {color: red; font-size: 14px;}
+#Success {color: green; font-size: 14px;}
 
 #Term-Condition-area{ width:935px; height:500px; float:left; background:#ffffff; border:1px solid #d7d7d7; padding:25px 25px; border-radius:5px; overflow-y:auto; scrollbar-base-color: #CCCCCC;
 scrollbar-arrow-color:      ${3:#000000;
