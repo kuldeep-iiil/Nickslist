@@ -50,10 +50,10 @@
 									<!--<%= image_tag("review-ques.jpg", :alt => "", :width => "20px", :height => "20px") %>-->
 									<%= quset.Description %>?
 									<br />
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
-									Yes
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
-									No
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
+									<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
+									<label for="radYesNo_N<%= quset.ID %>">No</label>
 									<% if(quset.ID == 1) %>
 									<br />
 									<textarea id="quesComment<%= quset.ID %>"  rows="4" cols="50" name="quesComment<%= quset.ID %>"></textarea>
@@ -69,26 +69,26 @@
 									
 									<% if(quset.ID != 7) %>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
-									Yes
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
-									No
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
+									<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
+									<label for="radYesNo_N<%= quset.ID %>">Yes</label>
 									<% else %>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Bid process" />
-									Bid process?<br />
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Bid<%= quset.ID %>" value="Bid process" />
+									<label for="radYesNo_Bid<%= quset.ID %>">Bid process?</label><br />
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Doing the work" />
-									Doing the work?<br />
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Work<%= quset.ID %>" value="Doing the work" />
+									<label for="radYesNo_Work<%= quset.ID %>">Doing the work?</label><br />
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Completion" />
-									Completion?<br />
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Completion<%= quset.ID %>" value="Completion" />
+									<label for="radYesNo_Completion<%= quset.ID %>">Completion?</label><br />
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="After completion" />
-									After completion?<br />
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_AfterComp<%= quset.ID %>" value="After completion" />
+									<label for="radYesNo_AfterComp<%= quset.ID %>">After completion?</label><br />
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="All of the above" />
-									All of the above?
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_All<%= quset.ID %>" value="All of the above" />
+									<label for="radYesNo_All<%= quset.ID %>">All of the above?</label>
 									<% end %>
 								</div>
 								<% end %>
@@ -101,10 +101,10 @@
 								<%= quset.Description %>?
 								<% if(quset.ID != 17) %>
 								<br />
-								<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
-								Yes
-								<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
-								No
+								<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
+								<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
+								<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
+								<label for="radYesNo_N<%= quset.ID %>">No</label>
 								<% end %>
 								<br />
 								<textarea id="quesComment<%= quset.ID %>" rows="4" cols="50" name="quesComment<%= quset.ID %>"></textarea>

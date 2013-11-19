@@ -65,15 +65,15 @@
 										<label for="radYesNo_N<%= quset.ID %>">No</label>
 										
 										<% elsif(@reviewAnswers[quset.ID - 1].IsYes == "No") %>
-										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
+										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
 										<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
-										<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
+										<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
 										<label for="radYesNo_N<%= quset.ID %>">No</label>
 										
 										<% else %>
-										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
+										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
 										<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
-										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
+										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
 										<label for="radYesNo_N<%= quset.ID %>">No</label>
 										<% end %>
 										<% if(quset.ID == 1) %>
@@ -98,14 +98,14 @@
 										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
 										<label for="radYesNo_N<%= quset.ID %>">No</label>
 										<% elsif(@reviewAnswers[quset.ID - 1].IsYes == "No") %>
-										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
+										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
 										<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
-										<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
+										<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
 										<label for="radYesNo_N<%= quset.ID %>">No</label>
 										<% else %>
-										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
+										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
 										<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
-										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
+										<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
 										<label for="radYesNo_N<%= quset.ID %>">No</label>
 										<% end %>
 										
@@ -172,15 +172,15 @@
 									<label for="radYesNo_N<%= quset.ID %>">No</label>
 
 									<% elsif(@reviewAnswers[quset.ID - 1].IsYes == "No") %>
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
 									<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
-									<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
+									<input type="radio" checked="checked" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
 									<label for="radYesNo_N<%= quset.ID %>">No</label>
 
 									<% else %>
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="Yes" />
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
 									<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo<%= quset.ID %>" value="No" />
+									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
 									<label for="radYesNo_N<%= quset.ID %>">No</label>
 									<% end %>
 									<% end %>
