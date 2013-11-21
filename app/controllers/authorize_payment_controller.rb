@@ -40,7 +40,7 @@ class AuthorizePaymentController < ApplicationController
     @userPaymentDetails.BLTransactionID = @invoiceNumber
     @userPaymentDetails.save
     #https://developer.authorize.net/tools/paramdump/index.php
-    @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :relay_url => AUTHORIZE_NET_CONFIG['relay_response_url'])
+    @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :relay_url => AUTHORIZE_NET_CONFIG['relay_response_url'](:only_path => false))
     #@sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :relay_url => "http://192.168.0.198:3000/authorize_payment/relay_response")
     
     if(@sim_transaction.blank?)     
@@ -57,9 +57,9 @@ class AuthorizePaymentController < ApplicationController
   def relay_response
     sim_response = AuthorizeNet::SIM::Response.new(params)
     if sim_response.approved?
-      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['receipt_url'])
+      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['receipt_url'](:only_path => false), :include => true)
     else
-      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['error_url'])
+      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['error_url'](:only_path => false), :include => true)
     end
   end
 
@@ -74,20 +74,20 @@ class AuthorizePaymentController < ApplicationController
      # @transaction_id = sim_response.transaction_id
      @param = params.to_json
       @response = sim_response.to_json
-     # @userPaymentDetails = UserPaymentDetail.find_by(BLTransactionID: @invoiceNumber)
-     # if(!@userPaymentDetails.blank?)
-     #   @userPaymentDetails.PayTransactionID = @transaction_id
-     #   @userPaymentDetails.ResponseString = @response
-     #   @userPaymentDetails.PaymentStatus = 1  
-     #   @userPaymentDetails.ResponseDateTime = time 
-     #   @userPaymentDetails.DateUpdated = time
-     #   @userPaymentDetails.save
+      @userPaymentDetails = UserPaymentDetail.find_by(BLTransactionID: @invoiceNumber)
+      if(!@userPaymentDetails.blank?)
+        @userPaymentDetails.PayTransactionID = @transaction_id
+        @userPaymentDetails.ResponseString = @response
+        @userPaymentDetails.PaymentStatus = 1  
+        @userPaymentDetails.ResponseDateTime = time 
+        @userPaymentDetails.DateUpdated = time
+        @userPaymentDetails.save
         
-     #   @subscribedUser = SubscribedUser.find_by(ID: @userPaymentDetails.UserID)
-     #   @subscribedUser.IsSubscribed = 1
-     #   @subscribedUser.DateUpdated = time
-     #   @subscribedUser.save
-     # end
+        @subscribedUser = SubscribedUser.find_by(ID: @userPaymentDetails.UserID)
+        @subscribedUser.IsSubscribed = 1
+        @subscribedUser.DateUpdated = time
+        @subscribedUser.save
+      end
     #else
      # render :text => 'Sorry, we failed to validate your response. Please check that your "Merchant Hash Value" is set correctly in the config/authorize_net.yml file.'
     #end
