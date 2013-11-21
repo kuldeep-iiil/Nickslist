@@ -27,6 +27,8 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.0)
     atomic (1.1.14)
+    authorize-net (1.5.2)
+      nokogiri (~> 1.4)
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
     celluloid (0.15.2)
@@ -58,9 +60,12 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25)
+    mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.0)
     mysql (2.9.1)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
     paypal-sdk-core (0.2.6)
       multi_json (~> 1.0)
       xml-simple
@@ -139,6 +144,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  authorize-net
   bcrypt-ruby
   coffee-rails (~> 4.0.0)
   geocoder

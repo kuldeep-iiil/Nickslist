@@ -2,11 +2,35 @@
 <html>
 	<head>
 		<title>NicksList - Add Reviews</title>
-		
+		<script>
+			$(document).ready(function() {
+				
+    			$("input[name$='radYesNo2']").click(function() {	
+        		var rbvalue = $(this).val();
+				if(rbvalue == 'No')
+				{
+					$("#divSubQuest3").hide();
+					$("#divSubQuest4").hide();
+					$("#divSubQuest5").hide();
+					$("#divSubQuest6").hide();
+					$("#divSubQuest7").hide();
+				}
+				else
+				{
+					$("#divSubQuest3").show();
+					$("#divSubQuest4").show();
+					$("#divSubQuest5").show();
+					$("#divSubQuest6").show();
+					$("#divSubQuest7").show();
+				}        		
+    			});
+			});
+		</script>
+
 	</head>
 	<body>
 		<%= render partial: "/layouts/header" %>
-		
+
 		<div id="main-content-wrapper">
 			<div class="browser-center">
 
@@ -15,10 +39,10 @@
 						<h1><%= @firstName %>  <%= @lastName %></h1>
 						<p>
 							<% if(@reviewCount == '1') %>
-										has <%= @reviewCount %> review available
-									<% else %>
-										has <%= @reviewCount %> reviews available
-									<% end %>
+							has <%= @reviewCount %> review available
+							<% else %>
+							has <%= @reviewCount %> reviews available
+							<% end %>
 						</p>
 					</div>
 					<div id="review-header-right">
@@ -31,114 +55,152 @@
 					</div>
 				</div>
 
-				<div id="signup-wrapper">
-					<div id="signup-header">
-						<h1>Review Customer</h1>
-						<h2>Please fill the below given form to provide your reviews</h2>
+				<div class="review-block-wrapper">
+					<div class="page-heading">
+						Add Review Details
 					</div>
-					<!--<div class="steps"><%= image_tag("step1.jpg", :alt => "") %></div>-->
 
-					<div id="singup-form-area">
+					<% if(!@reviewQuestion.blank?) %>
+					<form action="<%= review_customers_AddReviewData_url %>" method="post">
+						<div id="divGeneral">
+							<% i = 1 %>
+							<% @reviewQuestion.each do |quset| %>
+							<% if(quset.Type == "General") %>
+							<% if(quset.ParentID == nil) %>
 
-						<% if(!@reviewQuestion.blank?) %>
-						<form action="<%= review_customers_AddReviewData_url %>" method="post">
-							<div id="divGeneral">
-								<% @reviewQuestion.each do |quset| %>
-								<% if(quset.Type == "General") %>
-								<% if(quset.ParentID == nil) %>
-								<div>
-									<!--<%= image_tag("review-ques.jpg", :alt => "", :width => "20px", :height => "20px") %>-->
-									<%= quset.Description %>?
-									<br />
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
-									<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
-									<label for="radYesNo_N<%= quset.ID %>">No</label>
-									<% if(quset.ID == 1) %>
-									<br />
-									<textarea id="quesComment<%= quset.ID %>"  rows="4" cols="50" name="quesComment<%= quset.ID %>"></textarea>
-									<br /><br />									
-								<% end %>	
-
+							<div class="question-block">
+								<div class="question-number">
+									<h1><%= i %></h1>
+									<p>
+										Question
+									</p>
 								</div>
-								<% else %>
-								<div>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<%= quset.Description %>?
-									<br />
-									
-									<% if(quset.ID != 7) %>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
-									<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
-									<label for="radYesNo_N<%= quset.ID %>">Yes</label>
-									<% else %>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Bid<%= quset.ID %>" value="Bid process" />
-									<label for="radYesNo_Bid<%= quset.ID %>">Bid process?</label><br />
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Work<%= quset.ID %>" value="Doing the work" />
-									<label for="radYesNo_Work<%= quset.ID %>">Doing the work?</label><br />
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Completion<%= quset.ID %>" value="Completion" />
-									<label for="radYesNo_Completion<%= quset.ID %>">Completion?</label><br />
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_AfterComp<%= quset.ID %>" value="After completion" />
-									<label for="radYesNo_AfterComp<%= quset.ID %>">After completion?</label><br />
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_All<%= quset.ID %>" value="All of the above" />
-									<label for="radYesNo_All<%= quset.ID %>">All of the above?</label>
-									<% end %>
-								</div>
-								<% end %>
-								<% end %>
-								<% end %>
-							</div>
-							<div id="divDetailed" style="display: none">
-								<% @reviewQuestion.each do |quset| %>
-								<% if(quset.Type == "Detailed") %>
-								<%= quset.Description %>?
-								<% if(quset.ID != 17) %>
-								<br />
-								<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
-								<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
-								<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
-								<label for="radYesNo_N<%= quset.ID %>">No</label>
-								<% end %>
-								<br />
-								<textarea id="quesComment<%= quset.ID %>" rows="4" cols="50" name="quesComment<%= quset.ID %>"></textarea>
-								<br /><br />
-								<% end %>
-								<% end %>
-								<br />
-								<br />
-								<div class="singup-textarea">
-									<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
-									<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
-									<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
-									<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
-									<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
-									<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
-							
-									<input type="submit" name="Submit" id="Submit" value="Finish" class="org-bt" />
+								<div class="question-area">
+									<div class="question-content">
+										<%= quset.Description %>?
+									</div>
+									<div class="question-content-answers">
+										<div class="question-option">
+											<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
+											<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
+											<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
+											<label for="radYesNo_N<%= quset.ID %>">No</label>
+										</div>
+										<div class="question-comment">
+											<% if(quset.ID == 1) %>
+											<textarea id="quesComment<%= quset.ID %>" class="comment-area" rows="5" cols="45" name="quesComment<%= quset.ID %>"></textarea>
+											<% end %>
+										</div>
+									</div>
 								</div>
 							</div>
-						</form>
-						<button id="btnContinue" class="org-bt" onclick="ShowHideDiv('General');" >
-							Continue
-						</button>
-						<button id="btnBack" class="org-bt" style="display:none" onclick="ShowHideDiv('Detailed');" >
-							Back
-						</button>
-						<% end %>
+							<% else %>
+
+							<div id="divSubQuest<%= quset.ID %>" class="sub-question">
+
+								<div class="sub-question-area">
+									<div class="question-content">
+										<%= quset.Description %>?
+									</div>
+									<div class="question-content-answers">
+										<div class="question-option">
+											<% if(quset.ID != 7) %>
+											<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
+											<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
+											<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
+											<label for="radYesNo_N<%= quset.ID %>">Yes</label>
+											<% else %>
+											<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Bid<%= quset.ID %>" value="Bid process" />
+											<label for="radYesNo_Bid<%= quset.ID %>">Bid process?</label>
+
+											<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Work<%= quset.ID %>" value="Doing the work" />
+											<label for="radYesNo_Work<%= quset.ID %>">Doing the work?</label>
+
+											<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Completion<%= quset.ID %>" value="Completion" />
+											<label for="radYesNo_Completion<%= quset.ID %>">Completion?</label>
+
+											<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_AfterComp<%= quset.ID %>" value="After completion" />
+											<label for="radYesNo_AfterComp<%= quset.ID %>">After completion?</label>
+
+											<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_All<%= quset.ID %>" value="All of the above" />
+											<label for="radYesNo_All<%= quset.ID %>">All of the above?</label>
+											<% end %>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<% end %>
+							<% i = i + 1 %>
+							<% end %>
+
+							<% end %>
+						</div>
+						<div id="divDetailed" style="display: none">
+							<% j = 1 %>
+							<% @reviewQuestion.each do |quset| %>
+							<% if(quset.Type == "Detailed") %>
+
+							<div class="question-block">
+								<div class="question-number">
+									<h1><%= j %></h1>
+									<p>
+										Question
+									</p>
+								</div>
+								<div class="question-area">
+									<div class="question-content">
+										<%= quset.Description %>?
+									</div>
+									<div class="question-content-answers">
+										<div class="question-option">
+											<% if(quset.ID != 17) %>
+											<br />
+											<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
+											<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
+											<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
+											<label for="radYesNo_N<%= quset.ID %>">No</label>
+											<% end %>
+										</div>
+										<div class="question-comment">
+											<textarea id="quesComment<%= quset.ID %>" class="comment-area" rows="5" cols="45" name="quesComment<%= quset.ID %>"></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+							<% j = j + 1 %>
+							<% end %>
+							<% end %>
+							<br />
+							<br />
+							<div class="review-submit-bt">
+								<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
+								<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
+								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
+								<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+								<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
+								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
+
+								<input type="submit" name="Submit" id="Submit" value="Finish" class="org-bt" />
+							</div>
+						</div>
+					</form>
+					<div class="review-bt">
+					<button id="btnContinue" class="org-bt" onclick="ShowHideDiv('General');" >
+						Continue
+					</button>
+					<button id="btnBack" class="org-bt" style="display:none" onclick="ShowHideDiv('Detailed');" >
+						Back
+					</button>
 					</div>
+
+					<% end %>
 
 				</div>
 
 			</div>
 		</div>
-		
+
 		<%= render partial: "/layouts/footer" %>
 	</body>
 </html>

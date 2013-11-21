@@ -336,3 +336,27 @@ scrollbar-face-color:       #CCCCCC;
 scrollbar-shadow-color:     #999999;
 scrollbar-darkshadow-color: #666666;}}
 
+
+
+/*add review css*/
+.page-heading{font-size:35px; font-family: 'OpenSans', Arial, sans-serif; color:#333}
+.question-block{ width:100%; float:left; border-top:1px solid #d9d9d9; margin-top:20px}
+.question-number{ width:80px; float:left; margin:20px;  background: #3d8cdb url(../images/hover.jpg) bottom repeat-x; border-radius:5px; padding:5px 0}
+.question-number h1{ text-align:center; font-family:Arial, Helvetica, sans-serif; font-size:40px; color:#fff; font-weight:normal; margin:0; padding:0}
+.question-number p{ text-align:center; font-size:12px; color:#ffffff; margin:0; padding:0; text-transform:uppercase}
+
+
+.question-area{ width:850px; float:right; margin-top:17px;}
+.question-content{ width:100%; float:left; font-family:Arial, Helvetica, sans-serif; font-size:17px; color:#3d8cdb; line-height:18px;}
+.question-content-answers{ width:100%; float:left; margin-top:10px;}
+.question-option{ width:70px; float:left; color:#333}
+.radio-area{ min-width:70px; margin:0 30px 10px 0; float:left}
+.question-comment{ width:750px; float:right}
+.comment-area{ width:750px; height:70px; resize:none}
+
+.sub-question{ width:850px; float:right;}
+.sub-question-area{ width:850px; float:right; margin-top:17px; border-top:1px solid #d9d9d9; margin-top:20px; padding-top:10px;}
+.sub-question-area .question-option{ width:100%; float:left}
+.sub-question-area .radio-area{margin:0 30px 0px 0 !important; }
+.review-bt{margin-top:30px; margin-left:500px; float:right}
+.review-submit-bt{margin-top:30px; float:right}

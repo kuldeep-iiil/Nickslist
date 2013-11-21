@@ -48,6 +48,9 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 #To run rails server in background
 gem 'thin'
 
+#Payment gateway
+gem 'authorize-net'
+
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

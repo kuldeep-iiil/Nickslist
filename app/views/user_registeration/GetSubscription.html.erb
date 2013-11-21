@@ -27,16 +27,18 @@
                     
                		<div class="singup-form">              			
                			<div id="SignupForm">
-               			<form action="/user_registeration/GetSubscription" method="post">
+               			<form action="<%= authorize_payment_payment_url %>" method="post">
                     	<div>
                     	  <div class="subscription-Item">Company Name : </div><div class="subscription-Value"><%= @companyName %></div>
+                    	  <input type="hidden" id="hidCompanyName" name="hidCompanyName" value="<%= @companyName %>" />
                     	</div>
                         <div>
                     	  <div class="subscription-Item">First Name : </div><div class="subscription-Value"><%= @firstName %></div>
+                    	  <input type="hidden" id="hidFirstName" name="hidFirstName" value="<%= @firstName %>" />
                         </div>
                         <div>
                           <div class="subscription-Item">Last Name : </div><div class="subscription-Value"><%= @lastName %></div>
-                        
+                        <input type="hidden" id="hidLastName" name="hidLastName" value="<%= @lastName %>" />
                     	</div>
                         <div>
 						  <div class="subscription-Item">Incorporation Type : </div><div class="subscription-Value"><%= @incorporationType %></div>
@@ -44,35 +46,34 @@
                     	</div>
                     	<div>
                     	  <div class="subscription-Item">Phone Number : </div><div class="subscription-Value"><%= @phoneNumber %></div>
-                        
+                        	<input type="hidden" id="hidPhoneNumber" name="hidPhoneNumber" value="<%= @phoneNumber %>" />
                     	</div>
                         <div>
                     	  <div class="subscription-Item">Email ID : </div><div class="subscription-Value"><%= @email %></div>
-                        	<% session[:email_id] =  @email %>
+                        	<input type="hidden" id="hidEmail" name="hidEmail" value="<%= @email %>" />
                           </div>
                         <div>
                     	  <div class="subscription-Item">License Number : </div><div class="subscription-Value"><%= @license %></div>
                         
                     	</div>
                     	<div class="subscription-Title">Business Address</div>
-                    	
-                        
+                    	<input type="hidden" id="hidPrice" name="hidPrice" value="<%= @price %>" />
                     	<div>
                     	  <div class="subscription-Item">Street Address : </div><div class="subscription-Value"><%= @bussStreetAddress %></div>
-                        
+                        <input type="hidden" id="hidStreetAddress" name="hidStreetAddress" value="<%= @bussStreetAddress %>" />
                     	</div>
                     	<div>
                     	  <div class="subscription-Item">City : </div><div class="subscription-Value"><%= @bussCity %></div>
-                        
+                        <input type="hidden" id="hidCity" name="hidCity" value="<%= @bussCity %>" />
                     	</div>
                     	<div>
                     	  
                     	  <div class="subscription-Item">State : </div><div class="subscription-Value"><%= @bussState %></div>
-                        
+                        <input type="hidden" id="hidState" name="hidState" value="<%= @bussState %>" />
                     	</div>
                         <div>
                     	  <div class="subscription-Item">Zip Code: </div><div class="subscription-Value"><%= @bussZipCode %></div>
-                        
+                        <input type="hidden" id="hidZipCode" name="hidZipCode" value="<%= @bussZipCode %>" />
                     	</div>
                     	<div class="subscription-Title">Mailing Address</div>
                     	
@@ -98,7 +99,7 @@
                         
                     	<div>
                     	  <div class="subscription-Item">Price : </div><div class="subscription-Value"><%= @price%></div>
-							<% session[:itemprice] =  @itemprice %>
+							<input type="hidden" id="hidPrice" name="hidPrice" value="<%= @price %>" />
                           <br />
                     	</div>
                         <div class="singup-textarea">

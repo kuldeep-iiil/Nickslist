@@ -93,9 +93,10 @@ class AuthenticationController < ApplicationController
   def authenticate(userName, password)
    
     user = SubscribedUser.find_by(UserName: userName)
+
     #@pass = BCrypt::Engine.hash_secret(password, user.Salt)
     #if user && user.Password == BCrypt::Engine.hash_secret(password, user.Salt)
-    if user && password == password_decryption(user.Password, user.Salt)
+    if (user && password == password_decryption(user.Password, user.Salt) && user.IsSubscribed)
       user
     else
       nil

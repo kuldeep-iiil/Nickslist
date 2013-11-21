@@ -1,4 +1,12 @@
-NicksListProj::Application.routes.draw do  
+NicksListProj::Application.routes.draw do
+  post "/authorize_payment/relay_response"
+  get "/authorize_payment/relay_response"
+  post "/authorize_payment/payment"
+  get "/authorize_payment/payment"
+  post "/authorize_payment/receipt"
+  get "/authorize_payment/receipt"
+  post "/authorize_payment/error"
+  get "/authorize_payment/error"  
   post "/user_profile/EditProfile"
   get "/user_profile/EditProfile"
   post "/user_profile/ViewProfile"
@@ -41,6 +49,8 @@ NicksListProj::Application.routes.draw do
   get "/user_registeration/revoked"
   post "/user_registeration/PaypalPayment"
   get "/user_registeration/PaypalPayment"
+  post "/user_registeration/RedirectToPaymentForm"
+  get "/user_registeration/RedirectToPaymentForm"
   post "/user_registeration/GetSubscription"
   get "/user_registeration/GetSubscription"
   post "/user_registeration/GetRegister"
