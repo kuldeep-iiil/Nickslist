@@ -69,10 +69,9 @@ class AuthorizePaymentController < ApplicationController
     sim_response = AuthorizeNet::SIM::Response.new(params)
     currentTime = Time.new
     time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
-    #if sim_response.blank?
-    #  @invoiceNumber = sim_response.invoice_num
-     # @transaction_id = sim_response.transaction_id
-     @param = params.to_json
+    if sim_response.blank?
+      @invoiceNumber = sim_response.invoice_num
+      @transaction_id = sim_response.transaction_id
       @response = sim_response.to_json
       @userPaymentDetails = UserPaymentDetail.find_by(BLTransactionID: @invoiceNumber)
       if(!@userPaymentDetails.blank?)
@@ -88,9 +87,9 @@ class AuthorizePaymentController < ApplicationController
         @subscribedUser.DateUpdated = time
         @subscribedUser.save
       end
-    #else
-     # render :text => 'Sorry, we failed to validate your response. Please check that your "Merchant Hash Value" is set correctly in the config/authorize_net.yml file.'
-    #end
+    else
+      render :text => 'Sorry, we failed to validate your response. Please check that your "Merchant Hash Value" is set correctly in the config/authorize_net.yml file.'
+    end
   end
 
   # GET
