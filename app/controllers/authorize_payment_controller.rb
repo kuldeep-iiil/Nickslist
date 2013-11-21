@@ -69,27 +69,28 @@ class AuthorizePaymentController < ApplicationController
     sim_response = AuthorizeNet::SIM::Response.new(params)
     currentTime = Time.new
     time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
-    if sim_response.blank?
-      @invoiceNumber = sim_response.invoice_num
-      @transaction_id = sim_response.transaction_id
+    #if sim_response.blank?
+    #  @invoiceNumber = sim_response.invoice_num
+     # @transaction_id = sim_response.transaction_id
+     @param = params.to_json
       @response = sim_response.to_json
-      @userPaymentDetails = UserPaymentDetail.find_by(BLTransactionID: @invoiceNumber)
-      if(!@userPaymentDetails.blank?)
-        @userPaymentDetails.PayTransactionID = @transaction_id
-        @userPaymentDetails.ResponseString = @response
-        @userPaymentDetails.PaymentStatus = 1  
-        @userPaymentDetails.ResponseDateTime = time 
-        @userPaymentDetails.DateUpdated = time
-        @userPaymentDetails.save
+     # @userPaymentDetails = UserPaymentDetail.find_by(BLTransactionID: @invoiceNumber)
+     # if(!@userPaymentDetails.blank?)
+     #   @userPaymentDetails.PayTransactionID = @transaction_id
+     #   @userPaymentDetails.ResponseString = @response
+     #   @userPaymentDetails.PaymentStatus = 1  
+     #   @userPaymentDetails.ResponseDateTime = time 
+     #   @userPaymentDetails.DateUpdated = time
+     #   @userPaymentDetails.save
         
-        @subscribedUser = SubscribedUser.find_by(ID: @userPaymentDetails.UserID)
-        @subscribedUser.IsSubscribed = 1
-        @subscribedUser.DateUpdated = time
-        @subscribedUser.save
-      end
-    else
-      render :text => 'Sorry, we failed to validate your response. Please check that your "Merchant Hash Value" is set correctly in the config/authorize_net.yml file.'
-    end
+     #   @subscribedUser = SubscribedUser.find_by(ID: @userPaymentDetails.UserID)
+     #   @subscribedUser.IsSubscribed = 1
+     #   @subscribedUser.DateUpdated = time
+     #   @subscribedUser.save
+     # end
+    #else
+     # render :text => 'Sorry, we failed to validate your response. Please check that your "Merchant Hash Value" is set correctly in the config/authorize_net.yml file.'
+    #end
   end
 
   # GET
