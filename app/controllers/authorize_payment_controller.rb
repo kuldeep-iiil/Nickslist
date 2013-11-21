@@ -69,7 +69,7 @@ class AuthorizePaymentController < ApplicationController
     sim_response = AuthorizeNet::SIM::Response.new(params)
     currentTime = Time.new
     time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
-    if(sim_response.approved?)
+    if sim_response.blank?
       @invoiceNumber = sim_response.invoice_num
       @transaction_id = sim_response.transaction_id
       @response = sim_response.to_json
