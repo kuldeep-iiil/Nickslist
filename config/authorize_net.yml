@@ -1,0 +1,11 @@
+default:
+  api_login_id: 5Ldj59bGu
+  api_transaction_key: 94Awp2dVh8994C3F
+  merchant_hash_value: 76STRYsdsffge@#$asdr@
+
+development: 
+ # <<: *default
+test: 
+  #<<: *default
+production: 
+  #<<: *default

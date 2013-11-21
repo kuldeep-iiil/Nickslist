@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<script type="text/javascript">
+		$(function(){			
+			
+			$('#x_relay_response').val("FALSE");
+			$("#sim_transaction").submit();
+		});
+        
+    </script>
+	</head>
+	<body>
+		
+		<form id="sim_transaction" action="<%= AuthorizeNet::SIM::Transaction::Gateway::TEST %>" method="post">
+        	<%= sim_fields(@sim_transaction) %>
+        	
+        	 <input type='hidden' name="x_show_form" value="payment_form">
+        	 
+        	 <input type="hidden" name="x_invoice_num" id="x_invoice_num" value="<%= @invoiceNumber %>" />
+        	<input type="hidden" id="hidamount" name="hidamount" value="<%= @amount %>" />
+        	<input type="hidden" id="x_company" name="x_company" value="<%= @userCompanyName %>"
+        	<input type="hidden" id="x_first_name" name="x_first_name" value="<%= @userFirstName %>" />
+        	<input type="hidden" id="x_last_name" name="x_last_name" value="<%= @userLastName %>" />
+        	<input type="hidden" id="x_email" name="x_email" value="<%= @userEmail %>" /> 
+        	<input type="hidden" id="x_phone" name="x_phone" value="<%= @userPhoneNumber %>" /> 
+        	<input type="hidden" id="x_address" name="x_address" value="<%= @userStreetAddress %>" />
+        	<input type="hidden" id="x_city" name="x_city" value="<%= @userCity %>" />
+        	<input type="hidden" id="x_state" name="x_state" value="<%= @userState %>" />
+        	<input type="hidden" id="x_zip" name="x_zip" value="<%= @userZipCode %>" /> 
+        	<input type="hidden" id="x_country" name="x_country" value="United States" />        	
+        </form>  
+	</body>
+	
+</html>
