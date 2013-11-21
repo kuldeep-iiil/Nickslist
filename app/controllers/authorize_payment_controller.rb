@@ -62,6 +62,17 @@ class AuthorizePaymentController < ApplicationController
       @invoiceNumber = sim_response.invoice_num
       @transaction_id = sim_response.transaction_id
       @response = sim_response.to_json
+      hash = JSON.parse(@response)
+      @response = '{"raw_response":{"x_response_code":"' + hash['raw_response']['x_response_code'] + 
+      ' "," x_response_reason_code":"' + hash['raw_response']['x_response_reason_code'] + 
+      ' "," x_response_reason_text":"' + hash['raw_response']['x_response_reason_text'] +
+      ' "," x_avs_code":"' + hash['raw_response']['x_avs_code'] +
+      ' "," x_auth_code":"' + hash['raw_response']['x_auth_code'] +
+      ' "," x_trans_id":"' + hash['raw_response']['x_trans_id'] +
+      ' "," x_method":"' + hash['raw_response']['x_method'] +
+      ' "," x_card_type":"' + hash['raw_response']['x_card_type'] +
+      ' "," x_account_number":"' + hash['raw_response']['x_account_number'] +
+      '"}}'
       @userPaymentDetails = UserPaymentDetail.find_by(BLTransactionID: @invoiceNumber)
       if(!@userPaymentDetails.blank?)
         @userPaymentDetails.PayTransactionID = @transaction_id
@@ -78,45 +89,30 @@ class AuthorizePaymentController < ApplicationController
       end
       render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['receipt_url'] + '?in=' + @invoiceNumber)
     else
-      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['error_url'], :only_path => false, :include => true)
+      @reason = sim_response.response_reason_text      
+      @userPaymentDetails = UserPaymentDetail.find_by(BLTransactionID: @invoiceNumber)
+      if(!@userPaymentDetails.blank?)
+        @userPaymentDetails.PayTransactionID = @transaction_id
+        @userPaymentDetails.ResponseString = @response
+        @userPaymentDetails.PaymentStatus = 0  
+        @userPaymentDetails.ResponseDateTime = time 
+        @userPaymentDetails.DateUpdated = time
+        @userPaymentDetails.save
+      end
+      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['error_url'] + '?msg=' + @reason)
     end
   end
 
   # GET
   # Displays a receipt.
   def receipt
-    #@invoiceNumber = request.QueryString['in']
    @invoiceNumber = request.query_parameters["in"]
-    if @invoiceNumber.blank?
-      render :text => 'Sorry, we failed to validate your response. Please check that your "Merchant Hash Value" is set correctly in the config/authorize_net.yml file.'
-    end
   end
 
   # GET
   # Displays an error page.
   def error
-    sim_response = AuthorizeNet::SIM::Response.new(params)
-    currentTime = Time.new
-    time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
-    if(!sim_response.blank?)
-      @reason = sim_response.response_reason_text
-      #@reason_code = sim_response.response_reason_code
-      #@response_code = sim_response.response_code
-      @invoiceNumber = sim_response.invoice_num
-      #@transaction_id = sim_response.transaction_id
-      #@response = sim_response.to_json
-      @userPaymentDetails = UserPaymentDetail.find_by(BLTransactionID: @invoiceNumber)
-      if(!@userPaymentDetails.blank?)
-        @userPaymentDetails.PayTransactionID = @transaction_id
-        @userPaymentDetails.ResponseString = @reason
-        @userPaymentDetails.PaymentStatus = 0  
-        @userPaymentDetails.ResponseDateTime = time 
-        @userPaymentDetails.DateUpdated = time
-        @userPaymentDetails.save
-      end
-    else
-      render :text => 'Sorry, we failed to validate your response. Please check that your "Merchant Hash Value" is set correctly in the config/authorize_net.yml file.'
-    end
+    @reason = request.query_parameters["msg"]   
   end
 
 end

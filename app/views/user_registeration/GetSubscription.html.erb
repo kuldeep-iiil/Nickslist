@@ -29,69 +29,69 @@
                			<div id="SignupForm">
                			<form action="<%= authorize_payment_payment_url %>" method="post">
                     	<div>
-                    	  <div class="subscription-Item">Company Name : </div><div class="subscription-Value"><%= @companyName %></div>
-                    	  <input type="hidden" id="hidCompanyName" name="hidCompanyName" value="<%= @companyName %>" />
+                    	  <div class="subscription-Item">Company Name : </div><div class="subscription-Value"><%= @usercompanyName %></div>
+                    	  <input type="hidden" id="hidCompanyName" name="hidCompanyName" value="<%= @usercompanyName %>" />
                     	</div>
                         <div>
-                    	  <div class="subscription-Item">First Name : </div><div class="subscription-Value"><%= @firstName %></div>
-                    	  <input type="hidden" id="hidFirstName" name="hidFirstName" value="<%= @firstName %>" />
+                    	  <div class="subscription-Item">First Name : </div><div class="subscription-Value"><%= @userfirstName %></div>
+                    	  <input type="hidden" id="hidFirstName" name="hidFirstName" value="<%= @userfirstName %>" />
                         </div>
                         <div>
-                          <div class="subscription-Item">Last Name : </div><div class="subscription-Value"><%= @lastName %></div>
-                        <input type="hidden" id="hidLastName" name="hidLastName" value="<%= @lastName %>" />
+                          <div class="subscription-Item">Last Name : </div><div class="subscription-Value"><%= @userlastName %></div>
+                        <input type="hidden" id="hidLastName" name="hidLastName" value="<%= @userlastName %>" />
                     	</div>
                         <div>
-						  <div class="subscription-Item">Incorporation Type : </div><div class="subscription-Value"><%= @incorporationType %></div>
+						  <div class="subscription-Item">Incorporation Type : </div><div class="subscription-Value"><%= @userincorporationType %></div>
                         
                     	</div>
                     	<div>
-                    	  <div class="subscription-Item">Phone Number : </div><div class="subscription-Value"><%= @phoneNumber %></div>
-                        	<input type="hidden" id="hidPhoneNumber" name="hidPhoneNumber" value="<%= @phoneNumber %>" />
+                    	  <div class="subscription-Item">Phone Number : </div><div class="subscription-Value"><%= @userphoneNumber %></div>
+                        	<input type="hidden" id="hidPhoneNumber" name="hidPhoneNumber" value="<%= @userphoneNumber %>" />
                     	</div>
                         <div>
-                    	  <div class="subscription-Item">Email ID : </div><div class="subscription-Value"><%= @email %></div>
-                        	<input type="hidden" id="hidEmail" name="hidEmail" value="<%= @email %>" />
+                    	  <div class="subscription-Item">Email ID : </div><div class="subscription-Value"><%= @useremail %></div>
+                        	<input type="hidden" id="hidEmail" name="hidEmail" value="<%= @useremail %>" />
                           </div>
                         <div>
-                    	  <div class="subscription-Item">License Number : </div><div class="subscription-Value"><%= @license %></div>
+                    	  <div class="subscription-Item">License Number : </div><div class="subscription-Value"><%= @userlicense %></div>
                         
                     	</div>
                     	<div class="subscription-Title">Business Address</div>
                     	<input type="hidden" id="hidPrice" name="hidPrice" value="<%= @price %>" />
                     	<div>
-                    	  <div class="subscription-Item">Street Address : </div><div class="subscription-Value"><%= @bussStreetAddress %></div>
-                        <input type="hidden" id="hidStreetAddress" name="hidStreetAddress" value="<%= @bussStreetAddress %>" />
+                    	  <div class="subscription-Item">Street Address : </div><div class="subscription-Value"><%= @userbussStreetAddress %></div>
+                        <input type="hidden" id="hidStreetAddress" name="hidStreetAddress" value="<%= @userbussStreetAddress %>" />
                     	</div>
                     	<div>
-                    	  <div class="subscription-Item">City : </div><div class="subscription-Value"><%= @bussCity %></div>
-                        <input type="hidden" id="hidCity" name="hidCity" value="<%= @bussCity %>" />
+                    	  <div class="subscription-Item">City : </div><div class="subscription-Value"><%= @userbussCity %></div>
+                        <input type="hidden" id="hidCity" name="hidCity" value="<%= @userbussCity %>" />
                     	</div>
                     	<div>
                     	  
-                    	  <div class="subscription-Item">State : </div><div class="subscription-Value"><%= @bussState %></div>
-                        <input type="hidden" id="hidState" name="hidState" value="<%= @bussState %>" />
+                    	  <div class="subscription-Item">State : </div><div class="subscription-Value"><%= @userbussState %></div>
+                        <input type="hidden" id="hidState" name="hidState" value="<%= @userbussState %>" />
                     	</div>
                         <div>
-                    	  <div class="subscription-Item">Zip Code: </div><div class="subscription-Value"><%= @bussZipCode %></div>
-                        <input type="hidden" id="hidZipCode" name="hidZipCode" value="<%= @bussZipCode %>" />
+                    	  <div class="subscription-Item">Zip Code: </div><div class="subscription-Value"><%= @userbussZipCode %></div>
+                        <input type="hidden" id="hidZipCode" name="hidZipCode" value="<%= @userbussZipCode %>" />
                     	</div>
                     	<div class="subscription-Title">Mailing Address</div>
                     	
                         
                         <div>
-                    	  <div class="subscription-Item">Street Address : </div><div class="subscription-Value"><%= @mailStreetAddress %></div>
+                    	  <div class="subscription-Item">Street Address : </div><div class="subscription-Value"><%= @usermailStreetAddress %></div>
                         
                     	</div>
                     	<div>
-                    	  <div class="subscription-Item">City : </div><div class="subscription-Value"><%= @mailCity %></div>
+                    	  <div class="subscription-Item">City : </div><div class="subscription-Value"><%= @usermailCity %></div>
                         
                     	</div>
                     	<div>
-                    	  <div class="subscription-Item">State : </div><div class="subscription-Value"><%= @mailState %></div>
+                    	  <div class="subscription-Item">State : </div><div class="subscription-Value"><%= @usermailState %></div>
                         
                     	</div>
                         <div>
-                    	  <div class="subscription-Item">Zip Code : </div><div class="subscription-Value"><%= @mailZipCode %></div>
+                    	  <div class="subscription-Item">Zip Code : </div><div class="subscription-Value"><%= @usermailZipCode %></div>
                         
                     	</div>
                     	<div class="subscription-Title">Subscription Price</div>

@@ -63,7 +63,7 @@ class CustomerSearchController < ApplicationController
       @customerSearchLog = CustomerSearchLog.new(CustomerSearchID: @customer[0].ID, SearchedDateTime: time)
       @customerSearchLog.save
       
-      @customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer[0].ID, UserID: currentUserID, IsReviewGiven: 0, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
+      #@customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer[0].ID, UserID: currentUserID, IsReviewGiven: 0, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
       if(@customer.length > 1)
         @custoemrIDs = @customer.all.collect {|cust| cust.ID}.join(',')
       else
@@ -93,8 +93,8 @@ class CustomerSearchController < ApplicationController
         @customerSearchLog = CustomerSearchLog.new(CustomerSearchID: @customer.ID, SearchedDateTime: time)
         @customerSearchLog.save
         
-        @customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer.ID, UserID: currentUserID, IsReviewGiven: 0, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
-        @customerReviewJoin.save
+        #@customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer.ID, UserID: currentUserID, IsReviewGiven: 0, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
+        #@customerReviewJoin.save
       end
       
       if(!@reviewer.blank?)

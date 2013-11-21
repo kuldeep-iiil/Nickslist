@@ -4,7 +4,7 @@
 	<title>NicksList - User Registration</title>
 	
 </head>
-<body onload="SignupForm_AuthUser('<%= @authCode %>', '<%= @companyName %>', '<%= @incorporationType %>', '<%= @bussStreetAddress %>', '<%= @bussCity %>', '<%= @bussState %>', '<%= @bussZipCode %>', '<%= @mailStreetAddress %>', '<%= @mailCity %>', '<%= @mailState %>', '<%= @mailZipCode %>', '<%= @phoneNumber %>', '<%= @email %>', '<%= @license %>'); <% if(!@error.blank?)%> SignupForm_visibility(); <% end %>">
+<body onload="SignupForm_AuthUser('<%= @userauthCode %>', '<%= @usercompanyName %>', '<%= @userincorporationType %>', '<%= @userbussStreetAddress %>', '<%= @userbussCity %>', '<%= @userbussState %>', '<%= @userbussZipCode %>', '<%= @usermailStreetAddress %>', '<%= @usermailCity %>', '<%= @usermailState %>', '<%= @mailZipCode %>', '<%= @userphoneNumber %>', '<%= @useremail %>', '<%= @userlicense %>'); <% if(!@error.blank?)%> SignupForm_visibility(); <% end %>">
 	<div id="wrapper">
 	<%= render partial: "/layouts/header" %>
 	

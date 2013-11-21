@@ -4,45 +4,45 @@ class UserRegisterationController < ApplicationController
   include Sidekiq::Worker
   
   def GetRegister    
-    @companyName = params[:textCompany]
-    @firstName = params[:textFirstName]
-    @lastName = params[:textLastName]
-    @incorporationType = params[:textIncorporationType]
-    @bussStreetAddress = params[:textBussStreetAddress]
+    @usercompanyName = params[:textCompany]
+    @userfirstName = params[:textFirstName]
+    @userlastName = params[:textLastName]
+    @userincorporationType = params[:textIncorporationType]
+    @userbussStreetAddress = params[:textBussStreetAddress]
     
-    @busscitystateVal = params[:textBussCity]    
-    @bussCity = ""
-    @bussState = ""
-    if(!@busscitystateVal.blank?)
-      @busscitystateVal = @busscitystateVal.split(',')    
-      @bussCity = @busscitystateVal.at(0).strip()      
-      @bussState = @busscitystateVal.at(1).strip()      
+    @userbusscitystateVal = params[:textBussCity]    
+    @userbussCity = ""
+    @userbussState = ""
+    if(!@userbusscitystateVal.blank?)
+      @userbusscitystateVal = @userbusscitystateVal.split(',')    
+      @userbussCity = @userbusscitystateVal.at(0).strip()      
+      @userbussState = @userbusscitystateVal.at(1).strip()      
     end
       
     #bussCity = params[:textBussCity]
     #bussState = params[:textBussState]    
-    @bussZipCode = params[:textBussZipCode]
+    @userbussZipCode = params[:textBussZipCode]
     
-    @mailStreetAddress = params[:textMailStreetAddress]    
-    @mailcitystateVal = params[:textMailCity]
-    @mailCity = ""
-    @mailState = ""
-    if(!@mailcitystateVal.blank?)    
-      @mailcitystateVal = @mailcitystateVal.split(',')
-      @mailCity = @mailcitystateVal.at(0).strip()
-      @mailState = @mailcitystateVal.at(1).strip()      
+    @usermailStreetAddress = params[:textMailStreetAddress]    
+    @usermailcitystateVal = params[:textMailCity]
+    @usermailCity = ""
+    @usermailState = ""
+    if(!@usermailcitystateVal.blank?)    
+      @usermailcitystateVal = @usermailcitystateVal.split(',')
+      @usermailCity = @usermailcitystateVal.at(0).strip()
+      @usermailState = @usermailcitystateVal.at(1).strip()      
     end
     
     #mailCity = params[:textMailCity]
     #mailState = params[:textMailState]
-    @mailZipCode = params[:textMailZipCode]
-    @phoneNumber = params[:textPhoneNumber]
-    @email = params[:textEmail]
-    @license = params[:textLicense]
+    @usermailZipCode = params[:textMailZipCode]
+    @userphoneNumber = params[:textPhoneNumber]
+    @useremail = params[:textEmail]
+    @userlicense = params[:textLicense]
     @userName = params[:textUserName]
     password = params[:textPassword]
     authCode = params[:textCode]
-    @authCode = authCode
+    @userauthCode = authCode
     keyCode = params[:hiddenFilledCode]
     currentTime = Time.new
     time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
@@ -58,10 +58,10 @@ class UserRegisterationController < ApplicationController
     end
     
     
-    if(@companyName != nil and @firstName != nil and @lastName != nil and @incorporationType != nil and 
-      @bussStreetAddress != nil and @bussCity != nil and @bussZipCode != nil and
-      @mailStreetAddress != nil and @mailCity != nil and @mailZipCode != nil and
-      @phoneNumber != nil and @email != nil and @license != nil and @userName != nil and password != nil and salt != nil)
+    if(@usercompanyName != nil and @userfirstName != nil and @userlastName != nil and @userincorporationType != nil and 
+      @userbussStreetAddress != nil and @userbussCity != nil and @userbussZipCode != nil and
+      @usermailStreetAddress != nil and @usermailCity != nil and @usermailZipCode != nil and
+      @userphoneNumber != nil and @useremail != nil and @userlicense != nil and @userName != nil and password != nil and salt != nil)
           
         if(keyCode.blank?)
           isUsed='0'
@@ -74,9 +74,9 @@ class UserRegisterationController < ApplicationController
         end
         
         userExistence = SubscribedUser.find_by(UserName: @userName)
-        emailExistence = SubscribedUser.find_by(EmailID: @email)
-        licenseExistence = SubscribedUser.find_by(LicenseNumber: @license)
-        companyExistence = SubscribedUser.find_by(CompanyName: @companyName)
+        emailExistence = SubscribedUser.find_by(EmailID: @useremail)
+        licenseExistence = SubscribedUser.find_by(LicenseNumber: @userlicense)
+        companyExistence = SubscribedUser.find_by(CompanyName: @usercompanyName)
 
         if(!userExistence.blank?)
           status = false
@@ -102,9 +102,9 @@ class UserRegisterationController < ApplicationController
           @messageString = ''
                           
           #Save User Information
-          @subscribedUser = SubscribedUser.new(UserName: @userName, Password: password, Salt: salt, FirstName: @firstName,
-          LastName: @lastName, EmailID: @email, CompanyName: @companyName, IncorporationType: @incorporationType,
-          ContactNumber: @phoneNumber, LicenseNumber: @license, AuthCodeUsed: isUsed, IsEnabled: 1, IsActivated: 0, 
+          @subscribedUser = SubscribedUser.new(UserName: @userName, Password: password, Salt: salt, FirstName: @userfirstName,
+          LastName: @userlastName, EmailID: @useremail, CompanyName: @usercompanyName, IncorporationType: @userincorporationType,
+          ContactNumber: @userphoneNumber, LicenseNumber: @userlicense, AuthCodeUsed: isUsed, IsEnabled: 1, IsActivated: 0, 
           IsApproved: 0, IsSubscribed: 0, DateCreated: time, DateUpdated: time)        
           @subscribedUser.save 
         
@@ -112,10 +112,10 @@ class UserRegisterationController < ApplicationController
           user = SubscribedUser.find_by(UserName: @userName)
         
           #Save Address Details
-          @userBussAddressDetail = UserAddressDetail.new(UserID: user.ID, AddressType: 'Business', Address: @bussStreetAddress, City: @bussCity, State: @bussState, ZIPCode: @bussZipCode, DateCreated: time, DateUpdated: time)
+          @userBussAddressDetail = UserAddressDetail.new(UserID: user.ID, AddressType: 'Business', Address: @userbussStreetAddress, City: @userbussCity, State: @userbussState, ZIPCode: @userbussZipCode, DateCreated: time, DateUpdated: time)
           @userBussAddressDetail.save
         
-          @userMailAddressDetail = UserAddressDetail.new(UserID: user.ID, AddressType: 'Mailing' , Address: @mailStreetAddress, City: @mailCity, State: @mailState, ZIPCode: @mailZipCode, DateCreated: time, DateUpdated: time)
+          @userMailAddressDetail = UserAddressDetail.new(UserID: user.ID, AddressType: 'Mailing' , Address: @usermailStreetAddress, City: @usermailCity, State: @usermailState, ZIPCode: @usermailZipCode, DateCreated: time, DateUpdated: time)
           @userMailAddressDetail.save
         
           #Create key for the user company to be used by subsicuent user.
@@ -141,20 +141,20 @@ class UserRegisterationController < ApplicationController
           userBussAddressDetails = UserAddressDetail.find_by(UserID: key.UserID, AddressType: 'Business')
           userMailAddressDetails = UserAddressDetail.find_by(UserID: key.UserID, AddressType: 'Mailing')
         
-          @authCode = authCode
-          @companyName = userDetails.CompanyName
-          @incorporationType = userDetails.IncorporationType
-          @bussStreetAddress = userBussAddressDetails.Address
-          @bussCity = userBussAddressDetails.City + ', ' + userBussAddressDetails.State
+          @userauthCode = authCode
+          @usercompanyName = userDetails.CompanyName
+          @userincorporationType = userDetails.IncorporationType
+          @userbussStreetAddress = userBussAddressDetails.Address
+          @userbussCity = userBussAddressDetails.City + ', ' + userBussAddressDetails.State
           #@bussState = userBussAddressDetails.State
-          @bussZipCode = userBussAddressDetails.ZIPCode
-          @mailStreetAddress = userMailAddressDetails.Address
-          @mailCity = userMailAddressDetails.City + ', ' + userMailAddressDetails.State
+          @userbussZipCode = userBussAddressDetails.ZIPCode
+          @usermailStreetAddress = userMailAddressDetails.Address
+          @usermailCity = userMailAddressDetails.City + ', ' + userMailAddressDetails.State
           #@mailState = userMailAddressDetails.State
-          @mailZipCode = userMailAddressDetails.ZIPCode
-          @phoneNumber = userDetails.ContactNumber
-          @email = userDetails.EmailID
-          @license = userDetails.LicenseNumber
+          @usermailZipCode = userMailAddressDetails.ZIPCode
+          @userphoneNumber = userDetails.ContactNumber
+          @useremail = userDetails.EmailID
+          @userlicense = userDetails.LicenseNumber
           @error = ""
         else
           @error = "1"         
