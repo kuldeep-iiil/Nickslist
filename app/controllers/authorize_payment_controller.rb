@@ -57,19 +57,8 @@ class AuthorizePaymentController < ApplicationController
   def relay_response
     sim_response = AuthorizeNet::SIM::Response.new(params)
     if sim_response.approved?
-      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['receipt_url'], :only_path => false , :include => true)
-    else
-      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['error_url'], :only_path => false, :include => true)
-    end
-  end
-
-  # GET
-  # Displays a receipt.
-  def receipt
-    sim_response = AuthorizeNet::SIM::Response.new(params)
-    currentTime = Time.new
-    time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
-    if sim_response.blank?
+      currentTime = Time.new
+      time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
       @invoiceNumber = sim_response.invoice_num
       @transaction_id = sim_response.transaction_id
       @response = sim_response.to_json
@@ -87,7 +76,18 @@ class AuthorizePaymentController < ApplicationController
         @subscribedUser.DateUpdated = time
         @subscribedUser.save
       end
+      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['receipt_url'] + '?in=' + @invoiceNumber)
     else
+      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['error_url'], :only_path => false, :include => true)
+    end
+  end
+
+  # GET
+  # Displays a receipt.
+  def receipt
+    #@invoiceNumber = request.QueryString['in']
+   @invoiceNumber = request.query_parameters["in"]
+    if @invoiceNumber.blank?
       render :text => 'Sorry, we failed to validate your response. Please check that your "Merchant Hash Value" is set correctly in the config/authorize_net.yml file.'
     end
   end
