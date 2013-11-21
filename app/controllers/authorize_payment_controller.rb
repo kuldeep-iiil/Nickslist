@@ -40,7 +40,7 @@ class AuthorizePaymentController < ApplicationController
     @userPaymentDetails.BLTransactionID = @invoiceNumber
     @userPaymentDetails.save
     #https://developer.authorize.net/tools/paramdump/index.php
-    @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :relay_url => "authorize_payment_relay_response_url")
+    @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :relay_url => "AUTHORIZE_NET_CONFIG['relay_response_url']")
     #@sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :relay_url => "http://192.168.0.198:3000/authorize_payment/relay_response")
     
     if(@sim_transaction.blank?)     
@@ -56,10 +56,10 @@ class AuthorizePaymentController < ApplicationController
   # Returns relay response when Authorize.Net POSTs to us.
   def relay_response
     sim_response = AuthorizeNet::SIM::Response.new(params)
-    if sim_response.success?(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['merchant_hash_value'])
-      render :text => sim_response.direct_post_reply("authorize_payment_receipt_url")
+    if sim_response.approved?
+      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['receipt_url'])
     else
-      render :text => sim_response.direct_post_reply("authorize_payment_error_url")
+      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['error_url'])
     end
   end
 
