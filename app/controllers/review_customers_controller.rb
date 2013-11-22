@@ -279,11 +279,13 @@ class ReviewCustomersController < ApplicationController
       @city = @citystateValSplit.at(0).strip()
       @state = @citystateValSplit.at(1).strip()
     end
-
+    
+    if(@firstName != nil && @lastName != nil && @phoneNumber != nil && @streetAddress != nil && @citystateVal != nil && @zipCode != nil)
     @customer = CustomerSearch.find_by_sql("select cs.ID from CustomerSearch cs 
                                   join CustomerAddress ca on cs.AddressID = ca.ID
                                   join CustomerPhone cp on cs.ID = cp.CustomerSearchID 
                                   where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
+    end
     if(!@customer.blank?)
       if(@customer.length > 1)
         @custoemrIDs = @customer.all.collect {|cust| cust.ID}.join(',')

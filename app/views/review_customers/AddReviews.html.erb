@@ -24,6 +24,11 @@
 					$("#divSubQuest7").show();
 				}        		
     			});
+    			
+    			//$("#linkReview").click(function() {
+    				
+    				//$.post( "/review_customers/ListReviews", {hidFirstName: $('#txtFirstName').val(), hidLastName: $('#txtLastName').val(), hidPhoneNumber: $('#txtPhoneNumber').val(), hidStreetAddress: $('#txtStreetAddress').val(), hidselectCity: $('#selectCity').val(), hidZipCode: $('#txtZipCode').val()});
+    			//});
 			});
 		</script>
 
@@ -108,7 +113,7 @@
 											<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Y<%= quset.ID %>" value="Yes" />
 											<label for="radYesNo_Y<%= quset.ID %>">Yes</label>
 											<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_N<%= quset.ID %>" value="No" />
-											<label for="radYesNo_N<%= quset.ID %>">Yes</label>
+											<label for="radYesNo_N<%= quset.ID %>">No</label>
 											<% else %>
 											<input type="radio" name="radYesNo<%= quset.ID %>" id="radYesNo_Bid<%= quset.ID %>" value="Bid process" />
 											<label for="radYesNo_Bid<%= quset.ID %>">Bid process?</label>
