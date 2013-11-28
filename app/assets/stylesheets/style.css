@@ -118,7 +118,7 @@ h1, h2, h3, h4, p {
 	text-transform: uppercase;
 }
 
-input[type=button], input[type=submit]
+input[type=button], input[type=submit], button
 {
 	cursor:pointer;
 }

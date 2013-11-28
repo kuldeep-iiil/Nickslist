@@ -129,6 +129,7 @@
 								</div>
 
 								<% else %>
+								<% if(@reviewAnswers[1].IsYes) == 'Yes' %>
 								<div id="divSubQuest<%= quset.ID %>" class="sub-question">
 
 									<div class="sub-question-area">
@@ -201,7 +202,7 @@
 										</div>
 									</div>
 								</div>
-
+								<% end %>
 								<% end %>
 								<% i = i + 1 %>
 								<% end %>
