@@ -1248,6 +1248,8 @@ input[type=button], input[type=submit]
 	float:right;
 	margin-right:59px;
 	margin-top:22px;
+	min-width:100px;
+	width:auto;
 	}
 
 .jPaginate {

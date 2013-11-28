@@ -85,7 +85,7 @@ class ReviewCustomersController < ApplicationController
                                   join CustomerAddress ca on cs.AddressID = ca.ID
                                   join CustomerPhone cp on cs.ID = cp.CustomerSearchID 
                                   where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
-    if(!@customer.blank?)
+    if(!@customer.blank? && @customer.length > 0)
       @userID = session[:user_id]
       #@review = Review.find_by(UserID: @userID)
       #if(@review.blank?)

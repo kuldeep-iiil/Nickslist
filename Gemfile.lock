@@ -66,11 +66,6 @@ GEM
     mysql (2.9.1)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
-    paypal-sdk-core (0.2.6)
-      multi_json (~> 1.0)
-      xml-simple
-    paypal-sdk-merchant (1.106.0)
-      paypal-sdk-core (~> 0.2.3)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -138,7 +133,6 @@ GEM
     uglifier (2.2.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-    xml-simple (1.1.2)
 
 PLATFORMS
   ruby
@@ -152,7 +146,6 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   mysql
-  paypal-sdk-merchant
   rails (= 4.0.0)
   rest-client
   sass-rails (~> 4.0.0)

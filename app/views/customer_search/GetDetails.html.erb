@@ -87,28 +87,9 @@
 								<% else %>
 								has <%= @reviewCount.to_i %> reviews available
 								<% end %> </h1>
-							<!--<% if(@ChkTermsConditions == 1) %>
-							<form action="<%= review_customers_TermsConditions_url %>" method="post">
-							<% else %>
-							<form action="<%= review_customers_ListReviews_url %>" method="post">
-							<% end %>
-								<h1> <%= params[:txtFirstName] %> <%= params[:txtLastName] %>
-								<% if(@reviewer.length == 1) %>
-								has <%= @reviewer.length %> review available
-								<% else %>
-								has <%= @reviewer.length %> reviews available
-								<% end %> </h1>
-								<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= params[:txtFirstName] %>" />
-								<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
-								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
-								<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
-								<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
-								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= params[:txtPhoneNumber] %>" />
-								<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= review_customers_ListReviews_url %>" />
-								<input type="hidden" name="hidDetailPage" id="hidDetailPage" value="1" />
-								<input type="submit" class="org-bt" name="btnViewReview" id="btnViewReview" value="CLICK HERE TO VIEW REVIEWS" />
-							</form>-->
-							<% if(@isUser.blank? && @isUser.length < 0) %>
+							
+							<% if(@isUser.blank? && @isUser.length == 0) %>
+							
 							<% if(@ChkTermsConditions == 1) %>
 							<form action="<%= review_customers_TermsConditions_url %>" method="post">
 							<% else %>
@@ -125,7 +106,9 @@
 								<input type="hidden" name="hidDetailPage" id="hidDetailPage" value="1" />
 								<input type="submit" class="org-bt" name="btnAddReview" id="btnAddReview" value="ADD REVIEW" />
 							</form>
+							
 							<% else %>
+							
 							<% if(@ChkTermsConditions == 1) %>
 							<form action="<%= review_customers_TermsConditions_url %>" method="post">
 							<% else %>
@@ -151,11 +134,11 @@
 
 							<div style="width:900px; float:left">&nbsp;</div>
 							
-
+					<% if(!@reviewer.blank?) %>
 					<div id="infinite-scroll" class="scroll" data-ui="jscroll-default">
 					
 					<div class="review-block-wrapper">
-					<% if(!@reviewer.blank?) %>
+					
 					<% i = 1 %>
 					<% @reviewer.each do |r| %>
 					<div class="review-block">
@@ -195,14 +178,14 @@
 					</div>
 					<% i = i + 1 %>
 					<% end %>
-					<% end %>
+					
 				</div>
 					<div style="float:left;">
 						<a href="<%= customer_search_LoadReviews_url %>">next</a>
 					</div>
 				</div>
 
-
+				<% end %>
 						</div>
 					</div>
 					

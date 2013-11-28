@@ -18,21 +18,6 @@ USE `nickslist_dev`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `paypal_workerrs`
---
-
-DROP TABLE IF EXISTS `paypal_workerrs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `paypal_workerrs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `AddressTypes`
 --
 
@@ -77,7 +62,7 @@ CREATE TABLE `CustomerSearchLogs` (
   `SearchedDateTime` datetime NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=513 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=541 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +96,7 @@ CREATE TABLE `CustomerPhone` (
   `DateCreated` datetime NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -305,7 +290,7 @@ CREATE TABLE `CustomerReviewJoin` (
   `DateUpdated` datetime NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -323,7 +308,7 @@ CREATE TABLE `Keys` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`),
   UNIQUE KEY `Key_UNIQUE` (`Key`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -384,7 +369,7 @@ CREATE TABLE `ReviewAnswers` (
   KEY `fk_DetailedReviewID` (`ReviewID`),
   KEY `fk_DetailedQuestionID` (`QuestionID`),
   CONSTRAINT `fk_DetailedQuestionID` FOREIGN KEY (`QuestionID`) REFERENCES `ReviewQuestions` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=633 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=752 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -523,21 +508,6 @@ CREATE TABLE `SubscriptionPlans` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `authorize_nets`
---
-
-DROP TABLE IF EXISTS `authorize_nets`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `authorize_nets` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `SubscribedUsers`
 --
 
@@ -568,7 +538,7 @@ CREATE TABLE `SubscribedUsers` (
   UNIQUE KEY `SubscribedUsercol_UNIQUE` (`UserName`),
   UNIQUE KEY `ID_UNIQUE` (`ID`),
   KEY `fk_IncorporationTypeID` (`IncorporationType`)
-) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=206 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -658,7 +628,7 @@ CREATE TABLE `Reviews` (
   UNIQUE KEY `ID_UNIQUE` (`ID`),
   KEY `fk_ReviewsUserID` (`UserID`),
   KEY `fk_ReviewsCustomerID` (`CustomerSearchID`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -685,7 +655,7 @@ CREATE TABLE `UserAddressDetails` (
   KEY `fk_AddressCityID` (`City`),
   KEY `fk_AddressStateID` (`State`),
   CONSTRAINT `fk_AddressUseriD` FOREIGN KEY (`UserID`) REFERENCES `SubscribedUsers` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=329 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=341 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -709,21 +679,6 @@ CREATE TABLE `Plaintiffs` (
   PRIMARY KEY (`ID`),
   KEY `fk_PlaintiffsCityID` (`City`),
   KEY `fk_PlaintiffsStateID` (`State`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `paypal_workers`
---
-
-DROP TABLE IF EXISTS `paypal_workers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `paypal_workers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -808,21 +763,6 @@ CREATE TABLE `UserSubscriptionPlanHistory` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `site_users`
---
-
-DROP TABLE IF EXISTS `site_users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `site_users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `CustomerAddress`
 --
 
@@ -839,22 +779,7 @@ CREATE TABLE `CustomerAddress` (
   `DateUpdated` datetime NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `paypal_interfaces`
---
-
-DROP TABLE IF EXISTS `paypal_interfaces`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `paypal_interfaces` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -872,7 +797,7 @@ CREATE TABLE `CustomerSearch` (
   `SearchDate` datetime NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -948,4 +873,4 @@ CREATE TABLE `CourtProceedings` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-11-28 15:52:03
+-- Dump completed on 2013-11-28 19:51:58

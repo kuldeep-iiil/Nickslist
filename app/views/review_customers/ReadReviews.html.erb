@@ -66,17 +66,18 @@
 						</div>
 						
 						</div>
+						<% if(!@reviewCount.blank? && @reviewCount.to_i > 1) %>
 						<div id="review-pager">
-	
 						<div id="reviewPaging"></div>
-
 						</div>
+						<% end %>
+						
 						<% if(!@reviewQuestion.blank? && !@reviewAnswers.blank?) %>
 						
 							<% i = 1 %>
 							<% @reviewQuestion.each do |quset| %>
 							<% if(quset.ParentID == nil) %>
-							<% if(i == 1)%>
+							<% if(!@reviewCount.blank? && i == 1 && @reviewCount.to_i > 1) %>
 							<div class="question-block-1">
 							<% else %>
 							<div class="question-block">
@@ -94,11 +95,15 @@
 									<div class="question-content-answers">
 										<div class="question-option">
 											<% if(quset.ID != 17) %>
+											<% if(@reviewAnswers[quset.ID - 1].IsYes.blank?) %>
+											NA
+											<% else %>
 											<%= @reviewAnswers[quset.ID - 1].IsYes %>
+											<% end %>
 											<% end %>
 										</div>
 										<div class="question-comment">
-											<% if(quset.ID == 1) %>
+											<% if(quset.ID != 2) %>
 											<%= @reviewAnswers[quset.ID - 1].Comments %>
 											<% end %>
 										</div>
@@ -107,7 +112,7 @@
 							</div>
 							<% i = i + 1 %>
 							<% else %>
-
+							<% if(@reviewAnswers[1].IsYes) == 'Yes' %>
 							<div id="divSubQuest<%= quset.ID %>" class="sub-question">
 
 								<div class="sub-question-area">
@@ -122,6 +127,7 @@
 									</div>
 								</div>
 							</div>
+							<% end %>
 							<% end %>
 							
 							<% end %>
@@ -146,7 +152,7 @@
 		<script type="text/javascript">
 			$(function() {
 				$("#reviewPaging").paginate({
-					count : <%= @reviewCount%>,
+					count : <%= @reviewCount %>,
 					start : <%= @currentIndex %>,
 					display : 5,
 					border : false,
