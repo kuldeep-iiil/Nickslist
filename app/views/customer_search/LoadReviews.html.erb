@@ -1,0 +1,43 @@
+<div class="review-block-wrapper">
+					<% if(!@reviewer.blank? && @reviewer.length > 0) %>
+					<% i = @index.to_i + 1 %>
+					<% @reviewer.each do |r| %>
+					<div class="review-block">
+						<div class="customer-block">
+                    		<div class="customer-photo">
+                        		<div class="serial-number"><%= sprintf('%02d', i) %></div>
+                        	</div>
+                        <div class="customer-detail">
+                        	<div class="customer-name-desc">
+                            	<h1><%= r.DateCreated.strftime('%e %B, %Y') %></h1>
+                            </div>
+                        </div>
+                    	</div>
+						
+						<div class="review-area">
+							<div class="read-review-bt">
+								<% if(@ChkTermsConditions == 1) %>
+								<form action="<%= review_customers_TermsConditions_url %>" method="post">
+									<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= review_customers_ReadReviews_url %>" />
+								<% else %>
+								<form action="<%= review_customers_ReadReviews_url %>" method="post">
+								<% end %>
+									<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
+									<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
+									<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
+									<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+									<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
+									<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
+									<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= r.ID %>" />
+									<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= r.ReviewID %>" />
+									<input type="hidden" name="hidCurrentIndex" id="hidCurrentIndex" value="<%= i %>" />
+									<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewer.length %>" />
+									<input type="submit" name="Submit" id="Submit" value="Read Review" class="reivew-blue-bt" />
+								</form>
+							</div>
+						</div>
+					</div>
+					<% i = i + 1 %>
+					<% end %>
+					<% end %>
+				</div>				

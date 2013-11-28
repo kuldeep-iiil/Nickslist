@@ -1,0 +1,26 @@
+<div id="signin_menu">
+	<form action="<%= admin_AdminLogin_url %>" method="post">
+		<p>
+			<label for="username">Username</label>
+			<input id="textUserName" name="textUserName" required="required" value="<%= @userName %>" title="User Name" tabindex="4" type="text">
+		</p>
+		<p>
+			<label for="password">Password</label>
+			<input id="textPassword" name="textPassword" required="required" value="" title="password" tabindex="5" type="password">
+		</p>
+		<% if(!@errorMessage.blank?) %>
+		<div id="Error">
+			<%= @errorMessage %>
+		</div>
+		<% end %>
+		<p class="remember">
+			<input id="signin_submit" value="Sign in" tabindex="6" type="submit">
+			<!--<input id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
+			<label for="remember">Remember me</label>-->
+		</p>
+
+		<p class="forgot">
+			<a href="<%= admin_requestpassword_url %>" id="resend_password_link">Forgot your password?</a>
+		</p>
+	</form>
+</div>
