@@ -36,18 +36,18 @@
 
 					<div id="review-header">
 						<div id="review-header-left">
-							<h1><%= @firstName %>  <%= @lastName %></h1>
-							<p>
+							<h1><%= @revfirstName %>  <%= @revlastName %></h1>
+							<!--<p>
 								<% if(@reviewCount == '1') %>
 								has <%= @reviewCount %> review available
 								<% else %>
 								has <%= @reviewCount %> reviews available
 								<% end %>
-							</p>
+							</p>-->
 						</div>
 						<div id="review-header-right">
 							<div class="address-desc">
-								<%= @streetAddress %>,	<%= @citystateVal %> <%= @zipCode %>
+								<%= @revstreetAddress %>,	<%= @revcitystateVal %> <%= @revzipCode %>
 							</div>
 							<div class="address-phone">
 								<%= @phoneNumber %>
@@ -58,6 +58,17 @@
 					<div class="review-block-wrapper">
 						<div class="page-heading">
 							Update Review Details
+							<div style="float:right;">
+								<form id="getSelectedReview" action="<%= customer_search_GetDetails_url %>" method="post">
+								<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
+								<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
+								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
+								<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+								<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
+								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
+								<input type="submit" name="Submit" id="Submit" value="GO BACK TO REVIEW LISTING" class="org-bt" />
+								</form>	
+							</div>
 						</div>
 
 						<% if(!@reviewQuestion.blank?) %>

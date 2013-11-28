@@ -38,11 +38,7 @@
 						</div>
 
 						<div class="singup-textarea-right">
-							<% if(!params[:hidDetailPage].blank?) %>
 							<form action="<%= customer_search_GetDetails_url %>" method="post">
-							<% else %>
-								<form action="<%= review_customers_ListReviews_url %>" method="post">
-							<% end %>
 								<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
 								<input type="hidden" name="hidLastName" id="hidLastName" value="<%= @lastName %>" />
 								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" value="<%= @streetAddress %>" />
@@ -64,6 +60,7 @@
 								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" value="<%= @phoneNumber %>" />
 								<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= @reviewerID %>" />
 								<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= @reviewID %>" />
+								<input type="hidden" name="hidCurrentIndex" id="hidCurrentIndex" value="<%= @currentIndex %>" />
 								<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewCount %>" />
 								<input type="hidden" name="hidIsAgree" id="hidIsAgree" value="1" />
 

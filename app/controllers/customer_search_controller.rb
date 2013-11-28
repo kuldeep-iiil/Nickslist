@@ -34,6 +34,23 @@ class CustomerSearchController < ApplicationController
       @streetAddress = params[:txtStreetAddress]
       @zipCode = params[:txtZipCode]
       @citystateVal = params[:selectCity]
+      
+      session[:hidFirstName] = nil
+      session[:hidLastName] = nil
+      session[:hidPhoneNumber] = nil
+      session[:hidStreetAddress] = nil
+      session[:hidselectCity] = nil
+      session[:hidZipCode] = nil
+      session[:indexVal] = nil
+      
+      session[:hidFirstName] = @firstName
+      session[:hidLastName] = @lastName
+      session[:hidPhoneNumber] = @phoneNumber
+      session[:hidStreetAddress] = @streetAddress
+      session[:hidselectCity] = @citystateVal
+      session[:hidZipCode] = @zipCode
+      session[:indexVal] = '0'
+      
       citystateVal = params[:selectCity].to_str.split(',')
       @city = citystateVal.at(0).strip()
       @state = citystateVal.at(1).strip()
@@ -65,15 +82,18 @@ class CustomerSearchController < ApplicationController
       
       #@customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer[0].ID, UserID: currentUserID, IsReviewGiven: 0, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
       if(@customer.length > 1)
-        @custoemrIDs = @customer.all.collect {|cust| cust.ID}.join(',')
+        @custoemrIDs = @customer.collect {|cust| cust.ID}.join(',')
       else
         @custoemrIDs = @customer[0].ID
       end
+      @reviewCount = Review.where(CustomerSearchID: @custoemrIDs).count   
+      @isUser = Review.where(CustomerSearchID: @custoemrIDs.to_s, UserID: currentUserID)
       @reviewer = SubscribedUser.find_by_sql("select user.ID, cust.ID as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
                   from SubscribedUsers user join Reviews rev on user.ID  = rev.UserID
                   join CustomerSearch cust on cust.ID= rev.CustomerSearchID
                    
-                  where cust.ID IN ('" + @custoemrIDs.to_s + "')")          
+                  where cust.ID IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit 0,9")    
+      
       else
         @customerAddress = CustomerAddress.find_by(StreetAddress: @streetAddress, City: @city, State: @state, ZIPCode: @zipCode)
         if(@customerAddress.blank?)
@@ -97,16 +117,23 @@ class CustomerSearchController < ApplicationController
         #@customerReviewJoin.save
       end
       
-      if(!@reviewer.blank?)
-         @currentUser = false
-          @reviewer.each do |revUser|
-            if(revUser.ID == currentUserID)
-              @currentUser = true
-              @reviewerID = revUser.ID
-              @reviewID = revUser.ReviewID
-            end
+      #if(!@reviewer.blank?)
+         #@currentUser = false
+          #@reviewer.each do |revUser|
+           # if(revUser.ID == currentUserID)
+             # @currentUser = true
+              #@reviewerID = revUser.ID
+              #@reviewID = revUser.ReviewID
+            #end
+          #end
+        #end
+      if(!@isUser.blank?)
+          @isUser.each do |revUser|
+          @reviewerID = revUser.UserID
+          @reviewID = revUser.ID
           end
-        end
+      end
+      
       
       #Get settings for Terms & Condition page
       @ChkTermsConditions = 1  
@@ -128,6 +155,58 @@ class CustomerSearchController < ApplicationController
         #@classifieds = @classifieds.to_gmaps4rails
       end
     end    
+  end
+  
+  def LoadReviews    
+    if(!session[:user_id])
+      redirect_to nicks_list_Index_url
+    end
+    
+    if(!session[:hidFirstName].blank?)
+      params[:hidFirstName] = session[:hidFirstName]
+      params[:hidLastName] = session[:hidLastName]
+      params[:hidPhoneNumber] = session[:hidPhoneNumber]
+      params[:hidStreetAddress] = session[:hidStreetAddress]
+      params[:hidselectCity] = session[:hidselectCity]
+      params[:hidZipCode] = session[:hidZipCode]
+    end
+    
+      @index = session[:indexVal] 
+      @index = @index.to_i + 9
+      session[:indexVal] = @index
+
+    @firstName = params[:hidFirstName]
+    @lastName = params[:hidLastName]
+    @phoneNumber = params[:hidPhoneNumber]
+    @streetAddress = params[:hidStreetAddress]
+    @citystateVal = params[:hidselectCity]
+    @zipCode = params[:hidZipCode]
+    @city = ""
+    @state = ""
+    if(!@citystateVal.blank?)
+      @citystateValSplit = @citystateVal.split(',')
+      @city = @citystateValSplit.at(0).strip()
+      @state = @citystateValSplit.at(1).strip()
+    end
+    
+    if(@firstName != nil && @lastName != nil && @phoneNumber != nil && @streetAddress != nil && @citystateVal != nil && @zipCode != nil)
+    @customer = CustomerSearch.find_by_sql("select cs.ID from CustomerSearch cs 
+                                  join CustomerAddress ca on cs.AddressID = ca.ID
+                                  join CustomerPhone cp on cs.ID = cp.CustomerSearchID 
+                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
+    end
+    if(!@customer.blank?)
+      if(@customer.length > 1)
+        @custoemrIDs = @customer.collect {|cust| cust.ID}.join(',')
+      else
+        @custoemrIDs = @customer[0].ID
+      end
+      @reviewer = SubscribedUser.find_by_sql("select user.ID, cust.ID as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
+                  from SubscribedUsers user join Reviews rev on user.ID  = rev.UserID
+                  join CustomerSearch cust on cust.ID= rev.CustomerSearchID
+                   
+                  where cust.ID IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit " + @index.to_s + " ,9") 
+    end
   end
   
   #Get Customer Home details from Zillow API

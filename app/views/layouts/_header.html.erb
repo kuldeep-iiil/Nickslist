@@ -90,7 +90,7 @@
 						</div>
 						<% else %>
 						<div id="logout-reg" class="logout-register">
-							<a href="javascript:void(0);"><%= image_tag("user.png", :alt => "", :width => "40px", :height=> "40px") %><%= session[:user_name] %></a>
+							<a href="javascript:void(0);"><%= image_tag("user.png", :alt => "",:style => "vertical-align:top", :width => "40px", :height=> "40px") %><%= session[:user_name] %></a>
 						</div>
 						<div id="signout_menu">
 							<form action="<%= user_profile_ViewProfile_url %>" method="post">

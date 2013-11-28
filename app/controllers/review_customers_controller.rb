@@ -37,7 +37,7 @@ class ReviewCustomersController < ApplicationController
                                   where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
     if(!@customer.blank?)
       if(@customer.length > 1)
-        @custoemrIDs = @customer.all.collect {|cust| cust.ID}.join(',')
+        @custoemrIDs = @customer.collect {|cust| cust.ID}.join(',')
       else
         @custoemrIDs = @customer[0].ID
       end
@@ -183,11 +183,10 @@ class ReviewCustomersController < ApplicationController
       end
       
     end
-    redirect_to review_customers_ListReviews_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}
+    redirect_to customer_search_GetDetails_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}
   end
 
   def ReadReviews
-
     if(!session[:user_id])
       redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :hidReviewerID => params[:hidReviewerID], :hidReviewID => params[:hidReviewID], :hidReviewCount => params[:hidReviewCount], :redirectUrl => review_customers_ReadReviews_url}
     end
@@ -202,6 +201,9 @@ class ReviewCustomersController < ApplicationController
       params[:hidReviewerID] = flash[:hidReviewerID]
       params[:hidReviewID] = flash[:hidReviewID]
       params[:hidReviewCount] = flash[:hidReviewCount]
+      params[:hidCurrentIndex] = flash[:hidCurrentIndex]
+      params[:hidReviewerID] = flash[:hidReviewerID]
+      params[:hidReviewID] = flash[:hidReviewID]
     end
 
     @firstName = params[:hidFirstName]
@@ -217,13 +219,30 @@ class ReviewCustomersController < ApplicationController
       @city = @citystateValSplit.at(0).strip()
       @state = @citystateValSplit.at(1).strip()
     end
-
+    if(params[:hidCurrentIndex].blank?)
+      @currentIndex = 0
+    else
+      @currentIndex = params[:hidCurrentIndex]
+    end
     @reviewerID = params[:hidReviewerID]
     @reviewID = params[:hidReviewID]
     @reviewCount = params[:hidReviewCount]
     @reviewQuestion = ReviewQuestion.all
 
     if(!@reviewID.blank? && !@reviewerID.blank?)
+      
+       @reviewDetails = CustomerSearch.find_by_sql("select cust.FirstName, cust.LastName, custadd.* 
+                      from CustomerAddress custadd join CustomerSearch cust on cust.AddressID = custadd.ID 
+                      join Reviews rev on cust.ID  = rev.CustomerSearchID 
+                      where rev.ID = '" + @reviewID.to_s + "'") 
+      
+      @revfirstName = @reviewDetails[0].FirstName
+      @revlastName = @reviewDetails[0].LastName
+      @revstreetAddress = @reviewDetails[0].StreetAddress
+      @revcitystateVal = @reviewDetails[0].City + ', ' + @reviewDetails[0].State
+      @revzipCode = @reviewDetails[0].ZIPCode
+      @revphoneNumber = @phoneNumber
+      
       @review = Review.find_by(ID: @reviewID)
       @reviewAnswers = ReviewAnswer.where("ReviewID = (?)", @reviewID)
     #@reviewer = SubscribedUser.find_by(ID: @reviewerID)
@@ -231,10 +250,56 @@ class ReviewCustomersController < ApplicationController
     end
   end
 
+  def PrevNextReview     
+    if(!params[:hidFirstName].blank?)
+      @firstName = params[:hidFirstName]
+      @lastName = params[:hidLastName]
+      @phoneNumber = params[:hidPhoneNumber]
+      @streetAddress = params[:hidStreetAddress]
+      @zipCode = params[:hidZipCode]
+      @citystateVal = params[:hidselectCity]
+      citystateVal = params[:hidselectCity].to_str.split(',')
+      @city = citystateVal.at(0).strip()
+      @state = citystateVal.at(1).strip()
+      @currentIndex = params[:hidCurrentIndex]
+      #@actionVal = params[:hidActionVal]
+    end
+    
+    #if(@actionVal == 'Previous')
+      #@currentIndex = @currentIndex.to_i - 1
+    #else
+      #@currentIndex = @currentIndex.to_i + 1
+    #end
+    @currentIndex = @currentIndex.to_i           
+    @customer = CustomerSearch.find_by_sql("select cs.ID from CustomerSearch cs 
+                                  join CustomerAddress ca on cs.AddressID = ca.ID
+                                  join CustomerPhone cp on cs.ID = cp.CustomerSearchID 
+                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
+    if(!@customer.blank?)
+      if(@customer.length > 1)
+        @custoemrIDs = @customer.collect {|cust| cust.ID}.join(',')
+      else
+        @custoemrIDs = @customer[0].ID
+      end
+      @reviewCount = Review.where(CustomerSearchID: @custoemrIDs).count
+      @reviewer = SubscribedUser.find_by_sql("select user.ID, cust.ID as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
+                  from SubscribedUsers user join Reviews rev on user.ID  = rev.UserID
+                  join CustomerSearch cust on cust.ID= rev.CustomerSearchID
+                   
+                  where cust.ID IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc") 
+      @reviewID = @reviewer[@currentIndex.to_i-1].ReviewID
+      @reviewerID = @reviewer[@currentIndex.to_i-1].ID
+      
+      #redirect_to review_customers_ReadReviews_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :hidReviewCount => @reviewer.length, :hidCurrentIndex => @currentIndex, :hidReviewID => @reviewID, :hidReviewerID => @reviewerID}            
+                  
+    end
+       
+  end
+
   def TermsConditions
 
     if(!session[:user_id])
-      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :redirectUrl => review_customers_ListReviews_url}
+      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :redirectUrl => customer_search_GetDetails_url}
     end
 
     @firstName = params[:hidFirstName]
@@ -247,6 +312,7 @@ class ReviewCustomersController < ApplicationController
     @reviewID = params[:hidReviewID]
     @reviewCount = params[:hidReviewCount]
     @redirectUrl = params[:hidRedirectUrl]
+    @currentIndex = params[:hidCurrentIndex]
   end
 
   def ListReviews
@@ -288,7 +354,7 @@ class ReviewCustomersController < ApplicationController
     end
     if(!@customer.blank?)
       if(@customer.length > 1)
-        @custoemrIDs = @customer.all.collect {|cust| cust.ID}.join(',')
+        @custoemrIDs = @customer.collect {|cust| cust.ID}.join(',')
       else
         @custoemrIDs = @customer[0].ID
       end
@@ -339,10 +405,21 @@ class ReviewCustomersController < ApplicationController
     @reviewQuestion = ReviewQuestion.all
 
     if(!@reviewID.blank? && !@reviewerID.blank?)
+      @reviewDetails = CustomerSearch.find_by_sql("select cust.FirstName, cust.LastName, custadd.* 
+                      from CustomerAddress custadd join CustomerSearch cust on cust.AddressID = custadd.ID 
+                      join Reviews rev on cust.ID  = rev.CustomerSearchID 
+                      where rev.ID = '" + @reviewID + "'")
+      
+      @revfirstName = @reviewDetails[0].FirstName
+      @revlastName = @reviewDetails[0].LastName
+      @revstreetAddress = @reviewDetails[0].StreetAddress
+      @revcitystateVal = @reviewDetails[0].City + ', ' + @reviewDetails[0].State
+      @revzipCode = @reviewDetails[0].ZIPCode
+      @revphoneNumber = @phoneNumber
       @review = Review.find_by(ID: @reviewID)
       @reviewAnswers = ReviewAnswer.where("ReviewID = (?)", @reviewID)
-      @reviewer = SubscribedUser.find_by(ID: @reviewerID)
-      @reviewerAdd = UserAddressDetail.find_by(UserID: @reviewerID)
+      #@reviewer = SubscribedUser.find_by(ID: @reviewerID)
+      #@reviewerAdd = UserAddressDetail.find_by(UserID: @reviewerID)
     end
   end
 
@@ -640,7 +717,7 @@ class ReviewCustomersController < ApplicationController
     @reviewAnswerUpdate.DateUpdated = time
     @reviewAnswerUpdate.save
 
-    redirect_to review_customers_ListReviews_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}
+    redirect_to customer_search_GetDetails_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}
   end
 
 end

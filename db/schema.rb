@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119124855) do
+ActiveRecord::Schema.define(version: 20131125104526) do
 
   create_table "AddressTypes", primary_key: "ID", force: true do |t|
     t.string   "Name",        limit: 20, null: false
@@ -319,6 +319,19 @@ ActiveRecord::Schema.define(version: 20131119124855) do
     t.string   "DateUpdated", limit: 45,  null: false
   end
 
+  create_table "SiteUsers", primary_key: "ID", force: true do |t|
+    t.string   "UserName",    limit: 45, null: false
+    t.string   "Password",    limit: 45, null: false
+    t.string   "FirstName",   limit: 45, null: false
+    t.string   "LastName",    limit: 45, null: false
+    t.string   "EmailID",     limit: 45, null: false
+    t.string   "Role",        limit: 45, null: false
+    t.datetime "DateCreated",            null: false
+    t.datetime "DateUpdated",            null: false
+  end
+
+  add_index "SiteUsers", ["ID"], name: "ID_UNIQUE", unique: true, using: :btree
+
   create_table "States", primary_key: "ID", force: true do |t|
     t.string "Name",        limit: 45, null: false
     t.string "DateCreated", limit: 45, null: false
@@ -338,10 +351,10 @@ ActiveRecord::Schema.define(version: 20131119124855) do
     t.string   "ContactNumber",     limit: 20,  null: false
     t.string   "LicenseNumber",     limit: 20,  null: false
     t.string   "AuthCodeUsed",      limit: 45
-    t.binary   "IsEnabled",         limit: 1,   null: false
-    t.binary   "IsActivated",       limit: 1,   null: false
-    t.binary   "IsApproved",        limit: 1,   null: false
-    t.binary   "IsSubscribed",      limit: 1,   null: false
+    t.boolean  "IsEnabled",                     null: false
+    t.boolean  "IsActivated",                   null: false
+    t.boolean  "IsApproved",                    null: false
+    t.boolean  "IsSubscribed",                  null: false
     t.datetime "DateCreated",                   null: false
     t.datetime "DateUpdated",                   null: false
   end
@@ -390,17 +403,15 @@ ActiveRecord::Schema.define(version: 20131119124855) do
   add_index "UserAuthorization", ["UserID"], name: "fk_AuthUserID", using: :btree
 
   create_table "UserPaymentDetails", primary_key: "ID", force: true do |t|
-    t.string   "UserID",           limit: 100, null: false
-    t.integer  "NumberOfItems",                null: false
-    t.float    "ItemPrice",                    null: false
-    t.string   "PayerID",          limit: 100, null: false
-    t.string   "Token",            limit: 100, null: false
-    t.string   "TransactionID",    limit: 45,  null: false
-    t.binary   "PaymentStatus",    limit: 1
+    t.string   "UserID",            limit: 100, null: false
+    t.string   "TransactionAmount", limit: 100, null: false
+    t.text     "BLTransactionID"
+    t.string   "PayTransactionID",  limit: 45,  null: false
+    t.binary   "PaymentStatus",     limit: 1
     t.datetime "ResponseDateTime"
-    t.text     "ResponseString",               null: false
-    t.datetime "DateCreated",                  null: false
-    t.string   "DateUpdated",      limit: 500, null: false
+    t.text     "ResponseString",                null: false
+    t.datetime "DateCreated",                   null: false
+    t.string   "DateUpdated",       limit: 500, null: false
   end
 
   add_index "UserPaymentDetails", ["ID"], name: "ID_UNIQUE", unique: true, using: :btree
@@ -452,6 +463,11 @@ ActiveRecord::Schema.define(version: 20131119124855) do
   end
 
   create_table "paypal_workers", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "site_users", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end

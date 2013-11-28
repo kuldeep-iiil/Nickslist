@@ -5,133 +5,162 @@
 	</head>
 	<body>
 		<%= render partial: "/layouts/header" %>
-		
+
 		<div id="main-content-wrapper">
 			<div class="browser-center">
 
 				<div id="review-header">
 					<div id="review-header-left">
-						<h1><%= @firstName %>  <%= @lastName %></h1>
-						<p>
-							<% if(@reviewCount == '1') %>
-								has <%= @reviewCount %> review available
-							<% else %>
-								has <%= @reviewCount %> reviews available
-							<% end %>
-						</p>
+						<h1><%= @revfirstName %>  <%= @revlastName %></h1>
+						<!--<p>
+						<% if(@reviewCount == '1') %>
+						has <%= @reviewCount %> review available
+						<% else %>
+						has <%= @reviewCount %> reviews available
+						<% end %>
+						</p>-->
 					</div>
 					<div id="review-header-right">
 						<div class="address-desc">
-							<%= @streetAddress %>,	<%= @citystateVal %> <%= @zipCode %>
+							<%= @revstreetAddress %>,	<%= @revcitystateVal %> <%= @revzipCode %>
 						</div>
 						<div class="address-phone">
 							<%= @phoneNumber %>
 						</div>
 					</div>
-				</div>
-
-				<div id="signup-wrapper">
-					<div id="signup-header">
-						<h1>Review Details</h1>
-						<!--<h2>Please fill the below given form to provide your reviews</h2>
-					</div>
-					<!--<div class="steps"><%= image_tag("step1.jpg", :alt => "") %></div>-->
-
-					<div id="singup-form-area">
-						<table width="100%">
-							
-							<tr>
-								<td>&nbsp;</td>
-							</tr>
-							<tr>
-								<td align="left"><h3>General Info</h3></td>
-							</tr>
-							<tr>
-								<td align="left">
-								<table width="100%">
-									<% @reviewQuestion.each do |quset| %>
-									<% if(quset.Type == "General") %>
-									<% if(quset.ParentID == nil) %>
-									<tr>
-										<td align="left"> 
-											<%= quset.Description %>? 
-											<% if(!@reviewAnswers[quset.ID - 1].IsYes.blank?) %>	
-												(<%= @reviewAnswers[quset.ID - 1].IsYes %>)
-											<% end%>	
-										</td>
-									</tr>
-									<% if(quset.ID == 1) %>
-									<tr>										
-										<% if(!@reviewAnswers[quset.ID - 1].Comments.blank?) %>
-										<td align="left"> <p>Comments : <%= @reviewAnswers[quset.ID - 1].Comments %></p> </td>
-										<% else %>
-										<td align="left"> <p>No Comments</p> </td>
-										<% end %>
-									</tr>
-									<% end %>
-									<tr><td>&nbsp;</td></tr>
-									<% else %>
-									<tr>
-										<td align="left" style="padding-left: 15px"> 
-											<%= quset.Description %>? 
-											<% if(!@reviewAnswers[quset.ID - 1].IsYes.blank?) %>	
-												(<%= @reviewAnswers[quset.ID - 1].IsYes %>)
-											<% end%>	
-											 
-										</td>
-									</tr>
-									
-									<% end %>
-									<% end %>
-									<% end %>
-								</table></td>
-							</tr>
-							<tr>
-								<td>&nbsp;</td>
-							</tr>
-							<tr>
-								<td align="left"><h3>Detailed Info</h3></td>
-							</tr>
-							<tr>
-								<td align="left">
-								<table width="100%">
-									<% @reviewQuestion.each do |quset| %>
-									<% if(quset.Type == "Detailed") %>
-									 
-									<tr>
-										<td align="left">
-										<%= quset.Description %>? 
-										<% if(quset.ID != 17) %>
-										<% if(!@reviewAnswers[quset.ID - 1].IsYes.blank?) %>	
-											(<%= @reviewAnswers[quset.ID - 1].IsYes %>)
-										<% end%>
-										<% end %>						
-										</td>
-									</tr>
-									
-									<tr>
-										<% if(!@reviewAnswers[quset.ID - 1].Comments.blank?) %>
-										<td align="left"> <p>Comments : <%= @reviewAnswers[quset.ID - 1].Comments %></p> </td>
-										<% else %>
-										<td align="left"> <p>No Comments</p> </td>
-										<% end %>
-									</tr>
-									<tr><td>&nbsp;</td></tr>
-									<% end %>
-									<% end %>
-								</table></td>
-							</tr>
-							
-						</table>
-					</div>
 
 				</div>
 
+				<div id="review-block-wrapper">
+
+					<div class="page-heading">
+						Review Details
+						
+						<div style="float:right">
+						<% if(@reviewerID.to_i == session[:user_id]) %>
+							<form action="<%= review_customers_UpdateReviews_url %>" method="post">
+								<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
+								<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
+								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
+								<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+								<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
+								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
+								<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= @reviewerID %>" />
+								<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= @reviewID %>" />
+								<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewCount%>" />
+								<input type="submit" name="Submit" id="Submit" value="UPDATE REVIEW" class="org-bt" />
+							</form>
+						
+						<% end %>
+						</div>
+						<div style="float:right">
+						<form action="<%= customer_search_GetDetails_url %>" method="post">
+							<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
+							<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
+							<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
+							<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+							<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
+							<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
+							<input type="submit" name="Submit" id="Submit" value="GO BACK TO REVIEW LISTING" class="org-bt" />
+						</form>	
+						</div>
+						
+						</div>
+						<div id="review-pager">
+	
+						<div id="reviewPaging"></div>
+
+						</div>
+						<% if(!@reviewQuestion.blank? && !@reviewAnswers.blank?) %>
+						
+							<% i = 1 %>
+							<% @reviewQuestion.each do |quset| %>
+							<% if(quset.ParentID == nil) %>
+							<% if(i == 1)%>
+							<div class="question-block-1">
+							<% else %>
+							<div class="question-block">
+							<% end %>
+								<div class="question-number">
+									<h1><%= i %></h1>
+									<p>
+										Question
+									</p>
+								</div>
+								<div class="question-area">
+									<div class="question-content">
+										<%= quset.Description %>?
+									</div>
+									<div class="question-content-answers">
+										<div class="question-option">
+											<% if(quset.ID != 17) %>
+											<%= @reviewAnswers[quset.ID - 1].IsYes %>
+											<% end %>
+										</div>
+										<div class="question-comment">
+											<% if(quset.ID == 1) %>
+											<%= @reviewAnswers[quset.ID - 1].Comments %>
+											<% end %>
+										</div>
+									</div>
+								</div>
+							</div>
+							<% i = i + 1 %>
+							<% else %>
+
+							<div id="divSubQuest<%= quset.ID %>" class="sub-question">
+
+								<div class="sub-question-area">
+									<div class="question-content">
+										<%= quset.Description %>?
+									</div>
+									<div class="question-content-answers">
+										<div class="question-option">
+											<%= @reviewAnswers[quset.ID - 1].IsYes %>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<% end %>
+							
+							<% end %>
+
+						
+						<% end %>
+
+
+				</div>
 			</div>
 		</div>
-		</div>
-
+		<form id="getSelectedReview" action="<%= review_customers_PrevNextReview_url %>" method="post">
+			<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
+			<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
+			<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
+			<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+			<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
+			<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
+			<input type="hidden" name="hidCurrentIndex" id="hidCurrentIndex" value="<%= @currentIndex %>" />
+		</form>
 		<%= render partial: "/layouts/footer" %>
-
+		<script type="text/javascript">
+			$(function() {
+				$("#reviewPaging").paginate({
+					count : <%= @reviewCount%>,
+					start : <%= @currentIndex %>,
+					display : 5,
+					border : false,
+					text_color : '#888',
+					background_color : '#EEE',
+					text_hover_color : 'black',
+					background_hover_color : '#CFCFCF',
+					images : true,
+					onChange : function(page) {
+						$("#hidCurrentIndex").val(page);
+						$("#getSelectedReview").submit();
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
