@@ -96,7 +96,7 @@ class AuthenticationController < ApplicationController
 
     #@pass = BCrypt::Engine.hash_secret(password, user.Salt)
     #if user && user.Password == BCrypt::Engine.hash_secret(password, user.Salt)
-    if (user && password == password_decryption(user.Password, user.Salt) && user.IsSubscribed)
+    if (user && password == password_decryption(user.Password, user.Salt) && user.IsSubscribed && user.IsActivated)
       user
     else
       nil

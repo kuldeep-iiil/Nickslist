@@ -104,8 +104,8 @@ class UserRegisterationController < ApplicationController
           #Save User Information
           @subscribedUser = SubscribedUser.new(UserName: @userName, Password: password, Salt: salt, FirstName: @userfirstName,
           LastName: @userlastName, EmailID: @useremail, CompanyName: @usercompanyName, IncorporationType: @userincorporationType,
-          ContactNumber: @userphoneNumber, LicenseNumber: @userlicense, AuthCodeUsed: isUsed, IsEnabled: 1, IsActivated: 0, 
-          IsApproved: 0, IsSubscribed: 0, DateCreated: time, DateUpdated: time)        
+          ContactNumber: @userphoneNumber, LicenseNumber: @userlicense, AuthCodeUsed: isUsed, IsActivated: 0, IsSubscribed: 0, 
+          DateCreated: time, DateUpdated: time)        
           @subscribedUser.save 
         
           #Get UserID for User to save user address details.
@@ -161,119 +161,5 @@ class UserRegisterationController < ApplicationController
           @messageString = "Invalid Authcode!"
         end
      end 
-  end
-  
-  def GetSubscription
-    @subscribedUser = SubscribedUser.find_by(EmailID: session[:email_id])
-    itemprice = session[:itemprice]
-    session[:email_id] = nil
-    session[:itemprice] = nil
-    currentTime = Time.new
-    time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
-    
-    @userPaymentDetails = UserPaymentDetail.new(UserID: @subscribedUser.ID, NumberOfItems: 1, ItemPrice: itemprice, PayerID: "", Token: "", TransactionID: "", ResponseString: "",  DateCreated: time, DateUpdated: time)
-    @userPaymentDetails.save
-    
-    @paypal = PaypalInterface.new(@userPaymentDetails)
-    @paypal.express_checkout
-    if @paypal.express_checkout_response.success?
-      @userPaymentDetails.Token = @paypal.express_checkout_response.Token
-      @userPaymentDetails.DateUpdated= time
-      @userPaymentDetails.save
-
-      @paypal_url = @paypal.api.express_checkout_url(@paypal.express_checkout_response)      
-      redirect_to @paypal_url
-    else      
-      @userPaymentDetails.PaymentStatus = 0
-      @userPaymentDetails.ResponseString = @paypal.express_checkout_response.to_json
-      @userPaymentDetails.DateUpdated = time
-      @userPaymentDetails.save
-      redirect_to user_registeration_GetRegister_url, :notice => "Unable to Process Request, contact Nickslist for help!"
-    end
-  end
-  
-  def paid
-    if(!params[:token].blank? && !params[:PayerID].blank?)
-      # success message
-      @token = params[:token]
-      @payerID = params[:PayerID]
-      currentTime = Time.new
-      time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
-      #begin
-        @userPaymentDetails = UserPaymentDetail.find_by(Token: @token)
-        @userPaymentDetails.PayerID = @payerID
-        @userPaymentDetails.DateUpdated = time
-        @userPaymentDetails.save
-        
-        @paypal = PaypalInterface.new(@userPaymentDetails)
-        @response = @paypal.do_express_checkout
-        if(!@response.blank?)
-          @timestamp = @response.Timestamp
-          @responseStatus = @response.Ack
-          currentTime = Time.new
-          time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
-          if(@responseStatus == "Failure")
-            @userPaymentDetails.TransactionID = ""
-            @userPaymentDetails.PaymentStatus = 0
-            @userPaymentDetails.ResponseDateTime = @timestamp
-            @userPaymentDetails.ResponseString = @response.to_json
-            @userPaymentDetails.DateUpdated = time
-            @userPaymentDetails.save
-            redirect_to user_registeration_GetRegister_url, :notice => "Unable to Process Request, contact Nickslist for help!"
-          else
-            
-            @PaymentInfo = @response.DoExpressCheckoutPaymentResponseDetails
-            @transactionID = @PaymentInfo.PaymentInfo[0].TransactionID
-            @PaymentInfo = @PaymentInfo.PaymentInfo[0].GrossAmount            
-            @amount = @PaymentInfo.value
-            @currency = @PaymentInfo.currencyID
-            #@currency = @currency
-
-            @userPaymentDetails.TransactionID = @transactionID
-            @userPaymentDetails.PaymentStatus = 1
-            @userPaymentDetails.ResponseDateTime = @timestamp
-            @userPaymentDetails.ResponseString = @response.to_json
-            @userPaymentDetails.DateUpdated = time
-            @userPaymentDetails.save
-            
-            #Update the isSubscribed to true in User table
-            @subscribedUser = SubscribedUser.find_by(ID: @userPaymentDetails.UserID)
-            @subscribedUser.IsSubscribed = 1
-            @subscribedUser.save
-            
-            #Send Welcome Mail
-            mail = UserMailer.welcome_user(@subscribedUser.EmailID, @subscribedUser.FirstName,  @subscribedUser.LastName, @transactionID, @timestamp, @responseStatus, @amount)
-            mail.deliver
-         end
-        end
-    else
-      # error message
-    end
-  end
-  
-  def Finish
-    redirect_to root_url
-  end
-  
-  def revoked
-    #if order = Order.cancel_payment(params)
-      # set a message for the user
-    #end
-    redirect_to user_registeration_GetRegister_path
-  end
-  
-  def ipn
-    #if (!params[:txn_id].blank? && !params[:token].blank?)
-      #payment.receive_ipn(params)
-     # txn_id = params[:txn_id]
-     # currentTime = Time.new
-     # time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
-     # userPaymentDetails = UserPaymentDetail.find_by(Token: token)
-     # userPaymentDetails.TransactionID = txn_id
-     # userPaymentDetails.UpdatedDate = time
-     # userPaymentDetails.save
-    #else
-      #Payment.create_by_ipn(params)
-    #end
   end
 end
