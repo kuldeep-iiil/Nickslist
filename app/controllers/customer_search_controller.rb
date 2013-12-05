@@ -92,7 +92,7 @@ class CustomerSearchController < ApplicationController
                   from SubscribedUsers user join Reviews rev on user.ID  = rev.UserID
                   join CustomerSearch cust on cust.ID= rev.CustomerSearchID
                    
-                  where cust.ID IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit 0,9")    
+                  where rev.IsApproved = '1' and rev.IsPublished = '1' and cust.ID IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit 0,9")    
       
       else
         @customerAddress = CustomerAddress.find_by(StreetAddress: @streetAddress, City: @city, State: @state, ZIPCode: @zipCode)
@@ -205,7 +205,7 @@ class CustomerSearchController < ApplicationController
                   from SubscribedUsers user join Reviews rev on user.ID  = rev.UserID
                   join CustomerSearch cust on cust.ID= rev.CustomerSearchID
                    
-                  where cust.ID IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit " + @index.to_s + " ,9") 
+                  where rev.IsApproved = '1' and rev.IsPublished = '1' and cust.ID IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit " + @index.to_s + " ,9") 
     end
   end
   
