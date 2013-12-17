@@ -20,7 +20,7 @@ class AuthenticationController < ApplicationController
     @user = user
     if user
       session[:last_seen] = Time.now
-      session[:user_id] = user.ID
+      session[:user_id] = user.id
       #session[:user_name] = user.FirstName + " " + user.LastName
       session[:user_name] = "Hi, " + user.FirstName
       if(@redirectUrl.blank?)

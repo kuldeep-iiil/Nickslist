@@ -31,27 +31,27 @@ class ReviewCustomersController < ApplicationController
     end
     @reviewCount = params[:hidReviewCount]
 
-    @customer = CustomerSearch.find_by_sql("select cs.ID from CustomerSearch cs 
-                                  join CustomerAddress ca on cs.AddressID = ca.ID
-                                  join CustomerPhone cp on cs.ID = cp.CustomerSearchID 
+    @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs 
+                                  join customer_addresses ca on cs.AddressID = ca.id
+                                  join customer_phones cp on cs.id = cp.CustomerSearchID 
                                   where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
     if(!@customer.blank?)
       if(@customer.length > 1)
-        @custoemrIDs = @customer.collect {|cust| cust.ID}.join(',')
+        @custoemrIDs = @customer.collect {|cust| cust.id}.join(',')
       else
-        @custoemrIDs = @customer[0].ID
+        @custoemrIDs = @customer[0].id
       end
-      @reviewer = SubscribedUser.find_by_sql("select user.ID, cust.ID as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
-                  from SubscribedUsers user join Reviews rev on user.ID  = rev.UserID
-                  join CustomerSearch cust on cust.ID= rev.CustomerSearchID
+      @reviewer = SubscribedUser.find_by_sql("select user.id, cust.id as 'CustomerID', rev.id as 'ReviewID', rev.DateCreated 
+                  from subscribed_users user join reviews rev on user.id  = rev.UserID
+                  join customer_searches cust on cust.id= rev.CustomerSearchID
                    
-                  where cust.ID IN ('" + @custoemrIDs.to_s + "')") 
+                  where cust.id IN ('" + @custoemrIDs.to_s + "')") 
     end
 
     if(!@reviewer.blank?)
       @reviewer.each do |revUser|
-        if(revUser.ID == session[:user_id])
-          @reviewerID = revUser.ID
+        if(revUser.id == session[:user_id])
+          @reviewerID = revUser.id
           @reviewID = revUser.ReviewID
           @reviewCount = @reviewer.length
           redirect_to review_customers_UpdateReviews_url, flash:{:hidFirstName => @firstName, :hidLastName => @lastName, :hidPhoneNumber => @phoneNumber, :hidStreetAddress => @streetAddress, :hidselectCity => @citystateVal, :hidZipCode => @zipCode, :hidReviewerID => @reviewerID, :hidReviewID => @reviewID, :hidReviewCount => @reviewCount}
@@ -81,104 +81,104 @@ class ReviewCustomersController < ApplicationController
       @state = @citystateValSplit.at(1).strip()
     end
 
-    @customer = CustomerSearch.find_by_sql("select cs.ID from CustomerSearch cs 
-                                  join CustomerAddress ca on cs.AddressID = ca.ID
-                                  join CustomerPhone cp on cs.ID = cp.CustomerSearchID 
+     @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs 
+                                  join customer_addresses ca on cs.AddressID = ca.id
+                                  join customer_phones cp on cs.id = cp.CustomerSearchID 
                                   where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
     if(!@customer.blank? && @customer.length > 0)
       @userID = session[:user_id]
       #@review = Review.find_by(UserID: @userID)
       #if(@review.blank?)
-      @review = Review.new(UserID: @userID, CustomerSearchID: @customer[0].ID, IsVisible: 0, IsApproved: 0, DateCreated: time, DateUpdated: time)
+      @review = Review.new(UserID: @userID, CustomerSearchID: @customer[0].id, IsPublished: 0, IsApproved: 0, DateCreated: time, DateUpdated: time)
       @review.save
       #end
 
       @quesComment1 = params[:quesComment1]
       @radYesNo1 = params[:radYesNo1]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 1, Comments: @quesComment1, IsYes: @radYesNo1, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 1, Comments: @quesComment1, IsYes: @radYesNo1, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @radYesNo2 = params[:radYesNo2]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 2, Comments: "", IsYes: @radYesNo2, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 2, Comments: "", IsYes: @radYesNo2, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @radYesNo3 = params[:radYesNo3]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 3, Comments: "", IsYes: @radYesNo3, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 3, Comments: "", IsYes: @radYesNo3, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @radYesNo4 = params[:radYesNo4]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 4, Comments: "", IsYes: @radYesNo4, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 4, Comments: "", IsYes: @radYesNo4, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @radYesNo5 = params[:radYesNo5]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 5, Comments: "", IsYes: @radYesNo5, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 5, Comments: "", IsYes: @radYesNo5, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @radYesNo6 = params[:radYesNo6]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 6, Comments: "", IsYes: @radYesNo6, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 6, Comments: "", IsYes: @radYesNo6, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @radYesNo7 = params[:radYesNo7]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 7, Comments: "", IsYes: @radYesNo7, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 7, Comments: "", IsYes: @radYesNo7, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @quesComment8 = params[:quesComment8]
       @radYesNo8 = params[:radYesNo8]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 8, Comments: @quesComment8, IsYes: @radYesNo8, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 8, Comments: @quesComment8, IsYes: @radYesNo8, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @quesComment9 = params[:quesComment9]
       @radYesNo9 = params[:radYesNo9]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 9, Comments: @quesComment9, IsYes: @radYesNo9, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 9, Comments: @quesComment9, IsYes: @radYesNo9, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @quesComment10 = params[:quesComment10]
       @radYesNo10 = params[:radYesNo10]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 10, Comments: @quesComment10, IsYes: @radYesNo10, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 10, Comments: @quesComment10, IsYes: @radYesNo10, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @quesComment11 = params[:quesComment11]
       @radYesNo11 = params[:radYesNo11]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 11, Comments: @quesComment11, IsYes: @radYesNo11, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 11, Comments: @quesComment11, IsYes: @radYesNo11, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @quesComment12 = params[:quesComment12]
       @radYesNo12 = params[:radYesNo12]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 12, Comments: @quesComment12, IsYes: @radYesNo12, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 12, Comments: @quesComment12, IsYes: @radYesNo12, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @quesComment13 = params[:quesComment13]
       @radYesNo13 = params[:radYesNo13]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 13, Comments: @quesComment13, IsYes: @radYesNo13, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 13, Comments: @quesComment13, IsYes: @radYesNo13, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @quesComment14 = params[:quesComment14]
       @radYesNo14 = params[:radYesNo14]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 14, Comments: @quesComment14, IsYes: @radYesNo14, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 14, Comments: @quesComment14, IsYes: @radYesNo14, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @quesComment15 = params[:quesComment15]
       @radYesNo15 = params[:radYesNo15]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 15, Comments: @quesComment15, IsYes: @radYesNo15, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 15, Comments: @quesComment15, IsYes: @radYesNo15, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @quesComment16 = params[:quesComment16]
       @radYesNo16 = params[:radYesNo16]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 16, Comments: @quesComment16, IsYes: @radYesNo16, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 16, Comments: @quesComment16, IsYes: @radYesNo16, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
 
       @quesComment17 = params[:quesComment17]
-      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.ID, QuestionID: 17, Comments: @quesComment17, IsYes: @radYesNo17, DateCreated: time, DateUpdated: time)
+      @reviewAnswer = ReviewAnswer.new(ReviewID: @review.id, QuestionID: 17, Comments: @quesComment17, IsYes: @radYesNo17, DateCreated: time, DateUpdated: time)
       @reviewAnswer.save
       
-      @customerReviewJoin = CustomerReviewJoin.find_by(CustomerSearchID: @customer[0].ID, UserID: @userID)
+      @customerReviewJoin = CustomerReviewJoin.find_by(CustomerSearchID: @customer[0].id, UserID: @userID)
       if(!@customerReviewJoin.blank?)
         @customerReviewJoin.IsReviewGiven = 1
         @customerReviewJoin.DateCreated = time
         @customerReviewJoin.DateUpdated = time      
         @customerReviewJoin.save
       else
-        @customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer[0].ID, UserID: @userID, IsReviewGiven: 1, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
+        @customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer[0].id, UserID: @userID, IsReviewGiven: 1, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
         @customerReviewJoin.save
       end
       
@@ -232,15 +232,15 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewID.blank? && !@reviewerID.blank?)
       
        @reviewDetails = CustomerSearch.find_by_sql("select cust.FirstName, cust.LastName, custadd.* 
-                      from CustomerAddress custadd join CustomerSearch cust on cust.AddressID = custadd.ID 
-                      join Reviews rev on cust.ID  = rev.CustomerSearchID 
-                      where rev.ID = '" + @reviewID.to_s + "'") 
+                      from customer_addresses custadd join customer_searches cust on cust.AddressID = custadd.id 
+                      join reviews rev on cust.ID  = rev.CustomerSearchID 
+                      where rev.id = '" + @reviewID.to_s + "'") 
       
       @revfirstName = @reviewDetails[0].FirstName
       @revlastName = @reviewDetails[0].LastName
       @revstreetAddress = @reviewDetails[0].StreetAddress
       @revcitystateVal = @reviewDetails[0].City + ', ' + @reviewDetails[0].State
-      @revzipCode = @reviewDetails[0].ZIPCode
+      @revzipCode = @reviewDetails[0].ZipCode
       @revphoneNumber = @phoneNumber
       
       @review = Review.find_by(ID: @reviewID)
@@ -271,24 +271,24 @@ class ReviewCustomersController < ApplicationController
       #@currentIndex = @currentIndex.to_i + 1
     #end
     @currentIndex = @currentIndex.to_i           
-    @customer = CustomerSearch.find_by_sql("select cs.ID from CustomerSearch cs 
-                                  join CustomerAddress ca on cs.AddressID = ca.ID
-                                  join CustomerPhone cp on cs.ID = cp.CustomerSearchID 
+     @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs 
+                                  join customer_addresses ca on cs.AddressID = ca.id
+                                  join customer_phones cp on cs.id = cp.CustomerSearchID 
                                   where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
     if(!@customer.blank?)
       if(@customer.length > 1)
-        @custoemrIDs = @customer.collect {|cust| cust.ID}.join(',')
+        @custoemrIDs = @customer.collect {|cust| cust.id}.join(',')
       else
-        @custoemrIDs = @customer[0].ID
+        @custoemrIDs = @customer[0].id
       end
       @reviewCount = Review.where(CustomerSearchID: @custoemrIDs).count
-      @reviewer = SubscribedUser.find_by_sql("select user.ID, cust.ID as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
-                  from SubscribedUsers user join Reviews rev on user.ID  = rev.UserID
-                  join CustomerSearch cust on cust.ID= rev.CustomerSearchID
+      @reviewer = SubscribedUser.find_by_sql("select user.id, cust.ID as 'CustomerID', rev.id as 'ReviewID', rev.DateCreated 
+                  from subscribed_users user join reviews rev on user.id  = rev.UserID
+                  join customer_searches cust on cust.id= rev.CustomerSearchID
                    
-                  where cust.ID IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc") 
+                  where cust.id IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc") 
       @reviewID = @reviewer[@currentIndex.to_i-1].ReviewID
-      @reviewerID = @reviewer[@currentIndex.to_i-1].ID
+      @reviewerID = @reviewer[@currentIndex.to_i-1].id
       
       #redirect_to review_customers_ReadReviews_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :hidReviewCount => @reviewer.length, :hidCurrentIndex => @currentIndex, :hidReviewID => @reviewID, :hidReviewerID => @reviewerID}            
                   
@@ -347,22 +347,22 @@ class ReviewCustomersController < ApplicationController
     end
     
     if(@firstName != nil && @lastName != nil && @phoneNumber != nil && @streetAddress != nil && @citystateVal != nil && @zipCode != nil)
-    @customer = CustomerSearch.find_by_sql("select cs.ID from CustomerSearch cs 
-                                  join CustomerAddress ca on cs.AddressID = ca.ID
-                                  join CustomerPhone cp on cs.ID = cp.CustomerSearchID 
+     @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs 
+                                  join customer_addresses ca on cs.AddressID = ca.id
+                                  join customer_phones cp on cs.id = cp.CustomerSearchID 
                                   where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
     end
     if(!@customer.blank?)
       if(@customer.length > 1)
-        @custoemrIDs = @customer.collect {|cust| cust.ID}.join(',')
+        @custoemrIDs = @customer.collect {|cust| cust.id}.join(',')
       else
-        @custoemrIDs = @customer[0].ID
+        @custoemrIDs = @customer[0].id
       end
-      @reviewer = SubscribedUser.find_by_sql("select user.ID, cust.ID as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
-                  from SubscribedUsers user join Reviews rev on user.ID  = rev.UserID
-                  join CustomerSearch cust on cust.ID= rev.CustomerSearchID
+      @reviewer = SubscribedUser.find_by_sql("select user.id, cust.id as 'CustomerID', rev.id as 'ReviewID', rev.DateCreated 
+                  from subscribed_users user join reviews rev on user.id  = rev.UserID
+                  join customer_searches cust on cust.id= rev.CustomerSearchID
                    
-                  where cust.ID IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc") 
+                  where cust.id IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc") 
     end
 
   end
@@ -406,15 +406,15 @@ class ReviewCustomersController < ApplicationController
 
     if(!@reviewID.blank? && !@reviewerID.blank?)
       @reviewDetails = CustomerSearch.find_by_sql("select cust.FirstName, cust.LastName, custadd.* 
-                      from CustomerAddress custadd join CustomerSearch cust on cust.AddressID = custadd.ID 
-                      join Reviews rev on cust.ID  = rev.CustomerSearchID 
-                      where rev.ID = '" + @reviewID + "'")
+                      from customer_addresses custadd join customer_searches cust on cust.AddressID = custadd.id 
+                      join reviews rev on cust.id  = rev.CustomerSearchID 
+                      where rev.id = '" + @reviewID.to_s + "'")
       
       @revfirstName = @reviewDetails[0].FirstName
       @revlastName = @reviewDetails[0].LastName
       @revstreetAddress = @reviewDetails[0].StreetAddress
       @revcitystateVal = @reviewDetails[0].City + ', ' + @reviewDetails[0].State
-      @revzipCode = @reviewDetails[0].ZIPCode
+      @revzipCode = @reviewDetails[0].ZipCode
       @revphoneNumber = @phoneNumber
       @review = Review.find_by(ID: @reviewID)
       @reviewAnswers = ReviewAnswer.where("ReviewID = (?)", @reviewID)
@@ -461,7 +461,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = @quesComment1
@@ -476,7 +476,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = ""
@@ -491,7 +491,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = ""
@@ -506,7 +506,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = ""
@@ -521,7 +521,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = ""
@@ -536,7 +536,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = ""
@@ -551,7 +551,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = ""
@@ -567,7 +567,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = @quesComment8
@@ -583,7 +583,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = @quesComment9
@@ -599,7 +599,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = @quesComment10
@@ -615,7 +615,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = @quesComment11
@@ -631,7 +631,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = @quesComment12
@@ -647,7 +647,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = @quesComment13
@@ -663,7 +663,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = @quesComment14
@@ -679,7 +679,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = @quesComment15
@@ -695,7 +695,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = @quesComment16
@@ -710,7 +710,7 @@ class ReviewCustomersController < ApplicationController
     if(!@reviewAnswer.blank?)
     @reviewAnswer.destroy
     end
-    @reviewAnswer = ReviewAnswerHistory.new(ID: @reviewAnswerUpdate.ID, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
+    @reviewAnswer = ReviewAnswerHistory.new(id: @reviewAnswerUpdate.id, ReviewID: @reviewAnswerUpdate.ReviewID, QuestionID: @reviewAnswerUpdate.QuestionID, Comments: @reviewAnswerUpdate.Comments, IsYes: @reviewAnswerUpdate.IsYes, DateCreated: @reviewAnswerUpdate.DateCreated, DateUpdated: @reviewAnswerUpdate.DateUpdated)
     @reviewAnswer.save
 
     @reviewAnswerUpdate.Comments = @quesComment17

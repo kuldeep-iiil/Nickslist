@@ -53,7 +53,7 @@
 							<% if(@ChkTermsConditions == 1) %>
 							
 							<div class="read-review-bt">
-								<% if(r.ID == session[:user_id]) %>
+								<% if(r.id == session[:user_id]) %>
 								<form action="<%= review_customers_TermsConditions_url %>" method="post">
 									<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
 									<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
@@ -61,7 +61,7 @@
 									<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
 									<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
 									<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
-									<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= r.ID %>" />
+									<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= r.id %>" />
 									<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= r.ReviewID %>" />
 									<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewer.length %>" />
 									<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= review_customers_UpdateReviews_url %>" />
@@ -77,7 +77,7 @@
 									<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
 									<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
 									<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
-									<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= r.ID %>" />
+									<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= r.id %>" />
 									<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= r.ReviewID %>" />
 									<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewer.length %>" />
 									<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= review_customers_ReadReviews_url %>" />
@@ -88,7 +88,7 @@
     						<% else %>
 							
 							<div class="read-review-bt">
-								<% if(r.ID == session[:user_id]) %>
+								<% if(r.id == session[:user_id]) %>
 								<form action="<%= review_customers_UpdateReviews_url %>" method="post">
 									<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
 									<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
@@ -96,7 +96,7 @@
 									<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
 									<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
 									<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
-									<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= r.ID %>" />
+									<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= r.id %>" />
 									<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= r.ReviewID %>" />
 									<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewer.length %>" />
 									<input type="submit" name="Submit" id="Submit" value="Update Review" class="reivew-blue-bt" />
@@ -111,7 +111,7 @@
 									<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
 									<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
 									<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
-									<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= r.ID %>" />
+									<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= r.id %>" />
 									<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= r.ReviewID %>" />
 									<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewer.length %>" />
 									<input type="submit" name="Submit" id="Submit" value="Read Review" class="reivew-blue-bt" />

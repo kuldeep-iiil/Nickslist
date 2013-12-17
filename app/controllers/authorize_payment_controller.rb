@@ -23,19 +23,19 @@ class AuthorizePaymentController < ApplicationController
     currentTime = Time.new
     time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
     
-    @userPaymentDetails = UserPaymentDetail.new(UserID: @subscribedUser.ID, TransactionAmount: @amount, PayTransactionID: "", ResponseString: "",  DateCreated: time, DateUpdated: time)
+    @userPaymentDetails = UserPaymentDetail.new(UserID: @subscribedUser.id, TransactionAmount: @amount, PayTransactionID: "", ResponseString: "",  DateCreated: time, DateUpdated: time)
     @userPaymentDetails.save
     
     
     
-    @sequence = @userPaymentDetails.ID
+    @sequence = @userPaymentDetails.id
     @apiLoginId = AUTHORIZE_NET_CONFIG['api_login_id']
     @txnKey = AUTHORIZE_NET_CONFIG['api_transaction_key'] 
     #@invoiceNumber = HMAC-MD5(@apiLoginId + "^" + @sequence  + "^" +  @amount  + "^" +  @txnKey + "^")
     
     uid = Time.now.to_i
     @uid = uid.to_s[6,9]
-    @invoiceNumber = @uid + @userPaymentDetails.ID.to_s + @userPaymentDetails.UserID.to_s
+    @invoiceNumber = @uid + @userPaymentDetails.id.to_s + @userPaymentDetails.UserID.to_s
     @userPaymentDetails.TransactionAmount = @amount
     @userPaymentDetails.BLTransactionID = @invoiceNumber
     @userPaymentDetails.save

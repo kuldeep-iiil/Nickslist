@@ -112,17 +112,17 @@ class UserRegisterationController < ApplicationController
           user = SubscribedUser.find_by(UserName: @userName)
         
           #Save Address Details
-          @userBussAddressDetail = UserAddressDetail.new(UserID: user.ID, AddressType: 'Business', Address: @userbussStreetAddress, City: @userbussCity, State: @userbussState, ZIPCode: @userbussZipCode, DateCreated: time, DateUpdated: time)
+          @userBussAddressDetail = UserAddressDetail.new(UserID: user.id, AddressType: 'Business', Address: @userbussStreetAddress, City: @userbussCity, State: @userbussState, ZipCode: @userbussZipCode, DateCreated: time, DateUpdated: time)
           @userBussAddressDetail.save
         
-          @userMailAddressDetail = UserAddressDetail.new(UserID: user.ID, AddressType: 'Mailing' , Address: @usermailStreetAddress, City: @usermailCity, State: @usermailState, ZIPCode: @usermailZipCode, DateCreated: time, DateUpdated: time)
+          @userMailAddressDetail = UserAddressDetail.new(UserID: user.id, AddressType: 'Mailing' , Address: @usermailStreetAddress, City: @usermailCity, State: @usermailState, ZipCode: @usermailZipCode, DateCreated: time, DateUpdated: time)
           @userMailAddressDetail.save
         
           #Create key for the user company to be used by subsicuent user.
           if(keyCode.blank?)
             keyCode = Time.now.to_i
             @keyCode = keyCode
-            @key = Key.new(UserID: user.ID, Key: keyCode , DateCreated: time)
+            @key = Key.new(UserID: user.id, Key: keyCode , DateCreated: time)
             @key.save          
           end
                       

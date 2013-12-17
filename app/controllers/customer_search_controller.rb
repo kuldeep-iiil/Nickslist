@@ -71,58 +71,58 @@ class CustomerSearchController < ApplicationController
       currentTime = Time.new
       time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
            
-      @customer = CustomerSearch.find_by_sql("select cs.ID from CustomerSearch cs 
-                                  join CustomerAddress ca on cs.AddressID = ca.ID
-                                  join CustomerPhone cp on cs.ID = cp.CustomerSearchID 
+      @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs 
+                                  join customer_addresses ca on cs.AddressID = ca.id
+                                  join customer_phones cp on cs.id = cp.CustomerSearchID 
                                   where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
       if(!@customer.blank?)
         
-      @customerSearchLog = CustomerSearchLog.new(CustomerSearchID: @customer[0].ID, SearchedDateTime: time)
+      @customerSearchLog = CustomerSearchLog.new(CustomerSearchID: @customer[0].id, SearchedDateTime: time)
       @customerSearchLog.save
       
-      #@customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer[0].ID, UserID: currentUserID, IsReviewGiven: 0, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
+      #@customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer[0].id, UserID: currentUserID, IsReviewGiven: 0, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
       if(@customer.length > 1)
-        @custoemrIDs = @customer.collect {|cust| cust.ID}.join(',')
+        @custoemrIDs = @customer.collect {|cust| cust.id}.join(',')
       else
-        @custoemrIDs = @customer[0].ID
+        @custoemrIDs = @customer[0].id
       end
       @reviewCount = Review.where(CustomerSearchID: @custoemrIDs).count   
       @isUser = Review.where(CustomerSearchID: @custoemrIDs.to_s, UserID: currentUserID)
-      @reviewer = SubscribedUser.find_by_sql("select user.ID, cust.ID as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
-                  from SubscribedUsers user join Reviews rev on user.ID  = rev.UserID
-                  join CustomerSearch cust on cust.ID= rev.CustomerSearchID
+      @reviewer = SubscribedUser.find_by_sql("select user.id, cust.id as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
+                  from subscribed_users user join reviews rev on user.id  = rev.UserID
+                  join customer_searches cust on cust.id= rev.CustomerSearchID
                    
-                  where rev.IsApproved = '1' and rev.IsPublished = '1' and cust.ID IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit 0,9")    
+                  where rev.IsApproved = '1' and rev.IsPublished = '1' and cust.id IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit 0,9")    
       
       else
-        @customerAddress = CustomerAddress.find_by(StreetAddress: @streetAddress, City: @city, State: @state, ZIPCode: @zipCode)
+        @customerAddress = CustomerAddress.find_by(StreetAddress: @streetAddress, City: @city, State: @state, ZipCode: @zipCode)
         if(@customerAddress.blank?)
-          @customerAddress = CustomerAddress.new(StreetAddress: @streetAddress, City: @city, State: @state, ZIPCode: @zipCode, DateCreated: time, DateUpdated: time)
+          @customerAddress = CustomerAddress.new(StreetAddress: @streetAddress, City: @city, State: @state, ZipCode: @zipCode, DateCreated: time, DateUpdated: time)
           @customerAddress.save
         end
         
-        @customer = CustomerSearch.new(FirstName: @firstName, LastName: @lastName, AddressID: @customerAddress.ID, SearchDate: time)
+        @customer = CustomerSearch.new(FirstName: @firstName, LastName: @lastName, AddressID: @customerAddress.id, SearchDate: time)
         @customer.save
         
         @customerPhone = CustomerPhone.find_by(ContactNumber: @phoneNumber)
         if(@customerPhone.blank?)
-          @customerPhone = CustomerPhone.new(CustomerSearchID: @customer.ID, ContactNumber: @phoneNumber, DateCreated: time)
+          @customerPhone = CustomerPhone.new(CustomerSearchID: @customer.id, ContactNumber: @phoneNumber, DateCreated: time)
           @customerPhone.save
         end
         
-        @customerSearchLog = CustomerSearchLog.new(CustomerSearchID: @customer.ID, SearchedDateTime: time)
+        @customerSearchLog = CustomerSearchLog.new(CustomerSearchID: @customer.id, SearchedDateTime: time)
         @customerSearchLog.save
         
-        #@customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer.ID, UserID: currentUserID, IsReviewGiven: 0, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
+        #@customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer.id, UserID: currentUserID, IsReviewGiven: 0, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
         #@customerReviewJoin.save
       end
       
       #if(!@reviewer.blank?)
          #@currentUser = false
           #@reviewer.each do |revUser|
-           # if(revUser.ID == currentUserID)
+           # if(revUser.id == currentUserID)
              # @currentUser = true
-              #@reviewerID = revUser.ID
+              #@reviewerID = revUser.id
               #@reviewID = revUser.ReviewID
             #end
           #end
@@ -130,7 +130,7 @@ class CustomerSearchController < ApplicationController
       if(!@isUser.blank?)
           @isUser.each do |revUser|
           @reviewerID = revUser.UserID
-          @reviewID = revUser.ID
+          @reviewID = revUser.id
           end
       end
       
@@ -190,22 +190,27 @@ class CustomerSearchController < ApplicationController
     end
     
     if(@firstName != nil && @lastName != nil && @phoneNumber != nil && @streetAddress != nil && @citystateVal != nil && @zipCode != nil)
-    @customer = CustomerSearch.find_by_sql("select cs.ID from CustomerSearch cs 
-                                  join CustomerAddress ca on cs.AddressID = ca.ID
-                                  join CustomerPhone cp on cs.ID = cp.CustomerSearchID 
+    @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs 
+                                  join customer_addresses ca on cs.AddressID = ca.id
+                                  join customer_phones cp on cs.id = cp.CustomerSearchID 
                                   where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
     end
     if(!@customer.blank?)
       if(@customer.length > 1)
-        @custoemrIDs = @customer.collect {|cust| cust.ID}.join(',')
+        @custoemrIDs = @customer.collect {|cust| cust.id}.join(',')
       else
-        @custoemrIDs = @customer[0].ID
+        @custoemrIDs = @customer[0].id
       end
-      @reviewer = SubscribedUser.find_by_sql("select user.ID, cust.ID as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
-                  from SubscribedUsers user join Reviews rev on user.ID  = rev.UserID
-                  join CustomerSearch cust on cust.ID= rev.CustomerSearchID
+      @reviewer = SubscribedUser.find_by_sql("select user.id, cust.id as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
+                  from subscribed_users user join reviews rev on user.id  = rev.UserID
+                  join customer_searches cust on cust.id= rev.CustomerSearchID
                    
-                  where rev.IsApproved = '1' and rev.IsPublished = '1' and cust.ID IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit " + @index.to_s + " ,9") 
+                  where rev.IsApproved = '1' and rev.IsPublished = '1' and cust.id IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit " + @index.to_s + " ,9") 
+      @currentreviewer = SubscribedUser.find_by_sql("select user.id, cust.id as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
+                  from subscribed_users user join reviews rev on user.id  = rev.UserID
+                  join customer_searches cust on cust.id= rev.CustomerSearchID
+                   
+                  where rev.UserID = '" + session[:user_id] + "' and cust.id IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit " + @index.to_s + " ,9") 
     end
   end
   
