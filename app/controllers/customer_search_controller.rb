@@ -74,7 +74,7 @@ class CustomerSearchController < ApplicationController
       @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs 
                                   join customer_addresses ca on cs.AddressID = ca.id
                                   join customer_phones cp on cs.id = cp.CustomerSearchID 
-                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
+                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZipCode = '" + @zipCode + "')")
       if(!@customer.blank?)
         
       @customerSearchLog = CustomerSearchLog.new(CustomerSearchID: @customer[0].id, SearchedDateTime: time)
@@ -86,14 +86,19 @@ class CustomerSearchController < ApplicationController
       else
         @custoemrIDs = @customer[0].id
       end
-      @reviewCount = Review.where(CustomerSearchID: @custoemrIDs).count   
+      @reviewCount = Review.where(CustomerSearchID: @custoemrIDs, IsApproved: 1, IsPublished: 1).count   
       @isUser = Review.where(CustomerSearchID: @custoemrIDs.to_s, UserID: currentUserID)
       @reviewer = SubscribedUser.find_by_sql("select user.id, cust.id as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
                   from subscribed_users user join reviews rev on user.id  = rev.UserID
                   join customer_searches cust on cust.id= rev.CustomerSearchID
-                   
-                  where rev.IsApproved = '1' and rev.IsPublished = '1' and cust.id IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit 0,9")    
+                  where rev.IsApproved = '1' and rev.IsPublished = '1' and cust.id IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit 0, 9")    
       
+     @currentreviewer = SubscribedUser.find_by_sql("select user.id, cust.id as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
+                  from subscribed_users user join reviews rev on user.id  = rev.UserID
+                  join customer_searches cust on cust.id= rev.CustomerSearchID
+                   
+                  where rev.UserID = '" + session[:user_id].to_s + "' and cust.id IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit 0, 9") 
+    
       else
         @customerAddress = CustomerAddress.find_by(StreetAddress: @streetAddress, City: @city, State: @state, ZipCode: @zipCode)
         if(@customerAddress.blank?)
@@ -193,7 +198,7 @@ class CustomerSearchController < ApplicationController
     @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs 
                                   join customer_addresses ca on cs.AddressID = ca.id
                                   join customer_phones cp on cs.id = cp.CustomerSearchID 
-                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
+                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZipCode = '" + @zipCode + "')")
     end
     if(!@customer.blank?)
       if(@customer.length > 1)
@@ -204,14 +209,8 @@ class CustomerSearchController < ApplicationController
       @reviewer = SubscribedUser.find_by_sql("select user.id, cust.id as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
                   from subscribed_users user join reviews rev on user.id  = rev.UserID
                   join customer_searches cust on cust.id= rev.CustomerSearchID
-                   
                   where rev.IsApproved = '1' and rev.IsPublished = '1' and cust.id IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit " + @index.to_s + " ,9") 
-      @currentreviewer = SubscribedUser.find_by_sql("select user.id, cust.id as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated 
-                  from subscribed_users user join reviews rev on user.id  = rev.UserID
-                  join customer_searches cust on cust.id= rev.CustomerSearchID
-                   
-                  where rev.UserID = '" + session[:user_id] + "' and cust.id IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit " + @index.to_s + " ,9") 
-    end
+      end
   end
   
   #Get Customer Home details from Zillow API

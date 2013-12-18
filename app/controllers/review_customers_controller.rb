@@ -34,8 +34,8 @@ class ReviewCustomersController < ApplicationController
     @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs 
                                   join customer_addresses ca on cs.AddressID = ca.id
                                   join customer_phones cp on cs.id = cp.CustomerSearchID 
-                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
-    if(!@customer.blank?)
+                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZipCode = '" + @zipCode + "')")
+      if(!@customer.blank?)
       if(@customer.length > 1)
         @custoemrIDs = @customer.collect {|cust| cust.id}.join(',')
       else
@@ -84,8 +84,8 @@ class ReviewCustomersController < ApplicationController
      @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs 
                                   join customer_addresses ca on cs.AddressID = ca.id
                                   join customer_phones cp on cs.id = cp.CustomerSearchID 
-                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
-    if(!@customer.blank? && @customer.length > 0)
+                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZipCode = '" + @zipCode + "')")
+     if(!@customer.blank? && @customer.length > 0)
       @userID = session[:user_id]
       #@review = Review.find_by(UserID: @userID)
       #if(@review.blank?)
@@ -274,8 +274,8 @@ class ReviewCustomersController < ApplicationController
      @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs 
                                   join customer_addresses ca on cs.AddressID = ca.id
                                   join customer_phones cp on cs.id = cp.CustomerSearchID 
-                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
-    if(!@customer.blank?)
+                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZipCode = '" + @zipCode + "')")
+     if(!@customer.blank?)
       if(@customer.length > 1)
         @custoemrIDs = @customer.collect {|cust| cust.id}.join(',')
       else
@@ -285,8 +285,8 @@ class ReviewCustomersController < ApplicationController
       @reviewer = SubscribedUser.find_by_sql("select user.id, cust.ID as 'CustomerID', rev.id as 'ReviewID', rev.DateCreated 
                   from subscribed_users user join reviews rev on user.id  = rev.UserID
                   join customer_searches cust on cust.id= rev.CustomerSearchID
-                   
-                  where cust.id IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc") 
+                  where rev.IsApproved = '1' and rev.IsPublished = '1' and cust.id IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc") 
+      
       @reviewID = @reviewer[@currentIndex.to_i-1].ReviewID
       @reviewerID = @reviewer[@currentIndex.to_i-1].id
       
@@ -350,8 +350,8 @@ class ReviewCustomersController < ApplicationController
      @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs 
                                   join customer_addresses ca on cs.AddressID = ca.id
                                   join customer_phones cp on cs.id = cp.CustomerSearchID 
-                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZIPCode = '" + @zipCode + "')")
-    end
+                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZipCode = '" + @zipCode + "')")
+     end
     if(!@customer.blank?)
       if(@customer.length > 1)
         @custoemrIDs = @customer.collect {|cust| cust.id}.join(',')

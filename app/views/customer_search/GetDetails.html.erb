@@ -63,13 +63,15 @@
                     </div>
                   	
                     <div class="read-review">
-							<% if @reviewer.blank? %>
+							<% if(@currentreviewer.blank?) %>
 							<% if(@ChkTermsConditions == 1) %>
 							<form action="<%= review_customers_TermsConditions_url %>" method="post">
 							<% else %>
 							<form action="<%= review_customers_AddReviews_url %>" method="post">
-							<% end %>	
+							<% end %>
+								
 								<h1>This customer is not reviewed yet!</h1>
+								
 								<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= params[:txtFirstName] %>" />
 								<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
 								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
