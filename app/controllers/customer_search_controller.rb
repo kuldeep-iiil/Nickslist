@@ -109,7 +109,7 @@ class CustomerSearchController < ApplicationController
         @customer = CustomerSearch.new(FirstName: @firstName, LastName: @lastName, AddressID: @customerAddress.id, SearchDate: time)
         @customer.save
         
-        @customerPhone = CustomerPhone.find_by(ContactNumber: @phoneNumber)
+        @customerPhone = CustomerPhone.find_by(ContactNumber: @phoneNumber, CustomerSearchID: @customer.id)
         if(@customerPhone.blank?)
           @customerPhone = CustomerPhone.new(CustomerSearchID: @customer.id, ContactNumber: @phoneNumber, DateCreated: time)
           @customerPhone.save

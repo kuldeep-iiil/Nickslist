@@ -659,7 +659,7 @@ input[type=button], input[type=submit], button
 
 .home-details-area {
 	width: 400px;
-	height: auto;
+	min-height: 250px;
 	float: left
 }
 .Home-Details-Title {
