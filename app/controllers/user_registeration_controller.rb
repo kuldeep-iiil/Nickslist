@@ -147,11 +147,11 @@ class UserRegisterationController < ApplicationController
           @userbussStreetAddress = userBussAddressDetails.Address
           @userbussCity = userBussAddressDetails.City + ', ' + userBussAddressDetails.State
           #@bussState = userBussAddressDetails.State
-          @userbussZipCode = userBussAddressDetails.ZIPCode
+          @userbussZipCode = userBussAddressDetails.ZipCode
           @usermailStreetAddress = userMailAddressDetails.Address
           @usermailCity = userMailAddressDetails.City + ', ' + userMailAddressDetails.State
           #@mailState = userMailAddressDetails.State
-          @usermailZipCode = userMailAddressDetails.ZIPCode
+          @usermailZipCode = userMailAddressDetails.ZipCode
           @userphoneNumber = userDetails.ContactNumber
           @useremail = userDetails.EmailID
           @userlicense = userDetails.LicenseNumber
