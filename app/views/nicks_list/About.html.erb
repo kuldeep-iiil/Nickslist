@@ -10,59 +10,27 @@
 			<div class="browser-center">
 				<div id="left-content-area">
 					<h1>About Billyslist</h1>
-					<p>
-						BillysList.com was founded by a small business owner who realized that just as good people need to be aware of bad contractors; good contractors need to be aware of bad people.  To Billy, it never seemed right to chalk up the actions of dishonest people to the cost of doing business.  The losses cost small businesses and consumers alike.  A bad customer should never have the last word.
-					</p>
-					<p>
-						As contractors we all know that competition is a good thing.  We also know the benefit of working together through trade organizations and other programs.  This is where the inspiration came from for BillysList.com, because contractors need a voice too.
-					</p>
-					<p>
-						In this internet driven world customers are able to know almost everything about a potential contractor.  The Federal, State and Local Governments regulate and keep tabs on us.  Organizations like the BBB and other consumer based rating services provide valuable information to guide someone in selecting a contractor that best fits them.  All of this takes place because of a few bad apples.  The majority of contractors are good and decent people, but the actions of a few, spread distrust upon all of us.
-					</p>
-					<p>
-						BillysList.com seeks to level the playing field and put contractors at ease with the people they work for.  Just as consumers want to know who they are contracting with and what their track record is, business owners also understand that “it is better to know”.
-					</p>
+					<%= @content %>
 				</div>
 				<div id="right-content-area">
 					<div id="client-testimonials">
 						<h1>Client Testimonials</h1>
 						<ul class="bxslider">
+							<% if(!@testimonialList.blank?) %>
+							<% @testimonialList.each do |test| %>
 							<li>
 								<div class="testimonial-rotating">
 									<div class="testimonial-desc">
-										There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+										<%= test.Comments %>
 									</div>
 									<div class="testimonial-name">
-										<h2>David William</h2>
-										<h3>Plumber</h3>
+										<h2><%= test.FirstName %> <%= test.LastName %></h2>
+										<h3><%= test.Occupation %></h3>
 									</div>
 								</div>
 							</li>
-
-							<li>
-								<div class="testimonial-rotating">
-									<div class="testimonial-desc">
-										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-									</div>
-									<div class="testimonial-name">
-										<h2>David William</h2>
-										<h3>Plumber</h3>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="testimonial-rotating">
-									<div class="testimonial-desc">
-										It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
-									</div>
-									<div class="testimonial-name">
-										<h2>David William</h2>
-										<h3>Plumber</h3>
-									</div>
-								</div>
-							</li>
-
+							<% end %>
+							<% end %>
 						</ul>
 					</div>
 				</div>

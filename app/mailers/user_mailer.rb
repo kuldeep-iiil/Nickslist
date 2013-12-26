@@ -19,5 +19,15 @@ class UserMailer < ActionMailer::Base
       email_subject = "Welcome to Nickslist"        
      #email_message = "Your password is :" + email_password
       mail(to: email_id, subject: email_subject)  
+  end
+  
+  def ContactUs_Email(userfirstName, userlastName, useremail, comments)         
+      @userfirstName = userfirstName
+      @userlastName = userlastName
+      @useremail = useremail
+      @comments = comments   
+      email_subject = "Comment posted by " + userfirstName + " " + userlastName        
+      email_message = "Comments :" + comments
+      mail(to: useremail, subject: email_subject)  
   end  
 end

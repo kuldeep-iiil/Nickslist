@@ -45,16 +45,16 @@
 										<a href="<%= nicks_list_HowItWorks_url %>">How it works </a>
 									</li>
 									<li>
-										<a href="#">FAQ’s</a>
+										<a href="<%= nicks_list_FAQ_url %>">FAQ’s</a>
 									</li>
 									<li>
-										<a href="#">Testimonials</a>
+										<a href="<%= nicks_list_Testimonials_url %>">Testimonials</a>
 									</li>
 									<li>
-										<a href="#">Press Release</a>
+										<a href="<%= nicks_list_PressRelease_url %>">Press Release</a>
 									</li>
 									<li>
-										<a href="#">Contact Us</a>
+										<a href="<%= nicks_list_ContactUs_url %>">Contact Us</a>
 									</li>
 								</ul>
 							</div>
@@ -205,15 +205,13 @@
 					</div>
 					<div class="news-point">
 						<ul class="bxslider">
+							<% if(!@newsUpdatesList.blank?) %>
+							<% @newsUpdatesList.each do |new| %>
 							<li>
-								There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+								<%= new.Comments %>
 							</li>
-							<li>
-								There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-							</li>
-							<li>
-								There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-							</li>
+							<% end %>
+							<% end %>
 						</ul>
 
 					</div>

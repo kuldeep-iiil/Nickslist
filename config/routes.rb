@@ -77,16 +77,16 @@ NicksListProj::Application.routes.draw do
   get "/nicks_list/About"
   post "/nicks_list/HowItWorks"
   get "/nicks_list/HowItWorks"
+  post "/nicks_list/Testimonials"
+  get "/nicks_list/Testimonials"
+  post "/nicks_list/PressRelease"
+  get "/nicks_list/PressRelease"
+  post "/nicks_list/FAQ"
+  get "/nicks_list/FAQ"
+  post "/nicks_list/ContactUs"
+  get "/nicks_list/ContactUs"
   #root to: "/nicks_list/Index"
   root to: "nicks_list#Index"
-  
-  resources :orders do
-    collection do
-      get :paid
-      get :revoked
-      post :ipn
-    end
-  end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

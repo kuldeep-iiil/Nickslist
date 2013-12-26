@@ -10,57 +10,28 @@
 		<div id="main-content-wrapper">
 			<div class="browser-center">
 				<div id="left-content-area">
-					<h1>How It  Works</h1>
-					<p>
-						When you login to BillysList.com you have the option to either rate/review a customer or search for info on a potential customer.
-					</p>
-					<p>
-						If you are searching, you need to provide the name, address and phone number of the person you are searching for.  All records in the BillysList.com data base will be provided as well as important info on the address such as map and tax records.  If the person has not had a review written about them, you will simply be shown a message that this person has not yet been reviewed.  If a review has been written however, you will be provided valuable insights to your potential client.
-					</p>
-					<p>
-						If you are reviewing a customer you will need to provide the name, address and phone number of the person you are reviewing.  Then you will need to answer a short list of questions and provide comments for your answers to help others better understand your experience.  At the end you will be given a chance to provide advice to any contractor who may be come in contact with them.  This will be posted along with the other content you have provided even if your best advice is to run.
-					</p>
+					<h1>How It Works</h1>
+					<%= @content %>
 				</div>
 				<div id="right-content-area">
 					<div id="client-testimonials">
 						<h1>Client Testimonials</h1>
 						<ul class="bxslider">
+							<% if(!@testimonialList.blank?) %>
+							<% @testimonialList.each do |test| %>
 							<li>
 								<div class="testimonial-rotating">
 									<div class="testimonial-desc">
-										There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+										<%= test.Comments %>
 									</div>
 									<div class="testimonial-name">
-										<h2>David William</h2>
-										<h3>Plumber</h3>
+										<h2><%= test.FirstName %> <%= test.LastName %></h2>
+										<h3><%= test.Occupation %></h3>
 									</div>
 								</div>
 							</li>
-
-							<li>
-								<div class="testimonial-rotating">
-									<div class="testimonial-desc">
-										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-									</div>
-									<div class="testimonial-name">
-										<h2>David William</h2>
-										<h3>Plumber</h3>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="testimonial-rotating">
-									<div class="testimonial-desc">
-										It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
-									</div>
-									<div class="testimonial-name">
-										<h2>David William</h2>
-										<h3>Plumber</h3>
-									</div>
-								</div>
-							</li>
-
+							<% end %>
+							<% end %>
 						</ul>
 					</div>
 				</div>

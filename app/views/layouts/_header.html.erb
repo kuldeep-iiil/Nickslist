@@ -30,16 +30,16 @@
 								<a href="<%= nicks_list_HowItWorks_url %>">How it works </a>
 							</li>
 							<li>
-								<a href="#">FAQ’s</a>
+								<a href="<%= nicks_list_FAQ_url %>">FAQ’s</a>
 							</li>
 							<li>
-								<a href="#">Testimonials</a>
+								<a href="<%= nicks_list_Testimonials_url %>">Testimonials</a>
 							</li>
 							<li>
-								<a href="#">Press Release</a>
+								<a href="<%= nicks_list_PressRelease_url %>">Press Release</a>
 							</li>
 							<li>
-								<a href="#">Contact Us</a>
+								<a href="<%= nicks_list_ContactUs_url %>">Contact Us</a>
 							</li>
 						</ul>
 					</div>
@@ -124,33 +124,35 @@
 				</div>
 				<div id="search">
 					<form action="<%= customer_search_GetDetails_url %>" method="post">
-                    	<div class="search-heading">Search Customer Rate/Reviews or Search for info on a potential customer.</div>
-                    	<div id="search-form">
-                        	<div class="form-textbox">
-                        	  <input name="txtFirstName" type="text" required="true" class="textbox-small" id="txtFirstName" placeholder="First Name" value="<%= @firstName %>" />
-                        	</div>
-                        	<div class="form-textbox">
-                        	  <input name="txtLastName" type="text" required="true" class="textbox-small" id="txtLastName" placeholder="Last Name" value="<%= @lastName %>" />
-                        	</div>
-                            <div class="form-textbox">
-                        	  <input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
-                        	</div>
-                          	<div class="form-textbox">
-                       	    	<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" value="<%= @citystateVal %>" />
-                        	</div>
-                        	<div class="form-textbox">
-                        	<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" value="<%= params[:selectState] %>" />-->
-                        	</div>
-                            <div class="form-textbox">
-                        	  <input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
-                        	</div>
-                            <div class="form-textbox">
-                        	  <input name="txtPhoneNumber" type="text" required="true" class="textbox-small" id="txtPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
-                        	</div>
-                            <div class="form-textbox">
-                       	  	  <input type="submit" name="Submit" id="Submit" value="Submit" class="search-bt" />
-                        	</div>
-                        	</form>
+						<div class="search-heading">
+							Search Customer Rate/Reviews or Search for info on a potential customer.
+						</div>
+						<div id="search-form">
+							<div class="form-textbox">
+								<input name="txtFirstName" type="text" required="true" class="textbox-small" id="txtFirstName" placeholder="First Name" value="<%= @firstName %>" />
+							</div>
+							<div class="form-textbox">
+								<input name="txtLastName" type="text" required="true" class="textbox-small" id="txtLastName" placeholder="Last Name" value="<%= @lastName %>" />
+							</div>
+							<div class="form-textbox">
+								<input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
+							</div>
+							<div class="form-textbox">
+								<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+							</div>
+							<div class="form-textbox">
+								<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" value="<%= params[:selectState] %>" />-->
+							</div>
+							<div class="form-textbox">
+								<input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
+							</div>
+							<div class="form-textbox">
+								<input name="txtPhoneNumber" type="text" required="true" class="textbox-small" id="txtPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
+							</div>
+							<div class="form-textbox">
+								<input type="submit" name="Submit" id="Submit" value="Submit" class="search-bt" />
+							</div>
+					</form>
 				</div>
 			</div>
 		</div>
