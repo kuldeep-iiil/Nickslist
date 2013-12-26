@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>NicksList-About Us</title>
+		
+	</head>
+	<body onload="openLogin('<%= @openLogin %>');">
+		<%= render partial: "/layouts/header" %>
+		
+		<div id="main-content-wrapper">
+			<div class="browser-center">
+				<div id="left-content-area">
+					<h1>Press Release</h1>
+					<%= @content %>
+				</div>
+				<div id="right-content-area">
+					<div id="client-testimonials">
+						<h1>Client Testimonials</h1>
+						<ul class="bxslider">
+							<% if(!@testimonialList.blank?) %>
+							<% @testimonialList.each do |test| %>
+							<li>
+								<div class="testimonial-rotating">
+									<div class="testimonial-desc">
+										<%= test.Comments %>
+									</div>
+									<div class="testimonial-name">
+										<h2><%= test.FirstName %> <%= test.LastName %></h2>
+										<h3><%= test.Occupation %></h3>
+									</div>
+								</div>
+							</li>
+							<% end %>
+							<% end %>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<%= render partial: "/layouts/footer" %>
+	</body>
+</html>

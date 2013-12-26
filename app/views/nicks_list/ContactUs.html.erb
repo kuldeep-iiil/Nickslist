@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>NicksList-About Us</title>
+
+	</head>
+	<body onload="openLogin('<%= @openLogin %>');">
+		<%= render partial: "/layouts/header" %>
+
+		<div id="main-content-wrapper">
+			<div class="browser-center">
+				<div id="left-content-area">
+					<h1>Contact Us</h1>
+					<div>&nbsp;</div>
+					<div id="SignupForm">
+									<form action="" method="post">
+										
+										<div class="singup-textarea">
+						<input type="text" name="textFirstName" id="textFirstName" required="true" class="singup-textbox-small" placeholder="First name" value="<%= @userfirstName %>" />
+					</div>
+					<div class="singup-textarea">
+						<input type="text" name="textLastName" id="textLastName" required="true" class="singup-textbox-small" placeholder="Last name" value="<%= @userlastName %>" />
+					</div>
+					<div class="singup-textarea">
+						<input type="text" name="textEmail" id="textEmail" required="true" class="singup-textbox" placeholder="Email" value="<%= @useremail %>" />
+					</div>
+					<div class="singup-textarea">
+						<textarea id="textComment" name="textComment" rows="10" cols="75" placeholder="Comments"></textarea>
+					</div>
+					<div class="singup-textarea">
+						<input type="submit" name="Submit" id="Submit" value="Submit" class="org-bt" />
+					</div>
+					</form>
+					</div>
+				</div>
+				<div id="right-content-area">
+					<div id="client-testimonials">
+						<h1>Client Testimonials</h1>
+						<ul class="bxslider">
+							<% if(!@testimonialList.blank?) %>
+							<% @testimonialList.each do |test| %>
+							<li>
+								<div class="testimonial-rotating">
+									<div class="testimonial-desc">
+										<%= test.Comments %>
+									</div>
+									<div class="testimonial-name">
+										<h2><%= test.FirstName %> <%= test.LastName %></h2>
+										<h3><%= test.Occupation %></h3>
+									</div>
+								</div>
+							</li>
+							<% end %>
+							<% end %>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<%= render partial: "/layouts/footer" %>
+	</body>
+</html>
