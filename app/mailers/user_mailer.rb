@@ -21,13 +21,14 @@ class UserMailer < ActionMailer::Base
       mail(to: email_id, subject: email_subject)  
   end
   
-  def ContactUs_Email(userfirstName, userlastName, useremail, comments)         
+  def ContactUs_Email(userfirstName, userlastName, userEmail, comments, userContact)         
       @userfirstName = userfirstName
       @userlastName = userlastName
-      @useremail = useremail
+      @userEmail = userEmail
+      @userContact = userContact
       @comments = comments   
       email_subject = "Comment posted by " + userfirstName + " " + userlastName        
       email_message = "Comments :" + comments
-      mail(to: useremail, subject: email_subject)  
+      mail(to: 'kuldeep.it2008@gmail.com', subject: email_subject)  
   end  
 end

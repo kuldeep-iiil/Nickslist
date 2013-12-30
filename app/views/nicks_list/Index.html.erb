@@ -29,7 +29,7 @@
 							</p>
 							<h1>703 555 5555</h1>
 							<p>
-								Any Questions <a href="mailto:">Email Us</a>
+								Any Questions <a href="<%= nicks_list_ContactUs_url %>">Email Us</a>
 							</p>
 						</div>
 						<div id="navigation">
@@ -142,25 +142,25 @@
 								</div>
 								<div id="search-form">
 									<div class="form-textbox">
-										<input name="txtFirstName" type="text" required="true" class="textbox-small" id="txtFirstName" placeholder="First Name" />
+										<input name="txtFirstName" type="text" required="true" class="textbox-small" id="txtFirstName" placeholder="First Name" pattern="^[A-Za-z]+[A-Za-z]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Steve]')" oninput="setCustomValidity('')" />
 									</div>
 									<div class="form-textbox">
-										<input name="txtLastName" type="text" required="true" class="textbox-small" id="txtLastName" placeholder="Last Name" />
+										<input name="txtLastName" type="text" required="true" class="textbox-small" id="txtLastName" placeholder="Last Name" pattern="^[A-Za-z]+[A-Za-z]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Steve]')" oninput="setCustomValidity('')" />
 									</div>
 									<div class="form-textbox">
 										<input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" />
 									</div>
 									<div class="form-textbox">
-										<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" />
+										<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" pattern="^[A-Za-z]+,[ ]?[A-Za-z]{2,2}$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle, WA] ')" oninput="setCustomValidity('')" />
 									</div>
 									<div class="form-textbox">
 										<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" />-->
 									</div>
 									<div class="form-textbox">
-										<input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" />
+										<input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" pattern="^[0-9]+[0-9]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [123456] ')" oninput="setCustomValidity('')" />
 									</div>
 									<div class="form-textbox">
-										<input name="txtPhoneNumber" type="text" required="true" class="textbox-small" id="txtPhoneNumber" placeholder="Phone Number" />
+										<input name="txtPhoneNumber" type="text" required="true" class="textbox-small" id="txtPhoneNumber" size="12" placeholder="Phone Number" pattern="^[0-9]{3,3}[-]?[0-9]{3,3}[-]?[0-9]{4,4}$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [1234567890 or 123-456-7890] ')" oninput="setCustomValidity('')" />
 									</div>
 									<div class="form-textbox">
 										<input type="submit" name="Submit" id="Submit" value="Submit" class="search-bt" />

@@ -30,10 +30,10 @@
                     	  <input type="text" name="textCompany" id="textCompany" readonly="readonly" required="true" class="singup-textbox"  placeholder="Name of Company" value="<%= @usercompanyName %>" />
                     	</div>
                         <div class="singup-textarea">
-                    	  <input type="text" name="textFirstName" id="textFirstName" required="true" class="singup-textbox-small"  placeholder="First Name" value="<%= @userfirstName %>" />
+                    	  <input type="text" name="textFirstName" id="textFirstName" required="true" class="singup-textbox-small"  placeholder="First Name" pattern="^[A-Za-z]+[A-Za-z]$" value="<%= @userfirstName %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Steve]')" oninput="setCustomValidity('')" />
                         </div>
                         <div class="singup-textarea">
-                          <input type="text" name="textLastName" id="textLastName" required="true" class="singup-textbox-small"  placeholder="Last Name" value="<%= @userlastName %>" />
+                          <input type="text" name="textLastName" id="textLastName" required="true" class="singup-textbox-small"  placeholder="Last Name" pattern="^[A-Za-z]+[A-Za-z]$" value="<%= @userlastName %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Steve]')" oninput="setCustomValidity('')" />
                     	</div>
                         <div class="singup-textarea">
                     	  <input type="text" readonly="readonly" name="textIncorporationType" id="textIncorporationType" required="true" class="singup-textbox"  placeholder="Type of Incorporation" value="<%= @userincorporationType %>" />

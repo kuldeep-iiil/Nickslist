@@ -85,6 +85,10 @@ NicksListProj::Application.routes.draw do
   get "/nicks_list/FAQ"
   post "/nicks_list/ContactUs"
   get "/nicks_list/ContactUs"
+  post "/nicks_list/PrivacyPolicy"
+  get "/nicks_list/PrivacyPolicy"
+  post "/nicks_list/TermsConditions"
+  get "/nicks_list/TermsConditions"
   #root to: "/nicks_list/Index"
   root to: "nicks_list#Index"
   

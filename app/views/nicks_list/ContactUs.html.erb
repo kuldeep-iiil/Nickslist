@@ -10,34 +10,44 @@
 		<div id="main-content-wrapper">
 			<div class="browser-center">
 				<div id="left-content-area">
-					<h1>Contact Us</h1>
-					<div>&nbsp;</div>
+					<h1><%= @title %></h1>
+					<br />
 					<div id="SignupForm">
-									<form action="" method="post">
-										
-										<div class="singup-textarea">
-						<input type="text" name="textFirstName" id="textFirstName" required="true" class="singup-textbox-small" placeholder="First name" value="<%= @userfirstName %>" />
-					</div>
-					<div class="singup-textarea">
-						<input type="text" name="textLastName" id="textLastName" required="true" class="singup-textbox-small" placeholder="Last name" value="<%= @userlastName %>" />
-					</div>
-					<div class="singup-textarea">
-						<input type="text" name="textEmail" id="textEmail" required="true" class="singup-textbox" placeholder="Email" value="<%= @useremail %>" />
-					</div>
-					<div class="singup-textarea">
-						<textarea id="textComment" name="textComment" rows="10" cols="75" placeholder="Comments"></textarea>
-					</div>
-					<div class="singup-textarea">
-						<input type="submit" name="Submit" id="Submit" value="Submit" class="org-bt" />
-					</div>
-					</form>
+						<form action="" method="post">
+
+							<div class="singup-textarea">
+								<span class="required">*</span>
+								<input type="text" name="textFirstName" id="textFirstName" required="true" class="singup-textbox-small" placeholder="First name" pattern="^[A-Za-z]+[A-Za-z]$" value="<%= @userfirstName %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Steve]')" oninput="setCustomValidity('')" />
+							</div>
+							<div class="singup-textarea">
+								<span class="required">*</span>
+								<input type="text" name="textLastName" id="textLastName" required="true" class="singup-textbox-small" placeholder="Last name" pattern="^[A-Za-z]+[A-Za-z]$" value="<%= @userlastName %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Steve]')" oninput="setCustomValidity('')" />
+							</div>
+							<div class="singup-textarea">
+								<span class="required">*</span>
+								<input type="email" name="textEmail" id="textEmail" required="true" class="singup-textbox-small" placeholder="Email" value="<%= @userEmail %>" />
+							</div>
+							<div class="singup-textarea">
+								<span class="required">&nbsp;</span>
+								<input type="text" name="textContact" id="textConatct" class="singup-textbox-small" placeholder="Contact Number" size="12" pattern="^[0-9]{3,3}[-]?[0-9]{3,3}[-]?[0-9]{4,4}$" value="<%= @userContact %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [1234567890 or 123-456-7890] ')" oninput="setCustomValidity('')" />
+							</div>
+							<div class="singup-textarea">
+								<span class="required">*</span>
+								<textarea id="textComment" name="textComment" required = "required" class="comment-textarea" rows="10" cols="70" placeholder="Comments"></textarea>
+							</div>
+							<div class="singup-textarea">
+								<input type="submit" name="Submit" id="Submit" value="Submit" class="org-bt" />
+							</div>
+						</form>
 					</div>
 				</div>
+				<% if(!@testimonialList.blank?) %>
 				<div id="right-content-area">
 					<div id="client-testimonials">
 						<h1>Client Testimonials</h1>
+						<br />
 						<ul class="bxslider">
-							<% if(!@testimonialList.blank?) %>
+
 							<% @testimonialList.each do |test| %>
 							<li>
 								<div class="testimonial-rotating">
@@ -51,10 +61,11 @@
 								</div>
 							</li>
 							<% end %>
-							<% end %>
+
 						</ul>
 					</div>
 				</div>
+				<% end %>
 			</div>
 		</div>
 

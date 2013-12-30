@@ -1,3 +1,9 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		$("a[href*='" + location.pathname + "']").addClass("active");
+	}); 
+</script>
 <div id="wrapper">
 	<div id="header-wrapper">
 		<div class="browser-center">
@@ -14,14 +20,14 @@
 					</p>
 					<h1>703 555 5555</h1>
 					<p>
-						Any Questions <a href="mailto:">Email Us</a>
+						Any Questions <a href="<%= nicks_list_ContactUs_url %>">Email Us</a>
 					</p>
 				</div>
 				<div id="navigation">
 					<div id="nav">
 						<ul>
-							<li class="first">
-								<a href="<%= root_url %>" class="active">Home</a>
+							<li>
+								<a href="<%= root_url %>">Home</a>
 							</li>
 							<li>
 								<a href="<%= nicks_list_About_url %>">About BillysList</a>
@@ -129,25 +135,25 @@
 						</div>
 						<div id="search-form">
 							<div class="form-textbox">
-								<input name="txtFirstName" type="text" required="true" class="textbox-small" id="txtFirstName" placeholder="First Name" value="<%= @firstName %>" />
+								<input name="txtFirstName" type="text" required="true" class="textbox-small" id="txtFirstName" placeholder="First Name" value="<%= @firstName %>" pattern="^[A-Za-z]+[A-Za-z]$" />
 							</div>
 							<div class="form-textbox">
-								<input name="txtLastName" type="text" required="true" class="textbox-small" id="txtLastName" placeholder="Last Name" value="<%= @lastName %>" />
+								<input name="txtLastName" type="text" required="true" class="textbox-small" id="txtLastName" placeholder="Last Name" value="<%= @lastName %>" pattern="^[A-Za-z]+[A-Za-z]$" />
 							</div>
 							<div class="form-textbox">
 								<input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
 							</div>
 							<div class="form-textbox">
-								<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+								<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" value="<%= @citystateVal %>" pattern="^[A-Za-z]+,[ ]?[A-Za-z]{2,2}$" />
 							</div>
 							<div class="form-textbox">
 								<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" value="<%= params[:selectState] %>" />-->
 							</div>
 							<div class="form-textbox">
-								<input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
+								<input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" value="<%= @zipCode %>" pattern="^[0-9]+[0-9]$" />
 							</div>
 							<div class="form-textbox">
-								<input name="txtPhoneNumber" type="text" required="true" class="textbox-small" id="txtPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
+								<input name="txtPhoneNumber" type="text" required="true" class="textbox-small" id="txtPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" pattern="^[0-9]{3,3}[-]?[0-9]{3,3}[-]?[0-9]{4,4}$" />
 							</div>
 							<div class="form-textbox">
 								<input type="submit" name="Submit" id="Submit" value="Submit" class="search-bt" />

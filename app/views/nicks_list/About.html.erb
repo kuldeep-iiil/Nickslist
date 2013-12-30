@@ -9,14 +9,17 @@
 		<div id="main-content-wrapper">
 			<div class="browser-center">
 				<div id="left-content-area">
-					<h1>About Billyslist</h1>
+					<h1><%= @title %></h1>
+					<br />
 					<%= @content %>
 				</div>
+				<% if(!@testimonialList.blank?) %>
 				<div id="right-content-area">
 					<div id="client-testimonials">
 						<h1>Client Testimonials</h1>
+						<br />
 						<ul class="bxslider">
-							<% if(!@testimonialList.blank?) %>
+							
 							<% @testimonialList.each do |test| %>
 							<li>
 								<div class="testimonial-rotating">
@@ -30,10 +33,11 @@
 								</div>
 							</li>
 							<% end %>
-							<% end %>
+							
 						</ul>
 					</div>
 				</div>
+				<% end %>
 			</div>
 		</div>
 

@@ -8,6 +8,7 @@ class CreateSiteUsers < ActiveRecord::Migration
       t.column :LastName, :string, :limit => 20, :null => false
       t.column :EmailID, :string, :limit => 50, :null => false
       t.column :IsActivated, :boolean, :null => false
+      t.column :IsSuperAdmin, :boolean, :null => false
       t.column :DateCreated, :datetime, :null => false
       t.column :DateUpdated, :datetime, :null => false
     end

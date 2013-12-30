@@ -22,51 +22,71 @@ class NicksListController < ApplicationController
       @reviewCount = flash[:hidReviewCount]
     end 
     
-    @newsUpdatesList = NewsUpdates.all  
+    @newsUpdatesList = NewsUpdates.where(IsEnabled: 1)  
     
   end
   
   def About
-    @siteContent = SiteContent.find_by(Title: "About BillyList")
+    @siteContent = SiteContent.find_by(PageCode: 101)
     if(!@siteContent.blank?)
       @content = @siteContent.Content.html_safe
+      @title = @siteContent.Title.html_safe
     end
     
-    @testimonialList = Testimonials.all
+    @testimonialList = Testimonials.where(IsEnabled: 1)
   end
   
   def HowItWorks
-    @siteContent = SiteContent.find_by(Title: "How It Works")
+    @siteContent = SiteContent.find_by(PageCode: 102)
     if(!@siteContent.blank?)
       @content = @siteContent.Content.html_safe
+      @title = @siteContent.Title.html_safe
     end
     
-    @testimonialList = Testimonials.all
+    @testimonialList = Testimonials.where(IsEnabled: 1)
   end
   
   def Testimonials
-    @testimonialList = Testimonials.all
+    @siteContent = SiteContent.find_by(PageCode: 107)
+    if(!@siteContent.blank?)
+      @content = @siteContent.Content.html_safe
+      @title = @siteContent.Title.html_safe
+    end
+    @testimonialList = Testimonials.where(IsEnabled: 1)
   end
   
   def PressRelease
-    @siteContent = SiteContent.find_by(Title: "Press Release")
+    @siteContent = SiteContent.find_by(PageCode: 103)
     if(!@siteContent.blank?)
       @content = @siteContent.Content.html_safe
+      @title = @siteContent.Title.html_safe
     end
-    @testimonialList = Testimonials.all
+    @testimonialList = Testimonials.where(IsEnabled: 1)
   end
   
   def FAQ
-    @faqList = Faq.all
+    @siteContent = SiteContent.find_by(PageCode: 106)
+    if(!@siteContent.blank?)
+      @content = @siteContent.Content.html_safe
+      @title = @siteContent.Title.html_safe
+    end
+    @faqList = Faq.where(IsEnabled: 1)
+    @testimonialList = Testimonials.where(IsEnabled: 1)
   end
   
   def ContactUs
+    @siteContent = SiteContent.find_by(PageCode: 108)
+    if(!@siteContent.blank?)
+      @content = @siteContent.Content.html_safe
+      @title = @siteContent.Title.html_safe
+    end
     if(!params[:textEmail].blank?)
       @userfirstName = params[:textFirstName]
       @userlastName = params[:textLastName]
-      @useremail = params[:textEmail]
+      @userEmail = params[:textEmail]
       @comments = params[:textComment]
-      mail = UserMailer.ContactUs_Email(@userfirstName, @userlastName, @useremail, @comments)
+      @userContact = params[:textContact]
+      mail = UserMailer.ContactUs_Email(@userfirstName, @userlastName, @useremail, @comments, @userContact)
       mail.deliver        
       redirect_to root_url, :notice => "Your comments post successfully!"
     end
@@ -75,8 +95,25 @@ class NicksListController < ApplicationController
       userDetails = SubscribedUser.find_by(ID: @userID)
       @userfirstName = userDetails.FirstName
       @userlastName = userDetails.LastName
-      @useremail = userDetails.EmailID
+      @userEmail = userDetails.EmailID
+      @userContact = userDetails.ContactNumber
     end
-    @testimonialList = Testimonials.all
+    @testimonialList = Testimonials.where(IsEnabled: 1)
+  end
+  
+  def PrivacyPolicy
+     @siteContent = SiteContent.find_by(PageCode: 104)
+    if(!@siteContent.blank?)
+      @content = @siteContent.Content.html_safe
+      @title = @siteContent.Title.html_safe
+    end
+  end
+  
+  def TermsConditions
+     @siteContent = SiteContent.find_by(PageCode: 105)
+    if(!@siteContent.blank?)
+      @content = @siteContent.Content.html_safe
+      @title = @siteContent.Title.html_safe
+    end
   end
 end
