@@ -161,7 +161,7 @@
 
 												<% else %>
 												<% if(@reviewAnswers[quset.id - 1].IsYes == "Bid process") %>
-												<input type="radio" checked="checked" name="radYesNo<%= quset.id %>" id="radYesNo_Bid<%= quset.ID %>" value="Bid process" />
+												<input type="radio" checked="checked" name="radYesNo<%= quset.id %>" id="radYesNo_Bid<%= quset.id %>" value="Bid process" />
 												<% else %>
 												<input type="radio" name="radYesNo<%= quset.id %>" id="radYesNo_Bid<%= quset.id %>" value="Bid process" />
 
@@ -169,7 +169,7 @@
 												<label for="radYesNo_Bid<%= quset.id %>">Bid process?</label>
 
 												<% if(@reviewAnswers[quset.id - 1].IsYes == "Doing the work") %>
-												<input type="radio" checked="checked" name="radYesNo<%= quset.id %>" id="radYesNo_Work<%= quset.ID %>" value="Doing the work" />
+												<input type="radio" checked="checked" name="radYesNo<%= quset.id %>" id="radYesNo_Work<%= quset.id %>" value="Doing the work" />
 												<% else %>
 												<input type="radio" name="radYesNo<%= quset.id %>" id="radYesNo_Work<%= quset.id %>" value="Doing the work" />
 
