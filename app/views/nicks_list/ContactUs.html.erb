@@ -25,7 +25,7 @@
 							</div>
 							<div class="singup-textarea">
 								<span class="required">*</span>
-								<input type="email" name="textEmail" id="textEmail" required="true" class="singup-textbox-small" placeholder="Email" value="<%= @userEmail %>" />
+								<input type="text" name="textEmail" id="textEmail" required="true" class="singup-textbox-small" placeholder="Email" value="<%= @userEmail %>" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" value="<%= @userContact %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [example@example.com] ')" oninput="setCustomValidity('')" />
 							</div>
 							<div class="singup-textarea">
 								<span class="required">&nbsp;</span>
@@ -33,9 +33,9 @@
 							</div>
 							<div class="singup-textarea">
 								<span class="required">*</span>
-								<textarea id="textComment" name="textComment" required = "required" class="comment-textarea" rows="10" cols="70" placeholder="Comments"></textarea>
+								<textarea id="textComment" name="textComment" required = "required" class="comment-textarea" rows="10" cols="67" placeholder="Comments"></textarea>
 							</div>
-							<div class="singup-textarea">
+							<div class="singup-button">
 								<input type="submit" name="Submit" id="Submit" value="Submit" class="org-bt" />
 							</div>
 						</form>

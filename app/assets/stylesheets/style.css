@@ -910,8 +910,15 @@ input[type=button], input[type=submit], button
 .singup-textarea {
 	width: auto;
 	float: left;
-	margin: 0 5px 5px 0
+	margin: 0 5px 5px 0;
 }
+
+.singup-button {
+	width: 100%;
+	float: left;
+	margin-left: 7px;
+}
+
 .singup-textarea-right {
 	width: auto;
 	float: right;
