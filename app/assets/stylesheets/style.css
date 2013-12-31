@@ -261,7 +261,7 @@ input[type=button], input[type=submit], button
 .textbox {
 	width: 175px;
 	height: 34px;
-	line-height: 34px;
+	line-height: normal;
 	font-size: 13px;
 	color: #666666;
 	border-radius: 5px;
@@ -272,7 +272,7 @@ input[type=button], input[type=submit], button
 .textbox-small {
 	width: 105px;
 	height: 34px;
-	line-height: 34px;
+	line-height: normal;
 	font-size: 13px;
 	color: #666666;
 	border-radius: 5px;
@@ -390,7 +390,7 @@ input[type=button], input[type=submit], button
 	width: 155px;
 	height: 34px;
 	float: left;
-	line-height: 34px;
+	line-height: normal;
 	font-size: 13px;
 	color: #666666;
 	border-radius: 5px;
@@ -921,7 +921,7 @@ input[type=button], input[type=submit], button
 	width: 410px;
 	height: 34px;
 	border: 1px solid #d7d7d7;
-	line-height: 34px;
+	line-height: normal;
 	font-size: 13px;
 	color: #666666;
 	border-radius: 5px;
@@ -932,7 +932,7 @@ input[type=button], input[type=submit], button
 	width: 197px;
 	height: 34px;
 	border: 1px solid #d7d7d7;
-	line-height: 34px;
+	line-height: normal;
 	font-size: 13px;
 	color: #666666;
 	border-radius: 5px;
@@ -1361,6 +1361,7 @@ float:left;
 	background: #ffffff;
 	padding: 0 5px;
 	resize: none;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .faq-comment-bak{
