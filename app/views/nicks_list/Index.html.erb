@@ -198,25 +198,25 @@
 						</p>
 					</div>
 				</div>
-
+				<% if(!@newsUpdatesList.blank?) %>
 				<div id="latest-news">
 					<div class="news-heading">
 						Latest News and Updates
 					</div>
 					<div class="news-point">
 						<ul class="bxslider">
-							<% if(!@newsUpdatesList.blank?) %>
+							
 							<% @newsUpdatesList.each do |new| %>
 							<li>
 								<%= new.Comments %>
 							</li>
 							<% end %>
-							<% end %>
+							
 						</ul>
 
 					</div>
 				</div>
-
+				<% end %>
 			</div>
 		</div>
 
