@@ -4,14 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Post from <%= @userfirstName %> <%= @userlastName %></h1>
-    <h3>First Name : <%= @userfirstName %></h3>
-    <h3>Last Name : <%= @userlastName %></h3>
-    <h3>Email ID : <%= @userEmail %></h3>
-    <h3>Contact Number : <%= @userContact %></h3>
-    <h3>Comments : </h3>
-    <p>
-     <%= @comments %>
-    </p>
+    <h3>Query from <%= @userfirstName %> <%= @userlastName %></h3>   
+    <b>Query Details:</b><br />
+    First Name : <%= @userfirstName %><br />
+    Last Name : <%= @userlastName %><br />
+    Email ID : <%= @userEmail %><br />
+    Contact Number : <%= @userContact %><br />
+    Comments : <%= @comments %>
   </body>
 </html>

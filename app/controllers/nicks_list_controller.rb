@@ -86,9 +86,9 @@ class NicksListController < ApplicationController
       @userEmail = params[:textEmail]
       @comments = params[:textComment]
       @userContact = params[:textContact]
-      mail = UserMailer.ContactUs_Email(@userfirstName, @userlastName, @useremail, @comments, @userContact)
+      mail = UserMailer.ContactUs_Email(@userfirstName, @userlastName, @userEmail, @comments, @userContact)
       mail.deliver        
-      redirect_to root_url, :notice => "Your comments post successfully!"
+      redirect_to nicks_list_ContactUs_url, :notice => "Your comments posted successfully!"
     end
      @userID = session[:user_id]
     if(!@userID.blank?)

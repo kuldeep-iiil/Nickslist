@@ -172,13 +172,15 @@
 
 						<div id="singup-form-area">
 							<div class="singup-form-heading">
-								<h1>Create Your Account</h1>
+								<h1>
+									<div>Create Your Account</div>
+									<% if(@messageString != nil)%>
+                        				<div id="messageDiv" class="error"><%= @messageString %></div>
+                        			<% end %>
+								</h1>
 								<p>
 									Fill the basic information below to create your account
 								</p>
-								<div id="Error">
-									<%= @messageString %>
-								</div>
 							</div>
 
 							<div class="singup-form">

@@ -47,6 +47,37 @@ h1, h2, h3, h4, p {
 	padding: 0
 }
 
+.error {
+	position:absolute;
+	margin-top: -3%;
+	margin-left: 18%;
+	color: red;
+	background: #FCFFB2;
+	font-size: 13px;
+	font-weight: bold;
+	border: 1px solid #e7e7e7;
+	padding: 9px;
+	border-radius: 5px;
+	text-align: center;
+	width: auto;
+	height: 18px;
+}
+.success {
+	position:absolute;
+	margin-top: -3%;
+	margin-left: 30%;
+	color: green;
+	background: #FCFFB2;
+	font-size: 13px;
+	font-weight: bold;
+	border: 1px solid #e7e7e7;
+	padding: 9px;
+	border-radius: 5px;
+	text-align: center;
+	width: auto;
+	height: 18px;
+}
+
 #wrapper {
 	width: 100%;
 	float: left;
@@ -983,6 +1014,14 @@ input[type=button], input[type=submit], button
 	text-transform: uppercase;
 	line-height: 30px;
 }
+.subscription-sub-Title {
+	width: 100%;
+	color: #ff8a00;
+	float: left;
+	font-size: 16px;
+	font-weight: normal;
+	line-height: 30px;
+}
 .subscription-Item {
 	width: 153px;
 	float: left;
@@ -1105,15 +1144,6 @@ input[type=button], input[type=submit], button
 #SignupForm {
 	font-size: 14px;
 	display: block
-}
-
-#Error {
-	color: red;
-	font-size: 14px;
-}
-#Success {
-	color: green;
-	font-size: 14px;
 }
 
 #Term-Condition-area {

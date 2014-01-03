@@ -85,8 +85,9 @@ class ReviewCustomersController < ApplicationController
                                   join customer_addresses ca on cs.AddressID = ca.id
                                   join customer_phones cp on cs.id = cp.CustomerSearchID 
                                   where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZipCode = '" + @zipCode + "')")
+     @userID = session[:user_id]
      if(!@customer.blank? && @customer.length > 0)
-      @userID = session[:user_id]
+      
       #@review = Review.find_by(UserID: @userID)
       #if(@review.blank?)
       @review = Review.new(UserID: @userID, CustomerSearchID: @customer[0].id, IsPublished: 0, IsApproved: 0, DateCreated: time, DateUpdated: time)
@@ -182,8 +183,19 @@ class ReviewCustomersController < ApplicationController
         @customerReviewJoin.save
       end
       
+       @subscribedUser = SubscribedUser.find_by(ID: @userID)
+        
+       @userfirstName = @subscribedUser.FirstName
+       @userlastName = @subscribedUser.LastName
+       @userEmail = @subscribedUser.EmailID
+      
+      mail_to_admin = UserMailer.ReviewAdminNotification(@userfirstName, @userlastName, @userEmail, @firstName, @lastName, @phoneNumber, @streetAddress, @zipCode, @citystateVal)
+      mail_to_admin.deliver 
+          
+      mail_to_user = UserMailer.ReviewUserNotification(@userfirstName, @userlastName, @userEmail, @firstName, @lastName, @phoneNumber, @streetAddress, @zipCode, @citystateVal)
+      mail_to_user.deliver
     end
-    redirect_to customer_search_GetDetails_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}
+    redirect_to customer_search_GetDetails_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}, :notice => "Review added successfully!"
   end
 
   def ReadReviews
@@ -717,7 +729,7 @@ class ReviewCustomersController < ApplicationController
     @reviewAnswerUpdate.DateUpdated = time
     @reviewAnswerUpdate.save
 
-    redirect_to customer_search_GetDetails_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}
+    redirect_to customer_search_GetDetails_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}, :notice => "Review updated successfully!"
   end
 
 end

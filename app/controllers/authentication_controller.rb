@@ -49,7 +49,7 @@ class AuthenticationController < ApplicationController
       else
         encryptedpassword = AuthenticationController.new()
         email_password = encryptedpassword.password_decryption(email.Password, email.Salt)      
-        mail = UserMailer.forgot_password(email_id, email_password)
+        mail = UserMailer.ForgotPassword(email_id, email_password)
         mail.deliver        
         redirect_to root_url, :notice => "Password sent to your Email ID successfully!"
       end

@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>NicksList-About Us</title>
-
-	</head>
-	<body onload="openLogin('<%= @openLogin %>');">
+	<body>
 		<%= render partial: "/layouts/header" %>
 
 		<div id="main-content-wrapper">
 			<div class="browser-center">
 				<div id="left-content-area">
-					<h1><%= @title %></h1>
+					<h1>
+					<div><%= @title %></div> 
+					
+					</h1>
+					<% if(flash[:notice] != nil) %>
+					<div id="messageDiv" class="success">
+						<%= flash[:notice] %>
+					</div>  
+					<% end %>
 					<br />
 					<div id="SignupForm">
-						<form action="" method="post">
+						<form action="<%= nicks_list_ContactUs_url %>" method="post">
 
 							<div class="singup-textarea">
 								<span class="required">*</span>
@@ -25,7 +29,7 @@
 							</div>
 							<div class="singup-textarea">
 								<span class="required">*</span>
-								<input type="text" name="textEmail" id="textEmail" required="true" class="singup-textbox-small" placeholder="Email" value="<%= @userEmail %>" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" value="<%= @userContact %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [example@example.com] ')" oninput="setCustomValidity('')" />
+								<input type="text" name="textEmail" id="textEmail" required="true" class="singup-textbox-small" placeholder="Email" value="<%= @userEmail %>" pattern="^[a-zA-Z0-9]+[.]?[_]?[a-zA-Z0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]{2,3}$" value="<%= @userContact %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [example@example.com] ')" oninput="setCustomValidity('')" />
 							</div>
 							<div class="singup-textarea">
 								<span class="required">&nbsp;</span>

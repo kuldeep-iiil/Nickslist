@@ -2,23 +2,33 @@ class UserMailer < ActionMailer::Base
   skip_before_action :verify_authenticity_token
   default from: 'kuldeep.it2008@gmail.com'
   
-  def forgot_password(email_id, email_password)         
+  def ForgotPassword(email_to, email_password)         
       @password = email_password      
       email_subject = "Password details for the Nicklists login account"        
-      email_message = "Your password is :" + email_password
-      mail(to: email_id, subject: email_subject)  
+      @email_message = "Your password is :" + email_password
+      mail(to: email_to, subject: email_subject)  
   end  
   
-  def welcome_user(email_id, firstName, lastName, transactionID, timestamp, responseStatus, amount)         
-      @firstName = firstName
-      @lastName = lastName
-      @transactionID = transactionID
-      @timestamp = timestamp
-      @responseStatus = responseStatus
-      @amount = amount      
-      email_subject = "Welcome to Nickslist"        
-     #email_message = "Your password is :" + email_password
-      mail(to: email_id, subject: email_subject)  
+  def WelcomeUser(userfirstName, userlastName, userEmail, invoiceNumber, amount)         
+      @userfirstName = userfirstName
+      @userlastName = userlastName
+      @userEmail = userEmail
+      @invoiceNumber = invoiceNumber
+      @amount = amount
+      email_to = userEmail      
+      email_subject = "Welcome to Nickslist!"
+      mail(to: email_to, subject: email_subject)  
+  end
+  
+  def NewUserNotification(userfirstName, userlastName, userEmail, invoiceNumber, amount)         
+      @userfirstName = userfirstName
+      @userlastName = userlastName
+      @userEmail = userEmail
+      @invoiceNumber = invoiceNumber
+      @amount = amount
+      email_to = "kuldeep.it2008@gmail.com"      
+      email_subject = "User Registration Notification mail!"
+      mail(to: email_to, subject: email_subject)  
   end
   
   def ContactUs_Email(userfirstName, userlastName, userEmail, comments, userContact)         
@@ -26,9 +36,39 @@ class UserMailer < ActionMailer::Base
       @userlastName = userlastName
       @userEmail = userEmail
       @userContact = userContact
-      @comments = comments   
-      email_subject = "Comment posted by " + userfirstName + " " + userlastName        
-      email_message = "Comments :" + comments
-      mail(to: 'kuldeep.it2008@gmail.com', subject: email_subject)  
-  end  
+      @comments = comments
+      email_to = "kuldeep.it2008@gmail.com"    
+      email_subject = "Comment posted by " + userfirstName + " " + userlastName
+      mail(to: email_to, subject: email_subject)  
+  end
+  
+  def ReviewAdminNotification(userfirstName, userlastName, userEmail, firstName, lastName, phoneNumber, streetAddress, zipCode, cityState)
+      @userfirstName = userfirstName
+      @userlastName = userlastName
+      @userEmail = userEmail
+      @firstName = firstName
+      @lastName = lastName
+      @phoneNumber = phoneNumber
+      @streetAddress = streetAddress
+      @zipCode = zipCode
+      @cityState = cityState
+      email_to = "kuldeep.it2008@gmail.com"    
+      email_subject = "Review Notification"
+      mail(to: email_to, subject: email_subject)  
+  end 
+  
+  def ReviewUserNotification(userfirstName, userlastName, userEmail, firstName, lastName, phoneNumber, streetAddress, zipCode, cityState)
+      @userfirstName = userfirstName
+      @userlastName = userlastName
+      @userEmail = userEmail
+      @firstName = firstName
+      @lastName = lastName
+      @phoneNumber = phoneNumber
+      @streetAddress = streetAddress
+      @zipCode = zipCode
+      @cityState = cityState
+      email_to = userEmail    
+      email_subject = "Review Notification"
+      mail(to: email_to, subject: email_subject)  
+  end   
 end

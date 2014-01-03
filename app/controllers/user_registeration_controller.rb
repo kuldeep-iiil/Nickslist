@@ -80,22 +80,22 @@ class UserRegisterationController < ApplicationController
 
         if(!userExistence.blank?)
           status = false
-          @messageString="Error Message : Username already exists."  
+          @messageString="Username already exists."  
         end
                   
         if(!emailExistence.blank?)
           status = false
-          @messageString="Error Message : Email ID already exists."  
+          @messageString="Email ID already exists."  
         end
                          
         if(!licenseExistence.blank? && keyCode == nil)
           status = false
-          @messageString="Error Message : License Number already exists."  
+          @messageString="License Number already exists."  
         end    
                          
         if(!companyExistence.blank? && keyCode == nil)
           status = false
-          @messageString="Error Message : Company name already exists."
+          @messageString="Company name already exists."
         end      
         
         if(status == true)

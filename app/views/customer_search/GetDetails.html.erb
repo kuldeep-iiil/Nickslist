@@ -2,215 +2,523 @@
 <html>
 <head>
 	<title>NicksList - Search Customer</title>
-	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script>
-		$(function(){
-			$('#infinite-scroll').jscroll({
-				loadingHtml : '<div style="width:100%;float:left;padding:25px 0px 35px 400px;"><img src="../assets/loading.gif" alt="Loading" /> Loading...</div>', // The HTML to show at the bottom of the content while loading the next set.
-				padding : 20, // The distance from the bottom of the scrollable content at which to trigger the loading of the next set of content.
-				//nextSelector: 'a.jscroll-next:last', // The selector to use for finding the link which contains the href pointing to the next set of content.
-				contentSelector: '.review-block' // A convenience selector for loading only part of the content in the response for the next set of content.
-			});
-		})
-			
-		</script>
-		
+		$(function() {
+			$( "#tabs" ).tabs();
+		});
+	</script>
+	<script>
+			$(function() {
+				$('#infinite-scroll').jscroll({
+					loadingHtml : '<div style="width:100%;float:left;padding:25px 0px 35px 400px;"><img src="../assets/loading.gif" alt="Loading" /> Loading...</div>', // The HTML to show at the bottom of the content while loading the next set.
+					padding : 20, // The distance from the bottom of the scrollable content at which to trigger the loading of the next set of content.
+					//nextSelector: 'a.jscroll-next:last', // The selector to use for finding the link which contains the href pointing to the next set of content.
+					contentSelector : '.review-block' // A convenience selector for loading only part of the content in the response for the next set of content.
+				});
+				$(function() {
+					// setup ul.tabs to work as tabs for each div directly under div.panes
+					$("ul.tabs").tabs("div.panes > div");
+				});
+			})
+
+		</script>  	
 </head>
 <body>
 <div id="wrapper">
-	<%= render partial: "/layouts/header" %>
+	
+    <%= render partial: "/layouts/header" %>
+    
     <div id="main-content-wrapper">
     	
     	<div class="browser-center">
         	<div id="record-search">
             	<div class="search-record-left">
                 	<div class="address-area">
-                    	<div class="customer-name"><%= params[:txtFirstName] %> <%= params[:txtLastName] %></div>
-                        <div class="address-detail"><%= params[:txtStreetAddress]  %><br />
-							<%= params[:selectCity]  %> <%= params[:txtZipCode]  %></div>
-                        <div class="address-phone"><%= params[:txtPhoneNumber]  %></div>
-                    </div>
-                    <div>&nbsp;</div>
-                    <div class="home-details-area">
-                    	<% if(@taxAssessmentYear.present? or @taxAssessment.present? or @yearBuilt.present? or @lotSizeSqFt.present? or @finishedSqFt.present? or @bathrooms.present? or @bedrooms.present? or @lastSoldPrice.present?) %>
-                    <div class="Home-Details-Title">Home Details</div>
-                    <% end %>
-                    <div class="Home-Details-Item">&nbsp;</div><div class="Home-Details-Value">&nbsp;</div>
-                    <% if(@taxAssessmentYear.present?) %>
-                    <div class="Home-Details-Item">Tax Assesment Year </div><div class="Home-Details-Value">: <%= @taxAssessmentYear %></div>
-                    <% end %>
-                    <% if(@taxAssessment.present?) %>
-                    <div class="Home-Details-Item">Tax Assesment </div><div class="Home-Details-Value">: <%= @taxAssessment %></div>
-                    <% end %>
-                    <% if(@yearBuilt.present?) %>
-                    <div class="Home-Details-Item">Year Built </div><div class="Home-Details-Value">: <%= @yearBuilt %></div>
-                    <% end %>
-                    <% if(@lotSizeSqFt.present?) %>
-                    <div class="Home-Details-Item">Lot </div><div class="Home-Details-Value">: <%= @lotSizeSqFt %>sqft</div>
-                    <% end %>
-                    <% if(@finishedSqFt.present?) %>
-                    <div class="Home-Details-Item">Finished </div><div class="Home-Details-Value">: <%= @finishedSqFt %>sqft</div>
-                    <% end %>
-                    <% if(@bathrooms.present?) %>
-                    <div class="Home-Details-Item">Bathrooms </div><div class="Home-Details-Value">: <%= @bathrooms %> Baths</div>
-                    <% end %>
-                    <% if(@bedrooms.present?) %>
-                    <div class="Home-Details-Item">Bedrooms </div><div class="Home-Details-Value">: <%= @bedrooms %> Beds</div>
-                    <% end %>
-                    <% if(@lastSoldPrice.present?) %>
-                    <div class="Home-Details-Item">Last Sold </div><div class="Home-Details-Value">: <%= @lastSoldDate %> for <%= @lastSoldPrice %></div>
-                   	<% end %>
-                    </div>
-                  	
-                    <div class="read-review">
-							<% if(@currentreviewer.blank?) %>
-							<% if(@ChkTermsConditions == 1) %>
-							<form action="<%= review_customers_TermsConditions_url %>" method="post">
-							<% else %>
-							<form action="<%= review_customers_AddReviews_url %>" method="post">
-							<% end %>
-								
-								<h1>This customer is not reviewed yet!</h1>
-								
-								<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= params[:txtFirstName] %>" />
-								<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
-								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
-								<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
-								<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
-								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= params[:txtPhoneNumber] %>" />
-								<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= review_customers_AddReviews_url %>" />
-								<input type="hidden" name="hidDetailPage" id="hidDetailPage" value="1" />
-								<input type="submit" class="org-bt" name="btnAddReview" id="btnAddReview" value="CLICK HERE TO ADD REVIEW" />
-							</form>	
-							<% else %>
-							<h1> <%= params[:txtFirstName] %> <%= params[:txtLastName] %>
-								<% if(@reviewCount.to_i == 1) %>
-								has <%= @reviewCount.to_i %> review available
-								<% else %>
-								has <%= @reviewCount.to_i %> reviews available
-								<% end %> </h1>
-							
-							<% if(@isUser.blank? && @isUser.length == 0) %>
-							
-							<% if(@ChkTermsConditions == 1) %>
-							<form action="<%= review_customers_TermsConditions_url %>" method="post">
-							<% else %>
-							<form action="<%= review_customers_AddReviews_url %>" method="post">
-							<% end %>	
-								<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= params[:txtFirstName] %>" />
-								<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
-								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
-								<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
-								<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
-								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= params[:txtPhoneNumber] %>" />
-								<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewCount %>" />
-								<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= review_customers_AddReviews_url %>" />
-								<input type="hidden" name="hidDetailPage" id="hidDetailPage" value="1" />
-								<input type="submit" class="org-bt" name="btnAddReview" id="btnAddReview" value="ADD REVIEW" />
-							</form>
-							
-							<% else %>
-							
-							<% if(@ChkTermsConditions == 1) %>
-							<form action="<%= review_customers_TermsConditions_url %>" method="post">
-							<% else %>
-							<form action="<%= review_customers_UpdateReviews_url %>" method="post">
-							<% end %>	
-								<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
-								<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
-								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
-								<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
-								<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
-								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
-								<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= @reviewerID %>" />
-								<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= @reviewID %>" />
-								<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewCount %>" />
-								<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= review_customers_UpdateReviews_url %>" />
-								<input type="hidden" name="hidDetailPage" id="hidDetailPage" value="1" />
-								<input type="submit" class="org-bt" name="btnAddReview" id="btnAddReview" value="UPDATE REVIEW" />
-							</form>
-							
-							<% end %>
-
-							<% end %>
-
-							<div style="width:900px; float:left">&nbsp;</div>
-							
-					<% if(!@reviewer.blank?) %>
-					<div id="infinite-scroll" class="scroll" data-ui="jscroll-default">
-					
-					<div class="review-block-wrapper">
-					
-					<% i = 1 %>
-					<% @reviewer.each do |r| %>
-					<div class="review-block">
-						<div class="customer-block">
-                    		<div class="customer-photo">
-                        		<div class="serial-number"><%= sprintf('%02d', i) %></div>
-                        	</div>
-                        <div class="customer-detail">
-                        	<div class="customer-name-desc">
-                            	<h1><%= r.DateCreated.strftime('%e %B, %Y') %></h1>
-                            </div>
-                        </div>
-                    	</div>
-						
-						<div class="review-area">
-							<div class="read-review-bt">
-								<% if(@ChkTermsConditions == 1) %>
-								<form action="<%= review_customers_TermsConditions_url %>" method="post">
-									<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= review_customers_ReadReviews_url %>" />
-								<% else %>
-								<form action="<%= review_customers_ReadReviews_url %>" method="post">
-								<% end %>
-									<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
-									<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
-									<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
-									<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
-									<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
-									<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
-									<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= r.id %>" />
-									<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= r.ReviewID %>" />
-									<input type="hidden" name="hidCurrentIndex" id="hidCurrentIndex" value="<%= i %>" />
-									<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewCount %>" />
-									<input type="submit" name="Submit" id="Submit" value="Read Review" class="reivew-blue-bt" />
-								</form>
+								<div class="customer-name">
+									<%= params[:txtFirstName] %> <%= params[:txtLastName] %>
+								</div>
+								<div class="address-detail">
+									<%= params[:txtStreetAddress]  %>
+									<br />
+									<%= params[:selectCity]  %> <%= params[:txtZipCode]  %>
+								</div>
+								<div class="address-phone">
+									<%= params[:txtPhoneNumber]  %>
+								</div>
 							</div>
-						</div>
-					</div>
-					<% i = i + 1 %>
-					<% end %>
-					
-				</div>
-					<div style="float:left;">
-						<a href="<%= customer_search_LoadReviews_url %>">next</a>
-					</div>
+					<div>&nbsp;</div>
+							<div class="home-details-area">
+								<% if(@taxAssessmentYear.present? or @taxAssessment.present? or @yearBuilt.present? or @lotSizeSqFt.present? or @finishedSqFt.present? or @bathrooms.present? or @bedrooms.present? or @lastSoldPrice.present?) %>
+								<div class="Home-Details-Title">
+									Home Details
+								</div>
+								<% end %>
+								<div class="Home-Details-Item">
+									&nbsp;
+								</div>
+								<div class="Home-Details-Value">
+									&nbsp;
+								</div>
+								<% if(@taxAssessmentYear.present?) %>
+								<div class="Home-Details-Item">
+									Tax Assesment Year
+								</div>
+								<div class="Home-Details-Value">
+									: <%= @taxAssessmentYear %>
+								</div>
+								<% end %>
+								<% if(@taxAssessment.present?) %>
+								<div class="Home-Details-Item">
+									Tax Assesment
+								</div>
+								<div class="Home-Details-Value">
+									: <%= @taxAssessment %>
+								</div>
+								<% end %>
+								<% if(@yearBuilt.present?) %>
+								<div class="Home-Details-Item">
+									Year Built
+								</div>
+								<div class="Home-Details-Value">
+									: <%= @yearBuilt %>
+								</div>
+								<% end %>
+								<% if(@lotSizeSqFt.present?) %>
+								<div class="Home-Details-Item">
+									Lot
+								</div>
+								<div class="Home-Details-Value">
+									: <%= @lotSizeSqFt %>sqft
+								</div>
+								<% end %>
+								<% if(@finishedSqFt.present?) %>
+								<div class="Home-Details-Item">
+									Finished
+								</div>
+								<div class="Home-Details-Value">
+									: <%= @finishedSqFt %>sqft
+								</div>
+								<% end %>
+								<% if(@bathrooms.present?) %>
+								<div class="Home-Details-Item">
+									Bathrooms
+								</div>
+								<div class="Home-Details-Value">
+									: <%= @bathrooms %> Baths
+								</div>
+								<% end %>
+								<% if(@bedrooms.present?) %>
+								<div class="Home-Details-Item">
+									Bedrooms
+								</div>
+								<div class="Home-Details-Value">
+									: <%= @bedrooms %> Beds
+								</div>
+								<% end %>
+								<% if(@lastSoldPrice.present?) %>
+								<div class="Home-Details-Item">
+									Last Sold
+								</div>
+								<div class="Home-Details-Value">
+									: <%= @lastSoldDate %> for <%= @lastSoldPrice %>
+								</div>
+								<% end %>
+							</div>
+
+								<div class="clear">&nbsp;</div>
+								<div id="tabs">
+<ul>
+<li><a href="#tabs-1">Reviews</a></li>
+<li><a href="#tabs-2">Public Records</a></li>
+</ul>
+<div id="tabs-1">
+
+											<div class="content">
+												<% if(@currentreviewer.blank?) %>
+												<% if(@ChkTermsConditions == 1) %>
+												<form action="<%= review_customers_TermsConditions_url %>" method="post">
+													<% else %>
+													<form action="<%= review_customers_AddReviews_url %>" method="post">
+														<% end %>
+
+														<h1>
+															<div>This customer is not reviewed yet!</div>
+															<% if(flash[:notice] != nil) %>
+																<div id="messageDiv" class="success">
+																	<%= flash[:notice] %>
+																</div> 
+															<% end %>
+														</h1>
+
+														<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= params[:txtFirstName] %>" />
+														<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
+														<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
+														<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
+														<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
+														<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= params[:txtPhoneNumber] %>" />
+														<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= review_customers_AddReviews_url %>" />
+														<input type="hidden" name="hidDetailPage" id="hidDetailPage" value="1" />
+														<input type="submit" class="org-bt" name="btnAddReview" id="btnAddReview" value="CLICK HERE TO ADD REVIEW" />
+													</form>
+													<% else %>
+													<h1> 
+													<div>
+													<%= params[:txtFirstName] %> <%= params[:txtLastName] %>
+													
+													<% if(@reviewCount.to_i == 1) %>
+													has <%= @reviewCount.to_i %> review available
+													<% else %>
+													has <%= @reviewCount.to_i %> reviews available
+													<% end %> 
+													</div>
+													<% if(flash[:notice] != nil) %>
+																<div id="messageDiv" class="success">
+																	<%= flash[:notice] %>
+																</div> 
+															<% end %>
+													</h1>
+
+													<% if(@isUser.blank? && @isUser.length == 0) %>
+
+													<% if(@ChkTermsConditions == 1) %>
+													<form action="<%= review_customers_TermsConditions_url %>" method="post">
+														<% else %>
+														<form action="<%= review_customers_AddReviews_url %>" method="post">
+															<% end %>
+															<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= params[:txtFirstName] %>" />
+															<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
+															<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
+															<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
+															<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
+															<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= params[:txtPhoneNumber] %>" />
+															<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewCount %>" />
+															<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= review_customers_AddReviews_url %>" />
+															<input type="hidden" name="hidDetailPage" id="hidDetailPage" value="1" />
+															<input type="submit" class="org-bt" name="btnAddReview" id="btnAddReview" value="ADD REVIEW" />
+														</form>
+
+														<% else %>
+
+														<% if(@ChkTermsConditions == 1) %>
+														<form action="<%= review_customers_TermsConditions_url %>" method="post">
+															<% else %>
+															<form action="<%= review_customers_UpdateReviews_url %>" method="post">
+																<% end %>
+																<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
+																<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
+																<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
+																<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+																<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
+																<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
+																<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= @reviewerID %>" />
+																<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= @reviewID %>" />
+																<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewCount %>" />
+																<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= review_customers_UpdateReviews_url %>" />
+																<input type="hidden" name="hidDetailPage" id="hidDetailPage" value="1" />
+																<input type="submit" class="org-bt" name="btnAddReview" id="btnAddReview" value="UPDATE REVIEW" />
+															</form>
+
+															<% end %>
+
+															<% end %>
+															
+															<div style="width:900px; float:left">
+																&nbsp; 
+															</div>
+															
+															<% if(!@reviewer.blank?) %>
+															<div id="infinite-scroll" class="scroll" data-ui="jscroll-default">
+
+																<div class="review-block-wrapper">
+
+																	<% i = 1 %>
+																	<% @reviewer.each do |r| %>
+																	<div class="review-block">
+																		<div class="customer-block">
+																			<div class="customer-photo">
+																				<div class="serial-number">
+																					<%= sprintf('%02d', i) %>
+																				</div>
+																			</div>
+																			<div class="customer-detail">
+																				<div class="customer-name-desc">
+																					<h1><%= r.DateCreated.strftime('%e %B, %Y') %></h1>
+																				</div>
+																			</div>
+																		</div>
+
+																		<div class="review-area">
+																			<div class="read-review-bt">
+																				<% if(@ChkTermsConditions == 1) %>
+																				<form action="<%= review_customers_TermsConditions_url %>" method="post">
+																					<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= review_customers_ReadReviews_url %>" />
+																					<% else %>
+																					<form action="<%= review_customers_ReadReviews_url %>" method="post">
+																						<% end %>
+																						<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
+																						<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
+																						<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
+																						<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+																						<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
+																						<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
+																						<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= r.id %>" />
+																						<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= r.ReviewID %>" />
+																						<input type="hidden" name="hidCurrentIndex" id="hidCurrentIndex" value="<%= i %>" />
+																						<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewCount %>" />
+																						<input type="submit" name="Submit" id="Submit" value="Read Review" class="reivew-blue-bt" />
+																					</form>
+																			</div>
+																		</div>
+																	</div>
+																	<% i = i + 1 %>
+																	<% end %>
+
+																</div>
+																<div style="float:left;">
+																	<a href="<%= customer_search_LoadReviews_url %>">next</a>
+																</div>
+															</div>
+
+															<% end %>
+											</div>
+										</div>
+
+										<div id="tabs-2">
+												<div id="SignupForm">
+													<% if(!@mljudgement.blank? && !@courtProceeding.blank? && !@lien.blank?)%>
+													<div class="subscription-Title">
+														ML & Judgements
+													</div>
+													<div style="text-align: justify">
+														<%= @mlComments %>
+													</div>
+													<br />
+													<div class="subscription-Title">
+														Court Proceedings
+													</div>
+													<div>
+														<div class="subscription-Item">
+															Type of Case :
+														</div>
+														<div class="subscription-Value">
+															<%= @caseType %>
+														</div>
+													</div>
+													<div>
+														<div class="subscription-Item">
+															Court Hearing Date :
+														</div>
+														<div class="subscription-Value">
+															<%= @hearingDate %>
+														</div>
+													</div>
+													<div class="clear"></div>
+													<div>
+														<div class="subscription-Item">
+															Case Filed On :
+														</div>
+														<div class="subscription-Value">
+															<%= @caseFiledDate %>
+														</div>
+													</div>
+													<div>
+														<div class="subscription-Item">
+															Amount Awarded($) :
+														</div>
+														<div class="subscription-Value">
+															<%= @amountAwarded %>
+														</div>
+													</div>
+
+													<div class="subscription-sub-Title">
+														Defendant Details
+													</div>
+													<div>
+														<div class="subscription-Item">
+															First Name :
+														</div>
+														<div class="subscription-Value">
+															<%= @defFirstName %>
+														</div>
+													</div>
+													<div>
+														<div class="subscription-Item">
+															Last Name :
+														</div>
+														<div class="subscription-Value">
+															<%= @defLastName %>
+														</div>
+													</div>
+													<div class="clear"></div>
+													<div>
+														<div class="subscription-Item">
+															Address :
+														</div>
+														<div class="subscription-Value">
+															<%= @defAddress %>
+														</div>
+													</div>
+													<div>
+														<div class="subscription-Item">
+															City, State :
+														</div>
+														<div class="subscription-Value">
+															<%= @defCityState %>
+														</div>
+													</div>
+													<div class="clear"></div>
+													<div>
+														<div class="subscription-Item">
+															ZipCode :
+														</div>
+														<div class="subscription-Value">
+															<%= @defZipcode %>
+														</div>
+													</div>
+													<div class="subscription-sub-Title">
+														Plaintiff Details
+													</div>
+													<div>
+														<div class="subscription-Item">
+															First Name :
+														</div>
+														<div class="subscription-Value">
+															<%= @plainFirstName %>
+														</div>
+													</div>
+													<div>
+														<div class="subscription-Item">
+															Last Name :
+														</div>
+														<div class="subscription-Value">
+															<%= @plainLastName %>
+														</div>
+													</div>
+													<div class="clear"></div>
+													<div>
+														<div class="subscription-Item">
+															Address :
+														</div>
+														<div class="subscription-Value">
+															<%= @plainAddress %>
+														</div>
+													</div>
+													<div>
+														<div class="subscription-Item">
+															City, State :
+														</div>
+														<div class="subscription-Value">
+															<%= @plainCityState %>
+														</div>
+													</div>
+													<div class="clear"></div>
+													<div>
+														<div class="subscription-Item">
+															ZipCode :
+														</div>
+														<div class="subscription-Value">
+															<%= @plainZipcode %>
+														</div>
+													</div>
+
+													<div class="subscription-Title">
+													<br />
+													Lien
+												</div>
+												<div>
+													<div class="subscription-Item">
+														Date Issued :
+													</div>
+													<div class="subscription-Value">
+														<%= @dateIssued %>
+													</div>
+												</div>
+												<div>
+													<div class="subscription-Item">
+														Amount($)
+													</div>
+													<div class="subscription-Value">
+														<%= @amount %>
+													</div>
+												</div>
+
+												<div class="subscription-sub-Title">
+													Grantor Details
+												</div>
+												<div>
+													<div class="subscription-Item">
+														First Name :
+													</div>
+													<div class="subscription-Value">
+														<%= @grantFirstName %>
+													</div>
+												</div>
+												<div>
+													<div class="subscription-Item">
+														Last Name :
+													</div>
+													<div class="subscription-Value">
+														<%= @grantLastName %>
+													</div>
+												</div>
+												<div class="clear"></div>
+												<div>
+													<div class="subscription-Item">
+														Address :
+													</div>
+													<div class="subscription-Value">
+														<%= @grantAddress %>
+													</div>
+												</div>
+												<div>
+													<div class="subscription-Item">
+														City, State :
+													</div>
+													<div class="subscription-Value">
+														<%= @grantCityState %>
+													</div>
+												</div>
+												<div class="clear"></div>
+												<div>
+													<div class="subscription-Item">
+														ZipCode :
+													</div>
+													<div class="subscription-Value">
+														<%= @grantZipcode %>
+													</div>
+												</div>
+												<% else %>
+													No Public Records found for this Address.
+												<% end %>
+											</div>
+										</div>
+									</div>
+								
+						
 				</div>
 
-				<% end %>
-						</div>
-					</div>
-					
-					
 
-           
-                <% if(@latitude.blank? && @longitude.blank?) %>
-                	<div class="search-record-right"> 
+				<% if(@latitude.blank? && @longitude.blank?) %>
+                <div class="search-record-right"> 
                 	We were not able to locate the address:
                 	<br />
                 	<b><%= params[:txtStreetAddress]  %> <%= params[:selectCity]  %> <%= params[:txtZipCode]  %></b>
-                	</div>
+                </div>
                 <% else %>
-                	<div class="search-record-right" id="map"></div>
+                <div class="search-record-right" id="map"></div>
                 <% end %>
                 <!--<div class="search-record-right" id="map"></div>
                 <%= gmaps4rails(@classifieds) %>-->
             </div>
 
+			
+
         </div> 
         </div>
     
-    <%= render partial: "/layouts/footer" %>
+   		<%= render partial: "/layouts/footer" %>
+    
 </div>
 
 <script type="text/javascript">
