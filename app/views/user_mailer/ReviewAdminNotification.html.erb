@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  	<h1>Review added Notification mail!</h1>
+    <p>Recently, <%= @userfirstName %> <%= @userlastName %> have reviewed a person. </p>
+ 
+    <p>
+      Reviewed person details: <br />
+      First Name: <%= @firstName %> <br />
+      Last Name: <%= @lastName %><br />
+      Address: <%= @streetAddress %><br />
+      City, State: <%= @cityState %> <br />
+      ZipCode: <%= @zipCode %> <br />
+      Contact Number : <%= @phoneNumber %>
+      
+    </p>
+    <H4>This review is pending to get approved and published.</H4>
+  </body>
+</html>

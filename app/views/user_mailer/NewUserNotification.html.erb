@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  	<h1>User Registration Notification mail!</h1>
+    <p><%= @userfirstName %> <%= @userlastName %> has successfuly registered and got the subscription by paying amount $<%= @amount %></p>
+ 
+    <p>
+      User payment details: <br />
+      First Name: <%= @userfirstName %> <br />
+      Last Name: <%= @userlastName %><br />
+      Email-ID: <%= @userEmail%><br />
+      Payment Amount: $<%= @amount %> <br />
+      Invoice Number : <%= @invoiceNumber %>
+      
+    </p>
+    <H4>User activation is pending. Need to activate within 24Hrs.</H4>
+  </body>
+</html>
