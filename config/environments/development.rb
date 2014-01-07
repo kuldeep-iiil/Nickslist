@@ -30,7 +30,7 @@ NicksListProj::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
   address:              'email-smtp.us-east-1.amazonaws.com',
-  port:                 465,
+  port:                 25,
   user_name:            'AKIAJHQ6XRQI52P6WWMQ',
   password:             'Al00Gje0xx9EOGyiyJ3p/khp7AkGQygmWqGqxa/VNXgA',
   authentication:       'login',
