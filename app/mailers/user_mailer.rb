@@ -1,7 +1,6 @@
 class UserMailer < ActionMailer::Base
   skip_before_action :verify_authenticity_token
-  default from: 'no_reply@nickslist.com'
-  
+  default from: 'kuldeep.it2008@gmail.com'
   
   def ForgotPassword(email_to, email_password)         
       @password = email_password      
@@ -38,10 +37,9 @@ class UserMailer < ActionMailer::Base
       @userEmail = userEmail
       @userContact = userContact
       @comments = comments
-      email_from = "no_reply@nickslist.com"
       email_to = "kuldeep.it2008@gmail.com"    
       email_subject = "Comment posted by " + userfirstName + " " + userlastName
-      mail(to: email_to, from: email_from, subject: email_subject)  
+      mail(to: email_to, from: 'noreply@gmail.com', subject: email_subject)  
   end
   
   def ReviewAdminNotification(userfirstName, userlastName, userEmail, firstName, lastName, phoneNumber, streetAddress, zipCode, cityState)
