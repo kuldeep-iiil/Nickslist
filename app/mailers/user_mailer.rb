@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   skip_before_action :verify_authenticity_token
-  default from: 'kuldeep.it2008@gmail.com'
+  default from: 'no_reply@nickslist.com'
   
   def ForgotPassword(email_to, email_password)         
       @password = email_password      
