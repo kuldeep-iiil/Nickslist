@@ -29,11 +29,13 @@ NicksListProj::Application.configure do
   
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  address:              'email-smtp.us-east-1.amazonaws.com',
-  port:                 25,
-  user_name:            'AKIAJHQ6XRQI52P6WWMQ',
-  password:             'Al00Gje0xx9EOGyiyJ3p/khp7AkGQygmWqGqxa/VNXgA',
+  address:              'smtp.gmail.com',
+  port:                 587,
+  domain:               'gmail.com',
+  user_name:            'kuldeepc.iiil@gmail.com',
+  password:             'kuldeep1#',
   authentication:       'login',
+  ssl:                  true,
   enable_starttls_auto: true  }
   
 end
