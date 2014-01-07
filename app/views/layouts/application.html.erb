@@ -30,10 +30,8 @@
 						$('#signout_menu').hide();
 					}
 				});
-			});
-
-			$(function() {    
-			$('input, textarea').placeholder();
+				
+				$('input, textarea').placeholder();
 			$('form').h5Validate();
 			
     		$( "#selectCity" ).autocomplete({
@@ -45,7 +43,9 @@
     		$( "#textMailCity" ).autocomplete({
       			source: availableCities
     		});
-  		});
+			});
+
+			
   	
   		function ShowHideDiv(divName) {
 				if (divName == 'General') {
