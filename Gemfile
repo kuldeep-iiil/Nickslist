@@ -48,6 +48,7 @@ gem 'thin'
 #Payment gateway
 gem 'authorize-net'
 
+gem 'jquery-placeholder-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

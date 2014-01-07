@@ -1,67 +1,64 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$(".expanderHead").click(function() {
-					$(this).next().slideToggle();
-					//$("#expanderContent").slideToggle();
-					if ($(this).children("#expanderSign").text() == "+") {
-						$(this).children("#expanderSign").html("−")
-					} else {
-						$(this).children("#expanderSign").text("+")
-					}
-				});
-			});
-		</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".expanderHead").click(function() {
+			$(this).next().slideToggle();
+			//$("#expanderContent").slideToggle();
+			if ($(this).children("#expanderSign").text() == "+") {
+				$(this).children("#expanderSign").html("−")
+			} else {
+				$(this).children("#expanderSign").text("+")
+			}
+		});
+	}); 
+</script>
+<%= render partial: "/layouts/header" %>
 
-	</head>
-	<body>
-		<%= render partial: "/layouts/header" %>
+<div id="main-content-wrapper">
+	<div class="browser-center">
+		<div id="left-content-area">
+			<h1><%= @title %></h1>
+			<br />
+			<% if(!@faqList.blank?) %>
+			<% @faqList.each do |faq| %>
+			<div class="expanderHead" style="cursor:pointer;">
+				<span id="expanderSign">+</span> <%= faq.Question %>
+			</div>
+			<div id="expanderContent" class="faq-comment-bak">
+				<p>
+					<%= faq.Answers %>
+				</p>
+			</div>
+			<br />
+			<% end %>
+			<% end %>
+		</div>
+		<% if(!@testimonialList.blank?) %>
+		<div id="right-content-area">
+			<div id="client-testimonials">
+				<h1>Client Testimonials</h1>
+				<br />
+				<ul class="bxslider">
 
-		<div id="main-content-wrapper">
-			<div class="browser-center">
-				<div id="left-content-area">
-					<h1><%= @title %></h1>
-					<br />
-					<% if(!@faqList.blank?) %>
-					<% @faqList.each do |faq| %>
-					<div class="expanderHead" style="cursor:pointer;"><span id="expanderSign">+</span> <%= faq.Question %> </div>
-					<div id="expanderContent" class="faq-comment-bak">
-						<p><%= faq.Answers %></p>
-					</div>
-					<br />
+					<% @testimonialList.each do |test| %>
+					<li>
+						<div class="testimonial-rotating">
+							<div class="testimonial-desc">
+								<%= test.Comments %>
+							</div>
+							<div class="testimonial-name">
+								<h2><%= test.FirstName %> <%= test.LastName %></h2>
+								<h3><%= test.Occupation %></h3>
+							</div>
+						</div>
+					</li>
 					<% end %>
-					<% end %>
-				</div>
-				<% if(!@testimonialList.blank?) %>
-				<div id="right-content-area">
-					<div id="client-testimonials">
-						<h1>Client Testimonials</h1>
-						<br />
-						<ul class="bxslider">
 
-							<% @testimonialList.each do |test| %>
-							<li>
-								<div class="testimonial-rotating">
-									<div class="testimonial-desc">
-										<%= test.Comments %>
-									</div>
-									<div class="testimonial-name">
-										<h2><%= test.FirstName %> <%= test.LastName %></h2>
-										<h3><%= test.Occupation %></h3>
-									</div>
-								</div>
-							</li>
-							<% end %>
-
-						</ul>
-					</div>
-				</div>
-				<% end %>
+				</ul>
 			</div>
 		</div>
+		<% end %>
+	</div>
+</div>
 
-		<%= render partial: "/layouts/footer" %>
-	</body>
-</html>
+<%= render partial: "/layouts/footer" %>
+

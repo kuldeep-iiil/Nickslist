@@ -9,11 +9,12 @@
   
   <script type="text/javascript">
 			$(document).ready(function() {
+				
 				$('.bxslider').bxSlider({
 					mode : 'horizontal',
 					speed : '500',
 					auto : 'true',
-					pause : '5000'
+					pause : '3000'
 				});
 				$('.login-register a').click(function() {
 					$('#signin_menu').toggle();
@@ -32,6 +33,9 @@
 			});
 
 			$(function() {    
+			$('input, textarea').placeholder();
+			$('form').h5Validate();
+			
     		$( "#selectCity" ).autocomplete({
       			source: availableCities
     		});
@@ -61,6 +65,5 @@
 </head>
 <body>
 <%= yield %>
-
 </body>
 </html>

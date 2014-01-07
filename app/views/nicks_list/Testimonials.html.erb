@@ -1,27 +1,22 @@
-<!DOCTYPE html>
-<html>
-	
-	<body>
-		<%= render partial: "/layouts/header" %>
-		
-		<div id="main-content-wrapper">
-			<div class="browser-center">
-				<div id="left-content-area" style="width:100%">
-					<h1><%= @title %></h1>
-					<br />
-					<% if(!@testimonialList.blank?) %>
-					<% @testimonialList.each do |test| %>
-					<div class="subscription-Title"><%= test.FirstName %> <%= test.LastName %> (<%= test.Occupation %>) </div>
-					<div id="expanderContent" text-align: justify">
-						<p><%= test.Comments %></p>
-					</div>
-					<% end %>
-					<% end %>
-					<br />
-				</div>
+<%= render partial: "/layouts/header" %>
+<div id="main-content-wrapper">
+	<div class="browser-center">
+		<div id="left-content-area" style="width:100%">
+			<h1><%= @title %></h1>
+			<br />
+			<% if(!@testimonialList.blank?) %>
+			<% @testimonialList.each do |test| %>
+			<div class="subscription-Title">
+				<%= test.FirstName %> <%= test.LastName %> (<%= test.Occupation %>)
 			</div>
-		</div>
+			<div id="expanderContent" text-align: justify">
+			<p><%= test.Comments %></p>
+			</div>
+			<% end %>
+			<% end %>
+			<br />
+			</div>
+			</div>
+			</div>
 
-		<%= render partial: "/layouts/footer" %>
-	</body>
-</html>
+			<%= render partial: "/layouts/footer" %>

@@ -293,7 +293,7 @@ class ReviewCustomersController < ApplicationController
       else
         @custoemrIDs = @customer[0].id
       end
-      @reviewCount = Review.where(CustomerSearchID: @custoemrIDs).count
+      @reviewCount = Review.where(CustomerSearchID: @custoemrIDs, IsApproved: 1, IsPublished: 1).count
       @reviewer = SubscribedUser.find_by_sql("select user.id, cust.ID as 'CustomerID', rev.id as 'ReviewID', rev.DateCreated 
                   from subscribed_users user join reviews rev on user.id  = rev.UserID
                   join customer_searches cust on cust.id= rev.CustomerSearchID

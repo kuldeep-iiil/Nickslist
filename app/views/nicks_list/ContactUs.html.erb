@@ -1,78 +1,73 @@
-<!DOCTYPE html>
-<html>
-	<body>
-		<%= render partial: "/layouts/header" %>
+<%= render partial: "/layouts/header" %>
 
-		<div id="main-content-wrapper">
-			<div class="browser-center">
-				<div id="left-content-area">
-					<h1>
-					<div><%= @title %></div> 
-					
-					</h1>
-					<% if(flash[:notice] != nil) %>
-					<div id="messageDiv" class="success">
-						<%= flash[:notice] %>
-					</div>  
-					<% end %>
-					<br />
-					<div id="SignupForm">
-						<form action="<%= nicks_list_ContactUs_url %>" method="post">
+<div id="main-content-wrapper">
+	<div class="browser-center">
+		<div id="left-content-area">
+			<h1>
+			<div>
+				<%= @title %>
+			</div></h1>
+			<% if(flash[:notice] != nil) %>
+			<div id="messageDiv" class="success">
+				<%= flash[:notice] %>
+			</div>
+			<% end %>
+			<br />
+			<div id="SignupForm">
+				<form action="<%= nicks_list_ContactUs_url %>" method="post">
 
-							<div class="singup-textarea">
-								<span class="required">*</span>
-								<input type="text" name="textFirstName" id="textFirstName" required="true" class="singup-textbox-small" placeholder="First name" pattern="^[A-Za-z]+[A-Za-z]$" value="<%= @userfirstName %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Steve]')" oninput="setCustomValidity('')" />
-							</div>
-							<div class="singup-textarea">
-								<span class="required">*</span>
-								<input type="text" name="textLastName" id="textLastName" required="true" class="singup-textbox-small" placeholder="Last name" pattern="^[A-Za-z]+[A-Za-z]$" value="<%= @userlastName %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Steve]')" oninput="setCustomValidity('')" />
-							</div>
-							<div class="singup-textarea">
-								<span class="required">*</span>
-								<input type="text" name="textEmail" id="textEmail" required="true" class="singup-textbox-small" placeholder="Email" value="<%= @userEmail %>" pattern="^[a-zA-Z0-9]+[.]?[_]?[a-zA-Z0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]{2,3}$" value="<%= @userContact %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [example@example.com] ')" oninput="setCustomValidity('')" />
-							</div>
-							<div class="singup-textarea">
-								<span class="required">&nbsp;</span>
-								<input type="text" name="textContact" id="textConatct" class="singup-textbox-small" placeholder="Contact Number" size="12" pattern="^[0-9]{3,3}[-]?[0-9]{3,3}[-]?[0-9]{4,4}$" value="<%= @userContact %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [1234567890 or 123-456-7890] ')" oninput="setCustomValidity('')" />
-							</div>
-							<div class="singup-textarea">
-								<span class="required">*</span>
-								<textarea id="textComment" name="textComment" required = "required" class="comment-textarea" rows="10" cols="67" placeholder="Comments"></textarea>
-							</div>
-							<div class="singup-button">
-								<input type="submit" name="Submit" id="Submit" value="Submit" class="org-bt" />
-							</div>
-						</form>
+					<div class="singup-textarea">
+						<span class="required">*</span>
+						<input type="text" name="textFirstName" id="textFirstName" required="true" class="singup-textbox-small" placeholder="First name" pattern="^[A-Za-z]+[A-Za-z]$" value="<%= @userfirstName %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Steve]')" oninput="setCustomValidity('')" />
 					</div>
-				</div>
-				<% if(!@testimonialList.blank?) %>
-				<div id="right-content-area">
-					<div id="client-testimonials">
-						<h1>Client Testimonials</h1>
-						<br />
-						<ul class="bxslider">
-
-							<% @testimonialList.each do |test| %>
-							<li>
-								<div class="testimonial-rotating">
-									<div class="testimonial-desc">
-										<%= test.Comments %>
-									</div>
-									<div class="testimonial-name">
-										<h2><%= test.FirstName %> <%= test.LastName %></h2>
-										<h3><%= test.Occupation %></h3>
-									</div>
-								</div>
-							</li>
-							<% end %>
-
-						</ul>
+					<div class="singup-textarea">
+						<span class="required">*</span>
+						<input type="text" name="textLastName" id="textLastName" required="true" class="singup-textbox-small" placeholder="Last name" pattern="^[A-Za-z]+[A-Za-z]$" value="<%= @userlastName %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Steve]')" oninput="setCustomValidity('')" />
 					</div>
-				</div>
-				<% end %>
+					<div class="singup-textarea">
+						<span class="required">*</span>
+						<input type="text" name="textEmail" id="textEmail" required="true" class="singup-textbox-small" placeholder="Email" value="<%= @userEmail %>" pattern="^[a-zA-Z0-9]+[.]?[_]?[a-zA-Z0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]{2,3}$" value="<%= @userContact %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [example@example.com] ')" oninput="setCustomValidity('')" />
+					</div>
+					<div class="singup-textarea">
+						<span class="required">&nbsp;</span>
+						<input type="text" name="textContact" id="textConatct" class="singup-textbox-small" placeholder="Contact Number" size="12" pattern="^[0-9]{3,3}[-]?[0-9]{3,3}[-]?[0-9]{4,4}$" value="<%= @userContact %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [1234567890 or 123-456-7890] ')" oninput="setCustomValidity('')" />
+					</div>
+					<div class="singup-textarea">
+						<span class="required">*</span>
+						<textarea id="textComment" name="textComment" required = "required" class="comment-textarea" rows="10" placeholder="Comments"></textarea>
+					</div>
+					<div class="singup-button">
+						<input type="submit" name="Submit" id="Submit" value="Submit" class="org-bt" />
+					</div>
+				</form>
 			</div>
 		</div>
+		<% if(!@testimonialList.blank?) %>
+		<div id="right-content-area">
+			<div id="client-testimonials">
+				<h1>Client Testimonials</h1>
+				<br />
+				<ul class="bxslider">
 
-		<%= render partial: "/layouts/footer" %>
-	</body>
-</html>
+					<% @testimonialList.each do |test| %>
+					<li>
+						<div class="testimonial-rotating">
+							<div class="testimonial-desc">
+								<%= test.Comments %>
+							</div>
+							<div class="testimonial-name">
+								<h2><%= test.FirstName %> <%= test.LastName %></h2>
+								<h3><%= test.Occupation %></h3>
+							</div>
+						</div>
+					</li>
+					<% end %>
+
+				</ul>
+			</div>
+		</div>
+		<% end %>
+	</div>
+</div>
+
+<%= render partial: "/layouts/footer" %>

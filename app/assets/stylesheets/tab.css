@@ -6,12 +6,13 @@
 .ui-tabs {
 	position: relative;/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
 	padding: 5px;
-	width: 980px;
+	width: 972px;
 	float: left;
 }
+.tab-con .ui-widget-content{ background:none!important; border:0!important}
 .ui-tabs .ui-tabs-nav {
 	margin: 0;
-	padding: .2em .2em 0;
+	padding: 0 !important;
 	background: none;
 	border-top: none;
 	border-left: none;
@@ -28,6 +29,7 @@
 	padding: 0;
 	white-space: nowrap;
 	background: #145fba;
+	color:#ffffff;
 	
 }
 .ui-tabs .ui-tabs-nav li a {
@@ -35,23 +37,25 @@
 	padding: .5em 1em;
 	text-decoration: none;
 	font-weight: normal;
-	color: #212121;
+	color: #ffffff !important;
 }
 a:active, a:focus{
 	
 	outline: none;
+	
 }
 .ui-tabs .ui-tabs-nav li.ui-tabs-active {
 	margin-bottom: -1px;
 	padding-bottom: 1px;
 	background: #ffffff;
 	font-weight: normal;
-	color: #212121;
+	color: #ffffff;
 }
 .ui-tabs .ui-tabs-nav li.ui-tabs-active a,
 .ui-tabs .ui-tabs-nav li.ui-state-disabled a,
 .ui-tabs .ui-tabs-nav li.ui-tabs-loading a {
 	cursor: text;
+	color:#212121 !important;
 }
 .ui-tabs .ui-tabs-nav li a, /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
 .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
@@ -60,19 +64,26 @@ a:active, a:focus{
 .ui-tabs .ui-tabs-panel {
 	display: block;
 	border-width: 0;
-	background: none;
+	background: #ffffff !important;
 	width: 950px;
 	color: #222222;
 	font-family: arial;
     font-size: 14px;
     border : 1;
+    padding:10px;
+    float:left;
+    border-left:1px solid #aaaaaa !important;
+    border-right:1px solid #aaaaaa !important;
+    border-bottom:1px solid #aaaaaa !important;
+    
+    
 }
 
 .ui-tabs .ui-tabs-panel h1 {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 17px;
 	font-weight: normal;
-	margin: 5px 0
+	margin: 5px 0;
 }
 
 .ui-tooltip {
