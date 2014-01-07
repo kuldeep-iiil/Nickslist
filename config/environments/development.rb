@@ -35,6 +35,7 @@ NicksListProj::Application.configure do
   user_name:            'kuldeepc.iiil@gmail.com',
   password:             'kuldeep1#',
   authentication:       'login',
+  ssl:                  true,
   enable_starttls_auto: true  }
   
 end
