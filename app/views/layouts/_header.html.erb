@@ -131,7 +131,7 @@
 					</p>
 				</div>
 				<div id="search">
-					<form action="<%= customer_search_GetDetails_url %>" method="post">
+					<form id="frmCustomerSearch" action="<%= customer_search_GetDetails_url %>" method="post">
 						<div class="search-heading">
 							Search Customer Rate/Reviews or Search for info on a potential customer.
 						</div>
@@ -146,7 +146,7 @@
 								<input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
 							</div>
 							<div class="form-textbox">
-								<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" value="<%= @citystateVal %>" pattern="^[A-Za-z]+[ ]?[A-Za-z]+,[ ]?[A-Za-z]{2,2}$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle, WA] ')" oninput="setCustomValidity('')" />
+								<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" value="<%= @citystateVal %>" pattern="^[A-Za-z]+[ ]?[A-Za-z]+,[ ][A-Za-z]{2,2}$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle, WA] ')" oninput="setCustomValidity('')" />
 							</div>
 							<div class="form-textbox">
 								<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" value="<%= params[:selectState] %>" />-->

@@ -743,7 +743,7 @@ input[type=button], input[type=submit], button
 	float: left
 }
 .review-block {
-	width: 275px;
+	width: 270px;
 	float: left;
 	padding: 10px;
 	background: #eeeeee url(/assets/review-block-bg.png) bottom left repeat-x;
@@ -822,7 +822,7 @@ input[type=button], input[type=submit], button
 	width: 107px;
 	float: right;
 	font-size: 14px;
-	margin-right: 10px
+	margin-right: 20px
 }
 
 .review-area .review-star {

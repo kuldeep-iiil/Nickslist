@@ -147,7 +147,7 @@
 										<input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" />
 									</div>
 									<div class="form-textbox">
-										<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" pattern="^[A-Za-z]+[ ]?[A-Za-z]+,[ ]?[A-Za-z]{2,2}$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle, WA] ')" oninput="setCustomValidity('')" />
+										<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" pattern="^[A-Za-z]+[ ]?[A-Za-z]+,[ ][A-Za-z]{2,2}$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle, WA] ')" oninput="setCustomValidity('')" />
 									</div>
 									<div class="form-textbox">
 										<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" />-->
