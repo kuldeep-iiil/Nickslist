@@ -3,7 +3,7 @@ class UserRegisterationController < ApplicationController
   include ActionView::Helpers::NumberHelper
   include Sidekiq::Worker
   
-  def GetRegister    
+  def GetRegister   
     @usercompanyName = params[:textCompany]
     @userfirstName = params[:textFirstName]
     @userlastName = params[:textLastName]
@@ -39,7 +39,7 @@ class UserRegisterationController < ApplicationController
     @userphoneNumber = params[:textPhoneNumber]
     @useremail = params[:textEmail]
     @userlicense = params[:textLicense]
-    @userName = params[:textUserName]
+    @useruserName = params[:textUserName]
     password = params[:textPassword]
     authCode = params[:textCode]
     @userauthCode = authCode
@@ -61,7 +61,7 @@ class UserRegisterationController < ApplicationController
     if(@usercompanyName != nil and @userfirstName != nil and @userlastName != nil and @userincorporationType != nil and 
       @userbussStreetAddress != nil and @userbussCity != nil and @userbussZipCode != nil and
       @usermailStreetAddress != nil and @usermailCity != nil and @usermailZipCode != nil and
-      @userphoneNumber != nil and @useremail != nil and @userlicense != nil and @userName != nil and password != nil and salt != nil)
+      @userphoneNumber != nil and @useremail != nil and @userlicense != nil and @useruserName != nil and password != nil and salt != nil)
           
         if(keyCode.blank?)
           isUsed='0'
@@ -102,7 +102,7 @@ class UserRegisterationController < ApplicationController
           @messageString = ''
                           
           #Save User Information
-          @subscribedUser = SubscribedUser.new(UserName: @userName, Password: password, Salt: salt, FirstName: @userfirstName,
+          @subscribedUser = SubscribedUser.new(UserName: @useruserName, Password: password, Salt: salt, FirstName: @userfirstName,
           LastName: @userlastName, EmailID: @useremail, CompanyName: @usercompanyName, IncorporationType: @userincorporationType,
           ContactNumber: @userphoneNumber, LicenseNumber: @userlicense, AuthCodeUsed: isUsed, IsActivated: 0, IsSubscribed: 0, 
           DateCreated: time, DateUpdated: time)        
@@ -145,11 +145,11 @@ class UserRegisterationController < ApplicationController
           @usercompanyName = userDetails.CompanyName
           @userincorporationType = userDetails.IncorporationType
           @userbussStreetAddress = userBussAddressDetails.Address
-          @userbussCity = userBussAddressDetails.City + ', ' + userBussAddressDetails.State
+          @userbusscitystateVal = userBussAddressDetails.City + ', ' + userBussAddressDetails.State
           #@bussState = userBussAddressDetails.State
           @userbussZipCode = userBussAddressDetails.ZipCode
           @usermailStreetAddress = userMailAddressDetails.Address
-          @usermailCity = userMailAddressDetails.City + ', ' + userMailAddressDetails.State
+          @usermailcitystateVal = userMailAddressDetails.City + ', ' + userMailAddressDetails.State
           #@mailState = userMailAddressDetails.State
           @usermailZipCode = userMailAddressDetails.ZipCode
           @userphoneNumber = userDetails.ContactNumber

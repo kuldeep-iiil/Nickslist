@@ -1,81 +1,53 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>NicksList - Add Reviews</title>
-		
-	</head>
-	<body>
-		<%= render partial: "/layouts/header" %>
-		
-		<div id="main-content-wrapper">
-			<div class="browser-center">
+<%= render partial: "/layouts/header" %>
 
-				<div id="signup-wrapper">
-					<div id="signup-header">
-						<h1>Terms & Conditions</h1>
-						<h2>Please read and confirm the terms and conditions to move forward.</h2>
-					</div>
+<div id="main-content-wrapper">
+	<div class="browser-center">
 
-					<div id="Term-Condition-area">
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-							</p>
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-							</p>
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-							</p>
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-							</p>
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-							</p>
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-							</p>
-						</div>
-
-						<div class="singup-textarea-right">
-							<form action="<%= customer_search_GetDetails_url %>" method="post">
-								<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
-								<input type="hidden" name="hidLastName" id="hidLastName" value="<%= @lastName %>" />
-								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" value="<%= @streetAddress %>" />
-								<input type="hidden" name="hidselectCity" id="hidselectCity" value="<%= @citystateVal %>" />
-								<input type="hidden" name="hidZipCode" id="hidZipCode" value="<%= @zipCode %>" />
-								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" value="<%= @phoneNumber %>" />
-
-								<input type="submit" name="Submit" id="Submit" value="Cancel" class="org-bt" />
-							</form>
-						</div>
-
-						<div class="singup-textarea-right">
-							<form action="<%= @redirectUrl %>" method="post">
-								<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
-								<input type="hidden" name="hidLastName" id="hidLastName" value="<%= @lastName %>" />
-								<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" value="<%= @streetAddress %>" />
-								<input type="hidden" name="hidselectCity" id="hidselectCity" value="<%= @citystateVal %>" />
-								<input type="hidden" name="hidZipCode" id="hidZipCode" value="<%= @zipCode %>" />
-								<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" value="<%= @phoneNumber %>" />
-								<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= @reviewerID %>" />
-								<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= @reviewID %>" />
-								<input type="hidden" name="hidCurrentIndex" id="hidCurrentIndex" value="<%= @currentIndex %>" />
-								<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewCount %>" />
-								<input type="hidden" name="hidIsAgree" id="hidIsAgree" value="1" />
-
-								<input type="submit" name="Submit" id="Submit" value="I Agree" class="org-bt" />
-							</form>
-						</div>
-						
-
-					</div>
-
-				</div>
-
+		<div id="signup-wrapper">
+			<div id="signup-header">
+				<h1>Terms & Conditions</h1>
+				<h2>Please read and confirm the terms and conditions to move forward.</h2>
 			</div>
 
-		<%= render partial: "/layouts/footer" %>
+			<div id="Term-Condition-area">
+				<%= @content %>
+			</div>
+
+			<div class="singup-textarea-right">
+				<form action="<%= customer_search_GetDetails_url %>" method="post">
+					<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
+					<input type="hidden" name="hidLastName" id="hidLastName" value="<%= @lastName %>" />
+					<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" value="<%= @streetAddress %>" />
+					<input type="hidden" name="hidselectCity" id="hidselectCity" value="<%= @citystateVal %>" />
+					<input type="hidden" name="hidZipCode" id="hidZipCode" value="<%= @zipCode %>" />
+					<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" value="<%= @phoneNumber %>" />
+
+					<input type="submit" name="Submit" id="Submit" value="Cancel" class="org-bt" />
+				</form>
+			</div>
+
+			<div class="singup-textarea-right">
+				<form action="<%= @redirectUrl %>" method="post">
+					<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
+					<input type="hidden" name="hidLastName" id="hidLastName" value="<%= @lastName %>" />
+					<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" value="<%= @streetAddress %>" />
+					<input type="hidden" name="hidselectCity" id="hidselectCity" value="<%= @citystateVal %>" />
+					<input type="hidden" name="hidZipCode" id="hidZipCode" value="<%= @zipCode %>" />
+					<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" value="<%= @phoneNumber %>" />
+					<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= @reviewerID %>" />
+					<input type="hidden" name="hidReviewID" id="hidReviewID" value="<%= @reviewID %>" />
+					<input type="hidden" name="hidCurrentIndex" id="hidCurrentIndex" value="<%= @currentIndex %>" />
+					<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewCount %>" />
+					<input type="hidden" name="hidIsAgree" id="hidIsAgree" value="1" />
+
+					<input type="submit" name="Submit" id="Submit" value="I Agree" class="org-bt" />
+				</form>
+			</div>
+
 		</div>
-	</body>
-</html>
+
+	</div>
+
+</div>
+
+<%= render partial: "/layouts/footer" %>

@@ -74,10 +74,11 @@ a:active, a:focus{
     float:left;
     border-left:1px solid #aaaaaa !important;
     border-right:1px solid #aaaaaa !important;
-    border-bottom:1px solid #aaaaaa !important;
+    /*border-bottom:1px solid #aaaaaa !important;*/
     
     
 }
+
 
 .ui-tabs .ui-tabs-panel h1 {
 	font-family: Arial, Helvetica, sans-serif;
@@ -94,15 +95,3 @@ a:active, a:focus{
 	-webkit-box-shadow: 0 0 5px #aaa;
 	box-shadow: 0 0 5px #aaa;
 }
-
-
-
-
-
-
-
-
-
-
-
-

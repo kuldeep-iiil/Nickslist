@@ -1150,9 +1150,10 @@ input[type=button], input[type=submit], button
 
 #Term-Condition-area {
 	width: 935px;
-	height: 500px;
+	height: 450px;
 	float: left;
 	background: #ffffff;
+	text-align:justify;
 	border: 1px solid #d7d7d7;
 	padding: 25px 25px;
 	margin-bottom: 20px;
@@ -1414,4 +1415,73 @@ float:left;
 	margin: 10px 0 10px 0;
 	display: none;
 	text-align: justify;
+}
+
+.back-fadeout
+{
+	display:none;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 99999;
+	background-color: #000000;
+	opacity: 0.5;
+}
+.term-conditions{
+	display:none;
+	margin-left:180px;
+	margin-top:10px;
+	padding-left:15px;
+	padding-right:5px;
+	border: 1px solid #e7e7e7;
+	border-radius: 5px;
+	text-align:center;
+	width: 74%;
+	height: 98%;
+	position: fixed;
+	z-index: 99999;
+	background-color: #ffffff;
+}
+
+.tab1-panel {
+	display: block;
+	border-width: 0;
+	background: #ffffff !important;
+	width: 950px;
+	color: #222222;
+	font-family: arial;
+    font-size: 14px;
+    border : 1;
+    padding:10px;
+    float:left;
+    border-left:1px solid #aaaaaa !important;
+    border-right:1px solid #aaaaaa !important;
+    border-bottom:1px solid #aaaaaa !important;
+    border-radius: 0 0 5px 5px;
+    margin-top: -10px;
+}
+
+.tab2-panel {
+	display: none;
+	border-width: 0;
+	background: #ffffff !important;
+	width: 950px;
+	color: #222222;
+	font-family: arial;
+    font-size: 14px;
+    border : 1;
+    padding:10px;
+    float:left;
+    border-left:1px solid #aaaaaa !important;
+    border-right:1px solid #aaaaaa !important;
+    border-bottom:1px solid #aaaaaa !important;
+    border-radius: 0 0 5px 5px;
+    margin-top: -10px;
+}
+
+.tab1-panel h1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 17px;
+	font-weight: normal;
+	margin: 5px 0;
 }

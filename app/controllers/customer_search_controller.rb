@@ -27,7 +27,7 @@ class CustomerSearchController < ApplicationController
       params[:txtZipCode] = params[:hidZipCode]
     end
 
-    if(params[:txtStreetAddress] != nil && params[:selectCity] != nil && params[:txtZipCode] != nil)
+    if(params[:txtStreetAddress].strip != '' && params[:selectCity].strip != '' && params[:txtZipCode].strip != '')
       @firstName = params[:txtFirstName]
       @lastName = params[:txtLastName]
       @phoneNumber = params[:txtPhoneNumber]
@@ -109,9 +109,9 @@ class CustomerSearchController < ApplicationController
           @courtProceeding = CourtProceedings.find_by(AddressID: @customerAddress.id)
           if(!@courtProceeding.blank?)
             @caseType = @courtProceeding.CaseType
-            @hearingDate = @courtProceeding.CourtHearingDate.strftime('%Y/%m/%d')
-            @caseFiledDate = @courtProceeding.DateFiled.strftime('%Y/%m/%d')
-            @amountAwarded = @courtProceeding.AmountAwarded
+            @hearingDate = @courtProceeding.CourtHearingDate.strftime('%m/%d/%Y')
+            @caseFiledDate = @courtProceeding.DateFiled.strftime('%m/%d/%Y')
+            @amountAwarded = number_to_currency(@courtProceeding.AmountAwarded, :unit => "$")
             @defendant = Defendants.find_by(id: @courtProceeding.DefendantID)
             if(!@defendant.blank?)
               @defFirstName = @defendant.FirstName
@@ -132,8 +132,8 @@ class CustomerSearchController < ApplicationController
 
           @lien = Liens.find_by(AddressID: @customerAddress.id)
           if(!@lien.blank?)
-            @dateIssued = @lien.DateIssued.strftime('%Y/%m/%d')
-            @amount = @lien.Amount
+            @dateIssued = @lien.DateIssued.strftime('%m/%d/%Y')
+            @amount = number_to_currency(@lien.Amount, :unit => "$")
             @grantor = Grantors.find_by(id: @lien.GrantorID)
             if(!@grantor.blank?)
               @grantFirstName = @grantor.FirstName
@@ -204,6 +204,13 @@ class CustomerSearchController < ApplicationController
       #@classifieds = @classifieds.to_gmaps4rails
       end
     end
+    
+    @siteContent = SiteContent.find_by(PageCode: 105)
+    if(!@siteContent.blank?)
+      @content = @siteContent.Content.html_safe
+      @title = @siteContent.Title.html_safe
+    end
+    
   end
 
   def LoadReviews

@@ -314,6 +314,12 @@ class ReviewCustomersController < ApplicationController
       redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :redirectUrl => customer_search_GetDetails_url}
     end
 
+    @siteContent = SiteContent.find_by(PageCode: 105)
+    if(!@siteContent.blank?)
+      @content = @siteContent.Content.html_safe
+      @title = @siteContent.Title.html_safe
+    end
+
     @firstName = params[:hidFirstName]
     @lastName = params[:hidLastName]
     @phoneNumber = params[:hidPhoneNumber]
