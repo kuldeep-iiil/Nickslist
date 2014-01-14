@@ -1150,13 +1150,14 @@ input[type=button], input[type=submit], button
 
 #Term-Condition-area {
 	width: 935px;
-	height: 450px;
+	height: 360px;
 	float: left;
 	background: #ffffff;
 	text-align:justify;
 	border: 1px solid #d7d7d7;
 	padding: 25px 25px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
+	margin-top: 10px;
 	border-radius: 5px;
 	overflow-y: auto;
 	scrollbar-base-color: #CCCCCC;
@@ -1436,8 +1437,8 @@ float:left;
 	border: 1px solid #e7e7e7;
 	border-radius: 5px;
 	text-align:center;
-	width: 74%;
-	height: 98%;
+	width: 995px;
+	height: 550px;
 	position: fixed;
 	z-index: 99999;
 	background-color: #ffffff;
