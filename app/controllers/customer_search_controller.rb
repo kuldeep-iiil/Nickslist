@@ -72,24 +72,27 @@ class CustomerSearchController < ApplicationController
         time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
 
         #Add customer search log for reporting
-        @customerAddress = CustomerAddress.find_by(StreetAddress: @streetAddress, City: @city, State: @state, ZipCode: @zipCode)
-        if(@customerAddress.blank?)
-          @customerAddress = CustomerAddress.new(StreetAddress: @streetAddress, City: @city, State: @state, ZipCode: @zipCode, DateCreated: time, DateUpdated: time)
-        @customerAddress.save
+        @customerSearch = CustomerSearch.find_by_sql("select cs.id from customer_searches cs
+                                  join customer_addresses ca on cs.AddressID = ca.id
+                                  join customer_phones cp on cs.id = cp.CustomerSearchID
+                                  where cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "' AND ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZipCode = '" + @zipCode + "'")
+        if(@customerSearch.blank?)
+          @customerAddress = CustomerAddress.find_by(StreetAddress: @streetAddress, City: @city, State: @state, ZipCode: @zipCode)
+          if(@customerAddress.blank?)
+            @customerAddress = CustomerAddress.new(StreetAddress: @streetAddress, City: @city, State: @state, ZipCode: @zipCode, DateCreated: time, DateUpdated: time)
+          @customerAddress.save
+          end
+
+          @customerSearch = CustomerSearch.new(FirstName: @firstName, LastName: @lastName, AddressID: @customerAddress.id, SearchDate: time)
+          @customerSearch.save
+
+          @customerPhone = CustomerPhone.find_by(ContactNumber: @phoneNumber, CustomerSearchID: @customerSearch.id)
+          if(@customerPhone.blank?)
+            @customerPhone = CustomerPhone.new(CustomerSearchID: @customerSearch.id, ContactNumber: @phoneNumber, DateCreated: time)
+          @customerPhone.save
+          end
         end
-
-        @customer = CustomerSearch.new(FirstName: @firstName, LastName: @lastName, AddressID: @customerAddress.id, SearchDate: time)
-        @customer.save
-
-        @customerPhone = CustomerPhone.find_by(ContactNumber: @phoneNumber, CustomerSearchID: @customer.id)
-        if(@customerPhone.blank?)
-          @customerPhone = CustomerPhone.new(CustomerSearchID: @customer.id, ContactNumber: @phoneNumber, DateCreated: time)
-        @customerPhone.save
-        end
-
-        @customerSearchLog = CustomerSearchLog.new(CustomerSearchID: @customer.id, SearchedDateTime: time)
-        @customerSearchLog.save
-
+        
         @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs
                                   join customer_addresses ca on cs.AddressID = ca.id
                                   join customer_phones cp on cs.id = cp.CustomerSearchID
@@ -101,6 +104,7 @@ class CustomerSearchController < ApplicationController
           else
             @custoemrIDs = @customer[0].id
           end
+          
           @reviewCount = Review.where(CustomerSearchID: @custoemrIDs, IsApproved: 1, IsPublished: 1).count
           @isUser = Review.where(CustomerSearchID: @custoemrIDs.to_s, UserID: currentUserID)
           @reviewer = SubscribedUser.find_by_sql("select user.id, cust.id as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated
@@ -113,14 +117,6 @@ class CustomerSearchController < ApplicationController
                   join customer_searches cust on cust.id= rev.CustomerSearchID
 
                   where rev.UserID = '" + session[:user_id].to_s + "' and cust.id IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit 0, 9")
-
-          if(!@currentreviewer.blank?)
-            @customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer[0].id, UserID: currentUserID, IsReviewGiven: 1, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
-          @customerReviewJoin.save
-          else
-            @customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer[0].id, UserID: currentUserID, IsReviewGiven: 0, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
-          @customerReviewJoin.save
-          end
 
           @customerAddress = CustomerAddress.find_by(StreetAddress: @streetAddress, City: @city, State: @state, ZipCode: @zipCode)
           if(!@customerAddress.blank?)
@@ -166,6 +162,27 @@ class CustomerSearchController < ApplicationController
                 @grantZipcode = @grantor.ZipCode
               end
             end
+          
+          end
+        end
+          
+        if(@customerSearch[0].id == nil)
+          searchID = @customerSearch.id
+        else
+          searchID = @customerSearch[0].id
+        end
+        
+        @customerSearchLog = CustomerSearchLog.new(CustomerSearchID: searchID, SearchedDateTime: time)
+        @customerSearchLog.save
+          
+        @customerReviewJoin = CustomerReviewJoin.find_by(CustomerSearchID: searchID, UserID: currentUserID)
+        if(@customerReviewJoin.blank?)
+          if(!@currentreviewer.blank?)
+            @customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: searchID, UserID: currentUserID, IsReviewGiven: 1, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
+            @customerReviewJoin.save
+          else
+            @customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: searchID, UserID: currentUserID, IsReviewGiven: 0, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
+            @customerReviewJoin.save
           end
         end
 

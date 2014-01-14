@@ -180,7 +180,7 @@ class ReviewCustomersController < ApplicationController
       @customerReviewJoin.save
       else
         @customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer[0].id, UserID: @userID, IsReviewGiven: 1, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
-      @customerReviewJoin.save
+        @customerReviewJoin.save
       end
 
       @subscribedUser = SubscribedUser.find_by(ID: @userID)

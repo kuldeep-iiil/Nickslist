@@ -161,7 +161,7 @@
 							</ul>
 							<div id="tabs-1" class="tab1-panel">
 								<div class="content">
-									<% if(@reviewCount.to_i <= 0) %>
+									<% if(@reviewCount.to_i <= 0 && @isUser.blank?) %>
 										<% if(@ChkTermsConditions == 1) %>
 											<form action="<%= review_customers_TermsConditions_url %>" method="post">
 										<% else %>
