@@ -57,7 +57,6 @@ class CustomerSearchController < ApplicationController
         #streetAddress=params[:txtStreetAddress].gsub('#','' )
         streetAddress=params[:txtStreetAddress].gsub(' ', '+')
         #streetAddress=streetAddress.gsub(' ', '+')
-        params[:txtStreetAddress]
 
         #citystatezip=params[:selectCity] + '%2C+' + params[:selectState] + '%2C+' + params[:txtZipCode]
         city=params[:selectCity].gsub(' ', '+')

@@ -144,7 +144,7 @@
 										<input name="txtLastName" type="text" required="true" class="textbox-small" id="txtLastName" placeholder="Last Name" pattern="^[A-Za-z]+[A-Za-z]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Steve]')" oninput="setCustomValidity('')" />
 									</div>
 									<div class="form-textbox">
-										<input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" />
+										<input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" pattern="^[A-Za-z0-9 ,]+$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [11111, Street Address]')" oninput="setCustomValidity('')" />
 									</div>
 									<div class="form-textbox">
 										<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" pattern="^[A-Za-z]+[ ]?[A-Za-z]+,[ ][A-Za-z]{2,2}$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle, WA] ')" oninput="setCustomValidity('')" />
@@ -153,7 +153,7 @@
 										<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" />-->
 									</div>
 									<div class="form-textbox">
-										<input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" placeholder="Zipcode" pattern="^[0-9]+[0-9]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [123456] ')" oninput="setCustomValidity('')" />
+										<input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" maxlength="6" placeholder="Zipcode" pattern="^[0-9]+[0-9]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [123456] ')" oninput="setCustomValidity('')" />
 									</div>
 									<div class="form-textbox">
 										<input name="txtPhoneNumber" type="text" required="true" class="textbox-small" id="txtPhoneNumber" size="12" placeholder="Phone Number" pattern="^[0-9]{3,3}[-]?[0-9]{3,3}[-]?[0-9]{4,4}$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [1234567890 or 123-456-7890] ')" oninput="setCustomValidity('')" />
