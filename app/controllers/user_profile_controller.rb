@@ -3,7 +3,7 @@ class UserProfileController < ApplicationController
   def EditProfile
     if(!session[:user_id])
       redirect_to nicks_list_Index_url, flash:{:redirectUrl => user_profile_ViewProfile_url}
-    end
+    else
     
     @userID = session[:user_id]
     if(!@userID.blank?)
@@ -28,13 +28,14 @@ class UserProfileController < ApplicationController
       @userlicense = userDetails.LicenseNumber
       @error = ""
     end
+    end
   end
 
   def ViewProfile
     
     if(!session[:user_id])
       redirect_to nicks_list_Index_url, flash:{:redirectUrl => user_profile_ViewProfile_url}
-    end
+    else
     
     @userID = session[:user_id]
     if(!@userID.blank?)
@@ -56,6 +57,7 @@ class UserProfileController < ApplicationController
       @useremail = userDetails.EmailID
       @userlicense = userDetails.LicenseNumber
       @error = ""
+    end
     end
   end
   
