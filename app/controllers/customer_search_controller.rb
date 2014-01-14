@@ -83,8 +83,8 @@ class CustomerSearchController < ApplicationController
           @customerAddress.save
           end
 
-          @customerSearch = CustomerSearch.new(FirstName: @firstName, LastName: @lastName, AddressID: @customerAddress.id, SearchDate: time)
-          @customerSearch.save
+          @customerAdded = CustomerSearch.new(FirstName: @firstName, LastName: @lastName, AddressID: @customerAddress.id, SearchDate: time)
+          @customerAdded.save
 
           @customerPhone = CustomerPhone.find_by(ContactNumber: @phoneNumber, CustomerSearchID: @customerSearch.id)
           if(@customerPhone.blank?)
@@ -166,8 +166,8 @@ class CustomerSearchController < ApplicationController
           end
         end
           
-        if(@customerSearch[0].id == nil)
-          searchID = @customerSearch.id
+        if(@customerSearch.blank?)
+          searchID = @customerAdded.id
         else
           searchID = @customerSearch[0].id
         end
