@@ -47,8 +47,6 @@
 					document.getElementById('textMailStreetAddress').readOnly = true;
 					document.getElementById('textMailCity').value = document.getElementById('textBussCity').value;
 					document.getElementById('textMailCity').readOnly = true;
-					//document.getElementById('textMailState').value= document.getElementById('textBussState').value;
-					//document.getElementById('textMailState').readOnly= true;
 					document.getElementById('textMailZipCode').value = document.getElementById('textBussZipCode').value;
 					document.getElementById('textMailZipCode').readOnly = true;
 				} else {
@@ -56,8 +54,6 @@
 					document.getElementById('textMailStreetAddress').readOnly = false;
 					document.getElementById('textMailCity').value = '';
 					document.getElementById('textMailCity').readOnly = false;
-					//document.getElementById('textMailState').value= '';
-					//document.getElementById('textMailState').readOnly= false;
 					document.getElementById('textMailZipCode').value = '';
 					document.getElementById('textMailZipCode').readOnly = false;
 				}
@@ -174,9 +170,7 @@
 										<div class="singup-textarea">
 											<input type="text" name="textBussCity" id="textBussCity" required="true" class="singup-textbox-small" pattern="^[A-Za-z]+,[ ]?[A-Za-z]{2,2}$" placeholder="City, State" value="<%= @userbusscitystateVal %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle, WA] ')" oninput="setCustomValidity('')" />
 										</div>
-										<!--<div class="singup-textarea">
-										<input type="text" name="textBussState" id="textBussState" required="true" class="singup-textbox-small"  placeholder="State" value="<%= params[:textBussState] %>" />
-										</div>-->
+										
 
 										<div class="singup-textarea">
 											<input type="checkbox" id="chkAddress" name="chkAddress" value="1" onclick="check_chkAddress(this);" />
@@ -191,9 +185,7 @@
 										<div class="singup-textarea">
 											<input type="text" name="textMailCity" id="textMailCity" required="true" class="singup-textbox-small" pattern="^[A-Za-z]+,[ ]?[A-Za-z]{2,2}$" placeholder="City, State" value="<%= @usermailcitystateVal %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle, WA] ')" oninput="setCustomValidity('')" />
 										</div>
-										<!--<div class="singup-textarea">
-										<input type="text" name="textMailState" id="textMailState" required="true" class="singup-textbox-small"  placeholder="State" value="<%= params[:textMailState] %>" />
-										</div>-->
+										
 
 										<div class="singup-textarea">
 											<input type="text" name="textPhoneNumber" id="textPhoneNumber" required="true" pattern="^[0-9]{3,3}[-]?[0-9]{3,3}[-]?[0-9]{4,4}$" class="singup-textbox-small"  placeholder="Phone Number" value = "<%= @userphoneNumber %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [1234567890 or 123-456-7890] ')" oninput="setCustomValidity('')" />
@@ -206,13 +198,13 @@
 											<input type="text" name="textLicense" id="textLicense" required="true" class="singup-textbox-small"  placeholder="Contractor License Number" value="<%= @userlicense %>" />
 										</div>
 										<div class="singup-textarea">
-											<input type="text" name="textUserName" id="textUserName" required="true" class="singup-textbox-small"  placeholder="User Name" value="<%= @useruserName %>" />
+											<input type="text" name="textUserName" id="textUserName" autocomplete="off" required="true" class="singup-textbox-small"  placeholder="User Name" value="<%= @useruserName %>" />
 										</div>
 										<div class="singup-textarea">
-											<input type="password" name="textPassword" id="textPassword" required="true" onchange="form.textConfirmPassword.pattern = this.value;" class="singup-textbox-small"  placeholder="Password" />
+											<input type="password" name="textPassword" id="textPassword" autocomplete="off" required="true" onchange="form.textConfirmPassword.pattern = this.value;" class="singup-textbox-small"  placeholder="Password" />
 										</div>
 										<div class="singup-textarea">
-											<input type="password"  name="textConfirmPassword" id="textConfirmPassword" required="true" class="singup-textbox-small"  placeholder="Confirm Password" />
+											<input type="password"  name="textConfirmPassword" id="textConfirmPassword" autocomplete="off" required="true" class="singup-textbox-small"  placeholder="Confirm Password" />
 										</div>
 										<div class="singup-textarea">
 											<input type="submit" name="Submit" id="Submit" value="Save & Continue" class="org-bt" />

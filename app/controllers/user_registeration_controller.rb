@@ -19,8 +19,6 @@ class UserRegisterationController < ApplicationController
       @userbussState = @userbusscitystateVal.at(1).strip()      
     end
       
-    #bussCity = params[:textBussCity]
-    #bussState = params[:textBussState]    
     @userbussZipCode = params[:textBussZipCode]
     
     @usermailStreetAddress = params[:textMailStreetAddress]    
@@ -32,9 +30,7 @@ class UserRegisterationController < ApplicationController
       @usermailCity = @usermailcitystateVal.at(0).strip()
       @usermailState = @usermailcitystateVal.at(1).strip()      
     end
-    
-    #mailCity = params[:textMailCity]
-    #mailState = params[:textMailState]
+   
     @usermailZipCode = params[:textMailZipCode]
     @userphoneNumber = params[:textPhoneNumber]
     @useremail = params[:textEmail]
@@ -109,7 +105,7 @@ class UserRegisterationController < ApplicationController
           @subscribedUser.save 
         
           #Get UserID for User to save user address details.
-          user = SubscribedUser.find_by(UserName: @userName)
+          user = SubscribedUser.find_by(UserName: @useruserName)
         
           #Save Address Details
           @userBussAddressDetail = UserAddressDetail.new(UserID: user.id, AddressType: 'Business', Address: @userbussStreetAddress, City: @userbussCity, State: @userbussState, ZipCode: @userbussZipCode, DateCreated: time, DateUpdated: time)
