@@ -71,6 +71,8 @@ NicksListProj::Application.routes.draw do
   get "/customer_search/LoadReviews"
   post "/customer_search/GetDetails"
   get "/customer_search/GetDetails"
+  post "customer_search/ViewSearchResultPage"
+  get "customer_search/ViewSearchResultPage"
   post "/nicks_list/Index"
   get "/nicks_list/Index"
   post "/nicks_list/About"

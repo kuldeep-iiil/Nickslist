@@ -6,17 +6,8 @@ class CustomerSearchController < ApplicationController
   skip_before_action :verify_authenticity_token
   def GetDetails
     if(!session[:user_id])
-      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_GetDetails_url}
+      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
     else
-
-      if(!flash[:hidFirstName].blank?)
-        params[:txtFirstName] = flash[:hidFirstName]
-        params[:txtLastName] = flash[:hidLastName]
-        params[:txtPhoneNumber] = flash[:hidPhoneNumber]
-        params[:txtStreetAddress] = flash[:hidStreetAddress]
-        params[:selectCity] = flash[:hidselectCity]
-        params[:txtZipCode] = flash[:hidZipCode]
-      end
 
       if(!params[:hidFirstName].blank?)
         params[:txtFirstName] = params[:hidFirstName]
@@ -91,7 +82,7 @@ class CustomerSearchController < ApplicationController
           @customerPhone.save
           end
         end
-        
+
         @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs
                                   join customer_addresses ca on cs.AddressID = ca.id
                                   join customer_phones cp on cs.id = cp.CustomerSearchID
@@ -103,7 +94,7 @@ class CustomerSearchController < ApplicationController
           else
             @custoemrIDs = @customer[0].id
           end
-          
+
           @reviewCount = Review.where(CustomerSearchID: @custoemrIDs, IsApproved: 1, IsPublished: 1).count
           @isUser = Review.where(CustomerSearchID: @custoemrIDs.to_s, UserID: currentUserID)
           @reviewer = SubscribedUser.find_by_sql("select user.id, cust.id as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated
@@ -161,27 +152,27 @@ class CustomerSearchController < ApplicationController
                 @grantZipcode = @grantor.ZipCode
               end
             end
-          
+
           end
         end
-          
+
         if(@customerSearch.blank?)
-          searchID = @customerAdded.id
+        searchID = @customerAdded.id
         else
-          searchID = @customerSearch[0].id
+        searchID = @customerSearch[0].id
         end
-        
+
         @customerSearchLog = CustomerSearchLog.new(CustomerSearchID: searchID, SearchedDateTime: time)
         @customerSearchLog.save
-          
+
         @customerReviewJoin = CustomerReviewJoin.find_by(CustomerSearchID: searchID, UserID: currentUserID)
         if(@customerReviewJoin.blank?)
           if(!@currentreviewer.blank?)
             @customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: searchID, UserID: currentUserID, IsReviewGiven: 1, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
-            @customerReviewJoin.save
+          @customerReviewJoin.save
           else
             @customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: searchID, UserID: currentUserID, IsReviewGiven: 0, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
-            @customerReviewJoin.save
+          @customerReviewJoin.save
           end
         end
 
@@ -232,54 +223,49 @@ class CustomerSearchController < ApplicationController
   end
 
   def LoadReviews
-    if(!session[:user_id])
-      redirect_to nicks_list_Index_url
-    else
+    if(!session[:hidFirstName].blank?)
+      params[:hidFirstName] = session[:hidFirstName]
+      params[:hidLastName] = session[:hidLastName]
+      params[:hidPhoneNumber] = session[:hidPhoneNumber]
+      params[:hidStreetAddress] = session[:hidStreetAddress]
+      params[:hidselectCity] = session[:hidselectCity]
+      params[:hidZipCode] = session[:hidZipCode]
+    end
 
-      if(!session[:hidFirstName].blank?)
-        params[:hidFirstName] = session[:hidFirstName]
-        params[:hidLastName] = session[:hidLastName]
-        params[:hidPhoneNumber] = session[:hidPhoneNumber]
-        params[:hidStreetAddress] = session[:hidStreetAddress]
-        params[:hidselectCity] = session[:hidselectCity]
-        params[:hidZipCode] = session[:hidZipCode]
-      end
+    @index = session[:indexVal]
+    @index = @index.to_i + 9
+    session[:indexVal] = @index
 
-      @index = session[:indexVal]
-      @index = @index.to_i + 9
-      session[:indexVal] = @index
+    @firstName = params[:hidFirstName]
+    @lastName = params[:hidLastName]
+    @phoneNumber = params[:hidPhoneNumber]
+    @streetAddress = params[:hidStreetAddress]
+    @citystateVal = params[:hidselectCity]
+    @zipCode = params[:hidZipCode]
+    @city = ""
+    @state = ""
+    if(!@citystateVal.blank?)
+      @citystateValSplit = @citystateVal.split(',')
+      @city = @citystateValSplit.at(0).strip()
+      @state = @citystateValSplit.at(1).strip()
+    end
 
-      @firstName = params[:hidFirstName]
-      @lastName = params[:hidLastName]
-      @phoneNumber = params[:hidPhoneNumber]
-      @streetAddress = params[:hidStreetAddress]
-      @citystateVal = params[:hidselectCity]
-      @zipCode = params[:hidZipCode]
-      @city = ""
-      @state = ""
-      if(!@citystateVal.blank?)
-        @citystateValSplit = @citystateVal.split(',')
-        @city = @citystateValSplit.at(0).strip()
-        @state = @citystateValSplit.at(1).strip()
-      end
-
-      if(@firstName != nil && @lastName != nil && @phoneNumber != nil && @streetAddress != nil && @citystateVal != nil && @zipCode != nil)
-        @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs
+    if(@firstName != nil && @lastName != nil && @phoneNumber != nil && @streetAddress != nil && @citystateVal != nil && @zipCode != nil)
+      @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs
                                   join customer_addresses ca on cs.AddressID = ca.id
                                   join customer_phones cp on cs.id = cp.CustomerSearchID
                                   where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZipCode = '" + @zipCode + "')")
+    end
+    if(!@customer.blank?)
+      if(@customer.length > 1)
+        @custoemrIDs = @customer.collect {|cust| cust.id}.join(',')
+      else
+        @custoemrIDs = @customer[0].id
       end
-      if(!@customer.blank?)
-        if(@customer.length > 1)
-          @custoemrIDs = @customer.collect {|cust| cust.id}.join(',')
-        else
-          @custoemrIDs = @customer[0].id
-        end
-        @reviewer = SubscribedUser.find_by_sql("select user.id, cust.id as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated
+      @reviewer = SubscribedUser.find_by_sql("select user.id, cust.id as 'CustomerID', rev.ID as 'ReviewID', rev.DateCreated
                   from subscribed_users user join reviews rev on user.id  = rev.UserID
                   join customer_searches cust on cust.id= rev.CustomerSearchID
                   where rev.IsApproved = '1' and rev.IsPublished = '1' and cust.id IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc limit " + @index.to_s + " ,9")
-      end
     end
   end
 
@@ -325,5 +311,14 @@ class CustomerSearchController < ApplicationController
     xmldoc.elements.each('SearchResults/response/results/result/lastSoldPrice') do |long|
       @lastSoldPrice = number_to_currency(long.text, :unit => "$")
     end
+  end
+
+  def ViewSearchResultPage
+    @firstName = flash[:hidFirstName]
+    @lastName = flash[:hidLastName]
+    @phoneNumber = flash[:hidPhoneNumber]
+    @streetAddress = flash[:hidStreetAddress]
+    @cityState = flash[:hidselectCity]
+    @zipCode = flash[:hidZipCode]
   end
 end

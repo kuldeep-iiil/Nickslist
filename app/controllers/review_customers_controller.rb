@@ -2,7 +2,8 @@ class ReviewCustomersController < ApplicationController
   skip_before_action :verify_authenticity_token
   def AddReviews
     if(!session[:user_id])
-      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :redirectUrl => review_customers_AddReviews_url}
+      #redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :redirectUrl => review_customers_AddReviews_url}
+      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
     else
 
       @reviewQuestion = ReviewQuestion.all
@@ -180,7 +181,7 @@ class ReviewCustomersController < ApplicationController
       @customerReviewJoin.save
       else
         @customerReviewJoin = CustomerReviewJoin.new(CustomerSearchID: @customer[0].id, UserID: @userID, IsReviewGiven: 1, IsRequestSent: 0, DateCreated: time, DateUpdated: time)
-        @customerReviewJoin.save
+      @customerReviewJoin.save
       end
 
       @subscribedUser = SubscribedUser.find_by(ID: @userID)
@@ -195,12 +196,14 @@ class ReviewCustomersController < ApplicationController
       mail_to_user = UserMailer.ReviewUserNotification(@userfirstName, @userlastName, @userEmail, @firstName, @lastName, @phoneNumber, @streetAddress, @zipCode, @citystateVal)
     mail_to_user.deliver
     end
-    redirect_to customer_search_GetDetails_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}, :notice => "Review added successfully!"
+    #redirect_to customer_search_ViewSearchResultPage_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}, :notice => "Review added successfully!"
+    redirect_to customer_search_ViewSearchResultPage_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}, :notice => "Review added successfully!"
   end
 
   def ReadReviews
     if(!session[:user_id])
-      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :hidReviewerID => params[:hidReviewerID], :hidReviewID => params[:hidReviewID], :hidReviewCount => params[:hidReviewCount], :redirectUrl => review_customers_ReadReviews_url}
+      #redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :hidReviewerID => params[:hidReviewerID], :hidReviewID => params[:hidReviewID], :hidReviewCount => params[:hidReviewCount], :redirectUrl => review_customers_ReadReviews_url}
+      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
     else
 
       if(!flash[:hidFirstName].blank?)
@@ -312,7 +315,8 @@ class ReviewCustomersController < ApplicationController
   def TermsConditions
 
     if(!session[:user_id])
-      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :redirectUrl => customer_search_GetDetails_url}
+      #redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :redirectUrl => customer_search_GetDetails_url}
+      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
     else
 
       @siteContent = SiteContent.find_by(PageCode: 105)
@@ -335,62 +339,11 @@ class ReviewCustomersController < ApplicationController
     end
   end
 
-  def ListReviews
-
-    if(!session[:user_id])
-      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :redirectUrl => review_customers_ListReviews_url}
-    else
-
-      if(!flash[:hidFirstName].blank?)
-        params[:hidFirstName] = flash[:hidFirstName]
-        params[:hidLastName] = flash[:hidLastName]
-        params[:hidPhoneNumber] = flash[:hidPhoneNumber]
-        params[:hidStreetAddress] = flash[:hidStreetAddress]
-        params[:hidselectCity] = flash[:hidselectCity]
-        params[:hidZipCode] = flash[:hidZipCode]
-      end
-
-      @ChkTermsConditions = 1
-
-      @firstName = params[:hidFirstName]
-      @lastName = params[:hidLastName]
-      @phoneNumber = params[:hidPhoneNumber]
-      @streetAddress = params[:hidStreetAddress]
-      @citystateVal = params[:hidselectCity]
-      @zipCode = params[:hidZipCode]
-      @city = ""
-      @state = ""
-      if(!@citystateVal.blank?)
-        @citystateValSplit = @citystateVal.split(',')
-        @city = @citystateValSplit.at(0).strip()
-        @state = @citystateValSplit.at(1).strip()
-      end
-
-      if(@firstName != nil && @lastName != nil && @phoneNumber != nil && @streetAddress != nil && @citystateVal != nil && @zipCode != nil)
-        @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs
-                                  join customer_addresses ca on cs.AddressID = ca.id
-                                  join customer_phones cp on cs.id = cp.CustomerSearchID
-                                  where (cs.LastName = '" + @lastName + "' AND cp.ContactNumber = '" + @phoneNumber + "') OR (ca.StreetAddress = '" + @streetAddress + "' AND ca.City = '" + @city + "' AND ca.State = '" + @state + "' AND ca.ZipCode = '" + @zipCode + "')")
-      end
-      if(!@customer.blank?)
-        if(@customer.length > 1)
-          @custoemrIDs = @customer.collect {|cust| cust.id}.join(',')
-        else
-          @custoemrIDs = @customer[0].id
-        end
-        @reviewer = SubscribedUser.find_by_sql("select user.id, cust.id as 'CustomerID', rev.id as 'ReviewID', rev.DateCreated
-                  from subscribed_users user join reviews rev on user.id  = rev.UserID
-                  join customer_searches cust on cust.id= rev.CustomerSearchID
-
-                  where cust.id IN ('" + @custoemrIDs.to_s + "') order by rev.DateCreated desc")
-      end
-    end
-  end
-
   def UpdateReviews
 
     if(!session[:user_id])
-      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :hidReviewerID => params[:hidReviewerID], :hidReviewID => params[:hidReviewID], :hidReviewCount => params[:hidReviewCount], :redirectUrl => review_customers_UpdateReviews_url}
+      #redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :hidReviewerID => params[:hidReviewerID], :hidReviewID => params[:hidReviewID], :hidReviewCount => params[:hidReviewCount], :redirectUrl => review_customers_UpdateReviews_url}
+      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
     else
 
       if(!flash[:hidFirstName].blank?)
@@ -738,7 +691,8 @@ class ReviewCustomersController < ApplicationController
     @reviewAnswerUpdate.DateUpdated = time
     @reviewAnswerUpdate.save
 
-    redirect_to customer_search_GetDetails_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}, :notice => "Review updated successfully!"
+    redirect_to customer_search_ViewSearchResultPage_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}, :notice => "Review updated successfully!"
+  #redirect_to customer_search_GetDetails_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}, :notice => "Review updated successfully!"
   end
 
 end
