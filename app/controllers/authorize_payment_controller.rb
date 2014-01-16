@@ -82,7 +82,7 @@ class AuthorizePaymentController < ApplicationController
         @userPaymentDetails.DateUpdated = time
         @userPaymentDetails.save
         
-        @subscribedUser = SubscribedUser.find_by(ID: @userPaymentDetails.UserID)
+        @subscribedUser = SubscribedUser.find_by(id: @userPaymentDetails.UserID)
         @subscribedUser.IsSubscribed = 1
         @subscribedUser.DateUpdated = time
         @subscribedUser.save
