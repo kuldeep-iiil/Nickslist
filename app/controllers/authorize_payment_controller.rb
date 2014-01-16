@@ -93,11 +93,11 @@ class AuthorizePaymentController < ApplicationController
         @userEmail = @subscribedUser.EmailID
         @amount = @userPaymentDetails.TransactionAmount
           
-        mail_to_admin = UserMailer.NewUserNotification(@userfirstName, @userlastName, @useremail, @invoiceNumber, @amount)
-        mail_to_admin.deliver 
+        #mail_to_admin = UserMailer.NewUserNotification(@userfirstName, @userlastName, @useremail, @invoiceNumber, @amount)
+        #mail_to_admin.deliver 
           
-        mail_to_user = UserMailer.WelcomeUser(@userfirstName, @userlastName, @useremail, @invoiceNumber, @amount)
-        mail_to_user.deliver        
+        #mail_to_user = UserMailer.WelcomeUser(@userfirstName, @userlastName, @useremail, @invoiceNumber, @amount)
+        #mail_to_user.deliver        
                 
       end
       render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['receipt_url'] + '?in=' + @invoiceNumber)
