@@ -158,4 +158,8 @@ class UserRegisterationController < ApplicationController
         end
      end 
   end
+  
+  def SaveContinue
+    
+  end
 end

@@ -4,18 +4,18 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hi <%= @userfirstName %> <%= @userlastName %>, Welcome to Nickslist.</h1>
+    <h4>Hi <%= @userfirstName %> <%= @userlastName %>, Welcome to Nickslist.</h4>
     <p>
       You have successfully registered with Nicklist.<br/><br/>
       Soon your account will be activated and then you can login to our website.<br /><br/>
-      For this, you will be notified on the registered emailid.
+      For this, you will be notified on your registered emailid.
     </p>
     <p>
       Please find below your payment details: <br />
-      Payment Status: <%= @responseStatus %> <br />
+      Payment Status: Succesful <br />
       Payment Amount: $<%= @amount %> <br />
-      Transaction ID : <%= @transactionID %> <br />
+      Transaction ID : <%= @invoiceNumber %> <br />
     </p>
-    <p>Thanks for joining and have a great day!</p>
+    <p>Thanks for joining us and have a great day!</p>
   </body>
 </html>

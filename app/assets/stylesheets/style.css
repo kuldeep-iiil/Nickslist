@@ -1487,3 +1487,19 @@ float:left;
 	font-weight: normal;
 	margin: 5px 0;
 }
+#reciept-area {
+width: 942px;
+float: left;
+background: #ffffff;
+border: 1px solid #d7d7d7;
+padding: 25px 25px;
+border-radius: 5px;
+}
+
+.reciept-area-heading h1 {
+width: 940px;
+font-size: 22px;
+color: #2464a3;
+font-weight: bold;
+border-bottom: 1px solid #d7d7d7;
+}
