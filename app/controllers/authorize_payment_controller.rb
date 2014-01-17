@@ -88,7 +88,7 @@ class AuthorizePaymentController < ApplicationController
         @subscribedUser.save
         
         
-        @userfirstName = @subscribedUser.Firstname
+        @userfirstName = @subscribedUser.FirstName
         @userlastName = @subscribedUser.LastName
         @useremail = @subscribedUser.EmailID
         @amount = @userPaymentDetails.TransactionAmount
