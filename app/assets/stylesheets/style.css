@@ -83,7 +83,7 @@ input, textarea { color: #000; }
 }
 
 #wrapper {
-	width: 100%;
+	/*width: 100%;*/
 	float: left;
 }
 .browser-center {
@@ -270,9 +270,35 @@ input[type=button], input[type=submit], button
 	width: 100%;
 	float: left;
 	background: url(/assets/banner.jpg) no-repeat;
-	min-height: 160px;
+	min-height: 256px;
 	position: relative
 }
+
+.banner-content-innwe {
+	float: left;
+	margin-top: 28px;
+	width: 435px;
+}
+.banner-content-innwe h1 {
+	font-family: 'OpenSans', Arial, sans-serif;
+	font-weight: normal;
+	color: #ffffff;
+	font-size: 38px
+}
+.banner-content-innwe p {
+	color: #ffffff;
+	font-family: 14px;
+	margin: 10px 0;
+	line-height: 20px
+}
+.banner-content-innwe p a {
+	background: url(/assets/org-bt-bg.jpg) repeat-x;
+	padding: 11px;
+	color: #ffffff;
+	border-radius: 5px;
+	float: left
+}
+
 #search {
 	width: 970px;
 	background: #174986;
