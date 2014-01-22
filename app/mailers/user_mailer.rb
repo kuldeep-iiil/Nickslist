@@ -9,12 +9,13 @@ class UserMailer < ActionMailer::Base
       mail(to: email_to, subject: email_subject)  
   end  
   
-  def WelcomeUser(userfirstName, userlastName, userEmail, invoiceNumber, amount)         
+  def WelcomeUser(userfirstName, userlastName, userEmail, invoiceNumber, amount, authCode)         
       @userfirstName = userfirstName
       @userlastName = userlastName
       @userEmail = userEmail
       @invoiceNumber = invoiceNumber
       @amount = amount
+      @authCode = authCode
       email_to = userEmail      
       email_subject = "Welcome to Nickslist!"
       mail(to: email_to, subject: email_subject)  

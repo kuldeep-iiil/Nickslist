@@ -6,16 +6,21 @@
   <body>
     <h4>Hi <%= @userfirstName %> <%= @userlastName %>, Welcome to Nickslist.</h4>
     <p>
-      You have successfully registered with Nicklist.<br/><br/>
+      You have successfully registered with Nickslist.<br/><br/>
       Soon your account will be activated and then you can login to our website.<br /><br/>
-      For this, you will be notified on your registered emailid.
+      For this, you will be notified on your registered email address.
     </p>
     <p>
       Please find below your payment details: <br />
       Payment Status: Succesful <br />
-      Payment Amount: $<%= @amount %> <br />
+      Payment Amount: <%= @amount %> <br />
       Transaction ID : <%= @invoiceNumber %> <br />
     </p>
+    <% if(!@authCode.blank?) %>
+    <p>
+    	To register and subscribed new subsequent users, you can use the authorization code <b><%= @authCode %></b>. By using this authcode you will get 30% discount on subscription price.
+    </p>
+    <% end %>
     <p>Thanks for joining us and have a great day!</p>
   </body>
 </html>

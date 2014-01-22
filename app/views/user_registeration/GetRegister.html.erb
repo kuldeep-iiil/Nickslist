@@ -15,7 +15,9 @@
 					idSignupCode.style.display = 'none';
 					idSignupReadOnlyCode.style.display = 'none';
 					idSignupForm.style.display = 'block';
-
+					$('#hiddenFilledCode').val('');
+					$('#textCode').val('');
+					$('#textFilledCode').val('');
 					document.getElementById('chkAddress').disabled = false;
 					document.getElementById('textFilledCode').disabled = false;
 					document.getElementById('textCompany').disabled = false;
@@ -83,10 +85,13 @@
 					document.getElementById('textPhoneNumber').disabled = true;
 					document.getElementById('textLicense').disabled = true;
 
-					if (bussStreetAddress == mailStreetAddress && bussCity == mailCity && bussZipCode == mailZipCode) {
-						document.getElementById('chkAddress').checked = true;
-					} else {
-						document.getElementById('chkAddress').checked = false;
+					if(bussStreetAddress != '' && bussCity != '' && bussZipCode != '')
+					{
+						if (bussStreetAddress == mailStreetAddress && bussCity == mailCity && bussZipCode == mailZipCode) {
+							document.getElementById('chkAddress').checked = true;
+						} else {
+							document.getElementById('chkAddress').checked = false;
+						}
 					}
 					document.getElementById('chkAddress').disabled = true;
 				} else {
@@ -131,7 +136,7 @@
 								<div id="SignupCode">
 									<form action="/user_registeration/GetRegister" method="post">
 										<div class="singup-textarea">
-											<input type="text" name="textCode" id="textCode" required="true" class="singup-textbox-small" placeholder="Authorization Code" />
+											<input type="text" name="textCode" id="textCode" required="true" class="singup-textbox-small" placeholder="Authorization Code" pattern="^[0-9]+[0-9]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [12345678]')" oninput="setCustomValidity('')" />
 										</div>
 										<div class="singup-textarea">
 											<input type="submit" name="Submit" id="Submit" value="Submit" class="org-bt" />
@@ -162,13 +167,13 @@
 											<input type="text" name="textIncorporationType" id="textIncorporationType" required="true" class="singup-textbox"  placeholder="Type of Incorporation" value="<%= @userincorporationType %>" />
 										</div>
 										<div class="singup-textarea">
-											<input type="text" name="textBussStreetAddress" required="true" id="textBussStreetAddress" class="singup-textbox"  placeholder="Business Street Address" value="<%= @userbussStreetAddress %>" />
+											<input type="text" name="textBussStreetAddress" required="true" id="textBussStreetAddress" class="singup-textbox"  placeholder="Business Street Address" value="<%= @userbussStreetAddress %>" pattern="^[A-Za-z0-9 ,]+$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [11111, Street Address]')" oninput="setCustomValidity('')" />
 										</div>
 										<div class="singup-textarea">
 											<input type="text" name="textBussZipCode" id="textBussZipCode" pattern="^[0-9]+[0-9]$" required="true" class="singup-textbox-small"  placeholder="ZipCode" value="<%= @userbussZipCode %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [123456] ')" oninput="setCustomValidity('')" />
 										</div>
 										<div class="singup-textarea">
-											<input type="text" name="textBussCity" id="textBussCity" required="true" class="singup-textbox-small" pattern="^[A-Za-z]+,[ ]?[A-Za-z]{2,2}$" placeholder="City, State" value="<%= @userbusscitystateVal %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle, WA] ')" oninput="setCustomValidity('')" />
+											<input type="text" name="textBussCity" id="textBussCity" required="true" class="singup-textbox-small" pattern="^[A-Za-z]+[ ]?[A-Za-z]+,[ ][A-Za-z]{2,2}$" placeholder="City, State" value="<%= @userbusscitystateVal %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle, WA] ')" oninput="setCustomValidity('')" />
 										</div>
 										
 
@@ -177,13 +182,13 @@
 											<label for="chkAddress">Use Business Address as Mailing Address.</label>
 										</div>
 										<div class="singup-textarea">
-											<input type="text" name="textMailStreetAddress" id="textMailStreetAddress" required="true" class="singup-textbox"  placeholder="Mailing Street Address" value="<%= @usermailStreetAddress %>" />
+											<input type="text" name="textMailStreetAddress" id="textMailStreetAddress" required="true" class="singup-textbox"  placeholder="Mailing Street Address" value="<%= @usermailStreetAddress %>" pattern="^[A-Za-z0-9 ,]+$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [11111, Street Address]')" oninput="setCustomValidity('')" />
 										</div>
 										<div class="singup-textarea">
 											<input type="text" name="textMailZipCode" id="textMailZipCode" required="true" pattern="^[0-9]+[0-9]$" class="singup-textbox-small"  placeholder="ZipCode" value="<%= @usermailZipCode %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [123456] ')" oninput="setCustomValidity('')" />
 										</div>
 										<div class="singup-textarea">
-											<input type="text" name="textMailCity" id="textMailCity" required="true" class="singup-textbox-small" pattern="^[A-Za-z]+,[ ]?[A-Za-z]{2,2}$" placeholder="City, State" value="<%= @usermailcitystateVal %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle, WA] ')" oninput="setCustomValidity('')" />
+											<input type="text" name="textMailCity" id="textMailCity" required="true" class="singup-textbox-small" pattern="^^[A-Za-z]+[ ]?[A-Za-z]+,[ ][A-Za-z]{2,2}$" placeholder="City, State" value="<%= @usermailcitystateVal %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle, WA] ')" oninput="setCustomValidity('')" />
 										</div>
 										
 

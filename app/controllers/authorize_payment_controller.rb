@@ -92,11 +92,18 @@ class AuthorizePaymentController < ApplicationController
         @userlastName = @subscribedUser.LastName
         @useremail = @subscribedUser.EmailID
         @amount = @userPaymentDetails.TransactionAmount
+        @authCode = ""
+        if(@subscribedUser.AuthCodeUsed)
+          @key = Key.find_by(UserID: @subscribedUser.id)
+          if(!@key.blank?)
+            @authCode = @key.Key
+          end
+        end
           
         mail_to_admin = UserMailer.NewUserNotification(@userfirstName, @userlastName, @useremail, @invoiceNumber, @amount)
         mail_to_admin.deliver 
           
-        mail_to_user = UserMailer.WelcomeUser(@userfirstName, @userlastName, @useremail, @invoiceNumber, @amount)
+        mail_to_user = UserMailer.WelcomeUser(@userfirstName, @userlastName, @useremail, @invoiceNumber, @amount, @authCode)
         mail_to_user.deliver        
                 
       end

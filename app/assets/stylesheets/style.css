@@ -48,7 +48,9 @@ h1, h2, h3, h4, p {
 }
 input, textarea { color: #000; }
 .placeholder { color: #aaa; }
-
+.error-text {
+	color:red;
+}
 .error {
 	position:absolute;
 	margin-top: -3%;
@@ -812,7 +814,7 @@ input[type=button], input[type=submit], button
 }
 
 .review-area {
-	width: 283px;
+	width: 270px;
 	float: left;
 	border-top: 1px solid #d4d4d4;
 	margin-top: 10px;
@@ -1449,7 +1451,7 @@ float:left;
 	display: block;
 	border-width: 0;
 	background: #ffffff !important;
-	width: 950px;
+	width: 960px;
 	color: #222222;
 	font-family: arial;
     font-size: 14px;
@@ -1467,7 +1469,7 @@ float:left;
 	display: none;
 	border-width: 0;
 	background: #ffffff !important;
-	width: 950px;
+	width: 960px;
 	color: #222222;
 	font-family: arial;
     font-size: 14px;
@@ -1488,18 +1490,18 @@ float:left;
 	margin: 5px 0;
 }
 #reciept-area {
-width: 942px;
-float: left;
-background: #ffffff;
-border: 1px solid #d7d7d7;
-padding: 25px 25px;
-border-radius: 5px;
+	width: 942px;
+	float: left;
+	background: #ffffff;
+	border: 1px solid #d7d7d7;
+	padding: 25px 25px;
+	border-radius: 5px;
 }
 
 .reciept-area-heading h1 {
-width: 940px;
-font-size: 22px;
-color: #2464a3;
-font-weight: bold;
-border-bottom: 1px solid #d7d7d7;
+	width: 940px;
+	font-size: 22px;
+	color: #2464a3;
+	font-weight: bold;
+	border-bottom: 1px solid #d7d7d7;
 }

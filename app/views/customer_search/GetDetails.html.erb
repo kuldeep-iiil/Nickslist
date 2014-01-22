@@ -41,6 +41,8 @@
 				$('#divTermConditions').hide();
     			$('#tabs-2').hide();
     			$('#tabs-1').show();
+    			$('#liTab1').addClass("ui-tabs-active ui-state-active");
+    			$('#liTab2').removeClass("ui-tabs-active ui-state-active");
     			return false;
 			});
 			$('#agreeSubmit').click(function(){
@@ -49,6 +51,8 @@
 				$('#divTermConditions').hide();
 				$('#tabs-1').hide();
     			$('#tabs-2').show();
+    			$('#liTab2').addClass("ui-tabs-active ui-state-active");
+    			$('#liTab1').removeClass("ui-tabs-active ui-state-active");
     			return false;
 			});
 		})
@@ -156,8 +160,8 @@
 								<!--<li><a href="#tabs-1">Reviews</a></li>
 								<li><a href="#tabs-2">Public Records</a></li>-->
 									
-								<li><a id="tab1" href="">Reviews</a></li>
-								<li><a id="tab2" href="">Public Records</a></li>
+								<li id="liTab1"><a id="tab1" href="">Reviews</a></li>
+								<li id="liTab2"><a id="tab2" href="">Public Records</a></li>
 							</ul>
 							<div id="tabs-1" class="tab1-panel">
 								<div class="content">

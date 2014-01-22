@@ -69,7 +69,7 @@ class UserRegisterationController < ApplicationController
           @price = number_to_currency(70.00, :unit => "$")
         end
         
-        userExistence = SubscribedUser.find_by(UserName: @userName)
+        userExistence = SubscribedUser.find_by(UserName: @useruserName)
         emailExistence = SubscribedUser.find_by(EmailID: @useremail)
         licenseExistence = SubscribedUser.find_by(LicenseNumber: @userlicense)
         companyExistence = SubscribedUser.find_by(CompanyName: @usercompanyName)
@@ -159,7 +159,4 @@ class UserRegisterationController < ApplicationController
      end 
   end
   
-  def SaveContinue
-    
-  end
 end

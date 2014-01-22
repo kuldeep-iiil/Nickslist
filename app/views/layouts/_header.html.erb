@@ -66,7 +66,7 @@
 									<input id="textPassword" name="textPassword" required="required" value="" title="password" tabindex="5" type="password">
 								</p>
 								<% if(!@errorMessage.blank?) %>
-								<div id="Error">
+								<div class="error-text">
 									<%= @errorMessage %>
 								</div>
 								<% end %>
@@ -88,7 +88,7 @@
 								</p>
 
 								<p class="forgot">
-									<a href="<%= authentication_requestpassword_url %>" id="resend_password_link">Forgot your password?</a>
+									<a href="<%= authentication_requestpassword_url %>" id="resend_password_link"><b>Forgot your password?</b></a>
 								</p>
 								<div class="signup">
 									New User? <a href="<%= user_registeration_GetRegister_url %>">Signup Here</a>

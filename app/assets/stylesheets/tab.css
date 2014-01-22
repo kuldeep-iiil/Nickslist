@@ -6,7 +6,7 @@
 .ui-tabs {
 	position: relative;/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
 	padding: 5px;
-	width: 972px;
+	width: 982px;
 	float: left;
 }
 .tab-con .ui-widget-content{ background:none!important; border:0!important}
@@ -65,7 +65,7 @@ a:active, a:focus{
 	display: block;
 	border-width: 0;
 	background: #ffffff !important;
-	width: 950px;
+	width: 960px;
 	color: #222222;
 	font-family: arial;
     font-size: 14px;
