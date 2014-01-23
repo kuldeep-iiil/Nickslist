@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   skip_before_action :verify_authenticity_token
-  default from: 'kuldeep.it2008@gmail.com'
+  default from: 'no_reply@nickslist.com'
   
   def ForgotPassword(email_to, email_password)         
       @password = email_password      
@@ -27,7 +27,7 @@ class UserMailer < ActionMailer::Base
       @userEmail = userEmail
       @invoiceNumber = invoiceNumber
       @amount = amount
-      email_to = "kuldeep.it2008@gmail.com"      
+      email_to = "info.nickslist@gmail.com"      
       email_subject = "User Registration Notification mail!"
       mail(to: email_to, subject: email_subject)  
   end
@@ -38,7 +38,7 @@ class UserMailer < ActionMailer::Base
       @userEmail = userEmail
       @userContact = userContact
       @comments = comments
-      email_to = "kuldeep.it2008@gmail.com"    
+      email_to = "info.nickslist@gmail.com"    
       email_subject = "Comment posted by " + userfirstName + " " + userlastName
       mail(to: email_to, from: 'noreply@gmail.com', subject: email_subject)  
   end
@@ -53,7 +53,7 @@ class UserMailer < ActionMailer::Base
       @streetAddress = streetAddress
       @zipCode = zipCode
       @cityState = cityState
-      email_to = "kuldeep.it2008@gmail.com"    
+      email_to = "info.nickslist@gmail.com"    
       email_subject = "Review Notification"
       mail(to: email_to, subject: email_subject)  
   end 
