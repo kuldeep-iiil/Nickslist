@@ -14,9 +14,9 @@ class UserRegisterationController < ApplicationController
     @userbussCity = ""
     @userbussState = ""
     if(!@userbusscitystateVal.blank?)
-      @userbusscitystateVal = @userbusscitystateVal.split(',')    
-      @userbussCity = @userbusscitystateVal.at(0).strip()      
-      @userbussState = @userbusscitystateVal.at(1).strip()      
+      @userbusscitystate = @userbusscitystateVal.split(',')    
+      @userbussCity = @userbusscitystate.at(0).strip()      
+      @userbussState = @userbusscitystate.at(1).strip()      
     end
       
     @userbussZipCode = params[:textBussZipCode]
@@ -26,9 +26,9 @@ class UserRegisterationController < ApplicationController
     @usermailCity = ""
     @usermailState = ""
     if(!@usermailcitystateVal.blank?)    
-      @usermailcitystateVal = @usermailcitystateVal.split(',')
-      @usermailCity = @usermailcitystateVal.at(0).strip()
-      @usermailState = @usermailcitystateVal.at(1).strip()      
+      @usermailcitystate = @usermailcitystateVal.split(',')
+      @usermailCity = @usermailcitystate.at(0).strip()
+      @usermailState = @usermailcitystate.at(1).strip()      
     end
    
     @usermailZipCode = params[:textMailZipCode]
