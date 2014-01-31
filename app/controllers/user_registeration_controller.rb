@@ -58,15 +58,19 @@ class UserRegisterationController < ApplicationController
       @userbussStreetAddress != nil and @userbussCity != nil and @userbussZipCode != nil and
       @usermailStreetAddress != nil and @usermailCity != nil and @usermailZipCode != nil and
       @userphoneNumber != nil and @useremail != nil and @userlicense != nil and @useruserName != nil and password != nil and salt != nil)
+        
+        
           
         if(keyCode.blank?)
           isUsed='0'
-          @itemprice = 100.00
-          @price = number_to_currency(100.00, :unit => "$")
+          @subPlan = UserSubscriptionPlan.find_by(PlanType: 'New User')
+          @itemprice = @subPlan.price
+          @price = number_to_currency(@itemprice.to_i, :unit => "$")
         else
           isUsed='1'
-          @itemprice = 70.00
-          @price = number_to_currency(70.00, :unit => "$")
+          @subPlan = UserSubscriptionPlan.find_by(PlanType: 'Subsequent User')
+          @itemprice = @subPlan.price
+          @price = number_to_currency(@itemprice.to_i, :unit => "$")
         end
         
         userExistence = SubscribedUser.find_by(UserName: @useruserName)
@@ -100,7 +104,7 @@ class UserRegisterationController < ApplicationController
           #Save User Information
           @subscribedUser = SubscribedUser.new(UserName: @useruserName, Password: password, Salt: salt, FirstName: @userfirstName,
           LastName: @userlastName, EmailID: @useremail, CompanyName: @usercompanyName, IncorporationType: @userincorporationType,
-          ContactNumber: @userphoneNumber, LicenseNumber: @userlicense, AuthCodeUsed: isUsed, IsActivated: 0, IsSubscribed: 0, 
+          ContactNumber: @userphoneNumber, LicenseNumber: @userlicense, AuthCodeUsed: isUsed, IsActivated: 0, IsSubscribed: 0, IsNotification: 1, 
           DateCreated: time, DateUpdated: time)        
           @subscribedUser.save 
         

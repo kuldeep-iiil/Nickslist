@@ -22,9 +22,10 @@
 		$(document).ready(function(){
 			$('#tab2').click(function(){
 				if($('#tabs-2').css('display') == 'none'){
-					$('body').css('overflow','hidden');
-					$('#divFadeOut').show();
-					$('#divTermConditions').show();
+					//$('body').css('overflow','hidden');
+					//$('#divFadeOut').show();
+					//$('#divTermConditions').show();
+					$("#frmTermsCondition").submit();
 				}
     			return false;
 			});
@@ -33,6 +34,8 @@
 					$('#tabs-2').hide();
     				$('#tabs-1').show();
 				}
+				$('#liTab1').addClass("ui-tabs-active ui-state-active");
+    			$('#liTab2').removeClass("ui-tabs-active ui-state-active");
     			return false;
 			});
 			$('#cancelSubmit').click(function(){
@@ -44,7 +47,7 @@
     			$('#liTab1').addClass("ui-tabs-active ui-state-active");
     			$('#liTab2').removeClass("ui-tabs-active ui-state-active");
     			return false;
-			});
+    		});
 			$('#agreeSubmit').click(function(){
 				$('body').css('overflow','auto');
 				$('#divFadeOut').hide();
@@ -54,7 +57,7 @@
     			$('#liTab2').addClass("ui-tabs-active ui-state-active");
     			$('#liTab1').removeClass("ui-tabs-active ui-state-active");
     			return false;
-			});
+    		});
 		})
 		
 	</script>  	
@@ -132,11 +135,11 @@
 						<% end %>
 						<% if(@lotSizeSqFt.present?) %>
 							<div class="Home-Details-Item">Lot</div>
-							<div class="Home-Details-Value">: <%= @lotSizeSqFt %>sqft</div>
+							<div class="Home-Details-Value">: <%= @lotSizeSqFt %> sqft</div>
 						<% end %>
 						<% if(@finishedSqFt.present?) %>
 							<div class="Home-Details-Item">Finished</div>
-							<div class="Home-Details-Value">: <%= @finishedSqFt %>sqft</div>
+							<div class="Home-Details-Value">: <%= @finishedSqFt %> sqft</div>
 						<% end %>
 						<% if(@bathrooms.present?) %>
 							<div class="Home-Details-Item">Bathrooms</div>
@@ -152,7 +155,37 @@
 					</div>
 
 					<div class="clear">&nbsp;</div>
-					
+					<form id="frmTermsCondition" action="<%= review_customers_TermsConditions_url %>" method="post">
+						<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= params[:txtFirstName] %>" />
+						<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
+						<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
+						<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
+						<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
+						<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= params[:txtPhoneNumber] %>" />
+						<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= customer_search_GetDetails_url %>" />
+					</form>
+					<% if(params[:hidIsAgree] != nil && params[:hidIsAgree].to_i == 1) %>
+						<script type="text/javascript">
+							$(function(){
+								//$('body').css('overflow','auto');
+								$('#tabs-1').hide();
+    							$('#tabs-2').show();
+    							$('#liTab2').addClass("ui-tabs-active ui-state-active");
+    							$('#liTab1').removeClass("ui-tabs-active ui-state-active");
+							});
+						</script>
+						
+					<% else %>
+						<script type="text/javascript">
+							$(function(){
+								//$('body').css('overflow','auto');
+    							$('#tabs-2').hide();
+    							$('#tabs-1').show();
+    							$('#liTab1').addClass("ui-tabs-active ui-state-active");
+    							$('#liTab2').removeClass("ui-tabs-active ui-state-active");
+    						});	
+						</script>
+					<% end %>
 					<div class="tab-con">
 						<div id="tabs">
 							<ul>
@@ -190,11 +223,10 @@
 									<% else %>
 										<h1> 
 											<div>
-												<%= params[:txtFirstName] %> <%= params[:txtLastName] %>
 												<% if(@reviewCount.to_i == 1) %>
-													has <%= @reviewCount.to_i %> review available
+													<%= @reviewCount.to_i %> review is available
 												<% else %>
-													has <%= @reviewCount.to_i %> reviews available
+													<%= @reviewCount.to_i %> reviews are available
 												<% end %> 
 											</div>
 											<% if(flash[:notice] != nil) %>
@@ -254,7 +286,7 @@
 															</div>
 															<div class="customer-detail">
 																<div class="customer-name-desc">
-																	<h1><%= r.DateCreated.strftime('%e %B, %Y') %></h1>
+																	<h1><%= r.DateCreated.strftime('%B %e, %Y') %></h1>
 																</div>
 															</div>
 														</div>

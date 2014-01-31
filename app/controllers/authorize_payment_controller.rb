@@ -107,7 +107,7 @@ class AuthorizePaymentController < ApplicationController
         mail_to_user.deliver        
                 
       end
-      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['receipt_url'] + '?in=' + @invoiceNumber)
+      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['receipt_url'] + '?in=' + @invoiceNumber + '&I=' + @subscribedUser.id)
     else
       @reason = sim_response.response_reason_text      
       @userPaymentDetails = UserPaymentDetail.find_by(BLTransactionID: @invoiceNumber)
@@ -127,6 +127,31 @@ class AuthorizePaymentController < ApplicationController
   # Displays a receipt.
   def receipt
    @invoiceNumber = request.query_parameters["in"]
+   @userID = request.query_parameters["I"]
+   if(!@userID.blank?)
+    userDetails = SubscribedUser.find_by(ID: @userID)
+    userBussAddressDetails = UserAddressDetail.find_by(UserID: @userID, AddressType: 'Business')
+    userMailAddressDetails = UserAddressDetail.find_by(UserID: @userID, AddressType: 'Mailing')
+    paymentDetail = UserPaymentDetail.find_by(PayTransactionID: @invoiceNumber);    
+    @usercompanyName = userDetails.CompanyName
+    @userfirstName = userDetails.FirstName
+    @userlastName = userDetails.LastName
+    @userincorporationType = userDetails.IncorporationType
+    @userbussStreetAddress = userBussAddressDetails.Address
+    @userbussCity = userBussAddressDetails.City
+    @userbussState = userBussAddressDetails.State
+    #@bussState = userBussAddressDetails.State
+    @userbussZipCode = userBussAddressDetails.ZipCode
+    @usermailStreetAddress = userMailAddressDetails.Address
+    @usermailCity = userMailAddressDetails.City
+    @usermailState = userMailAddressDetails.State
+    #@mailState = userMailAddressDetails.State
+    @usermailZipCode = userMailAddressDetails.ZipCode
+    @userphoneNumber = userDetails.ContactNumber
+    @useremail = userDetails.EmailID
+    @userlicense = userDetails.LicenseNumber
+    @price = paymentDetail.TransactionAmount
+   end
   end
 
   # GET

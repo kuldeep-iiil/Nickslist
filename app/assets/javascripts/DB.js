@@ -1,5 +1,5 @@
     var availableCities = [
-      "Aaronsburg, PA",
+	"Aaronsburg, PA",
 "Abbeville, AL",
 "Abbeville, GA",
 "Abbeville, LA",

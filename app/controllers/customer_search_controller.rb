@@ -162,7 +162,7 @@ class CustomerSearchController < ApplicationController
         searchID = @customerSearch[0].id
         end
 
-        @customerSearchLog = CustomerSearchLog.new(CustomerSearchID: searchID, SearchedDateTime: time)
+        @customerSearchLog = CustomerSearchLog.new(CustomerSearchID: searchID, UserID: currentUserID, SearchedDateTime: time)
         @customerSearchLog.save
 
         @customerReviewJoin = CustomerReviewJoin.find_by(CustomerSearchID: searchID, UserID: currentUserID)
@@ -294,10 +294,10 @@ class CustomerSearchController < ApplicationController
       @yearBuilt = long.text
     end
     xmldoc.elements.each('SearchResults/response/results/result/lotSizeSqFt') do |long|
-      @lotSizeSqFt = long.text
+      @lotSizeSqFt = number_with_delimiter(long.text)
     end
     xmldoc.elements.each('SearchResults/response/results/result/finishedSqFt') do |long|
-      @finishedSqFt = long.text
+      @finishedSqFt = number_with_delimiter(long.text)
     end
     xmldoc.elements.each('SearchResults/response/results/result/bathrooms') do |long|
       @bathrooms = long.text

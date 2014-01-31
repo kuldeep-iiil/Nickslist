@@ -24,7 +24,65 @@
                			<div id="SignupForm">               			
 							<h3>Your transaction ID:</h3>
 							<%= @invoiceNumber %>
+                        <br /><br />
+                        
+                        <% if(!@userID.blank?) %>
+                        <div>
+                    	  <div class="subscription-Item">Company Name : </div><div class="subscription-Value"><%= @usercompanyName %></div>
+                    	  </div>
+                        <div>
+                    	  <div class="subscription-Item">First Name : </div><div class="subscription-Value"><%= @userfirstName %></div>
+                    	  </div>
+                        <div>
+                          <div class="subscription-Item">Last Name : </div><div class="subscription-Value"><%= @userlastName %></div>
                         </div>
+                        <div>
+						  <div class="subscription-Item">Incorporation Type : </div><div class="subscription-Value"><%= @userincorporationType %></div>
+                        </div>
+                    	<div>
+                    	  <div class="subscription-Item">Phone Number : </div><div class="subscription-Value"><%= @userphoneNumber %></div>
+                        	</div>
+                        <div>
+                    	  <div class="subscription-Item">Email ID : </div><div class="subscription-Value"><%= @useremail %></div>
+                        	</div>
+                        <div>
+                    	  <div class="subscription-Item">License Number : </div><div class="subscription-Value"><%= @userlicense %></div>
+                        </div>
+                    	<div class="subscription-Title">Business Address</div>
+                    	<div>
+                    	  <div class="subscription-Item">Street Address : </div><div class="subscription-Value"><%= @userbussStreetAddress %></div>
+                        </div>
+                    	<div>
+                    	  <div class="subscription-Item">City : </div><div class="subscription-Value"><%= @userbussCity %></div>
+                        </div>
+                    	<div>
+                    	  
+                    	  <div class="subscription-Item">State : </div><div class="subscription-Value"><%= @userbussState %></div>
+                        </div>
+                        <div>
+                    	  <div class="subscription-Item">Zip Code: </div><div class="subscription-Value"><%= @userbussZipCode %></div>
+                        </div>
+                    	<div class="subscription-Title">Mailing Address</div>
+                    	
+                        
+                        <div>
+                    	  <div class="subscription-Item">Street Address : </div><div class="subscription-Value"><%= @usermailStreetAddress %></div>
+                        </div>
+                    	<div>
+                    	  <div class="subscription-Item">City : </div><div class="subscription-Value"><%= @usermailCity %></div>
+                        </div>
+                    	<div>
+                    	  <div class="subscription-Item">State : </div><div class="subscription-Value"><%= @usermailState %></div>
+                        </div>
+                        <div>
+                    	  <div class="subscription-Item">Zip Code : </div><div class="subscription-Value"><%= @usermailZipCode %></div>
+                        </div>
+                    	<div class="subscription-Title">Subscription Price</div>
+                    	<div>
+                    	  <div class="subscription-Item">Price : </div><div class="subscription-Value"><%= @price%></div>
+						</div>
+                    	<% end %>
+                    	</div>
                     </div>
                </div>
                

@@ -22,7 +22,13 @@ class NicksListController < ApplicationController
       @reviewCount = flash[:hidReviewCount]
     end 
     
-    @newsUpdatesList = NewsUpdates.where(IsEnabled: 1)  
+    @newsUpdatesList = NewsUpdates.where(IsEnabled: 1)
+    
+    @banner = SiteContent.find_by(PageCode: 109)
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end  
     
   end
   
@@ -33,6 +39,10 @@ class NicksListController < ApplicationController
       @title = @siteContent.Title.html_safe
     end
     
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
     @testimonialList = Testimonials.where(IsEnabled: 1)
   end
   
@@ -43,6 +53,10 @@ class NicksListController < ApplicationController
       @title = @siteContent.Title.html_safe
     end
     
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
     @testimonialList = Testimonials.where(IsEnabled: 1)
   end
   
@@ -51,6 +65,11 @@ class NicksListController < ApplicationController
     if(!@siteContent.blank?)
       @content = @siteContent.Content.html_safe
       @title = @siteContent.Title.html_safe
+    end
+    
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
     end
     @testimonialList = Testimonials.where(IsEnabled: 1)
   end
@@ -61,6 +80,11 @@ class NicksListController < ApplicationController
       @content = @siteContent.Content.html_safe
       @title = @siteContent.Title.html_safe
     end
+    
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
     @testimonialList = Testimonials.where(IsEnabled: 1)
   end
   
@@ -70,6 +94,12 @@ class NicksListController < ApplicationController
       @content = @siteContent.Content.html_safe
       @title = @siteContent.Title.html_safe
     end
+    
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
+    
     @faqList = Faq.where(IsEnabled: 1)
     @testimonialList = Testimonials.where(IsEnabled: 1)
   end
@@ -80,6 +110,12 @@ class NicksListController < ApplicationController
       @content = @siteContent.Content.html_safe
       @title = @siteContent.Title.html_safe
     end
+    
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
+    
     if(!params[:textEmail].blank?)
       @userfirstName = params[:textFirstName]
       @userlastName = params[:textLastName]
@@ -88,7 +124,7 @@ class NicksListController < ApplicationController
       @userContact = params[:textContact]
       mail = UserMailer.ContactUs_Email(@userfirstName, @userlastName, @userEmail, @comments, @userContact)
       mail.deliver        
-      redirect_to nicks_list_ContactUs_url, :notice => "Your comments posted successfully!"
+      redirect_to nicks_list_ContactUs_url, :notice => "Thank you for submitting your request. One of our representatives will contact you shortly."
     end
      @userID = session[:user_id]
     if(!@userID.blank?)

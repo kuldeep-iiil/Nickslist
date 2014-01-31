@@ -1,3 +1,11 @@
+<script type="text/javascript">
+	function print()
+	{
+		//$('#signup-header').printElement();
+		window.print();
+		return false;
+	}
+</script>
 <%= render partial: "/layouts/header" %>
 
 <div id="main-content-wrapper">
@@ -21,6 +29,7 @@
 					<input type="hidden" name="hidselectCity" id="hidselectCity" value="<%= @citystateVal %>" />
 					<input type="hidden" name="hidZipCode" id="hidZipCode" value="<%= @zipCode %>" />
 					<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" value="<%= @phoneNumber %>" />
+					<input type="hidden" name="hidIsAgree" id="hidIsAgree" value="0" />
 
 					<input type="submit" name="Submit" id="Submit" value="Cancel" class="org-bt" />
 				</form>
@@ -42,7 +51,9 @@
 
 					<input type="submit" name="Submit" id="Submit" value="I Agree" class="org-bt" />
 				</form>
+				<!--<input type="button" name="btnPrint" id="btnPrint" value="Print" class="org-bt" onclick="print();" />-->
 			</div>
+			
 
 		</div>
 

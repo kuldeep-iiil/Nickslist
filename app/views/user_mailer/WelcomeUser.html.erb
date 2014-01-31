@@ -4,14 +4,14 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h4>Hi <%= @userfirstName %> <%= @userlastName %>, Welcome to Nickslist.</h4>
+    <h4>Welcome to Nickslist, <%= @userfirstName %> <%= @userlastName %>.</h4>
+    <p>You have successfully registered with us.</p>
     <p>
-      You have successfully registered with Nickslist.<br/><br/>
-      Soon your account will be activated and then you can login to our website.<br /><br/>
-      For this, you will be notified on your registered email address.
+		Once your contractor license has been verified you will have full access Nickslist.<br />
+		You will be notified by email once your account has been activated.
     </p>
     <p>
-      Please find below your payment details: <br />
+      Payment Details: <br />
       Payment Status: Succesful <br />
       Payment Amount: <%= @amount %> <br />
       Transaction ID : <%= @invoiceNumber %> <br />
@@ -21,6 +21,6 @@
     	To register and subscribed new subsequent users, you can use the authorization code <b><%= @authCode %></b>. By using this authcode you will get 30% discount on subscription price.
     </p>
     <% end %>
-    <p>Thanks for joining us and have a great day!</p>
+    <p>Thank you for joining Nickslist and have a great day.</p>
   </body>
 </html>

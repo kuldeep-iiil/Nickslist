@@ -67,6 +67,7 @@ class AuthenticationController < ApplicationController
   
   def requestpassword
     email_id = params[:textEmail]
+    @messageString = ""
     if(!email_id.blank?)
       email = SubscribedUser.find_by(EmailID: email_id)
       if(email.blank?)
@@ -77,7 +78,7 @@ class AuthenticationController < ApplicationController
         email_password = encryptedpassword.password_decryption(email.Password, email.Salt)      
         mail = UserMailer.ForgotPassword(email_id, email_password)
         mail.deliver        
-        redirect_to root_url, :notice => "Password sent to your Email ID successfully!"
+        @messageString = "Thank you for submitting your request. Your password will be sent to you by email."
       end
     end 
   end
