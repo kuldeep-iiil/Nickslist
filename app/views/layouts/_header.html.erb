@@ -75,7 +75,8 @@
 									<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
 									<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
 									<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
-									<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+									<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City" value="<%= @city %>" />
+									<input type="hidden" name="hidselectState" id="hidselectState" placeholder="State" value="<%= @state %>" />
 									<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
 									<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
 									<input type="hidden" name="hidredirectUrl" id="hidredirectUrl" value="<%= @redirectUrl %>" />
@@ -122,9 +123,9 @@
 		<div class="browser-center">
 			<div id="innwe-banner-area">
 				<div class="banner-content-innwe">
-					<h1>Lorem Ipsum, consectetur, adipisci</h1>
+					<h1><%= @bannerHeader %></h1>
 					<p>
-						If you want to know about your customer that he will pay for the quality services that you provide. BillysList is the right tool to confirm.
+						<%= @bannerContent %>
 					</p>
 					<p>
 						<a href="<%= nicks_list_About_url %>">More Information</a>
@@ -137,19 +138,19 @@
 						</div>
 						<div id="search-form">
 							<div class="form-textbox">
-								<input name="txtFirstName" type="text" required="true" class="textbox-small" id="txtFirstName" placeholder="First Name" value="<%= @firstName %>" pattern="^[A-Za-z]+[A-Za-z]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Steve]')" oninput="setCustomValidity('')" />
+								<input name="txtFirstName" type="text" required="true" class="textbox-medium" id="txtFirstName" placeholder="First Name" value="<%= @firstName %>" pattern="^[A-Za-z]+[A-Za-z]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Steve]')" oninput="setCustomValidity('')" />
 							</div>
 							<div class="form-textbox">
-								<input name="txtLastName" type="text" required="true" class="textbox-small" id="txtLastName" placeholder="Last Name" value="<%= @lastName %>" pattern="^[A-Za-z]+[A-Za-z]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Steve]')" oninput="setCustomValidity('')" />
+								<input name="txtLastName" type="text" required="true" class="textbox-medium" id="txtLastName" placeholder="Last Name" value="<%= @lastName %>" pattern="^[A-Za-z]+[A-Za-z]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Steve]')" oninput="setCustomValidity('')" />
 							</div>
 							<div class="form-textbox">
 								<input name="txtStreetAddress" type="text" required="true" class="textbox" id="txtStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" pattern="^[A-Za-z0-9 ,]+$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [11111, Street Address]')" oninput="setCustomValidity('')" />
 							</div>
 							<div class="form-textbox">
-								<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox" id="selectCity" placeholder="City, State" value="<%= @citystateVal %>" pattern="^[A-Za-z]+[ ]?[A-Za-z]+,[ ][A-Za-z]{2,2}$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle, WA] ')" oninput="setCustomValidity('')" />
+								<input name="selectCity" type="text" required="true" autocomplete="off" class="textbox-medium" id="selectCity" placeholder="City" value="<%= @city %>" pattern="^[A-Za-z]+[ ]?[A-Za-z]+[ ]?[A-Za-z]+[ ]?[A-Za-z]+[ ]?[A-Za-z]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle] ')" oninput="setCustomValidity('')" />
 							</div>
 							<div class="form-textbox">
-								<!--<input name="selectState" type="text" required="true" class="textbox" id="selectState" placeholder="State" value="<%= params[:selectState] %>" />-->
+								<input name="selectState" type="text" required="true" class="textbox-small" id="selectState" placeholder="State" value="<%= @state %>" pattern="^[A-Za-z]+[A-Za-z]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [WA] ')" oninput="setCustomValidity('')" />
 							</div>
 							<div class="form-textbox">
 								<input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" maxlength="6" placeholder="Zipcode" value="<%= @zipCode %>" pattern="^[0-9]+[0-9]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [123456] ')" oninput="setCustomValidity('')" />

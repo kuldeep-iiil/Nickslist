@@ -15,22 +15,26 @@ class CustomerSearchController < ApplicationController
         params[:txtPhoneNumber] = params[:hidPhoneNumber]
         params[:txtStreetAddress] = params[:hidStreetAddress]
         params[:selectCity] = params[:hidselectCity]
+        params[:selectState] = params[:hidselectState]
         params[:txtZipCode] = params[:hidZipCode]
       end
 
-      if(params[:txtStreetAddress].strip != '' && params[:selectCity].strip != '' && params[:txtZipCode].strip != '')
+      if(params[:txtStreetAddress].strip != '' && params[:selectCity].strip != '' && params[:selectState].strip != '' && params[:txtZipCode].strip != '')
         @firstName = params[:txtFirstName]
         @lastName = params[:txtLastName]
         @phoneNumber = params[:txtPhoneNumber]
         @streetAddress = params[:txtStreetAddress]
         @zipCode = params[:txtZipCode]
-        @citystateVal = params[:selectCity]
-
+        #@citystateVal = params[:selectCity]
+        @city = params[:selectCity]
+        @state = params[:selectState]
+        
         session[:hidFirstName] = nil
         session[:hidLastName] = nil
         session[:hidPhoneNumber] = nil
         session[:hidStreetAddress] = nil
         session[:hidselectCity] = nil
+        session[:hidselectState] = nil
         session[:hidZipCode] = nil
         session[:indexVal] = nil
 
@@ -38,20 +42,15 @@ class CustomerSearchController < ApplicationController
         session[:hidLastName] = @lastName
         session[:hidPhoneNumber] = @phoneNumber
         session[:hidStreetAddress] = @streetAddress
-        session[:hidselectCity] = @citystateVal
+        session[:hidselectCity] = @city
+        session[:hidselectState] = @state
         session[:hidZipCode] = @zipCode
         session[:indexVal] = '0'
 
-        citystateVal = params[:selectCity].to_str.split(',')
-        @city = citystateVal.at(0).strip()
-        @state = citystateVal.at(1).strip()
-        #streetAddress=params[:txtStreetAddress].gsub('#','' )
-        streetAddress=params[:txtStreetAddress].gsub(' ', '+')
-        #streetAddress=streetAddress.gsub(' ', '+')
-
-        #citystatezip=params[:selectCity] + '%2C+' + params[:selectState] + '%2C+' + params[:txtZipCode]
-        city=params[:selectCity].gsub(' ', '+')
-        citystatezip=city + '%2C+' + params[:txtZipCode]
+        streetAddress = @streetAddress.gsub(' ', '+')
+        city = @city.gsub(' ', '+')
+        state = @state.gsub(' ', '+')
+        citystatezip=city + '%2C+' + state + '%2C+' + params[:txtZipCode]
         citystatezip=citystatezip.gsub(', ','%2C')
 
         currentUserID = session[:user_id]
@@ -197,7 +196,7 @@ class CustomerSearchController < ApplicationController
         @ChkTermsConditions = 1
 
         #location = params[:txtStreetAddress] + ', ' + params[:selectCity] + ', ' + params[:selectState] + ', ' + params[:txtZipCode]
-        location = params[:txtStreetAddress] + ', ' + params[:selectCity] + ', ' + params[:txtZipCode]
+        location = params[:txtStreetAddress] + ', ' + params[:selectCity] + ', ' + params[:selectState] + ', ' + params[:txtZipCode]
 
         cordinates = Geocoder.search(location)
 
@@ -229,6 +228,7 @@ class CustomerSearchController < ApplicationController
       params[:hidPhoneNumber] = session[:hidPhoneNumber]
       params[:hidStreetAddress] = session[:hidStreetAddress]
       params[:hidselectCity] = session[:hidselectCity]
+      params[:hidselectState] = session[:hidselectState]
       params[:hidZipCode] = session[:hidZipCode]
     end
 
@@ -240,17 +240,19 @@ class CustomerSearchController < ApplicationController
     @lastName = params[:hidLastName]
     @phoneNumber = params[:hidPhoneNumber]
     @streetAddress = params[:hidStreetAddress]
-    @citystateVal = params[:hidselectCity]
+    #@citystateVal = params[:hidselectCity]
+    @city = params[:hidselectCity]
+    @state = params[:hidselectState]
     @zipCode = params[:hidZipCode]
     @city = ""
     @state = ""
-    if(!@citystateVal.blank?)
-      @citystateValSplit = @citystateVal.split(',')
-      @city = @citystateValSplit.at(0).strip()
-      @state = @citystateValSplit.at(1).strip()
-    end
+    #if(!@citystateVal.blank?)
+    #  @citystateValSplit = @citystateVal.split(',')
+    #  @city = @citystateValSplit.at(0).strip()
+    #  @state = @citystateValSplit.at(1).strip()
+    #end
 
-    if(@firstName != nil && @lastName != nil && @phoneNumber != nil && @streetAddress != nil && @citystateVal != nil && @zipCode != nil)
+    if(@firstName != nil && @lastName != nil && @phoneNumber != nil && @streetAddress != nil && @city != nil && @state != nil && @zipCode != nil)
       @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs
                                   join customer_addresses ca on cs.AddressID = ca.id
                                   join customer_phones cp on cs.id = cp.CustomerSearchID
@@ -318,7 +320,8 @@ class CustomerSearchController < ApplicationController
     @lastName = flash[:hidLastName]
     @phoneNumber = flash[:hidPhoneNumber]
     @streetAddress = flash[:hidStreetAddress]
-    @cityState = flash[:hidselectCity]
+    @city = flash[:hidselectCity]
+    @state = flash[:hidselectState]
     @zipCode = flash[:hidZipCode]
   end
 end

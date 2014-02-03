@@ -9,27 +9,24 @@ class UserRegisterationController < ApplicationController
     @userlastName = params[:textLastName]
     @userincorporationType = params[:textIncorporationType]
     @userbussStreetAddress = params[:textBussStreetAddress]
-    
-    @userbusscitystateVal = params[:textBussCity]    
-    @userbussCity = ""
-    @userbussState = ""
-    if(!@userbusscitystateVal.blank?)
-      @userbusscitystate = @userbusscitystateVal.split(',')    
-      @userbussCity = @userbusscitystate.at(0).strip()      
-      @userbussState = @userbusscitystate.at(1).strip()      
-    end
+    @userbussCity = params[:textBussCity] 
+    @userbussState = params[:textBussState] 
+    #if(!@userbusscitystateVal.blank?)
+    #  @userbusscitystate = @userbusscitystateVal.split(',')    
+    #  @userbussCity = @userbusscitystate.at(0).strip()      
+    #  @userbussState = @userbusscitystate.at(1).strip()      
+    #end
       
     @userbussZipCode = params[:textBussZipCode]
     
-    @usermailStreetAddress = params[:textMailStreetAddress]    
-    @usermailcitystateVal = params[:textMailCity]
-    @usermailCity = ""
-    @usermailState = ""
-    if(!@usermailcitystateVal.blank?)    
-      @usermailcitystate = @usermailcitystateVal.split(',')
-      @usermailCity = @usermailcitystate.at(0).strip()
-      @usermailState = @usermailcitystate.at(1).strip()      
-    end
+    @usermailStreetAddress = params[:textMailStreetAddress]
+    @usermailCity = params[:textMailCity]
+    @usermailState = params[:textMailState]
+    #f(!@usermailcitystateVal.blank?)    
+    #  @usermailcitystate = @usermailcitystateVal.split(',')
+    #  @usermailCity = @usermailcitystate.at(0).strip()
+    #  @usermailState = @usermailcitystate.at(1).strip()      
+    #end
    
     @usermailZipCode = params[:textMailZipCode]
     @userphoneNumber = params[:textPhoneNumber]
@@ -54,13 +51,12 @@ class UserRegisterationController < ApplicationController
     end
     
     
-    if(@usercompanyName != nil and @userfirstName != nil and @userlastName != nil and @userincorporationType != nil and 
-      @userbussStreetAddress != nil and @userbussCity != nil and @userbussZipCode != nil and
-      @usermailStreetAddress != nil and @usermailCity != nil and @usermailZipCode != nil and
-      @userphoneNumber != nil and @useremail != nil and @userlicense != nil and @useruserName != nil and password != nil and salt != nil)
+    if(params[:textCompany] != nil and params[:textFirstName] != nil and params[:textLastName] != nil and params[:textIncorporationType] != nil and 
+      params[:textBussStreetAddress] != nil and params[:textBussCity] != nil and params[:textBussState] != nil and params[:textBussZipCode] != nil and
+      params[:textMailStreetAddress] != nil and params[:textMailCity] and params[:textMailState] != nil and params[:textMailZipCode] != nil and
+      params[:textPhoneNumber] != nil and params[:textEmail] != nil and params[:textLicense] != nil and params[:textUserName] != nil and password != nil and salt != nil)
         
-        
-          
+  
         if(keyCode.blank?)
           isUsed='0'
           @subPlan = UserSubscriptionPlan.find_by(PlanType: 'New User')
@@ -145,12 +141,12 @@ class UserRegisterationController < ApplicationController
           @usercompanyName = userDetails.CompanyName
           @userincorporationType = userDetails.IncorporationType
           @userbussStreetAddress = userBussAddressDetails.Address
-          @userbusscitystateVal = userBussAddressDetails.City + ', ' + userBussAddressDetails.State
-          #@bussState = userBussAddressDetails.State
+          @userbussCity = userBussAddressDetails.City
+          @userbussState = userBussAddressDetails.State
           @userbussZipCode = userBussAddressDetails.ZipCode
           @usermailStreetAddress = userMailAddressDetails.Address
-          @usermailcitystateVal = userMailAddressDetails.City + ', ' + userMailAddressDetails.State
-          #@mailState = userMailAddressDetails.State
+          @usermailCity = userMailAddressDetails.City
+          @usermailState = userMailAddressDetails.State
           @usermailZipCode = userMailAddressDetails.ZipCode
           @userphoneNumber = userDetails.ContactNumber
           @useremail = userDetails.EmailID

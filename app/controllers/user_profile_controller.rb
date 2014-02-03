@@ -16,11 +16,13 @@ class UserProfileController < ApplicationController
       @usercompanyName = userDetails.CompanyName
       @userincorporationType = userDetails.IncorporationType
       @userbussStreetAddress = userBussAddressDetails.Address
-      @userbussCity = userBussAddressDetails.City + ', ' + userBussAddressDetails.State
+      @userbussCity = userBussAddressDetails.City
+      @userbussState = userBussAddressDetails.State
       #@bussState = userBussAddressDetails.State
       @userbussZipCode = userBussAddressDetails.ZipCode
       @usermailStreetAddress = userMailAddressDetails.Address
-      @usermailCity = userMailAddressDetails.City + ', ' + userMailAddressDetails.State
+      @usermailCity = userMailAddressDetails.City
+      @usermailState = userMailAddressDetails.State
       #@mailState = userMailAddressDetails.State
       @usermailZipCode = userMailAddressDetails.ZipCode
       @userphoneNumber = userDetails.ContactNumber

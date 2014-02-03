@@ -19,17 +19,19 @@
 					$('#textCode').val('');
 					$('#textFilledCode').val('');
 					document.getElementById('chkAddress').disabled = false;
-					document.getElementById('textFilledCode').disabled = false;
-					document.getElementById('textCompany').disabled = false;
-					document.getElementById('textIncorporationType').disabled = false;
-					document.getElementById('textBussStreetAddress').disabled = false;
-					document.getElementById('textBussCity').disabled = false;
-					document.getElementById('textBussZipCode').disabled = false;
-					document.getElementById('textMailStreetAddress').disabled = false;
-					document.getElementById('textMailCity').disabled = false;
-					document.getElementById('textMailZipCode').disabled = false;
-					document.getElementById('textPhoneNumber').disabled = false;
-					document.getElementById('textLicense').disabled = false;
+					document.getElementById('textFilledCode').readOnly = false;
+					document.getElementById('textCompany').readOnly = false;
+					document.getElementById('textIncorporationType').readOnly = false;
+					document.getElementById('textBussStreetAddress').readOnly = false;
+					document.getElementById('textBussCity').readOnly = false;
+					document.getElementById('textBussState').readOnly = false;
+					document.getElementById('textBussZipCode').readOnly = false;
+					document.getElementById('textMailStreetAddress').readOnly = false;
+					document.getElementById('textMailCity').readOnly = false;
+					document.getElementById('textMailState').readOnly = false;
+					document.getElementById('textMailZipCode').readOnly = false;
+					document.getElementById('textPhoneNumber').readOnly = false;
+					document.getElementById('textLicense').readOnly = false;
 				}
 			}
 
@@ -49,6 +51,8 @@
 					document.getElementById('textMailStreetAddress').readOnly = true;
 					document.getElementById('textMailCity').value = document.getElementById('textBussCity').value;
 					document.getElementById('textMailCity').readOnly = true;
+					document.getElementById('textMailState').value = document.getElementById('textBussCity').value;
+					document.getElementById('textMailState').readOnly = true;
 					document.getElementById('textMailZipCode').value = document.getElementById('textBussZipCode').value;
 					document.getElementById('textMailZipCode').readOnly = true;
 				} else {
@@ -56,12 +60,14 @@
 					document.getElementById('textMailStreetAddress').readOnly = false;
 					document.getElementById('textMailCity').value = '';
 					document.getElementById('textMailCity').readOnly = false;
+					document.getElementById('textMailState').value = '';
+					document.getElementById('textMailState').readOnly = false;
 					document.getElementById('textMailZipCode').value = '';
 					document.getElementById('textMailZipCode').readOnly = false;
 				}
 			}
 
-			function SignupForm_AuthUser(authCode, bussStreetAddress, bussCity, bussZipCode, mailStreetAddress, mailCity, mailZipCode) {
+			function SignupForm_AuthUser(authCode, bussStreetAddress, bussCity, bussState, bussZipCode, mailStreetAddress, mailCity, mailState, mailZipCode) {
 				var idSignupCode = document.getElementById('SignupCode');
 				var idSignupReadOnlyCode = document.getElementById('SignupReadOnlyCode');
 				var idSignupForm = document.getElementById('SignupForm');
@@ -73,21 +79,23 @@
 
 					document.getElementById('chkCode').checked = true;
 					document.getElementById('chkCode').disabled = false;
-					document.getElementById('textFilledCode').disabled = true;
-					document.getElementById('textCompany').disabled = true;
-					document.getElementById('textIncorporationType').disabled = true;
-					document.getElementById('textBussStreetAddress').disabled = true;
-					document.getElementById('textBussCity').disabled = true;
-					document.getElementById('textBussZipCode').disabled = true;
-					document.getElementById('textMailStreetAddress').disabled = true;
-					document.getElementById('textMailCity').disabled = true;
-					document.getElementById('textMailZipCode').disabled = true;
-					document.getElementById('textPhoneNumber').disabled = true;
-					document.getElementById('textLicense').disabled = true;
+					document.getElementById('textFilledCode').readOnly = true;
+					document.getElementById('textCompany').readOnly = true;
+					document.getElementById('textIncorporationType').readOnly = true;
+					document.getElementById('textBussStreetAddress').readOnly = true;
+					document.getElementById('textBussCity').readOnly = true;
+					document.getElementById('textBussState').readOnly = true;
+					document.getElementById('textBussZipCode').readOnly = true;
+					document.getElementById('textMailStreetAddress').readOnly = true;
+					document.getElementById('textMailCity').readOnly = true;
+					document.getElementById('textMailState').readOnly = true;
+					document.getElementById('textMailZipCode').readOnly = true;
+					document.getElementById('textPhoneNumber').readOnly = true;
+					document.getElementById('textLicense').readOnly = true;
 
-					if(bussStreetAddress != '' && bussCity != '' && bussZipCode != '')
+					if(bussStreetAddress != '' && bussCity != '' && bussState != '' && bussZipCode != '')
 					{
-						if (bussStreetAddress == mailStreetAddress && bussCity == mailCity && bussZipCode == mailZipCode) {
+						if (bussStreetAddress == mailStreetAddress && bussCity == mailCity && bussState == mailState && bussZipCode == mailZipCode) {
 							document.getElementById('chkAddress').checked = true;
 						} else {
 							document.getElementById('chkAddress').checked = false;
@@ -102,7 +110,7 @@
 			}
 		</script>
 	</head>
-	<body onload="SignupForm_AuthUser('<%= @userauthCode %>', '<%= @userbussStreetAddress %>', '<%= @userbussCity %>', '<%= @userbussZipCode %>', '<%= @usermailStreetAddress %>', '<%= @usermailCity %>', '<%= @usermailZipCode %>'); <% if(!@error.blank?)%> SignupForm_visibility(); <% end %>">
+	<body onload="SignupForm_AuthUser('<%= @userauthCode %>', '<%= @userbussStreetAddress %>', '<%= @userbussCity %>', '<%= @userbussState %>', '<%= @userbussZipCode %>', '<%= @usermailStreetAddress %>', '<%= @usermailCity %>', '<%= @usermailState %>', '<%= @usermailZipCode %>'); <% if(!@error.blank?)%> SignupForm_visibility(); <% end %>">
 		<div id="wrapper">
 			<%= render partial: "/layouts/header" %>
 
@@ -170,11 +178,15 @@
 											<input type="text" name="textBussStreetAddress" required="true" id="textBussStreetAddress" class="singup-textbox" placeholder="Business Street Address" value="<%= @userbussStreetAddress %>" maxlength="100" pattern="^[A-Za-z0-9 ,]+$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [11111, Street Address]')" oninput="setCustomValidity('')" />
 										</div>
 										<div class="singup-textarea">
-											<input type="text" name="textBussZipCode" id="textBussZipCode" required="true" class="singup-textbox-small"  placeholder="ZipCode" value="<%= @userbussZipCode %>" maxlength="6" pattern="^[0-9]+[0-9]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [123456] ')" oninput="setCustomValidity('')" />
+											<input type="text" name="textBussCity" id="textBussCity" required="true" class="singup-textbox-small" placeholder="City" value="<%= @userbussCity %>" maxlength="20" pattern="^[A-Za-z]+[ ]?[A-Za-z]+[ ]?[A-Za-z]+[ ]?[A-Za-z]+[ ]?[A-Za-z]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle] ')" oninput="setCustomValidity('')" />
 										</div>
 										<div class="singup-textarea">
-											<input type="text" name="textBussCity" id="textBussCity" required="true" class="singup-textbox-small" placeholder="City, State" value="<%= @userbusscitystateVal %>" maxlength="20" pattern="^[A-Za-z]+[ ]?[A-Za-z]+,[ ][A-Za-z]{2,2}$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle, WA] ')" oninput="setCustomValidity('')" />
+											<input type="text" name="textBussState" id="textBussState" required="true" class="singup-textbox-small" placeholder="State" value="<%= @userbussState %>" maxlength="20" pattern="^[A-Za-z]+[A-Za-z]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [WA] ')" oninput="setCustomValidity('')" />
 										</div>
+										<div class="singup-textarea">
+											<input type="text" name="textBussZipCode" id="textBussZipCode" required="true" class="singup-textbox-small"  placeholder="ZipCode" value="<%= @userbussZipCode %>" maxlength="6" pattern="^[0-9]+[0-9]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [123456] ')" oninput="setCustomValidity('')" />
+										</div>
+										
 										
 
 										<div class="singup-textarea">
@@ -185,10 +197,13 @@
 											<input type="text" name="textMailStreetAddress" id="textMailStreetAddress" required="true" class="singup-textbox"  placeholder="Mailing Street Address" value="<%= @usermailStreetAddress %>" maxlength="100" pattern="^[A-Za-z0-9 ,]+$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [11111, Street Address]')" oninput="setCustomValidity('')" />
 										</div>
 										<div class="singup-textarea">
-											<input type="text" name="textMailZipCode" id="textMailZipCode" required="true" class="singup-textbox-small"  placeholder="ZipCode" value="<%= @usermailZipCode %>" maxlength="6" pattern="^[0-9]+[0-9]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [123456] ')" oninput="setCustomValidity('')" />
+											<input type="text" name="textMailCity" id="textMailCity" required="true" class="singup-textbox-small" placeholder="City" value="<%= @usermailCity %>" maxlength="20" pattern="^[A-Za-z]+[ ]?[A-Za-z]+[ ]?[A-Za-z]+[ ]?[A-Za-z]+[ ]?[A-Za-z]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle] ')" oninput="setCustomValidity('')" />
 										</div>
 										<div class="singup-textarea">
-											<input type="text" name="textMailCity" id="textMailCity" required="true" class="singup-textbox-small" placeholder="City, State" value="<%= @usermailcitystateVal %>" maxlength="20" pattern="^^[A-Za-z]+[ ]?[A-Za-z]+,[ ][A-Za-z]{2,2}$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [Seattle, WA] ')" oninput="setCustomValidity('')" />
+											<input type="text" name="textMailState" id="textMailState" required="true" class="singup-textbox-small" placeholder="State" value="<%= @usermailState %>" maxlength="20" pattern="^[A-Za-z]+[A-Za-z]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [WA] ')" oninput="setCustomValidity('')" />
+										</div>
+										<div class="singup-textarea">
+											<input type="text" name="textMailZipCode" id="textMailZipCode" required="true" class="singup-textbox-small"  placeholder="ZipCode" value="<%= @usermailZipCode %>" maxlength="6" pattern="^[0-9]+[0-9]$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [123456] ')" oninput="setCustomValidity('')" />
 										</div>
 										
 
@@ -211,6 +226,7 @@
 										<div class="singup-textarea">
 											<input type="password"  name="textConfirmPassword" id="textConfirmPassword" autocomplete="off" required="true" class="singup-textbox-small"  placeholder="Confirm Password" maxlength="20" />
 										</div>
+										<div class="clear"></div>
 										<div class="singup-textarea">
 											<input type="submit" name="Submit" id="Submit" value="Save & Continue" class="org-bt" />
 										</div>

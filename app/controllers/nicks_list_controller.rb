@@ -39,6 +39,7 @@ class NicksListController < ApplicationController
       @title = @siteContent.Title.html_safe
     end
     
+    @banner = SiteContent.find_by(PageCode: 109)
     if(!@banner.blank?)
       @bannerContent = @banner.Content.html_safe
       @bannerHeader = @banner.Title.html_safe
@@ -53,6 +54,7 @@ class NicksListController < ApplicationController
       @title = @siteContent.Title.html_safe
     end
     
+    @banner = SiteContent.find_by(PageCode: 109)
     if(!@banner.blank?)
       @bannerContent = @banner.Content.html_safe
       @bannerHeader = @banner.Title.html_safe
@@ -67,6 +69,7 @@ class NicksListController < ApplicationController
       @title = @siteContent.Title.html_safe
     end
     
+    @banner = SiteContent.find_by(PageCode: 109)
     if(!@banner.blank?)
       @bannerContent = @banner.Content.html_safe
       @bannerHeader = @banner.Title.html_safe
@@ -81,6 +84,7 @@ class NicksListController < ApplicationController
       @title = @siteContent.Title.html_safe
     end
     
+    @banner = SiteContent.find_by(PageCode: 109)
     if(!@banner.blank?)
       @bannerContent = @banner.Content.html_safe
       @bannerHeader = @banner.Title.html_safe
@@ -95,6 +99,7 @@ class NicksListController < ApplicationController
       @title = @siteContent.Title.html_safe
     end
     
+    @banner = SiteContent.find_by(PageCode: 109)
     if(!@banner.blank?)
       @bannerContent = @banner.Content.html_safe
       @bannerHeader = @banner.Title.html_safe
@@ -111,6 +116,7 @@ class NicksListController < ApplicationController
       @title = @siteContent.Title.html_safe
     end
     
+    @banner = SiteContent.find_by(PageCode: 109)
     if(!@banner.blank?)
       @bannerContent = @banner.Content.html_safe
       @bannerHeader = @banner.Title.html_safe

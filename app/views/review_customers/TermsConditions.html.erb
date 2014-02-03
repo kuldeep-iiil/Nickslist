@@ -1,13 +1,17 @@
-<script type="text/javascript">
-	function print()
-	{
-		//$('#signup-header').printElement();
-		window.print();
-		return false;
-	}
-</script>
 <%= render partial: "/layouts/header" %>
+<script type="text/javascript">
+	function Popup() 
+    {
+    	var data = $('#Term-Condition-area').html(); 
+        var mywindow = window.open('', 'Terms & Conditions', 'height=500,width=1000');
+        mywindow.document.write('<html><head><title>Terms & Conditions</title>');
+        mywindow.document.write('</head><body style="text-align: justify">' + data + '</body></html>');
+        mywindow.print();
+        mywindow.close();
 
+        return false;
+    }
+</script>
 <div id="main-content-wrapper">
 	<div class="browser-center">
 
@@ -26,7 +30,8 @@
 					<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
 					<input type="hidden" name="hidLastName" id="hidLastName" value="<%= @lastName %>" />
 					<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" value="<%= @streetAddress %>" />
-					<input type="hidden" name="hidselectCity" id="hidselectCity" value="<%= @citystateVal %>" />
+					<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City" value="<%= @city %>" />
+					<input type="hidden" name="hidselectState" id="hidselectState" placeholder="State" value="<%= @state %>" />
 					<input type="hidden" name="hidZipCode" id="hidZipCode" value="<%= @zipCode %>" />
 					<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" value="<%= @phoneNumber %>" />
 					<input type="hidden" name="hidIsAgree" id="hidIsAgree" value="0" />
@@ -40,7 +45,8 @@
 					<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
 					<input type="hidden" name="hidLastName" id="hidLastName" value="<%= @lastName %>" />
 					<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" value="<%= @streetAddress %>" />
-					<input type="hidden" name="hidselectCity" id="hidselectCity" value="<%= @citystateVal %>" />
+					<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City" value="<%= @city %>" />
+					<input type="hidden" name="hidselectState" id="hidselectState" placeholder="State" value="<%= @state %>" />
 					<input type="hidden" name="hidZipCode" id="hidZipCode" value="<%= @zipCode %>" />
 					<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" value="<%= @phoneNumber %>" />
 					<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= @reviewerID %>" />
@@ -48,11 +54,13 @@
 					<input type="hidden" name="hidCurrentIndex" id="hidCurrentIndex" value="<%= @currentIndex %>" />
 					<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewCount %>" />
 					<input type="hidden" name="hidIsAgree" id="hidIsAgree" value="1" />
-
+					
+					<input type="button" value="Print Terms & Conditions" onclick="Popup();" class="org-bt" />
 					<input type="submit" name="Submit" id="Submit" value="I Agree" class="org-bt" />
+					
 				</form>
-				<!--<input type="button" name="btnPrint" id="btnPrint" value="Print" class="org-bt" onclick="print();" />-->
-			</div>
+				
+				</div>
 			
 
 		</div>

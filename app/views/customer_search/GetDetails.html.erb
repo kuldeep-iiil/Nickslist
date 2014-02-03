@@ -104,7 +104,7 @@
 						<div class="address-detail">
 							<%= params[:txtStreetAddress]  %>
 							<br />
-							<%= params[:selectCity]  %> <%= params[:txtZipCode]  %>
+							<%= params[:selectCity]  %>, <%= params[:selectState] %> <%= params[:txtZipCode]  %>
 						</div>
 						<div class="address-phone">
 							<%= params[:txtPhoneNumber]  %>
@@ -160,6 +160,7 @@
 						<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
 						<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
 						<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
+						<input type="hidden" name="hidselectState" id="hidselectState" placeholder="State" value="<%= params[:selectState] %>" />
 						<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
 						<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= params[:txtPhoneNumber] %>" />
 						<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= customer_search_GetDetails_url %>" />
@@ -214,6 +215,7 @@
 												<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
 												<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
 												<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
+												<input type="hidden" name="hidselectState" id="hidselectState" placeholder="State" value="<%= params[:selectState] %>" />
 												<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
 												<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= params[:txtPhoneNumber] %>" />
 												<input type="hidden" name="hidRedirectUrl" id="hidRedirectUrl" value="<%= review_customers_AddReviews_url %>" />
@@ -242,7 +244,8 @@
 													<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= params[:txtFirstName] %>" />
 													<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= params[:txtLastName] %>" />
 													<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= params[:txtStreetAddress] %>" />
-													<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= params[:selectCity] %>" />
+													<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City" value="<%= params[:selectCity] %>" />
+													<input type="hidden" name="hidselectState" id="hidselectState" placeholder="State" value="<%= params[:selectState] %>" />
 													<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= params[:txtZipCode] %>" />
 													<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= params[:txtPhoneNumber] %>" />
 													<input type="hidden" name="hidReviewCount" id="hidReviewCount" value="<%= @reviewCount %>" />
@@ -259,7 +262,8 @@
 													<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
 													<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
 													<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
-													<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+													<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City" value="<%= @city %>" />
+													<input type="hidden" name="hidselectState" id="hidselectState" placeholder="State" value="<%= @state %>" />
 													<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
 													<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
 													<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= @reviewerID %>" />
@@ -301,7 +305,8 @@
 																		<input type="hidden" name="hidFirstName" id="hidFirstName" value="<%= @firstName %>" />
 																		<input type="hidden" name="hidLastName" id="hidLastName" placeholder="Last Name" value="<%= @lastName %>" />
 																		<input type="hidden" name="hidStreetAddress" id="hidStreetAddress" placeholder="Street Address" value="<%= @streetAddress %>" />
-																		<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City, State" value="<%= @citystateVal %>" />
+																		<input type="hidden" name="hidselectCity" id="hidselectCity" placeholder="City" value="<%= @city %>" />
+																		<input type="hidden" name="hidselectState" id="hidselectState" placeholder="State" value="<%= @state %>" />
 																		<input type="hidden" name="hidZipCode" id="hidZipCode" placeholder="Zipcode" value="<%= @zipCode %>" />
 																		<input type="hidden" name="hidPhoneNumber" id="hidPhoneNumber" placeholder="Phone Number" value="<%= @phoneNumber %>" />
 																		<input type="hidden" name="hidReviewerID" id="hidReviewerID" value="<%= r.id %>" />
@@ -532,7 +537,7 @@
                 <div class="search-record-right"> 
                 	We were not able to locate the address:
                 	<br />
-                	<b><%= params[:txtStreetAddress]  %> <%= params[:selectCity]  %> <%= params[:txtZipCode]  %></b>
+                	<b><%= params[:txtStreetAddress]  %> <%= params[:selectCity]  %>, <%= params[:selectState]  %> <%= params[:txtZipCode]  %></b>
                 </div>
                 <% else %>
                 <div class="search-record-right" id="map"></div>

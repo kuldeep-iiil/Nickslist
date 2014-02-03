@@ -3,7 +3,7 @@ class ReviewCustomersController < ApplicationController
   def AddReviews
     if(!session[:user_id])
       #redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :redirectUrl => review_customers_AddReviews_url}
-      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
+      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidselectState => params[:selectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
     else
 
       @reviewQuestion = ReviewQuestion.all
@@ -14,6 +14,7 @@ class ReviewCustomersController < ApplicationController
         params[:hidPhoneNumber] = flash[:hidPhoneNumber]
         params[:hidStreetAddress] = flash[:hidStreetAddress]
         params[:hidselectCity] = flash[:hidselectCity]
+        params[:hidselectState] = flash[:hidselectState]
         params[:hidZipCode] = flash[:hidZipCode]
       end
 
@@ -21,15 +22,19 @@ class ReviewCustomersController < ApplicationController
       @lastName = params[:hidLastName]
       @phoneNumber = params[:hidPhoneNumber]
       @streetAddress = params[:hidStreetAddress]
-      @citystateVal = params[:hidselectCity]
+      #@citystateVal = params[:hidselectCity]
       @zipCode = params[:hidZipCode]
-      @city = ""
-      @state = ""
-      if(!@citystateVal.blank?)
-        @citystateValSplit = @citystateVal.split(',')
-        @city = @citystateValSplit.at(0).strip()
-        @state = @citystateValSplit.at(1).strip()
-      end
+      #@city = ""
+      #@state = ""
+      #if(!@citystateVal.blank?)
+      #  @citystateValSplit = @citystateVal.split(',')
+      #  @city = @citystateValSplit.at(0).strip()
+      #  @state = @citystateValSplit.at(1).strip()
+      #end
+      
+      @city = params[:hidselectCity]
+      @state = params[:hidselectState]
+      
       @reviewCount = params[:hidReviewCount]
 
       @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs
@@ -55,7 +60,7 @@ class ReviewCustomersController < ApplicationController
             @reviewerID = revUser.id
             @reviewID = revUser.ReviewID
             @reviewCount = @reviewer.length
-            redirect_to review_customers_UpdateReviews_url, flash:{:hidFirstName => @firstName, :hidLastName => @lastName, :hidPhoneNumber => @phoneNumber, :hidStreetAddress => @streetAddress, :hidselectCity => @citystateVal, :hidZipCode => @zipCode, :hidReviewerID => @reviewerID, :hidReviewID => @reviewID, :hidReviewCount => @reviewCount}
+            redirect_to review_customers_UpdateReviews_url, flash:{:hidFirstName => @firstName, :hidLastName => @lastName, :hidPhoneNumber => @phoneNumber, :hidStreetAddress => @streetAddress, :hidselectCity => @city, :hidselectState => @state, :hidZipCode => @zipCode, :hidReviewerID => @reviewerID, :hidReviewID => @reviewID, :hidReviewCount => @reviewCount}
           end
         end
       end
@@ -73,15 +78,16 @@ class ReviewCustomersController < ApplicationController
     @phoneNumber = params[:hidPhoneNumber]
     @streetAddress = params[:hidStreetAddress]
     @zipCode = params[:hidZipCode]
-    @citystateVal = params[:hidselectCity]
-    @city = ""
-    @state = ""
-    if(!@citystateVal.blank?)
-      @citystateValSplit = @citystateVal.split(',')
-      @city = @citystateValSplit.at(0).strip()
-      @state = @citystateValSplit.at(1).strip()
-    end
-
+    #@citystateVal = params[:hidselectCity]
+    #@city = ""
+    #@state = ""
+    #if(!@citystateVal.blank?)
+    #  @citystateValSplit = @citystateVal.split(',')
+    #  @city = @citystateValSplit.at(0).strip()
+    #  @state = @citystateValSplit.at(1).strip()
+    #end
+    @city = params[:hidselectCity]
+    @state = params[:hidselectState]
     @customer = CustomerSearch.find_by_sql("select cs.id from customer_searches cs
                                   join customer_addresses ca on cs.AddressID = ca.id
                                   join customer_phones cp on cs.id = cp.CustomerSearchID
@@ -197,13 +203,13 @@ class ReviewCustomersController < ApplicationController
     mail_to_user.deliver
     end
     #redirect_to customer_search_ViewSearchResultPage_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}, :notice => "Review added successfully!"
-    redirect_to customer_search_ViewSearchResultPage_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}, :notice => "Review added successfully!"
+    redirect_to customer_search_ViewSearchResultPage_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidselectState => params[:hidselectState], :hidZipCode => params[:hidZipCode]}, :notice => "Review added successfully!"
   end
 
   def ReadReviews
     if(!session[:user_id])
       #redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :hidReviewerID => params[:hidReviewerID], :hidReviewID => params[:hidReviewID], :hidReviewCount => params[:hidReviewCount], :redirectUrl => review_customers_ReadReviews_url}
-      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
+      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidselectState => params[:selectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
     else
 
       if(!flash[:hidFirstName].blank?)
@@ -212,6 +218,7 @@ class ReviewCustomersController < ApplicationController
         params[:hidPhoneNumber] = flash[:hidPhoneNumber]
         params[:hidStreetAddress] = flash[:hidStreetAddress]
         params[:hidselectCity] = flash[:hidselectCity]
+        params[:hidselectState] = flash[:hidselectState]
         params[:hidZipCode] = flash[:hidZipCode]
         params[:hidReviewerID] = flash[:hidReviewerID]
         params[:hidReviewID] = flash[:hidReviewID]
@@ -225,15 +232,17 @@ class ReviewCustomersController < ApplicationController
       @lastName = params[:hidLastName]
       @phoneNumber = params[:hidPhoneNumber]
       @streetAddress = params[:hidStreetAddress]
-      @citystateVal = params[:hidselectCity]
+      #@citystateVal = params[:hidselectCity]
       @zipCode = params[:hidZipCode]
-      @city = ""
-      @state = ""
-      if(!@citystateVal.blank?)
-        @citystateValSplit = @citystateVal.split(',')
-        @city = @citystateValSplit.at(0).strip()
-        @state = @citystateValSplit.at(1).strip()
-      end
+      @city = params[:hidselectCity]
+      @state = params[:hidselectState]
+      #@city = ""
+      #@state = ""
+      #if(!@citystateVal.blank?)
+      #  @citystateValSplit = @citystateVal.split(',')
+      #  @city = @citystateValSplit.at(0).strip()
+      #  @state = @citystateValSplit.at(1).strip()
+      #end
       if(params[:hidCurrentIndex].blank?)
         @currentIndex = 0
       else
@@ -254,7 +263,9 @@ class ReviewCustomersController < ApplicationController
         @revfirstName = @reviewDetails[0].FirstName
         @revlastName = @reviewDetails[0].LastName
         @revstreetAddress = @reviewDetails[0].StreetAddress
-        @revcitystateVal = @reviewDetails[0].City + ', ' + @reviewDetails[0].State
+        #@revcitystateVal = @reviewDetails[0].City + ', ' + @reviewDetails[0].State
+        @city = @reviewDetails[0].City
+        @state = @reviewDetails[0].State
         @revzipCode = @reviewDetails[0].ZipCode
         @revphoneNumber = @phoneNumber
 
@@ -273,10 +284,12 @@ class ReviewCustomersController < ApplicationController
       @phoneNumber = params[:hidPhoneNumber]
       @streetAddress = params[:hidStreetAddress]
       @zipCode = params[:hidZipCode]
-      @citystateVal = params[:hidselectCity]
-      citystateVal = params[:hidselectCity].to_str.split(',')
-      @city = citystateVal.at(0).strip()
-      @state = citystateVal.at(1).strip()
+      #@citystateVal = params[:hidselectCity]
+      #citystateVal = params[:hidselectCity].to_str.split(',')
+      #@city = citystateVal.at(0).strip()
+      #@state = citystateVal.at(1).strip()
+      @city = params[:hidselectCity]
+      @state = params[:hidselectState]
       @currentIndex = params[:hidCurrentIndex]
     #@actionVal = params[:hidActionVal]
     end
@@ -316,7 +329,7 @@ class ReviewCustomersController < ApplicationController
 
     if(!session[:user_id])
       #redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :redirectUrl => customer_search_GetDetails_url}
-      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
+      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidselectState => params[:selectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
     else
 
       @siteContent = SiteContent.find_by(PageCode: 105)
@@ -329,7 +342,9 @@ class ReviewCustomersController < ApplicationController
       @lastName = params[:hidLastName]
       @phoneNumber = params[:hidPhoneNumber]
       @streetAddress = params[:hidStreetAddress]
-      @citystateVal = params[:hidselectCity]
+      #@citystateVal = params[:hidselectCity]
+      @city = params[:hidselectCity]
+      @state = params[:hidselectState]
       @zipCode = params[:hidZipCode]
       @reviewerID = params[:hidReviewerID]
       @reviewID = params[:hidReviewID]
@@ -343,7 +358,7 @@ class ReviewCustomersController < ApplicationController
 
     if(!session[:user_id])
       #redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :hidReviewerID => params[:hidReviewerID], :hidReviewID => params[:hidReviewID], :hidReviewCount => params[:hidReviewCount], :redirectUrl => review_customers_UpdateReviews_url}
-      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
+      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectState => params[:selectCity], :hidselectSate => params[:hidselectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
     else
 
       if(!flash[:hidFirstName].blank?)
@@ -352,6 +367,7 @@ class ReviewCustomersController < ApplicationController
         params[:hidPhoneNumber] = flash[:hidPhoneNumber]
         params[:hidStreetAddress] = flash[:hidStreetAddress]
         params[:hidselectCity] = flash[:hidselectCity]
+        params[:hidselectState] = flash[:hidselectState]
         params[:hidZipCode] = flash[:hidZipCode]
         params[:hidReviewerID] = flash[:hidReviewerID]
         params[:hidReviewID] = flash[:hidReviewID]
@@ -362,16 +378,19 @@ class ReviewCustomersController < ApplicationController
       @lastName = params[:hidLastName]
       @phoneNumber = params[:hidPhoneNumber]
       @streetAddress = params[:hidStreetAddress]
-      @citystateVal = params[:hidselectCity]
+      #@citystateVal = params[:hidselectCity]
       @zipCode = params[:hidZipCode]
-      @city = ""
-      @state = ""
-      if(!@citystateVal.blank?)
-        @citystateValSplit = @citystateVal.split(',')
-        @city = @citystateValSplit.at(0).strip()
-        @state = @citystateValSplit.at(1).strip()
-      end
-
+      #@city = ""
+      #@state = ""
+     # if(!@citystateVal.blank?)
+      #  @citystateValSplit = @citystateVal.split(',')
+      #  @city = @citystateValSplit.at(0).strip()
+      #  @state = @citystateValSplit.at(1).strip()
+      #end
+      
+      @city = params[:hidselectCity]
+      @state = params[:hidselectState]
+      
       @reviewerID = params[:hidReviewerID]
       @reviewID = params[:hidReviewID]
       @reviewCount = params[:hidReviewCount]
@@ -386,7 +405,9 @@ class ReviewCustomersController < ApplicationController
         @revfirstName = @reviewDetails[0].FirstName
         @revlastName = @reviewDetails[0].LastName
         @revstreetAddress = @reviewDetails[0].StreetAddress
-        @revcitystateVal = @reviewDetails[0].City + ', ' + @reviewDetails[0].State
+        #@revcitystateVal = @reviewDetails[0].City + ', ' + @reviewDetails[0].State
+        @city = @reviewDetails[0].City
+        @state = @reviewDetails[0].State
         @revzipCode = @reviewDetails[0].ZipCode
         @revphoneNumber = @phoneNumber
         @review = Review.find_by(ID: @reviewID)
@@ -409,14 +430,14 @@ class ReviewCustomersController < ApplicationController
     @phoneNumber = params[:hidPhoneNumber]
     @streetAddress = params[:hidStreetAddress]
     @zipCode = params[:hidZipCode]
-    @citystateVal = params[:hidselectCity]
-    @city = ""
-    @state = ""
-    if(!@citystateVal.blank?)
-      @citystateValSplit = @citystateVal.split(',')
-      @city = @citystateValSplit.at(0).strip()
-      @state = @citystateValSplit.at(1).strip()
-    end
+    #@citystateVal = params[:hidselectCity]
+    @city = params[:hidselectCity]
+    @state = params[:hidselectState]
+    #if(!@citystateVal.blank?)
+    #  @citystateValSplit = @citystateVal.split(',')
+    #  @city = @citystateValSplit.at(0).strip()
+    #  @state = @citystateValSplit.at(1).strip()
+    #end
 
     #@customer = Customer.find_by(FirstName: @firstName, LastName: @lastName, ContactNumber: @phoneNumber, StreetAddress: @streetAddress, City: @city, State: @state, ZIPCode: @zipCode)
     #if(@customer.blank?)
@@ -691,7 +712,7 @@ class ReviewCustomersController < ApplicationController
     @reviewAnswerUpdate.DateUpdated = time
     @reviewAnswerUpdate.save
 
-    redirect_to customer_search_ViewSearchResultPage_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}, :notice => "Review updated successfully!"
+    redirect_to customer_search_ViewSearchResultPage_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidselectCity => params[:hidselectState], :hidZipCode => params[:hidZipCode]}, :notice => "Review updated successfully!"
   #redirect_to customer_search_GetDetails_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}, :notice => "Review updated successfully!"
   end
 
