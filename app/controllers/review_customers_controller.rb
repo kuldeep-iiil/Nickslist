@@ -1,6 +1,11 @@
 class ReviewCustomersController < ApplicationController
   skip_before_action :verify_authenticity_token
   def AddReviews
+    @banner = SiteContent.find_by(PageCode: 109)
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
     if(!session[:user_id])
       #redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :redirectUrl => review_customers_AddReviews_url}
       redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidselectState => params[:selectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
@@ -207,6 +212,11 @@ class ReviewCustomersController < ApplicationController
   end
 
   def ReadReviews
+    @banner = SiteContent.find_by(PageCode: 109)
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
     if(!session[:user_id])
       #redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :hidReviewerID => params[:hidReviewerID], :hidReviewID => params[:hidReviewID], :hidReviewCount => params[:hidReviewCount], :redirectUrl => review_customers_ReadReviews_url}
       redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidselectState => params[:selectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
@@ -326,7 +336,11 @@ class ReviewCustomersController < ApplicationController
   end
 
   def TermsConditions
-
+    @banner = SiteContent.find_by(PageCode: 109)
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
     if(!session[:user_id])
       #redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :redirectUrl => customer_search_GetDetails_url}
       redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidselectState => params[:selectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
@@ -355,7 +369,11 @@ class ReviewCustomersController < ApplicationController
   end
 
   def UpdateReviews
-
+    @banner = SiteContent.find_by(PageCode: 109)
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
     if(!session[:user_id])
       #redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :hidReviewerID => params[:hidReviewerID], :hidReviewID => params[:hidReviewID], :hidReviewCount => params[:hidReviewCount], :redirectUrl => review_customers_UpdateReviews_url}
       redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectState => params[:selectCity], :hidselectSate => params[:hidselectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}

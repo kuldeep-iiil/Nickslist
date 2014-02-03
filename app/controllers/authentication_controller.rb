@@ -66,6 +66,12 @@ class AuthenticationController < ApplicationController
   end
   
   def requestpassword
+    @banner = SiteContent.find_by(PageCode: 109)
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
+    
     email_id = params[:textEmail]
     @messageString = ""
     if(!email_id.blank?)
@@ -84,6 +90,12 @@ class AuthenticationController < ApplicationController
   end
   
   def ChangePassword
+    @banner = SiteContent.find_by(PageCode: 109)
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
+    
     if(!session[:user_id])
       redirect_to nicks_list_Index_url, flash:{:redirectUrl => authentication_SavePassword_url}
     end

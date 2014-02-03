@@ -126,6 +126,12 @@ class AuthorizePaymentController < ApplicationController
   # GET
   # Displays a receipt.
   def receipt
+    @banner = SiteContent.find_by(PageCode: 109)
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
+    
    @invoiceNumber = request.query_parameters["in"]
    @userID = request.query_parameters["I"]
    if(!@userID.blank?)
@@ -157,6 +163,12 @@ class AuthorizePaymentController < ApplicationController
   # GET
   # Displays an error page.
   def error
+    @banner = SiteContent.find_by(PageCode: 109)
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
+    
     @reason = request.query_parameters["msg"]   
   end
 

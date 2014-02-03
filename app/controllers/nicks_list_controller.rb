@@ -146,7 +146,7 @@ class NicksListController < ApplicationController
   def PrivacyPolicy
      @siteContent = SiteContent.find_by(PageCode: 104)
     if(!@siteContent.blank?)
-      @content = @siteContent.Content.html_safe
+      @content = @siteContent.Content.html_safe                                                                                                                                                                                                                                                                                                                                                                                                 
       @title = @siteContent.Title.html_safe
     end
   end

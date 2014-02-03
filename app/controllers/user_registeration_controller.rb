@@ -3,7 +3,13 @@ class UserRegisterationController < ApplicationController
   include ActionView::Helpers::NumberHelper
   include Sidekiq::Worker
   
-  def GetRegister   
+  def GetRegister 
+    @banner = SiteContent.find_by(PageCode: 109)
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
+      
     @usercompanyName = params[:textCompany]
     @userfirstName = params[:textFirstName]
     @userlastName = params[:textLastName]

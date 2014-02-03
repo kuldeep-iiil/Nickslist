@@ -5,6 +5,12 @@ class CustomerSearchController < ApplicationController
   include ActionView::Helpers::NumberHelper
   skip_before_action :verify_authenticity_token
   def GetDetails
+    @banner = SiteContent.find_by(PageCode: 109)
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
+    
     if(!session[:user_id])
       redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
     else

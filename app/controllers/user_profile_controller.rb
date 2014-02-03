@@ -1,6 +1,13 @@
 class UserProfileController < ApplicationController
   skip_before_action :verify_authenticity_token
   def EditProfile
+    @banner = SiteContent.find_by(PageCode: 109)
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
+    
+    
     if(!session[:user_id])
       redirect_to nicks_list_Index_url, flash:{:redirectUrl => user_profile_ViewProfile_url}
     else
@@ -34,6 +41,11 @@ class UserProfileController < ApplicationController
   end
 
   def ViewProfile
+    @banner = SiteContent.find_by(PageCode: 109)
+    if(!@banner.blank?)
+      @bannerContent = @banner.Content.html_safe
+      @bannerHeader = @banner.Title.html_safe
+    end
     
     if(!session[:user_id])
       redirect_to nicks_list_Index_url, flash:{:redirectUrl => user_profile_ViewProfile_url}
