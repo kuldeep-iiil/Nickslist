@@ -93,7 +93,7 @@ class AuthorizePaymentController < ApplicationController
         @useremail = @subscribedUser.EmailID
         @amount = @userPaymentDetails.TransactionAmount
         @authCode = ""
-        if(@subscribedUser.AuthCodeUsed)
+        if(!@subscribedUser.AuthCodeUsed)
           @key = Key.find_by(UserID: @subscribedUser.id)
           if(!@key.blank?)
             @authCode = @key.Key
