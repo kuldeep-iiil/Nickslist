@@ -138,7 +138,7 @@ class UserRegisterationController < ApplicationController
      
       if(!authCode.blank?)
         key = Key.find_by(Key: authCode)
-        if(key.blank?)  
+        if(!key.blank?)  
           userDetails = SubscribedUser.find_by(ID: key.UserID)
           userBussAddressDetails = UserAddressDetail.find_by(UserID: key.UserID, AddressType: 'Business')
           userMailAddressDetails = UserAddressDetail.find_by(UserID: key.UserID, AddressType: 'Mailing')
