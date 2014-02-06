@@ -8,20 +8,20 @@ class ReviewCustomersController < ApplicationController
     end
     if(!session[:user_id])
       #redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :redirectUrl => review_customers_AddReviews_url}
-      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidselectState => params[:selectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
+      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidselectState => params[:selectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_GetDetails_url}
     else
 
       @reviewQuestion = ReviewQuestion.all
 
-      if(!flash[:hidFirstName].blank?)
-        params[:hidFirstName] = flash[:hidFirstName]
-        params[:hidLastName] = flash[:hidLastName]
-        params[:hidPhoneNumber] = flash[:hidPhoneNumber]
-        params[:hidStreetAddress] = flash[:hidStreetAddress]
-        params[:hidselectCity] = flash[:hidselectCity]
-        params[:hidselectState] = flash[:hidselectState]
-        params[:hidZipCode] = flash[:hidZipCode]
-      end
+      #if(!flash[:hidFirstName].blank?)
+      #  params[:hidFirstName] = flash[:hidFirstName]
+      #  params[:hidLastName] = flash[:hidLastName]
+      #  params[:hidPhoneNumber] = flash[:hidPhoneNumber]
+      #  params[:hidStreetAddress] = flash[:hidStreetAddress]
+      #  params[:hidselectCity] = flash[:hidselectCity]
+      #  params[:hidselectState] = flash[:hidselectState]
+      #  params[:hidZipCode] = flash[:hidZipCode]
+      #end
 
       @firstName = params[:hidFirstName]
       @lastName = params[:hidLastName]
@@ -219,24 +219,24 @@ class ReviewCustomersController < ApplicationController
     end
     if(!session[:user_id])
       #redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :hidReviewerID => params[:hidReviewerID], :hidReviewID => params[:hidReviewID], :hidReviewCount => params[:hidReviewCount], :redirectUrl => review_customers_ReadReviews_url}
-      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidselectState => params[:selectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
+      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidselectState => params[:selectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_GetDetails_url}
     else
 
-      if(!flash[:hidFirstName].blank?)
-        params[:hidFirstName] = flash[:hidFirstName]
-        params[:hidLastName] = flash[:hidLastName]
-        params[:hidPhoneNumber] = flash[:hidPhoneNumber]
-        params[:hidStreetAddress] = flash[:hidStreetAddress]
-        params[:hidselectCity] = flash[:hidselectCity]
-        params[:hidselectState] = flash[:hidselectState]
-        params[:hidZipCode] = flash[:hidZipCode]
-        params[:hidReviewerID] = flash[:hidReviewerID]
-        params[:hidReviewID] = flash[:hidReviewID]
-        params[:hidReviewCount] = flash[:hidReviewCount]
-        params[:hidCurrentIndex] = flash[:hidCurrentIndex]
-        params[:hidReviewerID] = flash[:hidReviewerID]
-        params[:hidReviewID] = flash[:hidReviewID]
-      end
+      #if(!flash[:hidFirstName].blank?)
+      #  params[:hidFirstName] = flash[:hidFirstName]
+      #  params[:hidLastName] = flash[:hidLastName]
+      #  params[:hidPhoneNumber] = flash[:hidPhoneNumber]
+      #  params[:hidStreetAddress] = flash[:hidStreetAddress]
+      #  params[:hidselectCity] = flash[:hidselectCity]
+      #  params[:hidselectState] = flash[:hidselectState]
+      #  params[:hidZipCode] = flash[:hidZipCode]
+      #  params[:hidReviewerID] = flash[:hidReviewerID]
+      #  params[:hidReviewID] = flash[:hidReviewID]
+      #  params[:hidReviewCount] = flash[:hidReviewCount]
+      #  params[:hidCurrentIndex] = flash[:hidCurrentIndex]
+      #  params[:hidReviewerID] = flash[:hidReviewerID]
+      #  params[:hidReviewID] = flash[:hidReviewID]
+      #end
 
       @firstName = params[:hidFirstName]
       @lastName = params[:hidLastName]
@@ -301,7 +301,7 @@ class ReviewCustomersController < ApplicationController
       @city = params[:hidselectCity]
       @state = params[:hidselectState]
       @currentIndex = params[:hidCurrentIndex]
-    #@actionVal = params[:hidActionVal]
+      #@actionVal = params[:hidActionVal]
     end
 
     #if(@actionVal == 'Previous')
@@ -376,7 +376,7 @@ class ReviewCustomersController < ApplicationController
     end
     if(!session[:user_id])
       #redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode], :hidReviewerID => params[:hidReviewerID], :hidReviewID => params[:hidReviewID], :hidReviewCount => params[:hidReviewCount], :redirectUrl => review_customers_UpdateReviews_url}
-      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectState => params[:selectCity], :hidselectSate => params[:hidselectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
+      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectState => params[:selectCity], :hidselectSate => params[:hidselectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_GetDetails_url}
     else
 
       if(!flash[:hidFirstName].blank?)

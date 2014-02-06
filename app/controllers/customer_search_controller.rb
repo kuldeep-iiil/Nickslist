@@ -12,7 +12,7 @@ class CustomerSearchController < ApplicationController
     end
     
     if(!session[:user_id])
-      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_ViewSearchResultPage_url}
+      redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidselectState => params[:selectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_GetDetails_url}
     else
 
       if(!params[:hidFirstName].blank?)

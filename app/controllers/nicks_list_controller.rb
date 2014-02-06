@@ -14,12 +14,13 @@ class NicksListController < ApplicationController
       @lastName = flash[:hidLastName]
       @phoneNumber = flash[:hidPhoneNumber]
       @streetAddress = flash[:hidStreetAddress]
-      @citystateVal = flash[:hidselectCity]
+      @city = flash[:hidselectCity]
+      @state = flash[:hidselectState]
       @zipCode = flash[:hidZipCode]
       @redirectUrl = flash[:redirectUrl]
-      @reviewerID = flash[:hidReviewerID]
-      @reviewID = flash[:hidReviewID]
-      @reviewCount = flash[:hidReviewCount]
+      #@reviewerID = flash[:hidReviewerID]
+      #@reviewID = flash[:hidReviewID]
+      #@reviewCount = flash[:hidReviewCount]
     end 
     
     @newsUpdatesList = NewsUpdates.where(IsEnabled: 1)

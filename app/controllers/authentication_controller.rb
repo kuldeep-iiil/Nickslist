@@ -8,12 +8,13 @@ class AuthenticationController < ApplicationController
       @lastName = params[:hidLastName]
       @phoneNumber = params[:hidPhoneNumber]
       @streetAddress = params[:hidStreetAddress]
-      @citystateVal = params[:hidselectCity]
+      @city = params[:hidselectCity]
+      @state = params[:hidselectState]
       @zipCode = params[:hidZipCode]
       @redirectUrl = params[:hidredirectUrl]
-      @reviewerID = params[:hidReviewerID]
-      @reviewID = params[:hidReviewID]
-      @reviewCount = params[:hidReviewCount]
+      #@reviewerID = params[:hidReviewerID]
+      #@reviewID = params[:hidReviewID]
+      #@reviewCount = params[:hidReviewCount]
     
     @username = userName
     user = authenticate(userName, password)
@@ -39,11 +40,9 @@ class AuthenticationController < ApplicationController
       
       if(@redirectUrl.blank?)
         redirect_to root_url
-      else
-        redirect_to @redirectUrl, flash:{:hidFirstName => @firstName, :hidLastName => @lastName, :hidPhoneNumber => @phoneNumber, :hidStreetAddress => @streetAddress, :hidselectCity => @citystateVal, :hidZipCode => @zipCode, :hidReviewerID => @reviewerID, :hidReviewID => @reviewID, :hidReviewCount => @reviewCount}  
-      end
+      end          
     else
-      redirect_to root_url, flash:{:userName => @username, :error => "Invalid User Name or Password!"}
+      redirect_to root_url, flash:{:hidFirstName => @firstName, :hidLastName => @lastName, :hidPhoneNumber => @phoneNumber, :hidStreetAddress => @streetAddress, :hidselectCity => @city, :hidselectState => @state, :hidZipCode => @zipCode, :redirectUrl => customer_search_GetDetails_url, :userName => @username, :error => "Invalid User Name or Password!"}
     end
   end
   
