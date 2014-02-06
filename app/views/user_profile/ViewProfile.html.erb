@@ -15,13 +15,19 @@
 						<h1>My Profile</h1>
 					</div>
 					<!--<div class="steps"><%= image_tag("step1.jpg", :alt => "") %></div>-->
-					<div id="singup-form-area">
+					<div id="singup-form-area" style="margin-left: 0px; padding: 50px; width: 890px !important">
 						<div class="singup-form-heading">
 							<div style="float:right; font-weight: bold">
 								<a href="<%= authentication_ChangePassword_url %>">Change Password</a>
 							</div>
-							<h1>View Profile</h1>
-							<div id="Success"><%= flash[:notice] %></div>
+							<h1>
+								View Profile
+								<% if(flash[:notice] != nil) %>
+									<div id="messageDiv" class="success">
+										<%= flash[:notice] %>
+									</div>
+								<% end %>
+							</h1>
 						</div>
 
 						<div class="singup-form">
