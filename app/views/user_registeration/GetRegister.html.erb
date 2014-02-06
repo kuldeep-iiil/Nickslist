@@ -215,10 +215,10 @@
 										</div>
 										
 										<div class="singup-textarea">
-											<input type="text" name="textLicense" id="textLicense" required="true" class="singup-textbox-small"  placeholder="Contractor License Number" value="<%= @userlicense %>" maxlength="20" />
+											<input type="text" name="textLicense" id="textLicense" required="true" class="singup-textbox-small"  placeholder="Contractor License Number" value="<%= @userlicense %>" maxlength="20" pattern="^[A-Za-z0-9]+$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [BNO1234567] ')" oninput="setCustomValidity('')" />
 										</div>
 										<div class="singup-textarea">
-											<input type="text" name="textUserName" id="textUserName" autocomplete="off" required="true" class="singup-textbox-small" placeholder="User Name" value="<%= @useruserName %>" maxlength="20" />
+											<input type="text" name="textUserName" id="textUserName" autocomplete="off" required="true" class="singup-textbox-small" placeholder="User Name" value="<%= @useruserName %>" maxlength="20" pattern="^[A-Za-z0-9]+$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [steve86] ')" oninput="setCustomValidity('')" />
 										</div>
 										<div class="singup-textarea">
 											<input type="password" name="textPassword" id="textPassword" autocomplete="off" required="true" onchange="form.textConfirmPassword.pattern = this.value;" class="singup-textbox-small"  placeholder="Password" maxlength="20" />
