@@ -156,7 +156,7 @@
 								<input name="txtZipCode" type="text" required="true" class="textbox-small" id="txtZipCode" maxlength="6" placeholder="Zipcode" value="<%= @zipCode %>" pattern="^[0-9]+$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [123456] ')" oninput="setCustomValidity('')" />
 							</div>
 							<div class="form-textbox">
-								<input name="txtPhoneNumber" type="text" required="true" class="textbox-small" id="txtPhoneNumber" maxlength="12" placeholder="Phone Number" value="<%= @phoneNumber %>" pattern="^[0-9]{3,3}[-][0-9]{3,3}[-][0-9]{4,4}$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [123-456-7890] ')" oninput="setCustomValidity('')" />
+								<input name="txtPhoneNumber" type="text" required="true" class="textbox-small" id="txtPhoneNumber" maxlength="12" placeholder="Phone Number" value="<%= @phoneNumber %>" pattern="^[0-9-]+$" oninvalid="this.setCustomValidity('Invalid format. Format should be like [123-456-7890] ')" oninput="setCustomValidity('')" />
 							</div>
 							<div class="form-textbox">
 								<input type="submit" name="Submit" id="Submit" value="Submit" class="search-bt" />
