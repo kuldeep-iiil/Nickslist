@@ -61,6 +61,7 @@ class AuthorizePaymentController < ApplicationController
       time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
       
       @invoiceNumber = sim_response.invoice_num
+      @paramValues = @invoiceNumber.to_s + '-' 
       @transaction_id = sim_response.transaction_id
       @response = sim_response.to_json
       hash = JSON.parse(@response)
@@ -102,15 +103,16 @@ class AuthorizePaymentController < ApplicationController
             @authCode = @key.Key
           end
         end
-          
+        
         mail_to_admin = UserMailer.NewUserNotification(@userfirstName, @userlastName, @useremail, @invoiceNumber, @amount)
         mail_to_admin.deliver 
           
         mail_to_user = UserMailer.WelcomeUser(@userfirstName, @userlastName, @useremail, @invoiceNumber, @amount, @authCode)
         mail_to_user.deliver        
-                
+        @paramValues = @paramValues + @userID.to_s  
       end
-      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['receipt_url'] + '?in=' + @invoiceNumber + '-' + @userID)
+      @paramValues = @invoiceNumber.to_s + '-' + @userID.to_s  
+      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['receipt_url'] + '?in=' + @paramValues)
     else
       @reason = sim_response.response_reason_text      
       @userPaymentDetails = UserPaymentDetail.find_by(BLTransactionID: @invoiceNumber)
