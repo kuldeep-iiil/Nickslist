@@ -222,21 +222,21 @@ class ReviewCustomersController < ApplicationController
       redirect_to nicks_list_Index_url, flash:{:hidFirstName => params[:txtFirstName], :hidLastName => params[:txtLastName], :hidPhoneNumber => params[:txtPhoneNumber], :hidStreetAddress => params[:txtStreetAddress], :hidselectCity => params[:selectCity], :hidselectState => params[:selectState], :hidZipCode => params[:txtZipCode], :redirectUrl => customer_search_GetDetails_url}
     else
 
-      #if(!flash[:hidFirstName].blank?)
-      #  params[:hidFirstName] = flash[:hidFirstName]
-      #  params[:hidLastName] = flash[:hidLastName]
-      #  params[:hidPhoneNumber] = flash[:hidPhoneNumber]
-      #  params[:hidStreetAddress] = flash[:hidStreetAddress]
-      #  params[:hidselectCity] = flash[:hidselectCity]
-      #  params[:hidselectState] = flash[:hidselectState]
-      #  params[:hidZipCode] = flash[:hidZipCode]
-      #  params[:hidReviewerID] = flash[:hidReviewerID]
-      #  params[:hidReviewID] = flash[:hidReviewID]
-      #  params[:hidReviewCount] = flash[:hidReviewCount]
-      #  params[:hidCurrentIndex] = flash[:hidCurrentIndex]
-      #  params[:hidReviewerID] = flash[:hidReviewerID]
-      #  params[:hidReviewID] = flash[:hidReviewID]
-      #end
+      if(!flash[:hidFirstName].blank?)
+        params[:hidFirstName] = flash[:hidFirstName]
+        params[:hidLastName] = flash[:hidLastName]
+        params[:hidPhoneNumber] = flash[:hidPhoneNumber]
+        params[:hidStreetAddress] = flash[:hidStreetAddress]
+        params[:hidselectCity] = flash[:hidselectCity]
+        params[:hidselectState] = flash[:hidselectState]
+        params[:hidZipCode] = flash[:hidZipCode]
+        params[:hidReviewerID] = flash[:hidReviewerID]
+        params[:hidReviewID] = flash[:hidReviewID]
+        params[:hidReviewCount] = flash[:hidReviewCount]
+        params[:hidCurrentIndex] = flash[:hidCurrentIndex]
+        params[:hidReviewerID] = flash[:hidReviewerID]
+        params[:hidReviewID] = flash[:hidReviewID]
+      end
 
       @firstName = params[:hidFirstName]
       @lastName = params[:hidLastName]
@@ -730,7 +730,7 @@ class ReviewCustomersController < ApplicationController
     @reviewAnswerUpdate.DateUpdated = time
     @reviewAnswerUpdate.save
 
-    redirect_to customer_search_ViewSearchResultPage_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidselectCity => params[:hidselectState], :hidZipCode => params[:hidZipCode]}, :notice => "Review updated successfully!"
+    redirect_to customer_search_ViewSearchResultPage_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidselectState => params[:hidselectState], :hidZipCode => params[:hidZipCode]}, :notice => "Review updated successfully!"
   #redirect_to customer_search_GetDetails_url, flash:{:hidFirstName => params[:hidFirstName], :hidLastName => params[:hidLastName], :hidPhoneNumber => params[:hidPhoneNumber], :hidStreetAddress => params[:hidStreetAddress], :hidselectCity => params[:hidselectCity], :hidZipCode => params[:hidZipCode]}, :notice => "Review updated successfully!"
   end
 
