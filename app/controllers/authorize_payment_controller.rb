@@ -59,6 +59,7 @@ class AuthorizePaymentController < ApplicationController
     if sim_response.approved?
       currentTime = Time.new
       time = currentTime.strftime("%Y-%m-%d %H:%M:%S")
+      @userID = ""
       @invoiceNumber = sim_response.invoice_num
       @transaction_id = sim_response.transaction_id
       @response = sim_response.to_json
@@ -86,7 +87,7 @@ class AuthorizePaymentController < ApplicationController
         @subscribedUser.IsSubscribed = 1
         @subscribedUser.DateUpdated = time
         @subscribedUser.save
-        
+        @userID = @subscribedUser.id
         
         @userfirstName = @subscribedUser.FirstName
         @userlastName = @subscribedUser.LastName
@@ -107,7 +108,7 @@ class AuthorizePaymentController < ApplicationController
         mail_to_user.deliver        
                 
       end
-      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['receipt_url'] + '?in=' + @invoiceNumber + '-' + @subscribedUser.id)
+      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['receipt_url'] + '?in=' + @invoiceNumber + '-' + @userID)
     else
       @reason = sim_response.response_reason_text      
       @userPaymentDetails = UserPaymentDetail.find_by(BLTransactionID: @invoiceNumber)
