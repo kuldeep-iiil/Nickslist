@@ -107,7 +107,7 @@ class AuthorizePaymentController < ApplicationController
         mail_to_user.deliver        
                 
       end
-      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['receipt_url'] + '?in=' + @invoiceNumber)
+      render :text => sim_response.direct_post_reply(AUTHORIZE_NET_CONFIG['receipt_url'] + '?in=' + @invoiceNumber + '&I=' + @subscribedUser.id)
     else
       @reason = sim_response.response_reason_text      
       @userPaymentDetails = UserPaymentDetail.find_by(BLTransactionID: @invoiceNumber)
@@ -138,7 +138,7 @@ class AuthorizePaymentController < ApplicationController
     userDetails = SubscribedUser.find_by(ID: @userID)
     userBussAddressDetails = UserAddressDetail.find_by(UserID: @userID, AddressType: 'Business')
     userMailAddressDetails = UserAddressDetail.find_by(UserID: @userID, AddressType: 'Mailing')
-    paymentDetail = UserPaymentDetail.find_by(PayTransactionID: @invoiceNumber);    
+    paymentDetail = UserPaymentDetail.find_by(BLTransactionID: @invoiceNumber);    
     @usercompanyName = userDetails.CompanyName
     @userfirstName = userDetails.FirstName
     @userlastName = userDetails.LastName
