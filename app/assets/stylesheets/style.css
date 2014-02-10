@@ -34,7 +34,7 @@ a {
 	text-decoration: none
 }
 img {
-	border: 0
+	border: 0px
 }
 
 h1, h2, h3, h4, p {
@@ -321,7 +321,7 @@ input[type=button], input[type=submit], button
 	font-size: 13px;
 	color: #666666;
 	border-radius: 5px;
-	border: 0;
+	border: 0px;
 	background: #ffffff;
 	padding: 0 5px
 }
@@ -332,7 +332,7 @@ input[type=button], input[type=submit], button
 	font-size: 13px;
 	color: #666666;
 	border-radius: 5px;
-	border: 0;
+	border: 0px;
 	background: #ffffff;
 	padding: 0 5px
 }
@@ -343,7 +343,7 @@ input[type=button], input[type=submit], button
 	font-size: 13px;
 	color: #666666;
 	border-radius: 5px;
-	border: 0;
+	border: 0px;
 	background: #ffffff;
 	padding: 0 5px
 }
@@ -374,7 +374,7 @@ input[type=button], input[type=submit], button
 .dropdown {
 	width: 120px;
 	height: 24px;
-	border: 0;
+	border: 0px;
 	font-size: 13px;
 	color: #666666;
 }
@@ -382,7 +382,7 @@ input[type=button], input[type=submit], button
 	background: url(/assets/search.png) no-repeat;
 	height: 37px;
 	width: 100px;
-	border: 0;
+	border: 0px;
 	text-indent: -999px;
 	cursor: pointer;
 	cursor: hand;

@@ -29,7 +29,7 @@
 					</div>
 					<div class="singup-textarea">
 						<span class="required">&nbsp;</span>
-						<input type="text" name="textContact" id="textContact" class="singup-textbox-small" placeholder="Contact Number" size="12" pattern="^[0-9]{3,3}[-]?[0-9]{3,3}[-]?[0-9]{4,4}$" value="<%= @userContact %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [1234567890 or 123-456-7890] ')" oninput="setCustomValidity('')" />
+						<input type="text" name="textContact" id="textContact" class="singup-textbox-small" placeholder="Contact Number" size="12" pattern="^[0-9-]+$" value="<%= @userContact %>" oninvalid="this.setCustomValidity('Invalid format. Format should be like [1234567890 or 123-456-7890] ')" oninput="setCustomValidity('')" />
 					</div>
 					<div class="singup-textarea">
 						<span class="required">*</span>
