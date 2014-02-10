@@ -32,36 +32,36 @@
 				});
 				
 				$('input, textarea').placeholder();
-			//$('form').h5Validate();
+				//$('form').h5Validate();
 			
-    		$( "#selectCity" ).autocomplete({
-      			source: availableCities
-    		});
-    		$( "#textBussCity" ).autocomplete({
-      			source: availableCities
-    		});
-    		$( "#textMailCity" ).autocomplete({
-      			source: availableCities
-    		});
+    			$( "#selectCity" ).autocomplete({
+      				source: availableCities
+    			});
+    			$( "#textBussCity" ).autocomplete({
+      				source: availableCities
+    			});
+    			$( "#textMailCity" ).autocomplete({
+      				source: availableCities
+    			});
     		
-    		$( "#selectState" ).autocomplete({
-      			source: availableStates
-    		});
-    		$( "#textBussState" ).autocomplete({
-      			source: availableStates
-    		});
-    		$( "#textMailState" ).autocomplete({
-      			source: availableStates
-    		});
+    			$( "#selectState" ).autocomplete({
+      				source: availableStates
+    			});
+    			$( "#textBussState" ).autocomplete({
+      				source: availableStates
+    			});
+    			$( "#textMailState" ).autocomplete({
+      				source: availableStates
+    			});
 			});
-
+			
 			$(function($){
 				$("#textPhoneNumber").mask("999-999-9999");
 				$("#txtPhoneNumber").mask("999-999-9999");
 				$("#textContact").mask("999-999-9999");
 			});
   	
-  		function ShowHideDiv(divName) {
+  			function ShowHideDiv(divName) {
 				if (divName == 'General') {
 					document.getElementById('btnContinue').style.display = 'none';
 					document.getElementById('divGeneral').style.display = 'none';

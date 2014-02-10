@@ -42,7 +42,11 @@ class AuthenticationController < ApplicationController
         redirect_to root_url
       end          
     else
-      redirect_to root_url, flash:{:hidFirstName => @firstName, :hidLastName => @lastName, :hidPhoneNumber => @phoneNumber, :hidStreetAddress => @streetAddress, :hidselectCity => @city, :hidselectState => @state, :hidZipCode => @zipCode, :redirectUrl => customer_search_GetDetails_url, :userName => @username, :error => "Invalid User Name or Password!"}
+      if(@redirectUrl.blank?)
+        redirect_to root_url, flash:{:userName => @username, :error => "Invalid User Name or Password!"}
+      else 
+        redirect_to root_url, flash:{:hidFirstName => @firstName, :hidLastName => @lastName, :hidPhoneNumber => @phoneNumber, :hidStreetAddress => @streetAddress, :hidselectCity => @city, :hidselectState => @state, :hidZipCode => @zipCode, :redirectUrl => customer_search_GetDetails_url, :userName => @username, :error => "Invalid User Name or Password!"}
+      end
     end
   end
   
